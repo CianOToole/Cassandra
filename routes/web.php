@@ -28,7 +28,6 @@ Route::get('/stocks/{id}/edit', [StockController::class, 'edit'])->name('stocks.
 Route::put('/stocks/{id}', [StockController::class, 'update'])->name('stocks.update'); //making a put request
 Route::delete('/stocks/{id}', [StockController::class, 'destroy'])->name('stocks.destroy'); //making a delete request
 
-
 Route::get('trades',[TradeController::class,'index']);
 Route::get('/trades/create', [TradeController::class, 'create'])->name('trades.create');
 Route::post('/trades', [TradeController::class, 'store'])->name('trades.store'); // this will be making a post request
@@ -36,3 +35,11 @@ Route::get('/trades/{id}', [TradeController::class, 'show'])->name('trades.show'
 Route::get('/trades/{id}/edit', [TradeController::class, 'edit'])->name('trades.edit');
 Route::put('/trades/{id}', [TradeController::class, 'update'])->name('trades.update'); //making a put request
 Route::delete('/trades/{id}', [TradeController::class, 'destroy'])->name('trades.destroy'); //making a delete request
+
+Route::get('balances',[BalanceController::class,'index']);
+Route::get('/balances/create', [TradeController::class, 'create'])->name('balances.create');
+Route::post('/balances', [TradeController::class, 'store'])->name('balances.store'); // this will be making a post request
+Route::get('/balances/{id}', [TradeController::class, 'show'])->name('balances.show');
+Route::get('/balances/{id}/edit', [TradeController::class, 'edit'])->name('balances.edit');
+Route::put('/balances/{id}', [TradeController::class, 'update'])->name('balances.update'); //making a put request
+Route::delete('/balances/{id}', [TradeController::class, 'destroy'])->name('balances.destroy'); //making a delete request
