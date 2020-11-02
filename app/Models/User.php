@@ -40,4 +40,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function trades(){
+        return $this->hasMany('App\Models\Trade', 'user_id');
+    }
+
+    public function balance(){
+        return $this->hasOne('App\Models\Balance', 'user_id');
+    }
 }

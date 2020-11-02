@@ -18,8 +18,6 @@ class CreateTradesTable extends Migration
             $table->decimal('price_at_order', 8, 2);
             $table->decimal('amount', 8, 2);
             $table->boolean('sellOrBuy');
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('stock_id')->constrained();
             $table->timestamps();
         });
     }

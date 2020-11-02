@@ -2,10 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Balance;
 use Illuminate\Http\Request;
+use Auth;
 
 class BalanceController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +30,15 @@ class BalanceController extends Controller
      */
     public function create()
     {
-        //
+        $balance = new Balance;
+        $balance->type_of_currency = "Euro";
+        $balance->amount = 100000.0;
+        $balance->user_id = Auth::id();
+        $balance->save();
+        return redirect()
+            ->route('stocks.index')
+            ->with('status', 'Created a new Todo!');
+
     }
 
     /**

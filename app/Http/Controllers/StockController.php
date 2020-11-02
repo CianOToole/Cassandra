@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Stock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 class StockController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,11 @@ class StockController extends Controller
      */
     public function index()
     {
-        return DB::select("select * from stocks");
+        $user = Auth::user();
+        $stocks = $user->trades()->orderBy('created_at', 'desc')->paginate(8);
+        return view('todos.index', [
+            'stocks' => $stocks
+        ]);
     }
 
     /**
@@ -46,7 +56,10 @@ class StockController extends Controller
      */
     public function show($id)
     {
-        //
+        $stock = Stock::findOrFail($id);
+        return view('stocks.show', [
+            'stock' => $stock,
+        ]);
     }
 
     /**
@@ -81,5 +94,12 @@ class StockController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function showAllTodos(){
+        $stocks = Stock::orderBy('created_at', 'desc')->paginate(8);
+        return view('stocks.index',[
+            'stocks' => $stocks
+        ]);
     }
 }
