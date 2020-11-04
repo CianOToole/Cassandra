@@ -11,6 +11,6 @@ class Role extends Model
 
     //many roles can belong to a user
     public function users(){
-        return $this -> belongsToMany('App\Models\User');
+        return $this -> belongsToMany('App\Models\User', 'user_role');
     }
 }
