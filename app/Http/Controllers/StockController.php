@@ -20,11 +20,19 @@ class StockController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        $stocks = $user->trades()->orderBy('created_at', 'desc')->paginate(8);
-        return view('todos.index', [
+        // $user = Auth::user();
+        // $stocks = $user->trades()->orderBy('created_at', 'desc')->paginate(8);
+        // return view('stocks.index', [
+        //     'stocks' => $stocks
+        // ]);
+        //  $stocks = Stock::orderBy('created_at', 'desc')->paginate(8);
+        //  $test = Stock::groupBy('ticker')->get();
+          $stocks = Stock::select("select DISTINCT ticker from stocks")->orderBy('created_at', 'desc');
+        return view('stocks.index',[
             'stocks' => $stocks
         ]);
+
+       
     }
 
     /**

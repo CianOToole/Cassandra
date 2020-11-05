@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Services\UserBalanceService;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -74,6 +75,7 @@ class UserController extends Controller
         $user->password = Hash::make($request->password);
         $user->save(); // save it to the database.
         //Redirect to a specified route with flash message.
+        (new UserBalanceService())->createUserBalance();
         return redirect()
             ->route('users.index')
             ->with('status', 'Created a new user!');

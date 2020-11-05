@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <h3 class="text-center">Create Todo</h3>
-    <form action="{{ route('todos.store') }}" method="post">
+    <form action="{{ route('stocks.store') }}" method="post">
         @csrf
         <div class="form-group">
             <label for="title">Todo Title</label>

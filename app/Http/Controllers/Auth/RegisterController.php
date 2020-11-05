@@ -50,10 +50,23 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'first_name' => 'required|string|min:2|max:191',
+            'middle_name'  => 'required|string|min:5|max:1000',
+            'last_name' => 'required|string|min:2|max:191',
+            'DOB'  => 'required|string|min:5|max:1000',
+            'gender' => 'required|string|min:2|max:191',
+            'address'  => 'required|string|min:5|max:1000',
+            'postcode' => 'required|string|min:2|max:191',
+            'country'  => 'required|string|min:5|max:1000',
+            'email' => 'required|string|unique:users,email|min:2|max:191',
+            'phone'  => 'required|string|min:5|max:1000',
+            'password'  => 'required|string|min:5|max:1000',
         ]);
+        // return Validator::make($data, [
+        //     'name' => ['required', 'string', 'max:255'],
+        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        //     'password' => ['required', 'string', 'min:8', 'confirmed'],
+        // ]);
     }
 
     /**
@@ -65,8 +78,16 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'first_name' => $data['first_name'],
+            'middle_name' => $data['middle_name'],
+            'last_name' => $data['last_name'],
+            'DOB' => $data['DOB'],
+            'gender' => $data['gender'],
+            'address' => $data['address'],
+            'postcode' => $data['postcode'],
+            'country' => $data['country'],
             'email' => $data['email'],
+            'phone' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
     }

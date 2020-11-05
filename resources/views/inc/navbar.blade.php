@@ -16,10 +16,10 @@
             <ul class="navbar-nav ml-auto">
                 @auth
                     <li class="nav-item">
-                        <a href="{{ route('todos.showAllTodos') }}" class="nav-link">Todos</a>
+                        <a href="{{ route('stocks.index') }}" class="nav-link">Stock!</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('todos.create') }}" class="nav-link">New Todo</a>
+                        {{-- <a href="{{ route('todos.create') }}" class="nav-link">New Todo</a> --}}
                     </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

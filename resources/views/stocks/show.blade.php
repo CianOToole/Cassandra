@@ -1,10 +1,10 @@
 @extends('layouts.app')
 @section('content')
-    <h3 class="text-center">{{$todo->title}}</h3>
-    <p>{{$todo->body}}</p>
+    <h3 class="text-center">{{$stock->title}}</h3>
+    <p>{{$stock->body}}</p>
     <br>
-    <a href="{{route('todos.edit',$todo->id)}}" class="btn btn-primary float-left">Update</a>
-    <a href="#" class="btn btn-danger float-right" data-toggle="modal" data-target="#delete-modal">Delete</a>
+    <a href="{{route('trades.create',$stock->id)}}" class="btn btn-primary float-left">Order</a>
+    {{-- <a href="#" class="btn btn-danger float-right" data-toggle="modal" data-target="#delete-modal">Delete</a> --}}
     <div class="clearfix"></div>
     <div class="modal fade" id="delete-modal">
         <div class="modal-dialog" role="document">
@@ -25,7 +25,7 @@
         </div>
         </div>
     </div>
-    <form method="POST" id="delete-form" action="{{route('todos.destroy',$todo->id)}}">
+    <form method="POST" id="delete-form" action="{{route('stocks.destroy',$stock->id)}}">
         @csrf
         @method('DELETE')
     </form>

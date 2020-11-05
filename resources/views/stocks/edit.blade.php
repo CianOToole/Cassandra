@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <h3 class="text-center">Edit Todo</h3>
-    <form action="{{route('todos.update',$todo->id)}}" method="post">
+    <form action="{{route('stocks.update',$stock->id)}}" method="post">
         @csrf
         @method('PUT')
         <div class="form-group">
