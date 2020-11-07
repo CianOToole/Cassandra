@@ -6,6 +6,7 @@ use App\Models\Trade;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Auth;
+use App\Services\UserBalanceService;
 
 class TradeController extends Controller
 {
@@ -29,12 +30,16 @@ class TradeController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
+     *@param  int  $price
+     *@param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($price, $id)
     {
-     return "bruh";
+     return view('trades.create', [
+         'price_at_order' => $price,
+         'stock_id' => $id
+     ]);
     }
 
     /**
@@ -48,16 +53,16 @@ class TradeController extends Controller
           //validation rules
           $rules = [
             'price_at_order' => 'required|string|min:2|max:191',
-            'amount'  => 'required|string|min:5|max:1000',
-            'sellOrBuy' => 'required|string|min:2|max:191',
-            'stock_id'  => 'required|string|min:5|max:1000',
+            'amount'  => 'required|string|min:2|max:1000',
+            'sellOrBuy' => 'required|in:1,0',
         ];
         //custom validation error messages
         $messages = [
-            'email.unique' => 'User title should be unique', //syntax: field_name.rule
+            'amount.required' => 'Amount is requried', //syntax: field_name.rule
         ];
         //First Validate the form data
         $request->validate($rules, $messages);
+        (new UserBalanceService())->createUserBalance();
         $trade = new Trade;
         $trade->price_at_order = $request->price_at_order;
         $trade->amount = $request->amount;
@@ -65,9 +70,10 @@ class TradeController extends Controller
         $trade->user_id = Auth::id();
         $trade->stock_id = $request->stock_id;
         $trade->save();
+        (new UserBalanceService())->minusProfit($request);
         return redirect()
             ->route('stocks.index')
-            ->with('status', 'Created a new Todo!');
+            ->with('status', 'Created a new Trade!');
     }
 
     /**
@@ -154,10 +160,11 @@ class TradeController extends Controller
     public function destroy($id)
     {
         $trades = Trade::findOrFail($id);
-        $trades->delete();
+       (new UserBalanceService())->addProfit($trades);
+            // $trades->delete();
         //Redirect to a specified route with flash message.
         return redirect()
             ->route('trades.index')
-            -> with('status','Deleted the selected user');
+            -> with('status','closed the selected Trade');
     }
 }

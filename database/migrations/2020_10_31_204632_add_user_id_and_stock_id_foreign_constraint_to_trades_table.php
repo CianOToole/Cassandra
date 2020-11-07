@@ -15,7 +15,7 @@ class AddUserIdAndStockIdForeignConstraintToTradesTable extends Migration
      */
     public function up()
     {
-        Trade::truncate();
+        // Trade::truncate();
         Schema::table('trades', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id'); // unsigned for foreign key.
             $table->foreign('user_id') // foreign key column name.

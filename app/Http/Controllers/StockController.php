@@ -25,9 +25,9 @@ class StockController extends Controller
         // return view('stocks.index', [
         //     'stocks' => $stocks
         // ]);
-        //  $stocks = Stock::orderBy('created_at', 'desc')->paginate(8);
+         $stocks = Stock::orderBy('created_at', 'asc')->paginate(31);
         //  $test = Stock::groupBy('ticker')->get();
-          $stocks = Stock::select("select DISTINCT ticker from stocks")->orderBy('created_at', 'desc');
+        //   $stocks = Stock::select("select DISTINCT ticker from stocks")->orderBy('created_at', 'desc');
         return view('stocks.index',[
             'stocks' => $stocks
         ]);
