@@ -38,9 +38,9 @@ class AddUserIdAndStockIdForeignConstraintToTradesTable extends Migration
     public function down()
     {
         Schema::table('trades', function (Blueprint $table) {
-            $table->dropForeignKey(['user_id']);
+            $table->dropForeign(['user_id']);
             $table->dropColumn('user_id');
-            $table->dropForeignKey(['stock_id']);
+            $table->dropForeign(['stock_id']);
             $table->dropColumn('stock_id');
         });
     }
