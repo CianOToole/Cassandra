@@ -36,7 +36,7 @@ class UserBalanceService
         $sharePerStock = ($trade->amount / $stockPast->price);
         $addToBalance = $sharePerStock * $stockNow->price;
         $balance = Balance::where('user_id', Auth::id())->firstOrFail();
-        $balance->amount += $addToBalance;
+        $balance->amount += $addToBalance; 
         $balance->save();
     }
 
