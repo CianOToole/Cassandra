@@ -49,7 +49,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-<<<<<<< HEAD
     //many roles can belong to a user
     public function roles(){
         return $this -> belongsToMany('App\Models\Role', 'user_role');
@@ -69,13 +68,4 @@ class User extends Authenticatable
         return null !== $this->roles()->where('name', $role)->first();
     }
 
-=======
-    public function trades(){
-        return $this->hasMany('App\Models\Trade', 'user_id');
-    }
-
-    public function balance(){
-        return $this->hasOne('App\Models\Balance', 'user_id');
-    }
->>>>>>> stockSim
 }

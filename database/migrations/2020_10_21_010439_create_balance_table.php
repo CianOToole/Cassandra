@@ -17,7 +17,6 @@ class CreateBalanceTable extends Migration
             $table->id();
             $table->string('type_of_currency', 100);
             $table->decimal('amount', 8, 2);
-            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

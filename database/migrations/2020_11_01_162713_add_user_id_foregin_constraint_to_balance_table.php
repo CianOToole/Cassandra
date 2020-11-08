@@ -13,7 +13,7 @@ class AddUserIdForeginConstraintToBalanceTable extends Migration
      */
     public function up()
     {
-        Schema::table('balance', function (Blueprint $table) {
+        Schema::table('balances', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id'); // unsigned for foreign key.
             $table->foreign('user_id') // foreign key column name.
                 ->references('id') // parent table primary key.
@@ -29,8 +29,8 @@ class AddUserIdForeginConstraintToBalanceTable extends Migration
      */
     public function down()
     {
-        Schema::table('balance', function (Blueprint $table) {
-            $table->dropForeignKey(['user_id']);
+        Schema::table('balances', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
             $table->dropColumn('user_id');
         });
     }
