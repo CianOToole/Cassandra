@@ -40,7 +40,7 @@ class UserSeeder extends Seeder
         $admin->phone = '0862014993';
         $admin->password = Hash::make('secret');
         $admin->save();
-        $admin->roles()->attach($role_admin);
+        $admin->roles()->attach($role_admin); 
 
 
         $adminTwo = new User();
