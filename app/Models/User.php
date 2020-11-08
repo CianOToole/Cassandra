@@ -17,8 +17,16 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'middle_name',
+        'last_name',
+        'DOB',
+        'gender',
+        'address',
+        'postcode',
+        'country',
         'email',
+        'phone',
         'password',
     ];
 
@@ -40,4 +48,34 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+<<<<<<< HEAD
+    //many roles can belong to a user
+    public function roles(){
+        return $this -> belongsToMany('App\Models\Role', 'user_role');
+    }
+
+    public function authorizeRoles($roles){
+        if(is_array($roles)){
+            return $this->hasAnyRole($roles);
+        }
+        return $this->hasRole($roles);
+    }
+
+    public function hasAnyRole($roles){
+        return null !== $this->roles()->whereIn('name', $roles)->first();
+    }
+    public function hasRole($role){
+        return null !== $this->roles()->where('name', $role)->first();
+    }
+
+=======
+    public function trades(){
+        return $this->hasMany('App\Models\Trade', 'user_id');
+    }
+
+    public function balance(){
+        return $this->hasOne('App\Models\Balance', 'user_id');
+    }
+>>>>>>> stockSim
 }
