@@ -51,12 +51,6 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-<<<<<<< HEAD
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-=======
             'first_name' => 'required|string|min:2|max:191',
             'middle_name'  => 'required|string|min:5|max:1000',
             'last_name' => 'required|string|min:2|max:191',
@@ -74,7 +68,6 @@ class RegisterController extends Controller
         //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         //     'password' => ['required', 'string', 'min:8', 'confirmed'],
         // ]);
->>>>>>> stockSim
     }
 
     /**
@@ -85,20 +78,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-<<<<<<< HEAD
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
-
-        $user->roles()->attach(Role::where('name', 'user')->first());
-
-        return $user;
-
-=======
         
-        return User::create([
+        $user =  User::create([
             'first_name' => $data['first_name'],
             'middle_name' => $data['middle_name'],
             'last_name' => $data['last_name'],
@@ -111,6 +92,9 @@ class RegisterController extends Controller
             'phone' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
->>>>>>> stockSim
+
+        $user->roles()->attach(Role::where('name','user')->first());
+
+        return $user;
     }
 }

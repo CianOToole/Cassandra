@@ -30,7 +30,7 @@ class AddUserIdForeginConstraintToBalanceTable extends Migration
     public function down()
     {
         Schema::table('balances', function (Blueprint $table) {
-            $table->dropForeignKey(['user_id']);
+            $table->dropForeign(['user_id']);
             $table->dropColumn('user_id');
         });
     }
