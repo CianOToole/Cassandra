@@ -15,10 +15,11 @@ class CreateClientsTable extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->string('middle_name');
             $table->date('DOB');
             $table->string('gender');
-            $table->string('psotcode');
+            $table->string('postcode');
             $table->string('country');
             $table->boolean('isExperienced');
             $table->boolean('isBanned');

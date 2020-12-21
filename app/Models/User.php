@@ -30,11 +30,11 @@ class User extends Authenticatable
     ];
 
     public function employee(){
-        return $this->belongsTo('App\Models\Employee');
+        return $this->hasOne('App\Models\Employee');
     }
 
     public function client(){
-        return $this->belongsTo('App\Models\Client');
+        return $this->hasOne('App\Models\Client');
     }
 
 // ROLES    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
