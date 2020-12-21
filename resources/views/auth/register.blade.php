@@ -13,7 +13,7 @@
 
 
                         <div class="form-group row">
-                            <label for="first_name" class="col-md-4 col-form-label text-md-right">{{ __('first_name') }}</label>
+                            <label for="first_name" class="col-md-4 col-form-label text-md-right">First name</label>
                             <div class="col-md-6">
                                 <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" 
                                 value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
@@ -27,7 +27,7 @@
 
 
                         <div class="form-group row">
-                            <label for="middle_name" class="col-md-4 col-form-label text-md-right">{{ __('middle_name') }}</label>
+                            <label for="middle_name" class="col-md-4 col-form-label text-md-right">Middle name</label>
                             <div class="col-md-6">
                                 <input id="middle_name" type="middle_name" class="form-control @error('middle_name') is-invalid @enderror" 
                                 name="middle_name" value="{{ old('middle_name') }}" required autocomplete="middle_name">
@@ -41,7 +41,7 @@
 
 
                         <div class="form-group row">
-                            <label for="last_name" class="col-md-4 col-form-label text-md-right">{{ __('last_name') }}</label>
+                            <label for="last_name" class="col-md-4 col-form-label text-md-right">Surname</label>
                             <div class="col-md-6">
                                 <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" 
                                 value="{{ old('last_name') }}" required autocomplete="last_name" autofocus>
