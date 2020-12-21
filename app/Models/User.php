@@ -37,7 +37,8 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\Client');
     }
 
-    //many roles can belong to a user
+// ROLES    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     public function roles(){
         return $this -> belongsToMany('App\Models\Role', 'user_role');
     }

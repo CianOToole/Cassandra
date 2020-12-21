@@ -11,12 +11,17 @@ Route::get('/', function () {
     return view('home');
 });
 
+// STOCKS CRUD ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/admin/home', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin.home');
-Route::get('/user/home', [App\Http\Controllers\User\HomeController::class, 'index'])->name('user.home');
+Route::get('/moderator/home', [App\Http\Controllers\Moderator\HomeController::class, 'index'])->name('moderator.home');
+Route::get('/client/home', [App\Http\Controllers\Client\HomeController::class, 'index'])->name('client.home');
+
+// STOCKS CRUD ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Route::get('stocks',[StockController::class,'index'])->name('stocks.index');
 Route::get('/stocks/create', [StockController::class, 'create'])->name('stocks.create');

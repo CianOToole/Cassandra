@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -11,11 +11,10 @@ class HomeController extends Controller
 
     public function __construct(){
         $this->middleware('auth');
-        $this->middleware('role:admin');
+        $this->middleware('role:client');
     }
 
     public function index(){
-        return view('admin.home');
+        return view('client.home');
     }
 }
-
