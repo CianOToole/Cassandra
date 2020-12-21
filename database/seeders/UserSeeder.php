@@ -17,55 +17,39 @@ class UserSeeder extends Seeder
     public function run()
     {
 
-        //db ,get me role where name = admin
         $role_admin = Role::where('name', 'admin')->first();
-        $role_user = Role::where('name', 'user')->first();
+        $role_moderator = Role::where('name', 'moderator')->first();
+        $role_client = Role::where('name', 'client')->first();
 
         $admin = new User();
-
-        $admin->first_name = 'Yvan';
-        $admin->middle_name = 'Angus';
-        $admin->last_name = 'Monod';
-        $admin->DOB  = '1998/09/12';
-        $admin->gender = 'Male';
-        $admin->address = 'test street';
-        $admin->postcode = 'XNZ72';
-        $admin->country = 'France';
-        $admin->email = 'yvan@mail.com';
-        $admin->phone = '9102716253';
+        $admin->name = 'John';
+        $admin->surname = 'Smith';
+        $admin->address = '123 No Where Street';
+        $admin->phone  = '000-0000-000';
+        $admin->email = 'smith@mail.com';
         $admin->password = Hash::make('secret');
         $admin->save();
         $admin->roles()->attach($role_admin); 
 
+        $moderator = new User();
+        $moderator->name = 'Angus';
+        $moderator->surname = 'McFiffe';
+        $moderator->address = '88 Lost Road';
+        $moderator->phone  = '111-1111-111';
+        $moderator->email = 'mcfiffe@mail.com';
+        $moderator->password = Hash::make('secret');
+        $moderator->save();
+        $moderator->roles()->attach($role_moderator); 
 
-        $adminTwo = new User();
-        $adminTwo->first_name = 'Cian';
-        $adminTwo->middle_name = 'Tupac';
-        $adminTwo->last_name = 'OToole';
-        $adminTwo->DOB  = '2001/11/01';
-        $adminTwo->gender = 'Unkwon';
-        $adminTwo->address = 'dev road';
-        $adminTwo->postcode = 'DZD83D';
-        $adminTwo->country = 'Ireland';
-        $adminTwo->email = 'cian@mail.com';
-        $adminTwo->phone = '01826749281';
-        $adminTwo->password = Hash::make('secret');
-        $adminTwo->save();
-        $adminTwo->roles()->attach($role_admin);
+        $client = new User();
+        $client->name = 'Niamh';
+        $client->surname = 'Farelly';
+        $client->address = '12 Abandonned Path';
+        $client->phone  = '222-2222-222';
+        $client->email = 'farelly@mail.com';
+        $client->password = Hash::make('secret');
+        $client->save();
+        $client->roles()->attach($role_client); 
 
-        $user = new User();
-        $user->first_name = 'John';
-        $user->middle_name = 'Delano';
-        $user->last_name = 'Smith';
-        $user->DOB  = '1992/04/10';
-        $user->gender = 'Male';
-        $user->address = 'somewhere';
-        $user->postcode = 'DJZ72D';
-        $user->country = 'Ireland';
-        $user->email = 'smith@mail.com';
-        $user->phone = '0862014993';
-        $user->password = Hash::make('secret');
-        $user->save();
-        $user->roles()->attach($role_user);
     }
 }
