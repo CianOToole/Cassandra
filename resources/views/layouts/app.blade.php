@@ -54,7 +54,8 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
+                                    <img src=" {{ asset('storage/profile_picture/' . Auth::user()->avatar) }} " width='30px' height="30px" 
+                                        style="object-fit: fill;"" class = "rounded-circle mr-1">
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -76,8 +77,29 @@
         </nav>
 
         <main class="py-4">
+            <div class="container">
+                <div class="row-justify-content-center">
+                    <div class="col-md-12">
+                        <div class="flash-message">
+                            @foreach (['success', 'info', 'danger', 'warning'] as $key)
+                                @if(Session::has($key))
+                                    <div class="flash alert alert-{{$key}}">{{ Session::get($key) }}
+                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    </div>
+                                @endif                                                            
+                            @endforeach    
+                        </div>
+                    </div>
+                </div>
+            </div>
             @yield('content')
         </main>
     </div>
 </body>
+
+<script src="https://kit.fontawesome.com/b0365a380f.js" crossorigin="anonymous"></script>
+<script>
+    setTimeout(function(){ $('.flash').alert('close') }, 3000); 
+</script>
+
 </html>

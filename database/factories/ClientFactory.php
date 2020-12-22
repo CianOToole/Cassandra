@@ -15,7 +15,7 @@ class ClientFactory extends Factory
 
         return [
             'name' => $this->faker->firstName($gender),
-            'middle_name' => $this->faker->name($gender),         
+            'middle_name' => $this->faker->firstName($gender),         
             'DOB' => $this->faker->dateTimeBetween(),
             'gender' => $gender,
             'postcode' => $this->faker->postcode,

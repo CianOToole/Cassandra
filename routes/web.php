@@ -5,13 +5,14 @@ use App\Http\Controllers\TradeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BalanceController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\ModeratorController as ModProfileController;
 
 
 Route::get('/', function () {
     return view('home');
 });
 
-// STOCKS CRUD ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// HOME ROUTES ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Auth::routes();
 
@@ -20,6 +21,17 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/admin/home', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin.home');
 Route::get('/moderator/home', [App\Http\Controllers\Moderator\HomeController::class, 'index'])->name('moderator.home');
 Route::get('/client/home', [App\Http\Controllers\Client\HomeController::class, 'index'])->name('client.home');
+
+// PROFILE CRUD ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// - moderators
+Route::get('/admin/moderators', [ModProfileController::class, 'index'])->name('admin.moderators.index');
+Route::get('/admin/moderators/create', [ModProfileController::class, 'create'])->name('admin.moderators.create');
+Route::get('/admin/moderators/{id}', [ModProfileController::class, 'show'])->name('admin.moderators.show');
+Route::post ('/admin/moderators/store', [ModProfileController::class, 'store'])->name('admin.moderators.store');
+Route::get('/admin/moderators/{id}/edit', [ModProfileController::class, 'edit'])->name('admin.moderators.edit');
+Route::put('/admin/moderators/{id}', [ModProfileController::class, 'update'])->name('admin.moderators.update');
+Route::delete('/admin/moderators/{id}', [ModProfileController::class, 'destroy'])->name('admin.moderators.destroy');
 
 // STOCKS CRUD ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
