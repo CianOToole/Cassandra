@@ -24,7 +24,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    <h3 class="home-link">Cassandra</h3>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -32,8 +32,21 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
+                    <ul class="navbar-nav mr-auto navigation">
+                        @auth
+                            @if (Auth::user()->hasRole('admin'))
+                                <li><a href="{{route('admin.moderators.index')}}">Moderators</a></li>    
+                                <li><a href="{{route('admin.clients.index')}}">Clients</a></li>    
+                                {{-- <li><a href="{{route('admin.patients.index')}}">Patients</a></li>     --}}
+                            @endif
+                            {{-- @if (Auth::user()->hasRole('doctor'))
+                                <li><a href="{{route('doctor.visits.index')}}">Visits</a></li>    
+                            @endif
+                            @if (Auth::user()->hasRole('patient'))
+                                <li><a href="{{route('patient.visits.index')}}">Visits</a></li>    
+                            @endif --}}
+                        @endauth
+                        {{-- <li><a href="{{route('about')}}">About Us</a></li> --}}
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -94,6 +107,7 @@
             </div>
             @yield('content')
         </main>
+
     </div>
 </body>
 

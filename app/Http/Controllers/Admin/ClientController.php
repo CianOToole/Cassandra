@@ -5,26 +5,26 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Employee;
+use App\Models\Client;
 use App\Models\Role;
 use Hash;
 use Illuminate\Support\Facades\DB;
 use Storage;
 
-class ModeratorController extends Controller{
+class ClientController extends Controller{
 
     public function index(){
 
         $users = DB::table('users')
-            ->join('employees', 'users.id', '=', 'employees.user_id')
-            ->orderBy('employees.id')
-            ->select('users.*', 'employees.name', 'employees.emp_number', 'employees.salary')        
+            ->join('clients', 'users.id', '=', 'clients.user_id')
+            ->orderBy('clients.id')
+            ->select('users.*', 'clients.name', 'clients.middle_name', 'clients.DOB', 'clients.gender', 'clients.isExperienced', 'clients.isBanned') 
             ->join('user_role', 'users.id', '=', 'user_role.user_id')
-            ->where('role_id', 2)
+            ->where('role_id', 3)
             ->paginate(8);
 
 
-        return view('admin.moderators.index',[
+        return view('admin.clients.index',[
             'users' => $users,
         ]);
 
@@ -33,14 +33,14 @@ class ModeratorController extends Controller{
     
     public function show($id){
 
-        $moderator = DB::table('users')        
-        ->join('employees', 'users.id', '=', 'employees.user_id')
-        ->select("users.*",  'employees.name', 'employees.emp_number', 'employees.salary')
+        $client = DB::table('users')        
+        ->join('clients', 'users.id', '=', 'clients.user_id')
+        ->select("users.*",  'clients.name', 'clients.middle_name', 'clients.DOB', 'clients.gender', 'clients.postcode', 'clients.country', 'clients.isExperienced', 'clients.isBanned')      
         ->where('users.id', $id)
         ->get();
 
-        return view('admin.moderators.show',[
-            'moderator' => $moderator,
+        return view('admin.clients.show',[
+            'client' => $client,
         ]);     
 
     }

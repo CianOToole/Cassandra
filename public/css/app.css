@@ -10903,6 +10903,10 @@ a.text-dark:focus {
   }
 }
 
+.red {
+  background: red;
+}
+
 .navbar {
   background: #16a77cc7 !important;
 }
@@ -10947,15 +10951,11 @@ table thead {
   background-color: rgba(51, 51, 51, 0.11);
 }
 
-table tbody tr.status-completed {
-  background-color: rgba(0, 102, 255, 0.1);
+table thead:hover {
+  cursor: pointer;
 }
 
-table tbody tr.status-ongoing {
-  background-color: rgba(255, 255, 255, 0.05);
-}
-
-table tbody tr.status-cancelled {
+table tbody tr.status-banned {
   background-color: rgba(255, 0, 0, 0.1);
 }
 

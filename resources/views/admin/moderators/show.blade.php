@@ -20,10 +20,6 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>id</td>
-                                        <td>{{ $moderator[0]->id }}</td>
-                                    </tr>
-                                    <tr>
                                         <td>Email</td>
                                         <td>{{ $moderator[0]->email }}</td>
                                     </tr>

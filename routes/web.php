@@ -5,7 +5,8 @@ use App\Http\Controllers\TradeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BalanceController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\ModeratorController as ModProfileController;
+use App\Http\Controllers\Admin\ModeratorController as ModController;
+use App\Http\Controllers\Admin\ClientController as CliController;
 
 
 Route::get('/', function () {
@@ -25,13 +26,22 @@ Route::get('/client/home', [App\Http\Controllers\Client\HomeController::class, '
 // PROFILE CRUD ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // - moderators
-Route::get('/admin/moderators', [ModProfileController::class, 'index'])->name('admin.moderators.index');
-Route::get('/admin/moderators/create', [ModProfileController::class, 'create'])->name('admin.moderators.create');
-Route::get('/admin/moderators/{id}', [ModProfileController::class, 'show'])->name('admin.moderators.show');
-Route::post ('/admin/moderators/store', [ModProfileController::class, 'store'])->name('admin.moderators.store');
-Route::get('/admin/moderators/{id}/edit', [ModProfileController::class, 'edit'])->name('admin.moderators.edit');
-Route::put('/admin/moderators/{id}', [ModProfileController::class, 'update'])->name('admin.moderators.update');
-Route::delete('/admin/moderators/{id}', [ModProfileController::class, 'destroy'])->name('admin.moderators.destroy');
+Route::get('/admin/moderators', [ModController::class, 'index'])->name('admin.moderators.index');
+Route::get('/admin/moderators/create', [ModController::class, 'create'])->name('admin.moderators.create');
+Route::get('/admin/moderators/{id}', [ModController::class, 'show'])->name('admin.moderators.show');
+Route::post ('/admin/moderators/store', [ModController::class, 'store'])->name('admin.moderators.store');
+Route::get('/admin/moderators/{id}/edit', [ModController::class, 'edit'])->name('admin.moderators.edit');
+Route::put('/admin/moderators/{id}', [ModController::class, 'update'])->name('admin.moderators.update');
+Route::delete('/admin/moderators/{id}', [ModController::class, 'destroy'])->name('admin.moderators.destroy');
+
+// - clients
+Route::get('/admin/clients', [CliController::class, 'index'])->name('admin.clients.index');
+Route::get('/admin/clients/create', [CliController::class, 'create'])->name('admin.clients.create');
+Route::get('/admin/clients/{id}', [CliController::class, 'show'])->name('admin.clients.show');
+Route::post ('/admin/clients/store', [CliController::class, 'store'])->name('admin.clients.store');
+Route::get('/admin/clients/{id}/edit', [CliController::class, 'edit'])->name('admin.clients.edit');
+Route::put('/admin/clients/{id}', [CliController::class, 'update'])->name('admin.clients.update');
+Route::delete('/admin/clients/{id}', [CliController::class, 'destroy'])->name('admin.clients.destroy');
 
 // STOCKS CRUD ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
