@@ -37,12 +37,11 @@
                             @if (Auth::user()->hasRole('admin'))
                                 <li><a href="{{route('admin.moderators.index')}}">Moderators</a></li>    
                                 <li><a href="{{route('admin.clients.index')}}">Clients</a></li>    
-                                {{-- <li><a href="{{route('admin.patients.index')}}">Patients</a></li>     --}}
                             @endif
-                            {{-- @if (Auth::user()->hasRole('doctor'))
-                                <li><a href="{{route('doctor.visits.index')}}">Visits</a></li>    
+                            @if (Auth::user()->hasRole('moderator'))
+                                <li><a href="{{route('moderator.clients.index')}}">Visits</a></li>    
                             @endif
-                            @if (Auth::user()->hasRole('patient'))
+                            {{-- @if (Auth::user()->hasRole('patient'))
                                 <li><a href="{{route('patient.visits.index')}}">Visits</a></li>    
                             @endif --}}
                         @endauth
@@ -77,12 +76,12 @@
                                         @if (Auth::user()->hasRole('admin'))
                                             <a class="dropdown-item" href="{{ route('admin.profiles.index') }}">Profile</a>
                                         @endif
-                                        {{-- @if (Auth::user()->hasRole('doctor'))
-                                            <a class="dropdown-item" href="{{ route('doctor.profile.index') }}">Profile</a>
-                                        @endif --}}
-                                        {{-- @if (Auth::user()->hasRole('patient'))
-                                            <a class="dropdown-item" href="{{ route('patient.profile.index') }}">Profile</a>
-                                        @endif --}}
+                                        @if (Auth::user()->hasRole('moderator'))
+                                            <a class="dropdown-item" href="{{ route('moderator.profiles.index') }}">Profile</a>
+                                        @endif
+                                        @if (Auth::user()->hasRole('client'))
+                                            <a class="dropdown-item" href="{{ route('client.profiles.index') }}">Profile</a>
+                                        @endif
                                     @endauth
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"

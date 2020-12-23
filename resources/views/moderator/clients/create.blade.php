@@ -36,13 +36,12 @@ $countries = array("Afghanistan", "Albania", "Algeria", "American Samoa", "Andor
 @endphp
 
 <div class="container">
-
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="card">
 
                 <div class="card-header">
-                    <h3 class="card-title">Edit {{ $client[0]->name }} {{ $client[0]->surname }}'s Profile</h3>
+                    <h3 class="card-title">Add new Client</h3>
                 </div>
 
                 <div class="card-body">
@@ -56,53 +55,60 @@ $countries = array("Afghanistan", "Albania", "Algeria", "American Samoa", "Andor
                         </div>
                     @endif
                     
-                    <form method="POST" action="{{ route('admin.clients.update', $client[0]->id) }}"  enctype="multipart/form-data">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <input type="hidden" name="_method" value="PUT">
+                    <form action="{{route('moderator.clients.store')}}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-                        {{-- <img src="{{ asset('storage/covers/' . $client[0]->avatar) }}" width="150" alt=""> --}}
-
-                        {{-- <div class="form-group">
+                        <div class="form-group ">
                             <label for="cover">Profile picture</label>                            
                             <div class="">
                                 <input type="file" class="form-control" id="avatar" name="avatar" value="" />
                             </div>
                         </div> --}}
-                        
-                        <div class="form-group">
+
+                        <div class="form-group ">
                             <label for="name">Name</label>
-                            <input type="text" class="form-control" id="name" name="name" value="{{ old('title', $client[0]->name) }}" />
+                            <div class="">
+                                <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" />
+                            </div>
                         </div>
-
-                        <div class="form-group">
+                        <div class="form-group ">
                             <label for="middle_name">Middle Name</label>
-                            <input type="text" class="form-control" id="middle_name" name="middle_name" value="{{ old('title', $client[0]->middle_name) }}" />
+                            <div class="">
+                                <input type="text" class="form-control" id="middle_name" name="middle_name" value="{{ old('middle_name') }}" />
+                            </div>
                         </div>
-
-                        <div class="form-group">
+                        <div class="form-group ">
                             <label for="surname">Surname</label>
-                            <input type="text" class="form-control" id="surname" name="surname" value="{{ old('title', $client[0]->surname) }}" />
+                            <div class="">
+                                <input type="text" class="form-control" id="surname" name="surname" value="{{ old('surname') }}" />
+                            </div>
                         </div>
-
-                        <div class="form-group">
-                            <label for="phone">Phone</label>
-                            <input type="text" class="form-control" id="phone" name="phone" value="{{ old('title', $client[0]->phone) }}" 
-                            placeholder="08x-xxxx-xxx" pattern="[0-9]{3}-[0-9]{4}-[0-9]{3}"/>
-                        </div>
-
-                        <div class="form-group">
+                        <div class="form-group ">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" value="{{ old('title', $client[0]->email) }}" />
+                            <div class="">
+                                <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" />
+                            </div>
                         </div>
-
-                        <div class="form-group">
+                        <div class="form-group ">
+                            <label for="phone">Phone</label>
+                            <div class="">
+                                <input type="tel" class="form-control" id="phone" name="phone" value="{{ old('phone') }}" 
+                                placeholder="08x-xxxx-xxx" pattern="[0-9]{3}-[0-9]{4}-[0-9]{3}"/>
+                            </div>
+                        </div>
+                        <div class="form-group ">
                             <label for="address">Address</label>
-                            <input type="text" class="form-control" id="address" name="address" value="{{ old('title', $client[0]->address) }}" />
+                            <div class="">
+                                <input type="text" class="form-control" id="address" name="address" value="{{ old('address') }}"/>
+                            </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group " style="padding-top: 16px">
                             <label for="postcode">Postcode</label>
-                            <input type="text" class="form-control" id="postcode" name="postcode" value="{{ old('title', $client[0]->postcode) }}" />
+                            <div class="">
+                                <input type="text" class="form-control" id="postcode" name="postcode" value="{{ old('postcode') }}" />
+                            </div>
                         </div>
 
                         <label for="">Country</label>
@@ -110,7 +116,7 @@ $countries = array("Afghanistan", "Albania", "Algeria", "American Samoa", "Andor
                             <div class="input-group-prepend">
                             </div>
                             <select class="custom-select" id="country" name="country">
-                                <option value="{{ old('title', $client[0]->country) }}">{{ old('title', $client[0]->country) }}</option>
+                                <option>Select your country</option>
                                     @foreach ($countries as $country)
                                         <option value= "{{$country}}"  >
                                         {{ $country}}</option>
@@ -118,9 +124,11 @@ $countries = array("Afghanistan", "Albania", "Algeria", "American Samoa", "Andor
                             </select>
                           </div>
 
-                        <div class="form-group">
+                        <div class="form-group ">
                             <label for="DOB">Date of Birth</label>
-                            <input type="date" class="form-control" id="DOB" name="DOB" value="{{ old('title', $client[0]->DOB) }}" />
+                            <div class="">
+                                <input type="date" class="form-control" id="DOB" name="DOB" value="{{ old('DOB') }}" />
+                            </div>
                         </div>
 
                         <label for="">Gender</label>
@@ -146,47 +154,31 @@ $countries = array("Afghanistan", "Albania", "Algeria", "American Samoa", "Andor
                                 </span>
                             @enderror
                         </div>
+                        
+                        <div class="form-group">
+                            <label for="password" class=" col-form-label ">{{ __('Password') }}</label>
 
-                        @if( $client[0]->isBanned == 0 )
-                            <label for="" style="padding-top: 16px">Ban {{ $client[0]->name }} {{ $client[0]->surname }} from posting?</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">
-                                        <input id="isBanned" type="radio" class="@error('isBanned') is-invalid @enderror" name="isBanned" 
-                                        value="1" {{ old('isBanned') }} autofocus>
-                                        <input id="isBanned" type="hidden" class="@error('isBanned') is-invalid @enderror" name="isBanned" 
-                                        value="0" {{ old('isBanned') }} autofocus checked>
-                                    </div>
-                                </div>
-                                <input type="text" class="form-control" aria-label="Text input with radio button" placeholder="Yes">
+                            <div class="">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
-                            @error('gender')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        @elseif($client[0]->isBanned == 1)
-                        <label for="" style="padding-top: 16px">Unban {{ $client[0]->name }} {{ $client[0]->surname }} from posting?</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <input id="isBanned" type="radio" class="@error('isBanned') is-invalid @enderror" name="isBanned" 
-                                    value="0" {{ old('isBanned') }} autofocus>
-                                    <input id="isBanned" type="hidden" class="@error('isBanned') is-invalid @enderror" name="isBanned" 
-                                    value="1" {{ old('isBanned') }} autofocus checked>
-                                </div>
-                            </div>
-                            <input type="text" class="form-control" aria-label="Text input with radio button" placeholder="Yes">
                         </div>
-                            @error('gender')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        @endif                        
 
-                        <div class="float-right" style="padding-top: 16px">
-                            <a href="{{ route('admin.clients.index') }}" class="btn btn-link">Cancel</a>
+                        <div class="form-group ">
+                            <label for="password-confirm" class="col-form-label ">{{ __('Confirm Password') }}</label>
+
+                            <div class="">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            </div>
+                        </div>
+
+                        <div class="float-right">
+                            <a href="{{ route('moderator.clients.index') }}" class="btn btn-link">Cancel</a>
                             <button type="submit" class="btn btn-primary pull-right">Submit</button>
                         </div>      
 

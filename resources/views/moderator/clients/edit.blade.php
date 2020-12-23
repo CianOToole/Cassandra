@@ -56,7 +56,7 @@ $countries = array("Afghanistan", "Albania", "Algeria", "American Samoa", "Andor
                         </div>
                     @endif
                     
-                    <form method="POST" action="{{ route('admin.clients.update', $client[0]->id) }}"  enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('moderator.clients.update', $client[0]->id) }}"  enctype="multipart/form-data">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="PUT">
 
@@ -186,7 +186,7 @@ $countries = array("Afghanistan", "Albania", "Algeria", "American Samoa", "Andor
                         @endif                        
 
                         <div class="float-right" style="padding-top: 16px">
-                            <a href="{{ route('admin.clients.index') }}" class="btn btn-link">Cancel</a>
+                            <a href="{{ route('moderator.clients.index') }}" class="btn btn-link">Cancel</a>
                             <button type="submit" class="btn btn-primary pull-right">Submit</button>
                         </div>      
 
