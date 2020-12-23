@@ -47,7 +47,7 @@
                                             }
                                         @endphp
                                         <tr data-id=" {{ $user->id }} " data-href="{{ route( 'admin.clients.show', $user->id) }}" class="status-{{$banning}}">
-                                            <td>{{ $user->name }}. {{ substr($user->name, 0, 1) }}</td>
+                                            <td>{{ $user->name }}. {{ substr($user->middle_name, 0, 1) }}</td>
                                             <td>{{ $user->surname }}</td>
                                             <td>{{ Str::limit($user->email, 15) }}</td>
                                             <td>{{ $user->phone }}</td>

@@ -34,7 +34,7 @@
                             </thead>
                                 <tbody>                                    
                                     <div class="" style=" float:left">
-                                        {{$users->->onEachSide(3)->links()}}
+                                        {{$users->onEachSide(3)->links()}}
                                     </div>
                                     @foreach ($users as $user)
                                         <tr data-id=" {{ $user->id }} " data-href="{{ route( 'admin.moderators.show', $user->id) }}">
