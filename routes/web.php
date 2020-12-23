@@ -5,6 +5,11 @@ use App\Http\Controllers\TradeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BalanceController;
 use Illuminate\Support\Facades\Route;
+
+// -    Users Profiles
+use App\Http\Controllers\Admin\ProfileController as AdminProfile;
+
+// -    Users CRUD
 use App\Http\Controllers\Admin\ModeratorController as ModController;
 use App\Http\Controllers\Admin\ClientController as CliController;
 
@@ -23,7 +28,14 @@ Route::get('/admin/home', [App\Http\Controllers\Admin\HomeController::class, 'in
 Route::get('/moderator/home', [App\Http\Controllers\Moderator\HomeController::class, 'index'])->name('moderator.home');
 Route::get('/client/home', [App\Http\Controllers\Client\HomeController::class, 'index'])->name('client.home');
 
-// PROFILE CRUD ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// PROFILES CRUD ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// - Admins
+Route::get('/admin/profile', [AdminProfile::class, 'profile'])->name('admin.profiles.index');
+Route::get('/admin/profile/{id}/edit', [AdminProfile::class, 'edit'])->name('admin.profiles.edit');
+Route::put('/admin/profile/{id}', [AdminProfile::class, 'update'])->name('admin.profiles.update');
+
+// USERS CRUD ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // - moderators
 Route::get('/admin/moderators', [ModController::class, 'index'])->name('admin.moderators.index');

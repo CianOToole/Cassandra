@@ -67,11 +67,24 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <img src=" {{ asset('storage/profile_picture/' . Auth::user()->avatar) }} " width='30px' height="30px" 
+                                    <img src=" {{ asset('storage/avatar/' . Auth::user()->avatar) }} " width='30px' height="30px" 
                                         style="object-fit: fill;"" class = "rounded-circle mr-1">
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                                    @auth
+                                        @if (Auth::user()->hasRole('admin'))
+                                            <a class="dropdown-item" href="{{ route('admin.profiles.index') }}">Profile</a>
+                                        @endif
+                                        {{-- @if (Auth::user()->hasRole('doctor'))
+                                            <a class="dropdown-item" href="{{ route('doctor.profile.index') }}">Profile</a>
+                                        @endif --}}
+                                        {{-- @if (Auth::user()->hasRole('patient'))
+                                            <a class="dropdown-item" href="{{ route('patient.profile.index') }}">Profile</a>
+                                        @endif --}}
+                                    @endauth
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

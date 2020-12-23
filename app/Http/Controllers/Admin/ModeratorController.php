@@ -13,6 +13,13 @@ use Storage;
 
 class ModeratorController extends Controller{
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('role:admin');  
+    }
+
+
     public function index(){
 
         $users = DB::table('users')
