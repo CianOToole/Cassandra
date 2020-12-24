@@ -14,10 +14,26 @@
                         </div>
                     @endif
 
-                    You are logged in as an ordinary User.
+                    Loggin successful.
+
+                    <br>
+                    <br>
+
+                    <div class="flash-message">
+                        @if($banning_state == 1)
+                            <div class="alert alert-danger">
+                                Warning: you have been ban from posting in the forum. Please watch out the community 
+                                <a href="#" style="text-decoration: underline; color: #761B18;">guideline</a>.
+                            </div>
+                        @endif           
+                    </div>
+
                 </div>
+
             </div>
         </div>
     </div>
 </div>
+
+
 @endsection
