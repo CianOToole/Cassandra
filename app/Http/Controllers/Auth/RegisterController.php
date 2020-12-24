@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Client;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -42,59 +43,37 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'first_name' => 'required|string|min:2|max:191',
-            'middle_name'  => 'required|string|min:5|max:1000',
-            'last_name' => 'required|string|min:2|max:191',
-            'DOB'  => 'required|string|min:5|max:1000',
-            'gender' => 'required|string|min:2|max:191',
-            'address'  => 'required|string|min:5|max:1000',
-            'postcode' => 'required|string|min:2|max:191',
-            'country'  => 'required|string|min:5|max:1000',
-            'email' => 'required|string|unique:users,email|min:2|max:191',
-            'phone'  => 'required|string|min:5|max:1000',
-            'password'  => 'required|string|min:5|max:1000',
+            'surname' => 'required|string|min:2|max:55',
+            'address'  => 'required|string|min:5|max:100',
+            'email' => 'required|email|unique:users,email',
+            'phone'  => 'required|string|min:5|max:25',
+            'password'  => 'required|string|min:8|max:25',
         ]);
-        // return Validator::make($data, [
-        //     'name' => ['required', 'string', 'max:255'],
-        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        //     'password' => ['required', 'string', 'min:8', 'confirmed'],
-        // ]);
+
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
     protected function create(array $data)
     {
         
         $user =  User::create([
-            'first_name' => $data['first_name'],
-            'middle_name' => $data['middle_name'],
-            'last_name' => $data['last_name'],
-            'DOB' => $data['DOB'],
-            'gender' => $data['gender'],
+            'surname' => $data['surname'],
             'address' => $data['address'],
-            'postcode' => $data['postcode'],
-            'country' => $data['country'],
             'email' => $data['email'],
-            'phone' => $data['email'],
+            'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
         ]);
 
-        $user->roles()->attach(Role::where('name','user')->first());
+        $user->roles()->attach(Role::where('name','client')->first());
 
+        $client = new Client();
+        $client->isExperienced = 0;
+        $client->isBanned = 0;
+        $client->user_id = $user->id;
+
+        $client->save();
         return $user;
     }
 }

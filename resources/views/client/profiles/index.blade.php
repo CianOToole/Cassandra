@@ -39,7 +39,7 @@
                                         </tr>   
                                         <tr>
                                             <td>Gender</td>
-                                            <td>{{ $client[0]->gender }}</td>
+                                            <td>{{ ($client[0]->gender == null) ? "Update Profile" : $client[0]->gender }}</td>
                                         </tr>   
                                         <tr>
                                             <td>Date of Birth</td>
