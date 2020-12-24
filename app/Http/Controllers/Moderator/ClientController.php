@@ -137,8 +137,6 @@ class ClientController extends Controller{
         $client->gender = $request->input('gender');
         $client->postcode = $request->input('postcode');
         $client->country = $request->input('country');        
-        $client->isExperienced = 0;        
-        $client->isBanned = $request->input('isBanned');
         $client->save();
 
         $request->session()->flash('info', 'Client edited successfully!');
@@ -162,6 +160,26 @@ class ClientController extends Controller{
         $user[0]->delete();
 
         $request->session()->flash('danger', 'Client removed successfully!');
+        return redirect()->route('moderator.clients.index');
+    }
+
+    public function ban(Request $request, $id){
+
+        $client = Client::where('user_id', $id)->firstOrFail();
+        $client->isBanned = $request->input('isBanned');
+        $client->save();
+
+        $request->session()->flash('info', 'Client ban successfully!');
+        return redirect()->route('moderator.clients.index');
+    }
+
+    public function unban(Request $request, $id){
+
+        $client = Client::where('user_id', $id)->firstOrFail();
+        $client->isBanned = $request->input('isBanned');
+        $client->save();
+
+        $request->session()->flash('info', 'Client unban successfully!');
         return redirect()->route('moderator.clients.index');
     }
 }

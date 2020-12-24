@@ -55,7 +55,27 @@
                                             <td>{{ $user->DOB }}</td>
                                             <td>{{ ($user->gender == 'male') ? 'M' : 'F' }}</td>
                                             <td>{{ ($user->isExperienced == 0) ? "no" : "yes" }}</td>
-                                            <td>{{ ($user->isBanned == 0) ? "no" : "yes" }}</td>
+                                            <td>
+                                                @if($user->isBanned == 0)
+                                                <form method="POST" action="{{ route('moderator.clients.banning', $user->id) }}">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                    <input type="hidden" name="_method" value="PUT">
+                                                        <input class="radio-inline" type="hidden" aria-label="" name="isBanned" value="1">
+                                                        <button type="submit" class="btn btn-primary"  title="Ban user">
+                                                            <i class="fas fa-ban"></i>
+                                                        </button>
+                                                </form>
+                                                @else
+                                                    <form method="POST" action="{{ route('moderator.clients.unban', $user->id) }}" >
+                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                        <input type="hidden" name="_method" value="PUT">
+                                                            <input class="radio-inline" type="hidden" aria-label="" name="isBanned" value="0">
+                                                            <button type="submit" class="btn btn-primary"  title="Unban user">
+                                                                <i class="fas fa-check"></i>
+                                                            </button>
+                                                    </form>
+                                                @endif
+                                            </td>
                                             <td>
                                                 <a href="{{ route( 'moderator.clients.edit', $user->id) }}" class="btn btn-dark">
                                                     <i class="fas fa-pen"></i>

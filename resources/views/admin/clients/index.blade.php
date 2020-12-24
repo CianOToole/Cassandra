@@ -31,7 +31,7 @@
                                 <th>DoB</th>
                                 <th>Gender</th>
                                 <th>Exp.</th>
-                                <th>Ban.</th>
+                                <th>(Un)Ban</th>
                                 <th>Action</th>
                             </thead>
                                 <tbody>                                    
@@ -55,15 +55,35 @@
                                             <td>{{ $user->DOB }}</td>
                                             <td>{{ ($user->gender == 'male') ? 'M' : 'F' }}</td>
                                             <td>{{ ($user->isExperienced == 0) ? "no" : "yes" }}</td>
-                                            <td>{{ ($user->isBanned == 0) ? "no" : "yes" }}</td>
                                             <td>
-                                                <a href="{{ route( 'admin.clients.edit', $user->id) }}" class="btn btn-dark">
+                                                @if($user->isBanned == 0)
+                                                    <form method="POST" action="{{ route('admin.clients.banning', $user->id) }}">
+                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                        <input type="hidden" name="_method" value="PUT">
+                                                            <input class="radio-inline" type="hidden" aria-label="" name="isBanned" value="1">
+                                                            <button type="submit" class="btn btn-primary"  title="Ban user">
+                                                                <i class="fas fa-ban"></i>
+                                                            </button>
+                                                    </form>
+                                                @else
+                                                    <form method="POST" action="{{ route('admin.clients.unban', $user->id) }}" >
+                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                        <input type="hidden" name="_method" value="PUT">
+                                                            <input class="radio-inline" type="hidden" aria-label="" name="isBanned" value="0">
+                                                            <button type="submit" class="btn btn-primary"  title="Unban user">
+                                                                <i class="fas fa-check"></i>
+                                                            </button>
+                                                    </form>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <a href="{{ route( 'admin.clients.edit', $user->id) }}" class="btn btn-dark" title="Edit user's profile">
                                                     <i class="fas fa-pen"></i>
                                                 </a>
                                                 <form style="display:inline-block" method="POST" action="{{ route( 'admin.clients.destroy', $user->id) }}">
                                                     <input type="hidden" name="_method" value="DELETE">
                                                     <input type="hidden" name="_token" value=" {{ csrf_token() }} ">
-                                                    <button type="submit" class="form-control btn btn-danger">
+                                                    <button type="submit" class="form-control btn btn-danger" title="Delete user's profile">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
                                                 </form>

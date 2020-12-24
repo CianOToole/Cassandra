@@ -52,14 +52,33 @@
                         </table>
                         
                     <div class="" style="float: right">
-                        <a href="{{ route('admin.clients.index') }} " class="btn btn-link">Back</a>
-                        <a href="{{ route('admin.clients.edit', $client[0]->id) }} " class="btn btn-dark">
+                        <a href="{{ route('admin.clients.index') }} " class="btn btn-link" title="Back to Clients table">Back</a>
+                        @if($client[0]->isBanned == 0)
+                            <form method="POST" action="{{ route('admin.clients.banning', $client[0]->id) }}" style="display: inline-block">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input type="hidden" name="_method" value="PUT">
+                                    <input class="radio-inline" type="hidden" aria-label="" name="isBanned" value="1">
+                                    <button type="submit" class="btn btn-primary"  title="Ban user">
+                                        <i class="fas fa-ban"></i>
+                                    </button>
+                            </form>
+                        @else
+                            <form method="POST" action="{{ route('admin.clients.unban', $client[0]->id) }}" style="display: inline-block">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input type="hidden" name="_method" value="PUT">
+                                    <input class="radio-inline" type="hidden" aria-label="" name="isBanned" value="0">
+                                    <button type="submit" class="btn btn-primary"  title="Unban user">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                            </form>
+                        @endif
+                        <a href="{{ route('admin.clients.edit', $client[0]->id) }} " class="btn btn-dark" title="Edit user's Profile">
                             <i class="fas fa-pen"></i>
                         </a>
                         <form style="display:inline-block" method="POST" action="{{ route( 'admin.clients.destroy', $client[0]->id) }}">
                             <input type="hidden" name="_method" value="DELETE">
                             <input type="hidden" name="_token" value=" {{ csrf_token() }} ">
-                            <button type="submit" class="form-control btn btn-danger">
+                            <button type="submit" class="form-control btn btn-danger" title="Delete user's Profile">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </form>

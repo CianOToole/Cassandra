@@ -53,6 +53,25 @@
                         
                     <div class="" style="float: right">
                         <a href="{{ route('moderator.clients.index') }} " class="btn btn-link">Back</a>
+                        @if($client[0]->isBanned == 0)
+                            <form method="POST" action="{{ route('moderator.clients.banning', $client[0]->id) }}" style="display: inline-block">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input type="hidden" name="_method" value="PUT">
+                                    <input class="radio-inline" type="hidden" aria-label="" name="isBanned" value="1">
+                                    <button type="submit" class="btn btn-primary"  title="Ban user">
+                                        <i class="fas fa-ban"></i>
+                                    </button>
+                            </form>
+                        @else
+                            <form method="POST" action="{{ route('moderator.clients.unban', $client[0]->id) }}" style="display: inline-block">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input type="hidden" name="_method" value="PUT">
+                                    <input class="radio-inline" type="hidden" aria-label="" name="isBanned" value="0">
+                                    <button type="submit" class="btn btn-primary"  title="Unban user">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                            </form>
+                        @endif
                         <a href="{{ route('moderator.clients.edit', $client[0]->id) }} " class="btn btn-dark">
                             <i class="fas fa-pen"></i>
                         </a>

@@ -145,45 +145,7 @@ $countries = array("Afghanistan", "Albania", "Algeria", "American Samoa", "Andor
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                        </div>
-
-                        @if( $client[0]->isBanned == 0 )
-                            <label for="" style="padding-top: 16px">Ban {{ $client[0]->name }} {{ $client[0]->surname }} from posting?</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">
-                                        <input id="isBanned" type="radio" class="@error('isBanned') is-invalid @enderror" name="isBanned" 
-                                        value="1" {{ old('isBanned') }} autofocus>
-                                        <input id="isBanned" type="hidden" class="@error('isBanned') is-invalid @enderror" name="isBanned" 
-                                        value="0" {{ old('isBanned') }} autofocus checked>
-                                    </div>
-                                </div>
-                                <input type="text" class="form-control" aria-label="Text input with radio button" placeholder="Yes">
-                            </div>
-                            @error('gender')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        @elseif($client[0]->isBanned == 1)
-                        <label for="" style="padding-top: 16px">Unban {{ $client[0]->name }} {{ $client[0]->surname }} from posting?</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <input id="isBanned" type="radio" class="@error('isBanned') is-invalid @enderror" name="isBanned" 
-                                    value="0" {{ old('isBanned') }} autofocus>
-                                    <input id="isBanned" type="hidden" class="@error('isBanned') is-invalid @enderror" name="isBanned" 
-                                    value="1" {{ old('isBanned') }} autofocus checked>
-                                </div>
-                            </div>
-                            <input type="text" class="form-control" aria-label="Text input with radio button" placeholder="Yes">
-                        </div>
-                            @error('gender')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        @endif                        
+                        </div>        
 
                         <div class="float-right" style="padding-top: 16px">
                             <a href="{{ route('moderator.clients.index') }}" class="btn btn-link">Cancel</a>

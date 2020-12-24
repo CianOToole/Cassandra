@@ -67,6 +67,9 @@ Route::post ('/admin/clients/store', [CliController::class, 'store'])->name('adm
 Route::get('/admin/clients/{id}/edit', [CliController::class, 'edit'])->name('admin.clients.edit');
 Route::put('/admin/clients/{id}', [CliController::class, 'update'])->name('admin.clients.update');
 Route::delete('/admin/clients/{id}', [CliController::class, 'destroy'])->name('admin.clients.destroy');
+// -> banning sys
+Route::put('/admin/banning/{id}', [CliController::class, 'ban'])->name('admin.clients.banning');
+Route::put('/admin/clients/{id}', [CliController::class, 'unban'])->name('admin.clients.unban');
 
 // - Moderator -> clients
 Route::get('/moderator/clients', [ModCliController::class, 'index'])->name('moderator.clients.index');
@@ -76,6 +79,9 @@ Route::post ('/moderator/clients/store', [ModCliController::class, 'store'])->na
 Route::get('/moderator/clients/{id}/edit', [ModCliController::class, 'edit'])->name('moderator.clients.edit');
 Route::put('/moderator/clients/{id}', [ModCliController::class, 'update'])->name('moderator.clients.update');
 Route::delete('/moderator/clients/{id}', [ModCliController::class, 'destroy'])->name('moderator.clients.destroy');
+// -> banning sys
+Route::put('/moderator/banning/{id}', [ModCliController::class, 'ban'])->name('moderator.clients.banning');
+Route::put('/moderator/clients/{id}', [ModCliController::class, 'unban'])->name('moderator.clients.unban');
 
 
 // STOCKS CRUD ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

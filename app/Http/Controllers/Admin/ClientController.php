@@ -105,7 +105,7 @@ class ClientController extends Controller{
 
         $client = DB::table('users')        
         ->join('clients', 'users.id', '=', 'clients.user_id')
-        ->select("users.*", 'clients.name', 'clients.middle_name', 'clients.DOB', 'clients.gender', 'clients.postcode', 'clients.country', 'clients.isExperienced', 'clients.isBanned')      
+        ->select("users.*", 'clients.name', 'clients.middle_name', 'clients.DOB', 'clients.gender', 'clients.postcode', 'clients.country')      
         ->where('users.id', $id)
         ->get();
 
@@ -143,9 +143,7 @@ class ClientController extends Controller{
         $client->DOB = $request->input('DOB');
         $client->gender = $request->input('gender');
         $client->postcode = $request->input('postcode');
-        $client->country = $request->input('country');        
-        $client->isExperienced = 0;        
-        $client->isBanned = $request->input('isBanned');
+        $client->country = $request->input('country');
         $client->save();
 
         $request->session()->flash('info', 'Client edited successfully!');
@@ -171,6 +169,26 @@ class ClientController extends Controller{
         $user[0]->delete();
 
         $request->session()->flash('danger', 'Client removed successfully!');
+        return redirect()->route('admin.clients.index');
+    }
+
+    public function ban(Request $request, $id){
+
+        $client = Client::where('user_id', $id)->firstOrFail();
+        $client->isBanned = $request->input('isBanned');
+        $client->save();
+
+        $request->session()->flash('info', 'Client ban successfully!');
+        return redirect()->route('admin.clients.index');
+    }
+
+    public function unban(Request $request, $id){
+
+        $client = Client::where('user_id', $id)->firstOrFail();
+        $client->isBanned = $request->input('isBanned');
+        $client->save();
+
+        $request->session()->flash('info', 'Client unban successfully!');
         return redirect()->route('admin.clients.index');
     }
 }
