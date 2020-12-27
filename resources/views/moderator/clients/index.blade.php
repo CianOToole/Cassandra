@@ -39,25 +39,30 @@
                                         {{ $users->onEachSide(3)->links() }}
                                     </div>
                                     @foreach ($users as $user)
-                                        @php
-                                            if($user->isBanned == 1){
-                                                $banning = "banned";
-                                            }else{
-                                                $banning = null;
-                                            }
-                                        @endphp
+                                    @php
+                                        ($user->isBanned == 1) ? $banning = "banned" : $banning = null;                                            
+                                        ($user->name == null & $user->middle_name == null) ? $required = "required" : $required = null;
+                                    @endphp
                                         <tr data-id=" {{ $user->id }} " data-href="{{ route( 'moderator.clients.show', $user->id) }}" class="status-{{$banning}}">
-                                            <td>{{ $user->name }}. {{ substr($user->middle_name, 0, 1) }}</td>
+                                            <td class="update-{{ $required }}">{{($user->name == null & $user->middle_name == null) ? "Update profile": $user->name }} </td>
                                             <td>{{ $user->surname }}</td>
-                                            <td>{{ Str::limit($user->email, 15) }}</td>
+                                            <td>{{ Str::limit($user->email, 13) }}</td>
                                             <td>{{ $user->phone }}</td>
-                                            <td>{{ Str::limit($user->address, 15) }}</td>
-                                            <td>{{ $user->DOB }}</td>
-                                            <td>{{ ($user->gender == 'male') ? 'M' : 'F' }}</td>
+                                            <td>{{ Str::limit($user->address, 13) }}</td>
+                                            <td class="update-{{ $required }}">{{ ($user->DOB == null) ? "Update profile" : $user->DOB }}</td>
+                                            <td class="update-{{ $required }}">
+                                                @if ($user->gender == 'male')
+                                                    male
+                                                    @elseif ($user->gender == 'female')
+                                                    female
+                                                    @else 
+                                                    update profile                                                    
+                                                @endif    
+                                            </td>
                                             <td>{{ ($user->isExperienced == 0) ? "no" : "yes" }}</td>
                                             <td>
                                                 @if($user->isBanned == 0)
-                                                <form method="POST" action="{{ route('moderator.clients.banning', $user->id) }}">
+                                                <form method="POST" action="{{ route('moderator.banning', $user->id) }}">
                                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                     <input type="hidden" name="_method" value="PUT">
                                                         <input class="radio-inline" type="hidden" aria-label="" name="isBanned" value="1">
@@ -66,7 +71,7 @@
                                                         </button>
                                                 </form>
                                                 @else
-                                                    <form method="POST" action="{{ route('moderator.clients.unban', $user->id) }}" >
+                                                    <form method="POST" action="{{ route('moderator.unban', $user->id) }}" >
                                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                         <input type="hidden" name="_method" value="PUT">
                                                             <input class="radio-inline" type="hidden" aria-label="" name="isBanned" value="0">

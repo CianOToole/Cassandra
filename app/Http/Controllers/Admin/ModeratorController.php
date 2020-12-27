@@ -24,7 +24,7 @@ class ModeratorController extends Controller{
 
         $users = DB::table('users')
             ->join('employees', 'users.id', '=', 'employees.user_id')
-            ->orderBy('employees.id')
+            ->orderBy('users.surname')
             ->select('users.*', 'employees.name', 'employees.emp_number', 'employees.salary')        
             ->join('user_role', 'users.id', '=', 'user_role.user_id')
             ->where('role_id', 2)

@@ -58,14 +58,12 @@ table thead:hover {
     cursor: pointer;
 }
 
-// table tbody tr.status-completed {
-//     background-color: rgba(0, 102, 255, 0.1);
-// }
-// table tbody tr.status-ongoing {
-//     background-color: rgba(255, 255, 255, 0.05);
-// }
 table tbody tr.status-banned {
     background-color: rgba(255, 0, 0, 0.1);
+}
+
+table tbody tr td.update-required {
+    font-style: italic;
 }
 
 // TABLE SORTING ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

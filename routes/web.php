@@ -16,7 +16,6 @@ use App\Http\Controllers\Admin\ModeratorController as ModController;
 use App\Http\Controllers\Admin\ClientController as CliController;
 use App\Http\Controllers\Moderator\ClientController as ModCliController;
 
-
 Route::get('/', function () {
     return view('home');
 });
@@ -67,9 +66,10 @@ Route::post ('/admin/clients/store', [CliController::class, 'store'])->name('adm
 Route::get('/admin/clients/{id}/edit', [CliController::class, 'edit'])->name('admin.clients.edit');
 Route::put('/admin/clients/{id}', [CliController::class, 'update'])->name('admin.clients.update');
 Route::delete('/admin/clients/{id}', [CliController::class, 'destroy'])->name('admin.clients.destroy');
+
 // -> banning sys
-Route::put('/admin/banning/{id}', [CliController::class, 'ban'])->name('admin.clients.banning');
-Route::put('/admin/clients/{id}', [CliController::class, 'unban'])->name('admin.clients.unban');
+Route::put('/admin/banning/{id}', [CliController::class, 'banning'])->name('admin.banning');
+Route::put('/admin/unbanning/{id}', [CliController::class, 'unban'])->name('admin.unban');
 
 // - Moderator -> clients
 Route::get('/moderator/clients', [ModCliController::class, 'index'])->name('moderator.clients.index');
@@ -80,8 +80,8 @@ Route::get('/moderator/clients/{id}/edit', [ModCliController::class, 'edit'])->n
 Route::put('/moderator/clients/{id}', [ModCliController::class, 'update'])->name('moderator.clients.update');
 Route::delete('/moderator/clients/{id}', [ModCliController::class, 'destroy'])->name('moderator.clients.destroy');
 // -> banning sys
-Route::put('/moderator/banning/{id}', [ModCliController::class, 'ban'])->name('moderator.clients.banning');
-Route::put('/moderator/clients/{id}', [ModCliController::class, 'unban'])->name('moderator.clients.unban');
+Route::put('/moderator/banning/{id}', [ModCliController::class, 'banning'])->name('moderator.banning');
+Route::put('/moderator/unbanning/{id}', [ModCliController::class, 'unban'])->name('moderator.unban');
 
 
 // STOCKS CRUD ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

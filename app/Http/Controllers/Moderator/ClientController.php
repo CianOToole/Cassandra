@@ -22,7 +22,7 @@ class ClientController extends Controller{
     public function index(){
         $users = DB::table('users')
         ->join('clients', 'users.id', '=', 'clients.user_id')
-        ->orderBy('clients.id')
+        ->orderBy('users.surname')
         ->select('users.*', 'clients.name', 'clients.middle_name', 'clients.DOB', 'clients.gender', 'clients.isExperienced', 'clients.isBanned') 
         ->join('user_role', 'users.id', '=', 'user_role.user_id')
         ->where('role_id', 3)
@@ -163,7 +163,7 @@ class ClientController extends Controller{
         return redirect()->route('moderator.clients.index');
     }
 
-    public function ban(Request $request, $id){
+    public function banning(Request $request, $id){
 
         $client = Client::where('user_id', $id)->firstOrFail();
         $client->isBanned = $request->input('isBanned');

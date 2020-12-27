@@ -13,6 +13,9 @@
                 <div class="card-body">
                         <table id="table-visit" class="table table-hover">
                                 <tbody>
+                                    @php                                 
+                                            ($client[0]->name == null & $client[0]->middle_name == null) ? $required = "required" : $required = null;
+                                    @endphp
                                     <tr>
                                         <td rowspan="6">
                                             <img src=" {{ asset('storage/avatar/' . $client[0]->avatar) }} " width='150px' height="150px" 
@@ -29,15 +32,18 @@
                                     </tr>
                                     <tr>
                                         <td>Address</td>
-                                        <td>{{ $client[0]->address }}, {{ $client[0]->postcode }}, {{ $client[0]->country }}</td>
+                                        <td class="update-{{ $required }}">{{ $client[0]->address }}, 
+                                            {{ ($client[0]->postcode == null) ? "Update profile" : $client[0]->postcode }}, 
+                                            {{ ($client[0]->country == null) ? "Update profile" : $client[0]->country }}
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td>Date of Birth</td>
-                                        <td>{{ $client[0]->DOB }}</td>
+                                        <td >Date of Birth</td>
+                                        <td class="update-{{ $required }}">{{ ($client[0]->DOB == null) ? "Update profile" : $client[0]->DOB }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Gender</td>
-                                        <td>{{ $client[0]->gender }}</td>
+                                        <td >Gender</td>
+                                        <td class="update-{{ $required }}">{{ ($client[0]->gender == null) ? "Update profile" : $client[0]->gender }}</td>
                                     </tr>
                                     <tr>
                                         <td>Experienced</td>
@@ -54,7 +60,7 @@
                     <div class="" style="float: right">
                         <a href="{{ route('admin.clients.index') }} " class="btn btn-link" title="Back to Clients table">Back</a>
                         @if($client[0]->isBanned == 0)
-                            <form method="POST" action="{{ route('admin.clients.banning', $client[0]->id) }}" style="display: inline-block">
+                            <form method="POST" action="{{ route('admin.banning', $client[0]->id) }}" style="display: inline-block">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" name="_method" value="PUT">
                                     <input class="radio-inline" type="hidden" aria-label="" name="isBanned" value="1">
@@ -63,7 +69,7 @@
                                     </button>
                             </form>
                         @else
-                            <form method="POST" action="{{ route('admin.clients.unban', $client[0]->id) }}" style="display: inline-block">
+                            <form method="POST" action="{{ route('admin.unban', $client[0]->id) }}" style="display: inline-block">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" name="_method" value="PUT">
                                     <input class="radio-inline" type="hidden" aria-label="" name="isBanned" value="0">
