@@ -11,7 +11,7 @@ class CreateTopicsTable extends Migration
         Schema::create('topics', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('original_post');
+            $table->text('original_post');
             $table->boolean('isPinned');
             $table->integer('number_of_replies');
             $table->bigInteger('user_id')->unsigned();
