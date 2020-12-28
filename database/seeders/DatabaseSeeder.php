@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             ModeratorSeeder::class,
             ClientSeeder::class,
+            BoardSeeder::class,
+            TopicSeeder::class,
         ]);
     }
 }
