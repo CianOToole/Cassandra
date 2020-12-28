@@ -13,7 +13,6 @@ class CreateTopicsTable extends Migration
             $table->string('title');
             $table->text('original_post');
             $table->boolean('isPinned');
-            $table->integer('number_of_replies');
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('board_id')->unsigned();
             $table->timestamps();

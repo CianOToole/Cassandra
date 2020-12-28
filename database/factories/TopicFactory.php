@@ -18,7 +18,6 @@ class TopicFactory extends Factory{
             'title' => $this->faker->catchPhrase(),
             'original_post' => $this->faker->realText($maxNbChars = 200, $indexSize = 2),         
             'isPinned' => $this->pinned(),
-            'number_of_replies' => $this->replies(),
             'user_id' => $this->userID(),
             'board_id' => $this->boardID(),
             'created_at' => $this->faker->dateTimeBetween('-1 week', '+1 week'),
@@ -29,10 +28,6 @@ class TopicFactory extends Factory{
         $i = rand(0,99);
         ($i < 99) ? $i = 0: $i = 1;
         return $i;
-    }
-
-    private function replies(){
-        return $i = rand(1,35);
     }
 
     private function userID(){

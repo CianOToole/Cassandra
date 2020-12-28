@@ -13,7 +13,7 @@ class TopicSeeder extends Seeder
 
         $topics = Topic::factory()
             ->count(100)
-            ->has(Post::factory()->count(mt_rand(1,4)))
+            ->has(Post::factory()->count($i = mt_rand(1,4)))
             ->create();
 
     }
