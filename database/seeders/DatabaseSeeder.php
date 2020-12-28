@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             ClientSeeder::class,
             BoardSeeder::class,
             TopicSeeder::class,
+            PostSeeder::class,
         ]);
     }
 }
