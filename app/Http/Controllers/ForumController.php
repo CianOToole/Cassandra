@@ -27,8 +27,8 @@ class ForumController extends Controller{
 
 
     public function boards_index(){
-        $boards = DB::table('boards')->paginate(8);
-        $categories = Board::get('category')->pluck('category');
+        $boards = DB::table('boards')->orderBy('category')->paginate(8);
+        $categories = Board::orderBy('category')->get('category')->pluck('category');
 
         return view('forum.index',[
             'boards' => $boards,
@@ -37,7 +37,7 @@ class ForumController extends Controller{
     }
 
     public function create() {
-        
+
     }
 
     public function store(Request $request){

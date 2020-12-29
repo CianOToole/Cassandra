@@ -12,9 +12,8 @@
                 <div class="card-header">
                     <h3 class="card-title">Boards</h3>
                     @auth
-                        @if (Auth::user()->hasRole('admin'))
-                            {{-- <a href=" {{ route('admin.clients.create') }} " class="btn btn-primary float-right add-btn"> --}}                    
-                            <a href=" # " class="btn btn-primary float-right add-btn">
+                        @if (Auth::user()->hasRole('admin'))               
+                            <a href=" {{ route('admin.board.create') }} " class="btn btn-primary float-right add-btn">  
                                 <i class="fas fa-plus-circle"></i><span style="margin-left: 6px">Add</span>
                             </a>
                         @endif
@@ -52,13 +51,11 @@
                                     @auth
                                         @if (Auth::user()->hasRole('admin'))
                                             <td>
-                                                {{-- <a href="{{ route( 'admin.clients.edit', $user->id) }}" class="btn btn-dark" title="Edit user's profile"> --}}
-                                                    <a href="#" class="btn btn-dark" title="Edit user's profile" style="float: right">
+                                                <a href="{{ route( 'admin.board.edit', $board[0]->id) }}" class="btn btn-dark" title="Edit user's profile" style="float: right">
                                                     <i class="fas fa-pen"></i>
                                                 </a>
-                                                {{-- <form style="display:inline-block" method="POST" action="{{ route( 'admin.clients.destroy', $user->id) }}"> --}}
                                                 <div class="" style="float: right; margin-right: 3px">
-                                                    <form style="display:inline-block" method="POST" action="#">
+                                                    <form style="display:inline-block" method="POST" action="{{ route( 'admin.board.destroy', $board[0]->id) }}">
                                                         <input type="hidden" name="_method" value="DELETE">
                                                         <input type="hidden" name="_token" value=" {{ csrf_token() }} ">
                                                         <button type="submit" class="form-control btn btn-danger" title="Delete user's profile">

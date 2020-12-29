@@ -16,6 +16,9 @@ use App\Http\Controllers\Admin\ModeratorController as ModController;
 use App\Http\Controllers\Admin\ClientController as CliController;
 use App\Http\Controllers\Moderator\ClientController as ModCliController;
 
+// - ADMIN BOARDS
+use App\Http\Controllers\Admin\BoardController as BoardController;
+
 // -    FORUM CRUD
 use App\Http\Controllers\ForumController as ForumCnt;
 
@@ -91,8 +94,18 @@ Route::put('/moderator/unbanning/{id}', [ModCliController::class, 'unban'])->nam
 // - search route
 Route::get('/search', [ForumCnt::class, 'search'])->name('forum.board');
 
-// - CRUD
+// - Admin -> boards
 Route::get('/boards', [ForumCnt::class, 'boards_index'])->name('forum.index');
+Route::get('/boards/create', [BoardController::class, 'create'])->name('admin.board.create');
+Route::post ('/boards/store', [BoardController::class, 'store'])->name('admin.board.store');
+Route::get('/boards/clients/{id}/edit', [BoardController::class, 'edit'])->name('admin.board.edit');
+Route::put('/boards/clients/{id}', [BoardController::class, 'update'])->name('admin.board.update');
+Route::delete('/boards/clients/{id}', [BoardController::class, 'destroy'])->name('admin.board.destroy');
+
+// - TOPICS CRUD
+
+
+
 
 // STOCKS CRUD ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
