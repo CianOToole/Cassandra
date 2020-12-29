@@ -16,6 +16,9 @@ use App\Http\Controllers\Admin\ModeratorController as ModController;
 use App\Http\Controllers\Admin\ClientController as CliController;
 use App\Http\Controllers\Moderator\ClientController as ModCliController;
 
+// -    FORUM CRUD
+use App\Http\Controllers\ForumController as ForumCnt;
+
 Route::get('/', function () {
     return view('home');
 });
@@ -83,6 +86,13 @@ Route::delete('/moderator/clients/{id}', [ModCliController::class, 'destroy'])->
 Route::put('/moderator/banning/{id}', [ModCliController::class, 'banning'])->name('moderator.banning');
 Route::put('/moderator/unbanning/{id}', [ModCliController::class, 'unban'])->name('moderator.unban');
 
+// FORUM CRUD ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// - search route
+Route::get('/search', [ForumCnt::class, 'search'])->name('forum.board');
+
+// - CRUD
+Route::get('/boards', [ForumCnt::class, 'boards_index'])->name('forum.index');
 
 // STOCKS CRUD ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

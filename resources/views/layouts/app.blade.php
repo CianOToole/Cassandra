@@ -36,7 +36,7 @@
                         @auth
                             @if (Auth::user()->hasRole('admin'))
                                 <li><a href="{{route('admin.moderators.index')}}">Moderators</a></li>    
-                                <li><a href="{{route('admin.clients.index')}}">Users</a></li>    
+                                <li><a href="{{route('admin.clients.index')}}">Users</a></li> 
                             @endif
                             @if (Auth::user()->hasRole('moderator'))
                                 <li><a href="{{route('moderator.clients.index')}}">Users</a></li>    
@@ -45,6 +45,7 @@
                                 <li><a href="{{route('patient.visits.index')}}">Visits</a></li>    
                             @endif --}}
                         @endauth
+                        <li><a href="{{route('forum.index')}}">Forum</a></li>    
                         {{-- <li><a href="{{route('about')}}">About Us</a></li> --}}
                     </ul>
 
