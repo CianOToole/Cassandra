@@ -46,7 +46,7 @@
                                     </form>
                                 </div>
 
-                                <tr data-id=" {{ $board[0]->id }} " data-href="#" class=""> 
+                                <tr data-id=" {{ $board[0]->id }} " data-href="{{ route( 'board.topics.index', $board[0]->id) }}" class=""> 
                                     <td>{{ $board[0]->category }}</td>
                                     @auth
                                         @if (Auth::user()->hasRole('admin'))

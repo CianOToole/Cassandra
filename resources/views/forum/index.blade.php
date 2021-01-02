@@ -53,20 +53,19 @@
                                 </div>
 
                                 @foreach ($boards as $board)
-                                    {{-- <tr data-id=" {{ $user->id }} " data-href="{{ route( 'admin.clients.show', $user->id) }}" class="status-{{$banning}}"> --}}
-                                        <tr data-id=" {{ $board->id }} " data-href="#" class=""> 
+                                    <tr data-id=" {{ $board->id }} " data-href="{{ route( 'board.topics.index', $board->id) }}" class="">
                                         <td>{{ $board->category }}</td>
                                         @auth
                                             @if (Auth::user()->hasRole('admin'))
                                                 <td>
-                                                    <a href="{{ route( 'admin.board.edit', $board->id) }}" class="btn btn-dark" title="Edit user's profile" style="float: right">
+                                                    <a href="{{ route( 'admin.board.edit', $board->id) }}" class="btn btn-dark" title="Edit board" style="float: right">
                                                         <i class="fas fa-pen"></i>
                                                     </a>
                                                     <div class="" style="float: right; margin-right: 3px">
                                                         <form style="display:inline-block" method="POST" action="{{ route( 'admin.board.destroy', $board->id) }}">
                                                             <input type="hidden" name="_method" value="DELETE">
                                                             <input type="hidden" name="_token" value=" {{ csrf_token() }} ">
-                                                            <button type="submit" class="form-control btn btn-danger" title="Delete user's profile">
+                                                            <button type="submit" class="form-control btn btn-danger" title="Delete board">
                                                                 <i class="fas fa-trash"></i>
                                                             </button>
                                                         </form>

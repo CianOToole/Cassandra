@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\BoardController as BoardController;
 
 // -    FORUM CRUD
 use App\Http\Controllers\ForumController as ForumCnt;
+use App\Http\Controllers\TopicController as TopicCnt;
 
 Route::get('/', function () {
     return view('home');
@@ -103,9 +104,12 @@ Route::put('/boards/clients/{id}', [BoardController::class, 'update'])->name('ad
 Route::delete('/boards/clients/{id}', [BoardController::class, 'destroy'])->name('admin.board.destroy');
 
 // - TOPICS CRUD
-
-
-
+Route::get('/board/{id}/topics', [TopicCnt::class, 'index'])->name('board.topics.index');
+Route::get('/board/{id}/topics/create', [TopicCnt::class, 'create'])->name('board.topics.create');
+Route::post('/board/{id}', [TopicCnt::class, 'store'])->name('board.topics.store');
+Route::get('/board/topics/{brid}/{tpid}/edit/topic', [TopicCnt::class, 'edit'])->name('board.topics.edit');
+Route::put('/board/topics/{brid}/{tpid}/topic', [TopicCnt::class, 'update'])->name('board.topics.update');
+Route::delete('/board/{brid}/{tpid}/topic', [TopicCnt::class, 'destroy'])->name('board.topics.destroy'); 
 
 // STOCKS CRUD ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
