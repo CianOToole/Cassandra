@@ -18,6 +18,17 @@ Use Auth;
 
 class TopicController extends Controller{
 
+    public function search($id){
+        $board = Board::where('id', '=', $id)->firstOrFail();
+        $search_text = $_GET['query'];
+        $topic = Topic::where('title', 'LIKE', '%' . $search_text . '%')->get();
+
+        return view('topics.topic',[
+            'board' => $board,
+            'topic' => $topic,
+        ]);
+    }
+
     public function index($id){
 
         $board = Board::where('id', '=', $id)->firstOrFail();
@@ -117,5 +128,16 @@ class TopicController extends Controller{
 
         $request->session()->flash('danger', 'Board removed successfully!');
         return redirect()->route('board.topics.index', $board_id); 
+    }
+
+    public function profile($id, $board_id){
+        $user = User::where('id', '=', $id)->get();
+        $board = Board::where('id', '=', $board_id)->get();
+
+        return view('topics.profile',[
+            'user' => $user,
+            'board' => $board,
+        ]);
+    
     }
 }

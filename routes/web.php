@@ -92,6 +92,7 @@ Route::put('/moderator/unbanning/{id}', [ModCliController::class, 'unban'])->nam
 
 // FORUM CRUD ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// - BOARDS
 // - search route
 Route::get('/search', [ForumCnt::class, 'search'])->name('forum.board');
 
@@ -103,7 +104,13 @@ Route::get('/boards/clients/{id}/edit', [BoardController::class, 'edit'])->name(
 Route::put('/boards/clients/{id}', [BoardController::class, 'update'])->name('admin.board.update');
 Route::delete('/boards/clients/{id}', [BoardController::class, 'destroy'])->name('admin.board.destroy');
 
-// - TOPICS CRUD
+// - TOPICS
+// - search route
+Route::get('/search/{id}/topics', [TopicCnt::class, 'search'])->name('forum.topic');
+//  - profiles
+Route::get('/profile/{usid}/{brid}', [TopicCnt::class, 'profile'])->name('profile.index');
+
+// - CRUD
 Route::get('/board/{id}/topics', [TopicCnt::class, 'index'])->name('board.topics.index');
 Route::get('/board/{id}/topics/create', [TopicCnt::class, 'create'])->name('board.topics.create');
 Route::post('/board/{id}', [TopicCnt::class, 'store'])->name('board.topics.store');

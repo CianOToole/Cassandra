@@ -15,8 +15,7 @@ class TopicFactory extends Factory{
 
     public function definition(){
         return [
-            'title' => $this->faker->catchPhrase(),
-            'original_post' => $this->faker->realText($maxNbChars = 200, $indexSize = 2),         
+            'title' => $this->faker->catchPhrase(),  
             'isPinned' => $this->pinned(),
             'user_id' => $this->userID(),
             'board_id' => $this->boardID(),

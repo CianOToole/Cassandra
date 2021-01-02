@@ -19,23 +19,20 @@
                 <div class="card-body">
                     
                     @if(count($topics) === 0)
-                        <p>There are no boards yet</p>
+                        <p>There are no topics yet</p>
                     @else
                         <table id="table-visits" class="table table-hover">
 
                             <div class="" style="float: left">
                                 {{$topics->onEachSide(4)->links()}}
                             </div>
+                            
+                            <a href="{{ route('forum.index') }}" class="btn btn-primary">Boards</a>
 
                             <div class="" style="float: right">                                 
-                                {{-- <form class="form-inline my-2 my-lg-0" type="GET" action="{{ route('forum.board') }}"> --}}
-                                    <form class="form-inline my-2 my-lg-0" type="GET" action="#">
-                                    <select name="query"  id="boards">
-                                        @foreach ($topics as $topic)
-                                            <option value="{{$topic->title}}">{{$topic->title}}</option>                                                    
-                                        @endforeach
-                                        </select>
-                                    <button class="btn btn-primary" type="submit">Search</button>
+                                <form class="form-inline my-2 my-lg-0" type="GET" action="{{ route('forum.topic', $board->id) }}">
+                                    <input type="search" placeholder="Search Board" name="query" id="boards" value="" class="form-control mr-sm-2">
+                                    <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
                                 </form>
                             </div>
 
@@ -54,7 +51,7 @@
                                     {{-- <tr data-id=" {{ $board->id }} " data-href="{{ route( 'board.topics.index', $board->id) }}" class=""> --}}
                                     <tr data-id=" {{ $topic->id }} " data-href="#" class="">
                                         <td>{{ $topic->title }}</td>
-                                        <td>{{ $topic->surname }}</td>
+                                        <td><a href="{{ route( 'profile.index', [$topic->user_id, $board->id] ) }}">{{ $topic->surname }}</a></td>
                                         <td>
                              
                                         </td>

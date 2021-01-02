@@ -42,13 +42,9 @@
                                 </div>
 
                                 <div class="" style="float: right">                                 
-                                    <form class="form-inline my-2 my-lg-0" type="GET" action="{{ route('forum.board') }}">
-                                        <select name="query"  id="boards">
-                                            @foreach ($categories as $category)
-                                                <option value="{{$category}}">{{$category}}</option>                                                    
-                                            @endforeach
-                                            </select>
-                                        <button class="btn btn-primary" type="submit">Search</button>
+                                    <form class="form-inline my-2 my-lg-0" type="GET" action="{{ route('forum.board') }}" style="display: inline">
+                                        <input type="search" placeholder="Search Board" name="query" id="boards" value="" class="form-control mr-sm-2">
+                                        <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
                                     </form>
                                 </div>
 
