@@ -118,6 +118,10 @@ Route::get('/board/topics/{brid}/{tpid}/edit/topic', [TopicCnt::class, 'edit'])-
 Route::put('/board/topics/{brid}/{tpid}/topic', [TopicCnt::class, 'update'])->name('board.topics.update');
 Route::delete('/board/{brid}/{tpid}/topic', [TopicCnt::class, 'destroy'])->name('board.topics.destroy'); 
 
+// - PINNIG & UNPINNIG
+Route::put('/pin/topic/{brid}/{tpid}', [TopicCnt::class, 'pin'])->name('pinning');
+Route::put('/unpin/topic/{brid}/{tpid}', [TopicCnt::class, 'unpin'])->name('unpinning');
+
 // STOCKS CRUD ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Route::get('stocks',[StockController::class,'index'])->name('stocks.index');

@@ -32,11 +32,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group ">
-                            <textarea id="original_post" class="text" cols="78" rows ="3" 
-                                name="original_post" value="original_post" placeholder="Type in your post"></textarea>
-                        </div>
-
                         <div class="float-right">
                             <a href="{{ route('board.topics.index', $board->id) }}" class="btn btn-link">Cancel</a>
                             <button type="submit" class="btn btn-primary pull-right">Submit</button>

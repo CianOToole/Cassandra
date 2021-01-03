@@ -26,12 +26,14 @@
                     @else
                         <table id="table-visits" class="table table-hover">
                             <thead>
+                                <th></th>
                                 <th>Title</th>
-                                @auth
-                                    @if (Auth::user()->hasRole('admin'))
-                                    <th style="float: right">Action</th>
-                                    @endif
-                                @endauth
+                                <th>Original poster</th>
+                                <th>Number of Replies</th>
+                                <th>Last Message</th>
+                                @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('moderator'))
+                                    <th>Action</th>                                
+                                @endif
                             </thead>
 
                             <tbody>
@@ -47,17 +49,26 @@
                                 </div>
 
                                 <tr data-id=" {{ $topic[0]->id }} " data-href="{{ route( 'board.topics.index', $topic[0]->id) }}" class=""> 
-                                    <td>{{ $topic[0]->title }}</td>
                                     <td>
-                                        @auth
-                                            @if(Auth::user()->id == $topic[0]->user_id)
-                                                <a href="{{ route( 'board.topics.edit', [$board->id, $topic[0]->id] ) }}" class="btn btn-dark" title="Edit user's profile" style="float: right">
-                                                    <i class="fas fa-pen"></i>
-                                                </a>
-                                            @endif
-                                        @endauth                                                
-                                        @auth
-                                            @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('moderator'))
+                                        @if($topic[0]->isPinned == true)
+                                            <i class="fas fa-fire" style="color: rgb(224, 34, 34)"></i>
+                                        @endif
+                                    </td>
+                                    <td>{{ $topic[0]->title }}</td>
+                                    <td><a href="{{ route( 'profile.index', [$topic[0]->user_id, $board->id] ) }}">{{ $topic[0]->surname }}</a></td>
+                                    <td>{{ $topic[0]->replies }}</td>
+                                    <td>{{ substr($topic[0]->updated_at, 11,18) }}</td>
+                                    @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('moderator'))
+                                        <td>
+                                            @auth
+                                                @if(Auth::user()->id == $topic[0]->user_id)
+                                                    <a href="{{ route( 'board.topics.edit', [$board->id, $topic[0]->id] ) }}" class="btn btn-dark" title="Edit user's profile" style="float: right">
+                                                        <i class="fas fa-pen"></i>
+                                                    </a>
+                                                @endif
+                                            @endauth  
+
+                                            @auth
                                                 <div class="" style="float: right; margin-right: 3px">
                                                     <form style="display:inline-block" method="POST" action="{{ route( 'board.topics.destroy',[ $board->id, $topic[0]->id]) }}">
                                                         <input type="hidden" name="_method" value="DELETE">
@@ -67,9 +78,29 @@
                                                         </button>
                                                     </form>
                                                 </div>
+                                            @endauth
+
+                                            @if($topic[0]->isPinned == false)
+                                                <form method="POST" action="{{ route( 'pinning', [$board->id, $topic[0]->id]) }}" style="float: right">                                                
+                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                    <input type="hidden" name="_method" value="PUT">
+                                                    <input class="radio-inline" type="hidden" aria-label="" name="isPinned" value="1">
+                                                    <button type="submit" class="btn btn-outline-secondary" title="Pin topic" >
+                                                        <i class="fas fa-thumbtack" ></i>
+                                                    </button>
+                                                </form>
+                                                @else
+                                                <form method="POST" action="{{ route( 'pinning', [$board->id, $topic[0]->id]) }}" style="float: right">     
+                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                    <input type="hidden" name="_method" value="PUT">
+                                                    <input class="radio-inline" type="hidden" aria-label="" name="isPinned" value="0">
+                                                    <button type="submit" class="btn btn-secondary" title="Unpin topic">
+                                                        <i class="fas fa-thumbtack" ></i>
+                                                    </button>
+                                                </form>
                                             @endif
-                                        @endauth
-                                    </td>
+                                        </td>
+                                    @endif    
                                 </tr>
                             </body>
                         </table>

@@ -21,7 +21,13 @@ class TopicController extends Controller{
     public function search($id){
         $board = Board::where('id', '=', $id)->firstOrFail();
         $search_text = $_GET['query'];
-        $topic = Topic::where('title', 'LIKE', '%' . $search_text . '%')->get();
+        $topic = Topic::where('title', 'LIKE', '%' . $search_text . '%')
+            ->join('users', 'topics.user_id', '=', 'users.id')            
+            ->join('posts', 'topics.user_id', '=', 'posts.topic_id')     
+            ->select('users.surname', 'topics.*', DB::raw("COUNT('posts.topic_id') as replies")) 
+            ->groupBy('id')
+            ->distinct()
+            ->get();
 
         return view('topics.topic',[
             'board' => $board,
@@ -34,22 +40,19 @@ class TopicController extends Controller{
         $board = Board::where('id', '=', $id)->firstOrFail();
 
         $topics = DB::table('topics')
-            ->where('board_id', $id)
+            ->where('board_id', $id)       
+            ->orderByDesc('isPinned')
             ->orderByDesc('updated_at')
             ->join('users', 'topics.user_id', '=', 'users.id')
-            ->select('users.surname', 'topics.*')
+            ->join('posts', 'topics.user_id', '=', 'posts.topic_id')               
+            ->select('users.surname', 'topics.*', DB::raw("COUNT('posts.topic_id') as replies"))  
+            ->groupBy('id')
+            ->distinct()
             ->paginate(10);
-
-        $posts = DB::table('topics')
-            ->where('board_id', $id)
-            ->join('posts', 'topics.user_id', '=', 'posts.topic_id')
-            ->select('posts.topic_id')
-            ->get();
 
         return view('topics.index',[
             'topics' => $topics,
             'board' => $board,
-            'posts' => $posts,
         ]);
     }
 
@@ -65,14 +68,12 @@ class TopicController extends Controller{
     public function store(Request $request, $id){
         $request->validate([
             'title' => ['required', 'string', 'max:50'],
-            'original_post' => ['required']
         ]);
 
         $user = Auth::user();
 
         $topic= new Topic();
         $topic->title = $request->input('title');
-        $topic->original_post = $request->input('original_post');
         $topic->isPinned = 0;
         $topic->user_id = $user->id;
         $topic->board_id = $id;
@@ -134,10 +135,42 @@ class TopicController extends Controller{
         $user = User::where('id', '=', $id)->get();
         $board = Board::where('id', '=', $board_id)->get();
 
+        $role =$user;
+        $role->load(['employee', 'client']);
+
         return view('topics.profile',[
             'user' => $user,
-            'board' => $board,
+            'board' => $board
         ]);
     
     }
+
+    public function pin(Request $request, $board_id, $topic_id){
+        $request->validate([
+            'isPinned' => ['required']
+        ]);
+
+        $topic = Topic::findOrFail($topic_id);
+        $topic->isPinned = $request->input('isPinned');
+        $topic->save();
+
+        $request->session()->flash('info', 'Topic pinned successfully!');
+        return redirect()->route('board.topics.index', $board_id);
+    
+    }
+
+    public function unpin(Request $request, $board_id, $topic_id){
+        $request->validate([
+            'isPinned' => ['required']
+        ]);
+
+        $topic = Topic::findOrFail($topic_id);
+        $topic->isPinned = $request->input('isPinned');
+        $topic->save();
+
+        $request->session()->flash('info', 'Topic unpinned successfully!');
+        return redirect()->route('board.topics.index', $board_id);
+    
+    }
+
 }

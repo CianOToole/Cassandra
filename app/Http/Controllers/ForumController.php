@@ -28,11 +28,11 @@ class ForumController extends Controller{
 
     public function boards_index(){
         $boards = DB::table('boards')->orderBy('category')->paginate(8);
-        // $categories = Board::orderBy('category')->get('category')->pluck('category');
+        $categories = Board::orderBy('category')->get('category')->pluck('category');
 
         return view('forum.index',[
             'boards' => $boards,
-            // 'categories' => $categories,
+            'categories' => $categories,
         ]);
     }
 

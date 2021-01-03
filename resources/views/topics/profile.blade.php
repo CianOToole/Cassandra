@@ -25,6 +25,12 @@
                                                 style="object-fit: fill;"" class = "rounded-circle">
                                             </td>
                                         </tr>
+                                        @if($user[0]->employee == null )
+                                        <tr>
+                                            <td>Client</td>
+                                            <td>{{ $user[0]->client->name }} {{ $user[0]->client->middle_name }} {{ $user[0]->surname }}</td>
+                                        </tr>   
+                                        @endif
                                         <tr>
                                             <td>Email</td>
                                             <td>{{ $user[0]->email }}</td>
@@ -35,16 +41,26 @@
                                         </tr>
                                         <tr>
                                             <td>Address</td>
-                                            <td>{{ $user[0]->address }}</td>
+                                            <td>{{ $user[0]->address }}
+                                                @if($user[0]->employee == null )
+                                                , {{ $user[0]->client->postcode }}, {{ $user[0]->client->country }}
+                                                @endif
+                                            </td>
                                         </tr>   
-                                        {{-- <tr>
-                                            <td>Employee Number</td>
-                                            <td>{{ $admin[0]->emp_number }}</td>
-                                        </tr>   
-                                        <tr>
-                                            <td>Salary</td>
-                                            <td>{{ $admin[0]->salary }} €</td>
-                                        </tr>    --}}
+                                        @if($user[0]->employee == null )
+                                            <tr>
+                                                <td>Date of Birth</td>
+                                                <td>{{ $user[0]->client->DOB }}</td>
+                                            </tr>   
+                                            <tr>
+                                                <td>Gender</td>
+                                                <td>{{ $user[0]->client->gender }}</td>
+                                            </tr> 
+                                            <tr>
+                                                <td>Gender</td>
+                                                <td>{{ ($user[0]->client->isBanned == 0) ? "" : "banned from posting"}}</td>
+                                            </tr> 
+                                        @endif
                                     </body>
                             </table>
                             
