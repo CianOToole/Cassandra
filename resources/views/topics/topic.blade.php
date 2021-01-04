@@ -51,7 +51,7 @@
                                 <tr data-id=" {{ $topic[0]->id }} " data-href="{{ route( 'board.topics.index', $topic[0]->id) }}" class=""> 
                                     <td>
                                         @if($topic[0]->isPinned == true)
-                                            <i class="fas fa-fire" style="color: rgb(224, 34, 34)"></i>
+                                            <i class="fas fa-check-circle" style="color: rgb(224, 34, 34)"></i>
                                         @endif
                                     </td>
                                     <td>{{ $topic[0]->title }}</td>

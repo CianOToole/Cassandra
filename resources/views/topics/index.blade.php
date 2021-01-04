@@ -54,6 +54,9 @@
                                     <tr data-id=" {{ $topic->id }} " data-href="#" class="">
                                         <td>
                                             @if($topic->isPinned == true)
+                                                <i class="fas fa-check-circle" style="color: rgb(224, 34, 34)"></i>
+                                            @endif
+                                            @if($topic->replies >= 10)
                                                 <i class="fas fa-fire" style="color: rgb(224, 34, 34)"></i>
                                             @endif
                                         </td>
