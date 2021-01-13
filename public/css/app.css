@@ -10904,7 +10904,7 @@ a.text-dark:focus {
 }
 
 .red {
-  background: red;
+  background: rgba(206, 31, 31, 0.945);
 }
 
 .navbar {
@@ -10963,6 +10963,12 @@ table tbody tr td.update-required {
   font-style: italic;
 }
 
+#table-visits th:after {
+  display: inline;
+  content: " \25B2";
+  font-size: 10px;
+}
+
 #table-visits th.asc:after {
   display: inline;
   content: " \25BC";
@@ -10973,5 +10979,13 @@ table tbody tr td.update-required {
   display: inline;
   content: " \25B2";
   font-size: 10px;
+}
+
+.block {
+  background-color: white;
+}
+
+.blue-bck {
+  background-color: rgba(12, 99, 214, 0.342);
 }
 

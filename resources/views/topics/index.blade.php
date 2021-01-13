@@ -9,33 +9,33 @@
             <p id="alert-message" class="alert collapse"></p>
 
             <div class="card">
+
                 <div class="card-header">
                     <h3 class="card-title">{{$board->category}}</h3>
-                        <a href=" {{ route('board.topics.create', $board->id) }} " class="btn btn-primary float-right add-btn">  
-                            <i class="fas fa-plus-circle"></i><span style="margin-left: 6px">Add</span>
-                        </a>
+                    <a href=" {{ route('board.topics.create', $board->id) }} " class="btn btn-primary float-right add-btn">  
+                        <i class="fas fa-plus-circle"></i><span style="margin-left: 6px">Add</span>
+                    </a>                        
                 </div>
 
                 <div class="card-body">
+
+                    <div class="" style="float: left">
+                        {{$topics->onEachSide(4)->links()}}
+                    </div>
+                    
+                    <a href="{{ route('forum.index') }}" class="btn btn-primary">Boards</a>
+
+                    <div class="" style="float: right">                                 
+                        <form class="form-inline my-2 my-lg-0" type="GET" action="{{ route('forum.topic', $board->id) }}">
+                            <input type="search" placeholder="Search Topic" name="query" id="boards" value="" class="form-control mr-sm-2">
+                            <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                    </div>
                     
                     @if(count($topics) === 0)
                         <p>There are no topics yet</p>
                     @else
                         <table id="table-visits" class="table table-hover">
-
-                            <div class="" style="float: left">
-                                {{$topics->onEachSide(4)->links()}}
-                            </div>
-                            
-                            <a href="{{ route('forum.index') }}" class="btn btn-primary">Boards</a>
-
-                            <div class="" style="float: right">                                 
-                                <form class="form-inline my-2 my-lg-0" type="GET" action="{{ route('forum.topic', $board->id) }}">
-                                    <input type="search" placeholder="Search Topic" name="query" id="boards" value="" class="form-control mr-sm-2">
-                                    <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
-                                </form>
-                            </div>
-
                             <thead>
                                 <th></th>
                                 <th>Title</th>
@@ -49,9 +49,7 @@
 
                             <tbody>
                                 @foreach ($topics as $topic)
-                                
-                                    {{-- <tr data-id=" {{ $board->id }} " data-href="{{ route( 'board.topics.index', $board->id) }}" class=""> --}}
-                                    <tr data-id=" {{ $topic->id }} " data-href="#" class="">
+                                    <tr data-id=" {{ $topic->id }} " data-href="{{ route( 'topic.posts.index', $topic->id) }}" class="">
                                         <td>
                                             @if($topic->isPinned == true)
                                                 <i class="fas fa-check-circle" style="color: rgb(224, 34, 34)"></i>
@@ -111,7 +109,7 @@
                                         @endif
                                     </tr>
                                 @endforeach                        
-                            </body>
+                            </tbody>
                         </table>
                     @endif
                 </div>

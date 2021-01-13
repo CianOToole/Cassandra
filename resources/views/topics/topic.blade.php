@@ -20,7 +20,18 @@
                     @endauth
                 </div>
 
-                <div class="card-body">                    
+                <div class="card-body">    
+                    
+                    <a href="{{ route('forum.index') }}" class="btn btn-primary">Boards</a>
+                    <a href="{{ route('board.topics.index', $board->id) }}" class="btn btn-outline-primary">Back</a>
+
+                    <div class="" style="float: right">                                 
+                        <form class="form-inline my-2 my-lg-0" type="GET" action="{{ route('forum.topic', $board->id) }}">
+                            <input type="search" placeholder="Search topic" name="query" id="topics" value="" class="form-control mr-sm-2">
+                            <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                    </div>
+                    
                     @if(count($topic) === 0)
                         <p>No Such topic</p>
                     @else
@@ -38,20 +49,13 @@
 
                             <tbody>
 
-                                <a href="{{ route('forum.index') }}" class="btn btn-primary">Boards</a>
-                                <a href="{{ route('board.topics.index', $board->id) }}" class="btn btn-outline-primary">Back</a>
-
-                                <div class="" style="float: right">                                 
-                                    <form class="form-inline my-2 my-lg-0" type="GET" action="{{ route('forum.topic', $board->id) }}">
-                                        <input type="search" placeholder="Search topic" name="query" id="topics" value="" class="form-control mr-sm-2">
-                                        <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
-                                    </form>
-                                </div>
-
                                 <tr data-id=" {{ $topic[0]->id }} " data-href="{{ route( 'board.topics.index', $topic[0]->id) }}" class=""> 
                                     <td>
                                         @if($topic[0]->isPinned == true)
                                             <i class="fas fa-check-circle" style="color: rgb(224, 34, 34)"></i>
+                                        @endif
+                                        @if($topic[0]->replies >= 10)
+                                            <i class="fas fa-fire" style="color: rgb(224, 34, 34)"></i>
                                         @endif
                                     </td>
                                     <td>{{ $topic[0]->title }}</td>

@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\BoardController as BoardController;
 // -    FORUM CRUD
 use App\Http\Controllers\ForumController as ForumCnt;
 use App\Http\Controllers\TopicController as TopicCnt;
+use App\Http\Controllers\PostController as PostCnt;
 
 Route::get('/', function () {
     return view('home');
@@ -117,6 +118,9 @@ Route::post('/board/{id}', [TopicCnt::class, 'store'])->name('board.topics.store
 Route::get('/board/topics/{brid}/{tpid}/edit/topic', [TopicCnt::class, 'edit'])->name('board.topics.edit');
 Route::put('/board/topics/{brid}/{tpid}/topic', [TopicCnt::class, 'update'])->name('board.topics.update');
 Route::delete('/board/{brid}/{tpid}/topic', [TopicCnt::class, 'destroy'])->name('board.topics.destroy'); 
+
+// - POSTS
+Route::get('topic/{id}/posts',[PostCnt::class,'index'])->name('topic.posts.index');
 
 // - PINNIG & UNPINNIG
 Route::put('/pin/topic/{brid}/{tpid}', [TopicCnt::class, 'pin'])->name('pinning');
