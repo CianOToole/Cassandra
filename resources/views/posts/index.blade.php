@@ -7,14 +7,19 @@
 
 <div class="container-fluid" style="display: inline-block">
     <div class="row">
+
         <div class="col-md-8 block">
 
             <div class="col-12 post-title">
+                <div class="" style="float: left">
+                    {{$posts->onEachSide(4)->links()}}
+                </div>
                 <h3>{{$topic_title[0]}}</h3>
                 <hr>
             </div>
 
             <div class="col-12 post-body">
+
                 @foreach ($posts as $post)
                     @php           
                         $switch_bcg;         
@@ -27,9 +32,18 @@
 
                         <div class="col-12" >
                             <div class="" style="float: right">
-                                <button>quote</button>
-                                <button>edit</button>
-                                <button>delete</button>
+                                @if($user = Auth::user()->id == $post->user_id)
+                                    <button>quote</button>
+                                    <button>edit</button>
+                                    
+                                    <form style="display:inline-block" method="POST" action="{{ route( 'topic.posts.destroy', [$topic_id, $post->id]) }}">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value=" {{ csrf_token() }} ">                                        
+                                        <button type="submit" class="form-control btn btn-danger" title="Delete post">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                @endif
                             </div>
                         </div>
 
@@ -42,7 +56,7 @@
                                         style="object-fit: fill;"" class = "">
                                     </figure>
                                     <p>
-                                        {{$post->name}} {{$post->surname}}
+                                        {{ ($post->emp_name != null) ?  $post->emp_name : $post->clt_name}}  {{$post->surname}}                                        
                                     </p>        
                                 </div>
 
@@ -66,9 +80,19 @@
                 @endforeach
             </div>
 
+            <div class="">
+                <form method="POST" action="{{ route( 'topic.posts.store', [$topic_id]) }}">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}" >
+                    <div class="form-group">
+                      <textarea type="text" class="form-control" id="post" name="post" placeholder="Post what you have to say, nobody is here to judge you.."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Post</button>
+                  </form>
+            </div>
+
         </div>
 
-        <div class="col-md-4 red"></div>
+        <div class="col-md-4"></div>
     </div>
 </div>
 @endsection

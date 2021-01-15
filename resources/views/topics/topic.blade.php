@@ -49,7 +49,7 @@
 
                             <tbody>
 
-                                <tr data-id=" {{ $topic[0]->id }} " data-href="{{ route( 'board.topics.index', $topic[0]->id) }}" class=""> 
+                                <tr data-id=" {{ $topic[0]->id }} " data-href="{{ route( 'topic.posts.index', $topic[0]->id) }}" class="">
                                     <td>
                                         @if($topic[0]->isPinned == true)
                                             <i class="fas fa-check-circle" style="color: rgb(224, 34, 34)"></i>

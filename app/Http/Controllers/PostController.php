@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Hash;
 use Storage;
 Use Auth;
+Use App\Models\Post;
 
 class PostController extends Controller
 {
@@ -19,11 +20,12 @@ class PostController extends Controller
 
         $posts = DB::table('posts')
             ->where('topic_id', $topic_id)
-            ->join('users', 'posts.user_id', '=', 'users.id')
-            ->join('clients', 'users.id', '=', 'clients.user_id')
-            ->select('posts.*', 'users.surname', 'users.avatar', 'clients.name')
+            ->join('users', 'posts.user_id', '=', 'users.id')    
+            ->leftJoin('employees', 'users.id', '=', 'employees.user_id')                   
+            ->leftJoin('clients', 'users.id', '=', 'clients.user_id')
+            ->select('posts.*', 'users.surname', 'users.avatar',  'employees.name as emp_name', 'clients.name as clt_name') 
             ->orderByDesc('updated_at')
-            ->get();
+            ->paginate(20);
 
         return view('posts.index',[
             'posts' => $posts,
@@ -32,20 +34,27 @@ class PostController extends Controller
         ]);
     }
 
+    public function store(Request $request, $topic_id){
 
-    public function create(){
-        
+        $request->validate([
+            'post' => ['required'],
+        ]);
+
+        $user = Auth::user();
+
+        $post= new Post();
+        $post->post = $request->input('post');
+        $post->user_id = $user->id;
+        $post->topic_id = $topic_id;
+        echo($topic_id);    
+        $post->save();
+
+        $request->session()->flash('success', 'Post added successfully!');
+
+        return redirect()->route('topic.posts.index', $topic_id);      
+
     }
 
-
-    public function store(Request $request){
-        
-    }
-
-
-    public function show($id){
-        
-    }
 
 
     public function edit($id){
@@ -58,7 +67,12 @@ class PostController extends Controller
     }
 
 
-    public function destroy($id){
-        
+    public function destroy(Request $request, $topic_id, $post_id){
+        $post = Post::where('id', $post_id)->firstOrFail();
+        $post->delete();
+
+
+        $request->session()->flash('danger', 'Post removed successfully!');
+        return redirect()->route('topic.posts.index', $topic_id); 
     }
 }

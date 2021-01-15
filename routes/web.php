@@ -121,6 +121,8 @@ Route::delete('/board/{brid}/{tpid}/topic', [TopicCnt::class, 'destroy'])->name(
 
 // - POSTS
 Route::get('topic/{id}/posts',[PostCnt::class,'index'])->name('topic.posts.index');
+Route::post('topic/{topic_id}/post/store',[PostCnt::class, 'store'])->name('topic.posts.store');
+Route::delete('/topic/{topic_id}/post/{post_id}', [PostCnt::class, 'destroy'])->name('topic.posts.destroy'); 
 
 // - PINNIG & UNPINNIG
 Route::put('/pin/topic/{brid}/{tpid}', [TopicCnt::class, 'pin'])->name('pinning');

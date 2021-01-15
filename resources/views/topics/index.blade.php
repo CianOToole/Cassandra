@@ -76,7 +76,6 @@
                                                 @auth
                                                     <div class="" style="float: right; margin-right: 3px">
                                                         <form style="display:inline-block" method="POST" action="{{ route( 'board.topics.destroy', [$board->id, $topic->id]) }}">
-                                                            <form style="display:inline-block" method="POST" action="#">
                                                             <input type="hidden" name="_method" value="DELETE">
                                                             <input type="hidden" name="_token" value=" {{ csrf_token() }} ">
                                                             <button type="submit" class="form-control btn btn-danger" title="Delete Topic">
