@@ -140,6 +140,20 @@
         var post_txt = document.getElementById('post_txt');
         post_txt.innerHTML += text;
     }
+
+    function editPost(id, action){
+        var posts_cnt = document.getElementsByClassName(id);
+        var text = posts_cnt[0].textContent;      
+        var post_txt = document.getElementById('post_txt');
+        post_txt.innerHTML += text;
+
+        $("#form_post_put").attr("value", "PUT");
+        
+        console.log(action);
+        
+        $("#form_post").attr("action", action);
+
+        }
   </script>
 
 </html>

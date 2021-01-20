@@ -26,21 +26,27 @@
                         ($count % 2 == 0) ? $switch_bcg = "blue-bck" : $switch_bcg = null;
                         $refine_date = $post->updated_at;
                         $date = date("d/m/Y H:i:s", strtotime($refine_date));  
+                        
+                        $quote_id = $post->id;
+                        $edit_id = $post->id;
+                        $post_id = $post->id;
                     @endphp
 
                     <div class="row {{ $switch_bcg }}" >
-
                         <div class="col-12" >
                             <div class="" style="float: right">
 
-                                <button id="{{ $post->id }}"  onClick="quote(this.id)" class="btn btn-primary">
+                                <button id="{{ $quote_id }}"  onClick="quote(this.id)" class="btn btn-primary">
                                     <i class="fas fa-quote-right"></i>
                                 </button>
 
-                                @if($user = Auth::user()->id == $post->user_id)                                    
-                                    <button class="btn btn-dark">
+                                @if($user = Auth::user()->id == $post->user_id)        
+
+                                    <button id="{{$edit_id}}" onClick="editPost(this.id, this.formAction)" class="btn btn-dark btn-{{$edit_id}}" 
+                                    formAction="{{ route( 'topic.posts.update', [$topic_id, $post_id ]) }}" >
                                         <i class="fas fa-pen"></i>
-                                    </button>                                    
+                                    </button>         
+
                                     <form style="display:inline-block" method="POST" action="{{ route( 'topic.posts.destroy', [$topic_id, $post->id]) }}">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value=" {{ csrf_token() }} ">                                        
@@ -86,8 +92,9 @@
             </div>
 
             <div class="">
-                <form method="POST" action="{{ route( 'topic.posts.store', [$topic_id]) }}">
+                <form id="form_post" method="POST" action="{{ route( 'topic.posts.store', [$topic_id]) }}">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" >
+                    <input id="form_post_put" type="hidden" name="_method" value="">
                     <div class="form-group">
                       <textarea type="text" class="form-control" id="post_txt" name="post" placeholder="Post what you have to say, nobody is here to judge you.."></textarea>
                     </div>

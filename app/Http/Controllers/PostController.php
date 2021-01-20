@@ -58,12 +58,21 @@ class PostController extends Controller
 
 
     public function edit($id){
-        
+
     }
 
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $topic_id, $post_id){
+        $request->validate([
+            'post' => ['required']
+        ]);
         
+        $post = Post::findOrFail($post_id);
+        $post->post = $request->input('post');
+        $post->save();
+
+        $request->session()->flash('info', 'Post edited successfully!');
+        return redirect()->route('topic.posts.index', $topic_id);
     }
 
 
