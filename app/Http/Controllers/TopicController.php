@@ -68,6 +68,7 @@ class TopicController extends Controller{
     public function store(Request $request, $id){
         $request->validate([
             'title' => ['required', 'string', 'max:50'],
+            'post' => ['required', 'string', 'min:10'],
         ]);
 
         $user = Auth::user();
@@ -76,11 +77,16 @@ class TopicController extends Controller{
         $topic->title = $request->input('title');
         $topic->isPinned = 0;
         $topic->user_id = $user->id;
-        $topic->board_id = $id;
+        $topic->board_id = $id;        
         $topic->save();
 
-        $request->session()->flash('success', 'Topic added successfully!');
+        $post= new Post();
+        $post->post = $request->input('post');
+        $post->user_id = $user->id;
+        $post->topic_id = $topic->id;
+        $post->save();
 
+        $request->session()->flash('success', 'Topic added successfully!');
         return redirect()->route('board.topics.index', $id);         
     }
 

@@ -32,6 +32,14 @@
                             </div>
                         </div>
 
+                        <div class="form-group ">
+                            <label for="post">Post</label>
+                            <div class="">
+                                <textarea class="form-control" id="post" name="post" value="{{ old('post') }}"
+                                placeholder="Write something meaningfull"> </textarea>
+                            </div>
+                        </div>
+
                         <div class="float-right">
                             <a href="{{ route('board.topics.index', $board->id) }}" class="btn btn-link">Cancel</a>
                             <button type="submit" class="btn btn-primary pull-right">Submit</button>
