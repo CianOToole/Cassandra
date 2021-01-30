@@ -123,10 +123,8 @@
         </main>
 
     </div>
-    
-    @stack('stocks')
-</body>
 
+</body>
 
 <script src="https://kit.fontawesome.com/b0365a380f.js" crossorigin="anonymous"></script>
 <script>

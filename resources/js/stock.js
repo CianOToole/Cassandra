@@ -1,1 +1,2 @@
-alert("Cian is Gay");
+alert("U Gay!");
+console.log("bite")

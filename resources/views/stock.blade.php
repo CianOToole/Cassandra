@@ -1,16 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-{{-- <script src="{{ asset('js/stock.js') }}" ></script> --}}
+
 <div class="container">
 
-
+<script src="{{ asset('js/stock.js') }}" type="text/javascript"></script>
 
 </div>
 
 @endsection
-
-
-@push('stocks')
-    <script src="js/stock.js" ></script>
-@endpush
