@@ -17,12 +17,15 @@ use App\Http\Controllers\Admin\ClientController as CliController;
 use App\Http\Controllers\Moderator\ClientController as ModCliController;
 
 // - ADMIN BOARDS
-use App\Http\Controllers\Admin\BoardController as BoardController;
+use App\Http\Controllers\Admin\BoardController as Board;
 
 // -    FORUM CRUD
-use App\Http\Controllers\ForumController as ForumCnt;
-use App\Http\Controllers\TopicController as TopicCnt;
-use App\Http\Controllers\PostController as PostCnt;
+use App\Http\Controllers\ForumController as Forum;
+use App\Http\Controllers\TopicController as Topic;
+use App\Http\Controllers\PostController as Post;
+
+//  -   TEST API
+use App\Http\Controllers\ApiController as API;
 
 Route::get('/', function () {
     return view('home');
@@ -95,39 +98,39 @@ Route::put('/moderator/unbanning/{id}', [ModCliController::class, 'unban'])->nam
 
 // - BOARDS
 // - search route
-Route::get('/search', [ForumCnt::class, 'search'])->name('forum.board');
+Route::get('/search', [Forum::class, 'search'])->name('forum.board');
 
 // - Admin -> boards
-Route::get('/boards', [ForumCnt::class, 'boards_index'])->name('forum.index');
-Route::get('/boards/create', [BoardController::class, 'create'])->name('admin.board.create');
-Route::post ('/boards/store', [BoardController::class, 'store'])->name('admin.board.store');
-Route::get('/boards/clients/{id}/edit', [BoardController::class, 'edit'])->name('admin.board.edit');
-Route::put('/boards/clients/{id}', [BoardController::class, 'update'])->name('admin.board.update');
-Route::delete('/boards/clients/{id}', [BoardController::class, 'destroy'])->name('admin.board.destroy');
+Route::get('/boards', [Forum::class, 'boards_index'])->name('forum.index');
+Route::get('/boards/create', [Board::class, 'create'])->name('admin.board.create');
+Route::post ('/boards/store', [Board::class, 'store'])->name('admin.board.store');
+Route::get('/boards/clients/{id}/edit', [Board::class, 'edit'])->name('admin.board.edit');
+Route::put('/boards/clients/{id}', [Board::class, 'update'])->name('admin.board.update');
+Route::delete('/boards/clients/{id}', [Board::class, 'destroy'])->name('admin.board.destroy');
 
 // - TOPICS
 // - search route
-Route::get('/search/{id}/topics', [TopicCnt::class, 'search'])->name('forum.topic');
+Route::get('/search/{id}/topics', [Topic::class, 'search'])->name('forum.topic');
 //  - profiles
-Route::get('/profile/{usid}/{brid}', [TopicCnt::class, 'profile'])->name('profile.index');
+Route::get('/profile/{usid}/{brid}', [Topic::class, 'profile'])->name('profile.index');
 
 // - CRUD
-Route::get('/board/{id}/topics', [TopicCnt::class, 'index'])->name('board.topics.index');
-Route::get('/board/{id}/topics/create', [TopicCnt::class, 'create'])->name('board.topics.create');
-Route::post('/board/{id}', [TopicCnt::class, 'store'])->name('board.topics.store');
-Route::get('/board/topics/{brid}/{tpid}/edit/topic', [TopicCnt::class, 'edit'])->name('board.topics.edit');
-Route::put('/board/topics/{brid}/{tpid}/topic', [TopicCnt::class, 'update'])->name('board.topics.update');
-Route::delete('/board/{brid}/{tpid}/topic', [TopicCnt::class, 'destroy'])->name('board.topics.destroy'); 
+Route::get('/board/{id}/topics', [Topic::class, 'index'])->name('board.topics.index');
+Route::get('/board/{id}/topics/create', [Topic::class, 'create'])->name('board.topics.create');
+Route::post('/board/{id}', [Topic::class, 'store'])->name('board.topics.store');
+Route::get('/board/topics/{brid}/{tpid}/edit/topic', [Topic::class, 'edit'])->name('board.topics.edit');
+Route::put('/board/topics/{brid}/{tpid}/topic', [Topic::class, 'update'])->name('board.topics.update');
+Route::delete('/board/{brid}/{tpid}/topic', [Topic::class, 'destroy'])->name('board.topics.destroy'); 
 
 // - POSTS
-Route::get('topic/{id}/posts',[PostCnt::class,'index'])->name('topic.posts.index');
-Route::post('topic/{topic_id}/post/store',[PostCnt::class, 'store'])->name('topic.posts.store');
-Route::put('/topic/{topic_id}/post/{post_id}/update', [PostCnt::class, 'update'])->name('topic.posts.update');
-Route::delete('/topic/{topic_id}/post/{post_id}', [PostCnt::class, 'destroy'])->name('topic.posts.destroy'); 
+Route::get('topic/{id}/posts',[Post::class,'index'])->name('topic.posts.index');
+Route::post('topic/{topic_id}/post/store',[Post::class, 'store'])->name('topic.posts.store');
+Route::put('/topic/{topic_id}/post/{post_id}/update', [Post::class, 'update'])->name('topic.posts.update');
+Route::delete('/topic/{topic_id}/post/{post_id}', [Post::class, 'destroy'])->name('topic.posts.destroy'); 
 
 // - PINNIG & UNPINNIG
-Route::put('/pin/topic/{brid}/{tpid}', [TopicCnt::class, 'pin'])->name('pinning');
-Route::put('/unpin/topic/{brid}/{tpid}', [TopicCnt::class, 'unpin'])->name('unpinning');
+Route::put('/pin/topic/{brid}/{tpid}', [Topic::class, 'pin'])->name('pinning');
+Route::put('/unpin/topic/{brid}/{tpid}', [Topic::class, 'unpin'])->name('unpinning');
 
 // STOCKS CRUD ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -164,3 +167,9 @@ Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update
 Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy'); //making a delete request
 
 
+// TEST API
+// Route::get('/stock',[API::class,'index'])->name('stock');
+
+Route::get('/stock', function () {
+    return view('stock');
+});

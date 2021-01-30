@@ -10,7 +10,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>    
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -122,7 +123,10 @@
         </main>
 
     </div>
+    
+    @stack('stocks')
 </body>
+
 
 <script src="https://kit.fontawesome.com/b0365a380f.js" crossorigin="anonymous"></script>
 <script>
