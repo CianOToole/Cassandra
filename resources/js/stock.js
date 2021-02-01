@@ -11,7 +11,7 @@ let stocks = [];
 
 // api gets the JSON file
 async function api() {
-    //let res = await fetch('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=demo');
+    // let res = await fetch('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=demo');
     let res = await fetch('https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=IBM&apikey=demo');
     let data = await res.json();
     return data;
@@ -44,12 +44,15 @@ function extracter() {
 
         stocks.reverse();
 
-        console.log("pass");
-        console.log(stocks);
-
+        // console.log("pass");
+        // console.log(stocks);
 
         candleStickChart();
 
+        var graph = document.getElementsByClassName("tv-lightweight-charts");
+        var container = document.getElementsByClassName("graph");
+
+        $(graph).appendTo(container);
 
     }, 3000);
 }
@@ -57,8 +60,8 @@ function extracter() {
 function candleStickChart() {
 
     var chart = LightweightCharts.createChart(document.body, {
-        width: 1000,
-        height: 300,
+        width: 730,
+        height: 500,
         layout: {
             backgroundColor: '#fff',
             textColor: 'rgba(0, 0, 0, 0.9)',
