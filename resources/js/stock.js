@@ -1,5 +1,4 @@
 // stockData stores JSON file data from api()
-console.log(x);
 let stockData;
 api().then(res => stockData = res);
 // timeSeries gets 'Monthly Time Series' object from stockData
@@ -14,6 +13,7 @@ let stocks = [];
 async function api() {
     let res = await fetch('https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=IBM&apikey=demo');
     let data = await res.json();
+    // console.log(data);
     return data;
 }
 
@@ -23,6 +23,7 @@ extracter();
 function extracter() {
     setTimeout(function() {
         timeSeries = stockData['Monthly Time Series'];
+        console.log(stockData);
 
         timeArray = Object.keys(timeSeries);
         seriesArray = Object.keys(timeSeries).map(i => timeSeries[i]);

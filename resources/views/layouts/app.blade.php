@@ -50,11 +50,14 @@
                         {{-- <li><a href="{{route('about')}}">About Us</a></li> --}}
                     </ul>
 
-                    <div class="input-group">
-                        <div class="form-outline">
-                          <input type="search" id="searchBar" class="form-control" placeholder="&#9786; Search"/>
+                    <form >
+                        <div class="input-group">
+                            <div  class="form-outline" >
+                                    <input id="searchBar" type="search" name="stock" class="form-control" style="width: 350px" autocomplete="off">
+                                    <ul id="searchGroup"></ul>
+                            </div>
                         </div>
-                    </div>
+                    </form>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
