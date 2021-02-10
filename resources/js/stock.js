@@ -11,7 +11,24 @@ let stocks = [];
 
 // api gets the JSON file
 async function api() {
-    let res = await fetch('https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=IBM&apikey=demo');
+
+    let ticket;
+
+    let ticketDemo = "IBM";
+    let apiKeyDemo = "demo";
+
+    let apiKeyYvan = "HXNZQEXJOAJMBD7G";
+    let apiKeyCian = "P7M1271DHCCEADYS";
+
+    (function(){
+        ticket = localStorage.getItem('ticket');    
+    })();
+
+    console.log(ticket);
+
+    let url = `https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=${ticketDemo}&apikey=${apiKeyDemo}`;
+
+    let res = await fetch(url);
     let data = await res.json();
     // console.log(data);
     return data;

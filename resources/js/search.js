@@ -2,7 +2,6 @@ let suggestions = [];
 let searchGroup = document.getElementById("searchGroup");
 let searchBar = document.getElementById("searchBar");
 
-
 window.onload  = function search(){
     let dataArray = [];
     searchBar.value = "";
@@ -11,7 +10,9 @@ window.onload  = function search(){
     searchBar.addEventListener("input",async function(e) {            
             let searchInput = document.getElementById("searchBar").value;
             // let apiKeyYvan = "HXNZQEXJOAJMBD7G";
-            // let url = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${searchInput}&apikey=${apiKeyYvan}`;
+            // let apiKeyCian = "P7M1271DHCCEADYS";
+
+            // let url = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${searchInput}&apikey=${apiKeyCian}`;
             let url = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=tencent&apikey=demo`;
             let res = await fetch(url);
             let data = await res.json();
@@ -70,7 +71,12 @@ function clickListElement(listIdentifier){
 
 function promptIntoSearch(_listIdentifier){
     let stock = suggestions[_listIdentifier];
-    // console.log(stock.symbol)
-    // searchBar.value = stock.symbol;
-    $("#searchStock").attr("action", "/stock/" + stock.symbol);
+    searchBar.value = stock.symbol;
+    let ticket = stock.symbol;
+
+    // Save the ticket to the localstorage
+    localStorage.setItem('ticket', ticket);
+    console.log(ticket)
+
+    $("#searchStock").attr("action", `/stock/${ticket}`);
 }
