@@ -10,9 +10,9 @@ window.onload  = function search(){
 
     searchBar.addEventListener("input",async function(e) {            
             let searchInput = document.getElementById("searchBar").value;
-            let apiKeyYvan = "HXNZQEXJOAJMBD7G";
-            let url = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${searchInput}&apikey=${apiKeyYvan}`;
-            // let url = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=tencent&apikey=demo`;
+            // let apiKeyYvan = "HXNZQEXJOAJMBD7G";
+            // let url = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${searchInput}&apikey=${apiKeyYvan}`;
+            let url = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=tencent&apikey=demo`;
             let res = await fetch(url);
             let data = await res.json();
             dataArray = data['bestMatches'];
@@ -68,9 +68,9 @@ function clickListElement(listIdentifier){
 
 }
 
-
 function promptIntoSearch(_listIdentifier){
     let stock = suggestions[_listIdentifier];
-    console.log(stock)
-    searchBar.value = stock.symbol;
+    // console.log(stock.symbol)
+    // searchBar.value = stock.symbol;
+    $("#searchStock").attr("action", "/stock/" + stock.symbol);
 }

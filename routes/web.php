@@ -170,6 +170,7 @@ Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.de
 // TEST API
 // Route::get('/stock',[API::class,'index'])->name('stock');
 
-Route::get('/stock', function () {
-    return view('stock');
-});
+// Route::get('/stock/{ticket}')->name('stock');
+Route::get('/stock/{ticket}', function () {
+    return view('stock');    
+})->name('stock');;

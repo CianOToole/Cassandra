@@ -50,10 +50,10 @@
                         {{-- <li><a href="{{route('about')}}">About Us</a></li> --}}
                     </ul>
 
-                    <form >
+                    <form id="searchStock" method="GET" action="">
                         <div class="input-group">
                             <div  class="form-outline" >
-                                    <input id="searchBar" type="search" name="stock" class="form-control" style="width: 350px" autocomplete="off">
+                                    <input id="searchBar" type="search" class="form-control" style="width: 350px" autocomplete="off" >
                                     <ul id="searchGroup"></ul>
                             </div>
                         </div>

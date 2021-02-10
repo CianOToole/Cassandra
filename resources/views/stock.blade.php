@@ -4,6 +4,10 @@
 
 <div class="container work">
 
+@php
+    // echo("http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]")
+@endphp
+
     <div class="row bite">
   
         <div class="col-md-8 graph">
