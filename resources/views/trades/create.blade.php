@@ -22,10 +22,13 @@
             <input type="radio" name="sellOrBuy" id="amousellOrBuynt"
                 class="form-control {{ $errors->has('sellOrBuy') ? 'is-invalid' : '' }}" 
                 placeholder="Enter sellOrBuy" value="1">
+
                 <label for="male">Sell</label><br>
+
                 <input type="radio" name="sellOrBuy" id="amousellOrBuynt"
                 class="form-control {{ $errors->has('sellOrBuy') ? 'is-invalid' : '' }}" 
                 placeholder="Enter sellOrBuy" value="0">
+                
             @if ($errors->has('sellOrBuy'))
                 <span class="invalid-feedback">
                     {{ $errors->first('sellOrBuy') }}
