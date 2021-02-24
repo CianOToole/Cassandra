@@ -9,11 +9,11 @@ window.onload  = function search(){
 
     searchBar.addEventListener("input",async function(e) {            
             let searchInput = document.getElementById("searchBar").value;
-            // let apiKeyYvan = "HXNZQEXJOAJMBD7G";
+            let apiKeyYvan = "HXNZQEXJOAJMBD7G";
             // let apiKeyCian = "P7M1271DHCCEADYS";
 
-            // let url = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${searchInput}&apikey=${apiKeyCian}`;
-            let url = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=tencent&apikey=demo`;
+            let url = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${searchInput}&apikey=${apiKeyYvan}`;
+            // let url = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=tencent&apikey=demo`;
             let res = await fetch(url);
             let data = await res.json();
             dataArray = data['bestMatches'];

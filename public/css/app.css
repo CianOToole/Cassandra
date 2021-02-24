@@ -10981,6 +10981,10 @@ table tbody tr td.update-required {
   font-size: 10px;
 }
 
+.bx-cnt {
+  background-color: #fff;
+}
+
 .block {
   background-color: white;
 }
@@ -11020,5 +11024,9 @@ table tbody tr td.update-required {
 
 #searchGroup li:active {
   background-color: rgba(32, 129, 249, 0.25);
+}
+
+.newsfeed .data {
+  display: block;
 }
 
