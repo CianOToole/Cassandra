@@ -1,15 +1,13 @@
 // API key: 1001c8ec6521e9e5a86ad2a88190bef0
-// URL: https://financialmodelingprep.com/api/v3/quote/MSFT?apikey=1001c8ec6521e9e5a86ad2a88190bef0
 
-const { property } = require("lodash");
+(async function(){
+   let data;    
+   let quote = [];
+   let key = "1001c8ec6521e9e5a86ad2a88190bef0";
 
-quote();
+    let ticket = localStorage.getItem('ticket');    
 
- async function quote(){
-
-    let  quote = [];
-    let data;
-    let url = `https://financialmodelingprep.com/api/v3/quote/MSFT?apikey=1001c8ec6521e9e5a86ad2a88190bef0`;
+    let url = `https://financialmodelingprep.com/api/v3/quote/${ticket}?apikey=${key}`;
 
     try {
         let res = await fetch(url);
@@ -20,15 +18,16 @@ quote();
       }
 
     (function(){
+      let container = document.getElementById("data")
         for (var name in data) {
-            if (data.hasOwnProperty(name)) {
-                console.log(name + " = " + data[name]);
-            }
+          // console.log(name + " = " + data[name]);
+          let item = document.createElement("li"); 
+          item.innerHTML = `${name} : ${data[name]}`;
+          container.appendChild(item);
         }
     })();
 
-}
-
+})();
 
 
 
