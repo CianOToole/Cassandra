@@ -143,7 +143,7 @@ Route::put('/stocks/{id}', [StockController::class, 'update'])->name('stocks.upd
 Route::delete('/stocks/{id}', [StockController::class, 'destroy'])->name('stocks.destroy'); //making a delete request
 
 Route::get('trades',[TradeController::class,'index'])->name('trades.index');
-Route::get('/trades/create/{price}/{id}', [TradeController::class, 'create'])->name('trades.create');
+Route::get('/trades/create/{data}', [TradeController::class, 'create'])->name('trades.create');
 Route::post('/trades', [TradeController::class, 'store'])->name('trades.store'); // this will be making a post request
 Route::get('/trades/{id}', [TradeController::class, 'show'])->name('trades.show');
 Route::get('/trades/{id}/edit', [TradeController::class, 'edit'])->name('trades.edit');
@@ -173,4 +173,4 @@ Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.de
 // Route::get('/stock/{ticket}')->name('stock');
 Route::get('/stock/{ticket}', function () {
     return view('stock');    
-})->name('stock');;
+})->name('stock');

@@ -26,7 +26,8 @@ async function api() {
 
     console.log(ticket);
 
-    let url = `https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=${ticketDemo}&apikey=${apiKeyDemo}`;
+    let url = `https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=TSCO.LON&apikey=demo`;
+    // let url = `https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=${ticketDemo}&apikey=${apiKeyDemo}`;
 
     let res = await fetch(url);
     let data = await res.json();

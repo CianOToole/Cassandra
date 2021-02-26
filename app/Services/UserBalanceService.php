@@ -38,6 +38,7 @@ class UserBalanceService
         $balance = Balance::where('user_id', Auth::id())->firstOrFail();
         $balance->amount += $addToBalance; 
         $balance->save();
+        $trade->delete();
     }
 
     public function minusProfit($request)

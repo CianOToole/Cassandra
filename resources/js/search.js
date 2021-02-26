@@ -76,7 +76,7 @@ function promptIntoSearch(_listIdentifier){
 
     // Save the ticket to the localstorage
     localStorage.setItem('ticket', ticket);
-    console.log(ticket)
+    console.log(ticket);
 
     $("#searchStock").attr("action", `/stock/${ticket}`);
 }
