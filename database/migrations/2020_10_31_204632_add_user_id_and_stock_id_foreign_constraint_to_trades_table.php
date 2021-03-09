@@ -22,11 +22,6 @@ class AddUserIdAndStockIdForeignConstraintToTradesTable extends Migration
                 ->references('id') // parent table primary key.
                 ->on('users') // parent table name.
                 ->onDelete('cascade'); // this will delete all the children rows when the parent row is deleted.
-            $table->unsignedBigInteger('stock_id'); // unsigned for foreign key.
-            $table->foreign('stock_id') // foreign key column name.
-                ->references('id') // parent table primary key.
-                ->on('stocks') // parent table name.
-                ->onDelete('cascade'); // this will delete all the children rows when the parent row is deleted. 
         });
     }
 
@@ -40,8 +35,6 @@ class AddUserIdAndStockIdForeignConstraintToTradesTable extends Migration
         Schema::table('trades', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
             $table->dropColumn('user_id');
-            $table->dropForeign(['stock_id']);
-            $table->dropColumn('stock_id');
         });
     }
 }

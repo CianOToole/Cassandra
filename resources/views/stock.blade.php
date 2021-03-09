@@ -25,8 +25,14 @@
                 dignissimos dolores.
             </div>
             {{-- href="{{route('trades.create',$stock->price)}}" --}}
-            <a href="#" onmousedown="promptOrder()" id="myBtn" class="btn btn-primary float-left">Order</a>
+            {{-- <a href="#" onmousedown="promptOrder()" id="myBtn" class="btn btn-primary float-left">Order</a> --}}
         </div>
+        <form action="{{ route('trades.create') }}" method="get">
+            <div class="input-group">
+                <input type="hidden" id="hideBtn" name="ticket" value="">
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
 
 
 

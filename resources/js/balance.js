@@ -2,10 +2,11 @@
 // let url = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${searchInput}&apikey=${apiKeyCian}`;
 let stockData;
 let test;
+let ticket;
 api().then(res => stockData = res);
 async function api() {
 
-    let ticket;
+
 
     let ticketDemo = "IBM";
     let apiKeyDemo = "demo";
@@ -24,23 +25,19 @@ async function api() {
     let res = await fetch(url);
     let data = await res.json();
     // console.log(data);
+    promptOrder();
     return data;
 }
 
 
-    test = document.getElementById("myBtn");
-    console.log(test);
-    console.log("hi");
 
 
-// let test = document.getElementById("myBtn");
-if (test) {
-    test.addEventListener("click", () => {
-        promptOrder();
-    });
-}
 function promptOrder() {
 
+
+    // let test = document.getElementById("hideBtn");
+    // document.getElementById("demo").innerHTML
+    document.getElementById("hideBtn").value = ticket;
 
     // setTimeout(function () {
     // let stock = suggestions[_listIdentifier];
@@ -51,7 +48,7 @@ function promptOrder() {
     // localStorage.setItem('ticket', ticket);
     // console.log(ticket)
 
-    $("#makeTrade").attr("action", `/trades.create/${stockData}`);
+    // $("#makeTrade").attr("action", `/trades.create/${stockData}`);
 
     // } , 2000);
 }

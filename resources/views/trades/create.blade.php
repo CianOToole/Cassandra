@@ -5,7 +5,7 @@
         @csrf
         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
         <input type="hidden" name="price_at_order" value="{{ $price_at_order }}">
-        <input type="hidden" name="stock_id" value="{{ $stock_id }}">
+        <input type="hidden" name="stock_ticker" value="{{ $stock_ticker }}">
         <div class="form-group">
             <label for="amount">Trade</label>
             <input type="text" name="amount" id="amount"

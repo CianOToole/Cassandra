@@ -16,6 +16,7 @@ class CreateTradesTable extends Migration
         Schema::create('trades', function (Blueprint $table) {
             $table->id();
             $table->decimal('price_at_order', 8, 2);
+            $table->string('ticker', 100);
             $table->decimal('amount', 8, 2);
             $table->boolean('sellOrBuy');
             $table->timestamps();
