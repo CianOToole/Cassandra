@@ -9,20 +9,25 @@
 }
 
 // NAVBAR   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-.navbar {
-    background: #16a77cc7 !important;
-}
-
-.home-link {
+*{
+    padding: 0px;
     margin: 0px;
+    box-sizing: border-box;
+}
+.header{
+    padding-right: 0px;
+    padding-left: 0px;
+}
+.navbar {
+    background: rgba(22, 22, 22, .95) !important ;
 }
 
 .navbar-light .navbar-nav .nav-link {
-    color: rgb(0, 0, 0, 1);
+    color: rgb(255, 255, 255);
 }
 
 .navbar-light .navbar-nav .nav-link:hover {
-    color: rgb(0, 0, 0, 0.5);
+    color: rgb(255, 255, 255);
 }
 
 .navigation {
@@ -30,9 +35,48 @@
 }
 
 .navigation li a {
-    color: black;
+    color: white;
     text-decoration: none;
     padding-right: 1em;
+}
+.nav-left-side{
+    display: flex;
+    justify-items: end;
+}
+
+// Search bar ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#searchBar:focus{
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.75) inset, 0 0 8px rgba(255, 255, 255, 0.75);
+    outline: 0 none;
+}
+
+#searchGroup {
+    padding: 0px;
+    position: absolute;
+    z-index: 99;
+    list-style-type: none;
+    background-color: white;
+    top: 100%;
+    left: 0;
+    right: 0;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+}
+
+#searchGroup li{
+    padding-left: 10px;
+    border-bottom: 1px solid #222;
+}
+
+#searchGroup li:hover{
+    background-color: lightgrey;
+    cursor: pointer;
+}
+
+#searchGroup li:active{
+    background-color: rgb(32, 129, 249, .25);
 }
 
 // TABLES   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -104,37 +148,6 @@ table tbody tr td.update-required {
     position: relative;
     display: inline-flex;
 }
-
-// Search bar ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-#searchGroup {
-    padding: 0px;
-    position: absolute;
-    z-index: 99;
-    list-style-type: none;
-    background-color: white;
-    top: 100%;
-    left: 0;
-    right: 0;
-    border: 1px solid #d4d4d4;
-    border-bottom: none;
-    border-top: none;
-}
-
-#searchGroup li{
-    padding-left: 10px;
-    border-bottom: 1px solid #222;
-}
-
-#searchGroup li:hover{
-    background-color: lightgrey;
-    cursor: pointer;
-}
-
-#searchGroup li:active{
-    background-color: rgb(32, 129, 249, .25);
-}
-
 
 // NewsFeed ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .newsfeed
