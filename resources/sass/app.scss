@@ -4,6 +4,7 @@
 @import 'variables';
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
 .red {
     background: rgba(206, 31, 31, 0.945);
 }
@@ -115,16 +116,44 @@ table tbody tr td.update-required {
     border-top: none;
 }
 
-#searchGroup li{
+#searchGroup li {
     padding-left: 10px;
     border-bottom: 1px solid #222;
 }
 
-#searchGroup li:hover{
+#searchGroup li:hover {
     background-color: lightgrey;
     cursor: pointer;
 }
 
-#searchGroup li:active{
+#searchGroup li:active {
     background-color: rgb(32, 129, 249, .25);
+}
+
+// Portfolio bar ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+.white {
+    background-color: white !important;
+}
+
+.moveRight {
+    margin-left: 50px;
+    width: 98px;
+    height: 23px;
+
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 19px;
+    text-align: center;
+}
+
+.walletText {
+    // width: 1300px;
+
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 27px;
 }

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Trade;
+use App\Models\Balance;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Auth;
 use App\Services\UserBalanceService;
+use App\Services\TradeService;
 
 class TradeController extends Controller
 {
@@ -23,9 +25,20 @@ class TradeController extends Controller
      */
     public function index()
     {
-        $trades = Trade::orderBy('created_at', 'desc')->paginate(8);
+        $user = Auth::user()->id;
+        $trades = Trade::where('user_id', '=', $user)->get();
+        $gainLoss = (new TradeService())->calProfitLoss();
+        $portfolioCash = 0;
+        foreach ($trades as $trade) {
+            $portfolioCash = $trade->amount;
+        }
+        $portfolioCash += $gainLoss;
+        $balances = Balance::where('user_id', '=', $user)->get();
         return view('trades.index', [
-            'trades' => $trades
+            'trades' => $trades,
+            'balances' => $balances,
+            'gainLoss' => $gainLoss,
+            'portfolioCash' => $portfolioCash
         ]);
     }
 
@@ -44,7 +57,7 @@ class TradeController extends Controller
         $request->validate($rules);
         set_time_limit(0);
 
-        $url_info = "https://financialmodelingprep.com/api/v3/profile/AAPL?apikey=937d579e58c5f65961d708c85782f993";
+        $url_info = "https://financialmodelingprep.com/api/v3/profile/{$request->ticket}?apikey=937d579e58c5f65961d708c85782f993";
 
         $channel = curl_init();
 
