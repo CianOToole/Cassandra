@@ -23,129 +23,163 @@
 
 <body>
     <div id="app">
-        <div class="container-fluid header">
 
+        <nav>
+            <div class="logo">
+                <a class="" href="{{ url('/') }}" >
+                    <img src="../../storage/Logo.svg" width="60px" height="60px"/>
+                </a>
+            </div>
 
-                <nav class="navbar navbar-expand-md  shadow-md">
+            <form id="searchStock" class="search-stock" method="GET" action=""  >
+                <input id="searchBar" type="search" class="form-control" autocomplete="off">
+                <ul id="searchGroup"></ul>
+            </form>
 
-                    <div class="col-md-4">
-                        {{-- Hamburger button -> don't touch  --}}
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
+            <div class="navbar">
 
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <a class="navbar-brand" href="{{ url('/') }}">
-                                <img src="../../storage/Logo.svg" width="50px" height="50px"/>
-                            </a>
-                            <!-- Left Side Of Navbar -->
-                            <ul class="navbar-nav mr-auto navigation">
-                                @auth
-                                    @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('moderator'))
+                <ul class="nav-links">   
+                    <!-- Authentication Links -->
+                    @guest
+                        @if (Route::has('login'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                        @endif
+                        
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                        @endif
+                        @else
+                        @auth
+ 
+                            @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('moderator'))
+    
+                                <li class="lg-items">
+                                    <button  id="" class="drop-btn" > Users</button>
+                                </li>
+                                {{--@auth
+                                        @if (Auth::user()->hasRole('admin'))
+                                            <a class="" href="{{ route('admin.moderators.index') }}">Moderators</a>
+                                            <a class="" href="{{ route('admin.clients.index') }}">Suscribers</a>
+                                        @endif
+                                        @if (Auth::user()->hasRole('moderator'))
+                                            <a class="" href="{{ route('admin.moderators.index') }}">Moderators</a>
+                                            <a class="" href="{{ route('admin.clients.index') }}">Suscribers</a>
+                                        @endif
+                                @endauth --}}
+                            @endif
+ 
+                            <li class="lg-items">
+                                <button  id="" class="drop-btn">Portfolio</button>
+                            </li>
 
-                                        <li class="nav-item dropdown">
-                                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                                Users
-                                            </a>
+                            <li class="lg-items"><a class="" href="#">Watchlist</a></li>
 
-                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                                @auth
-                                                    @if (Auth::user()->hasRole('admin'))
-                                                        <a class="dropdown-item" href="{{ route('admin.moderators.index') }}">Moderators</a>
-                                                        <a class="dropdown-item" href="{{ route('admin.clients.index') }}">Suscribers</a>
-                                                    @endif
-                                                    @if (Auth::user()->hasRole('moderator'))
-                                                        <a class="dropdown-item" href="{{ route('admin.moderators.index') }}">Moderators</a>
-                                                        <a class="dropdown-item" href="{{ route('admin.clients.index') }}">Suscribers</a>
-                                                    @endif
-                                                @endauth
-                                            </div>
-                                        </li>
-
-                                    @endif
-
-                                    <li><a class="nav-link" href="#">Portfolio</a></li>
-
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{route('forum.index')}}">News & Boards</a>
-                                    </li>  
-                                    
-                                @endauth
-                            </ul>
+                            <li class="lg-items"><a class="" href="{{route('forum.index')}}">News & Boards</a></li>   
                             
-                        </div>
+                            @endauth
+                    
+                            <li class="nav-item dropdown lg-items">
+                                <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <img src=" {{ asset('storage/avatar/' . Auth::user()->avatar) }} " width='30px' height="30px" 
+                                        style="object-fit: fill;" class = "rounded-circle mr-1 ">
+                                </a>
 
-                    </div>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
+                                    @auth
+                                        @if (Auth::user()->hasRole('admin'))
+                                            <a class="dropdown-item" href="{{ route('admin.profiles.index') }}">Profile</a>
+                                        @endif
+                                        @if (Auth::user()->hasRole('moderator'))
+                                            <a class="dropdown-item" href="{{ route('moderator.profiles.index') }}">Profile</a>
+                                        @endif
+                                        @if (Auth::user()->hasRole('client'))
+                                            <a class="dropdown-item" href="{{ route('client.profiles.index') }}">Profile</a>
+                                        @endif
+                                    @endauth
 
-                        <div class="col-sm-4">
-                            <form id="searchStock" method="GET" action="">
-                                <div class="input-group">
-                                    <div  class="form-outline" >
-                                        <input id="searchBar" type="search" class="form-control" autocomplete="off" >
-                                        <ul id="searchGroup"></ul>
-                                    </div>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
                                 </div>
-                            </form>
-                        </div>
+                            </li>
 
-                        <div class="col-md-4 nav-left-side">
-                            <!-- Right Side Of Navbar -->
-                            <ul class="navbar-nav ml-auto">
-                                <!-- Authentication Links -->
-                                @guest
-                                    @if (Route::has('login'))
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                        </li>
-                                    @endif
-                                    
-                                    @if (Route::has('register'))
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                        </li>
-                                    @endif
-                                @else
-                                    <li class="nav-item dropdown">
-                                        <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                            <img src=" {{ asset('storage/avatar/' . Auth::user()->avatar) }} " width='30px' height="30px" 
-                                                style="object-fit: fill;" class = "rounded-circle mr-1 ">
-                                        </a>
+                            <li id="dropMenu"class="hamburger">
+                                <button>
+                                    <h3>&#9776;</h3>
+                                </button>
+                            </li>
 
-                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    @endguest
+                </ul>
+            </div>
+        </nav>
 
-                                            @auth
-                                                @if (Auth::user()->hasRole('admin'))
-                                                    <a class="dropdown-item" href="{{ route('admin.profiles.index') }}">Profile</a>
-                                                @endif
-                                                @if (Auth::user()->hasRole('moderator'))
-                                                    <a class="dropdown-item" href="{{ route('moderator.profiles.index') }}">Profile</a>
-                                                @endif
-                                                @if (Auth::user()->hasRole('client'))
-                                                    <a class="dropdown-item" href="{{ route('client.profiles.index') }}">Profile</a>
-                                                @endif
-                                            @endauth
+        <div id="responsiveNavbar" class="responsive-navbar" >
+            @guest
+                @if (Route::has('login'))
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    </li>
+                @endif
+            
+                @if (Route::has('register'))
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    </li>
+                @endif
+            @else
+                @auth
 
-                                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                            document.getElementById('logout-form').submit();">
-                                                {{ __('Logout') }}
-                                            </a>
+                    @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('moderator'))
+                        <li class="lg-items" data-aos="fade-right"><button  id="" class="dropbtn " > Users</button></li>
+                    @endif
 
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                                @csrf
-                                            </form>
-                                        </div>
-                                    </li>
-                                @endguest
-                            </ul>
-                        </div>
+                    <li class="lg-items"><button  id="" class="">Portfolio</button></li>
 
-                </nav>
+                    <li class="lg-items"><a class="" href="#">Watchlist</a></li>
 
+                    <li class="lg-items"><a class="" href="{{route('forum.index')}}">News & Boards</a><>
+                        @auth
+                            @if (Auth::user()->hasRole('admin'))
+                                <a class="dropdown-item" href="{{ route('admin.profiles.index') }}">Profile</a>
+                            @endif
+                            @if (Auth::user()->hasRole('moderator'))
+                                <a class="dropdown-item" href="{{ route('moderator.profiles.index') }}">Profile</a>
+                            @endif
+                            @if (Auth::user()->hasRole('client'))
+                                <a class="dropdown-item" href="{{ route('client.profiles.index') }}">Profile</a>
+                            @endif
+                        @endauth
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }} 
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </li>
+                
+                @endauth
+            @endguest
         </div>
 
-        <main class="py-4">
+        <main id="mainContainer"class="py-4">
             <div class="container">
                 <div class="row-justify-content-center">
                     <div class="col-md-12">
@@ -165,7 +199,6 @@
         </main>
 
     </div>
-
 </body>
 
 <script src="https://kit.fontawesome.com/b0365a380f.js" crossorigin="anonymous"></script>

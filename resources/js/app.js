@@ -1,5 +1,26 @@
 require('./bootstrap');
 
+//HAMBURGER MENU  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+document.addEventListener("DOMContentLoaded", () => {
+
+    let collapse = false;
+    let hamburger = document.getElementById("dropMenu");
+    
+    hamburger.addEventListener("click", () => {
+        if(collapse == false){
+            hamburger.classList.remove("rotation-2");
+            hamburger.classList.add("rotation-1");
+            document.getElementById("responsiveNavbar").style.display = "grid";
+            collapse = true;
+        }else{
+            hamburger.classList.remove("rotation-1");
+            hamburger.classList.add("rotation-2");
+            document.getElementById("responsiveNavbar").style.display = "none";
+            collapse = false;
+        }
+    });
+});
+
 // clickable rows    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // DOMContentLoaded waits for the brower to download the DOM structure before anything else 
