@@ -31,10 +31,12 @@
                 </a>
             </div>
 
-            <form id="searchStock" class="search-stock" method="GET" action=""  >
-                <input id="searchBar" type="search" class="form-control" autocomplete="off">
-                <ul id="searchGroup"></ul>
-            </form>
+            @auth
+                <form id="searchStock" class="search-stock" method="GET" action=""  >
+                    <input id="searchBar" type="search" class="form-control" autocomplete="off">
+                    <ul id="searchGroup"></ul>
+                </form>
+            @endauth
 
             <div class="navbar">
 
@@ -42,17 +44,18 @@
                     <!-- Authentication Links -->
                     @guest
                         @if (Route::has('login'))
-                            <li class="nav-item">
+                            <li class="nav-item login-register">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                         @endif
                         
                         @if (Route::has('register'))
-                            <li class="nav-item">
+                            <li class="nav-item login-register">
                                 <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                             </li>
                         @endif
                         @else
+
                         @auth
  
                             @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('moderator'))
@@ -71,16 +74,20 @@
                                         @endif
                                 @endauth --}}
                             @endif
- 
-                            <li class="lg-items">
-                                <button  id="" class="drop-btn">Portfolio</button>
-                            </li>
+    
+                                <li class="lg-items">
+                                    <button  id="" class="drop-btn">Portfolio</button>
+                                </li>
 
-                            <li class="lg-items"><a class="" href="#">Watchlist</a></li>
+                                <li class="lg-items">
+                                    <a class="" href="#">Watchlist</a>                                
+                                </li>
 
-                            <li class="lg-items"><a class="" href="{{route('forum.index')}}">News & Boards</a></li>   
+                                <li class="lg-items">
+                                    <a class="" href="{{route('forum.index')}}">News & Boards</a>
+                                </li>   
                             
-                            @endauth
+   
                     
                             <li class="nav-item dropdown lg-items">
                                 <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -88,24 +95,31 @@
                                         style="object-fit: fill;" class = "rounded-circle mr-1 ">
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu dropdown-menu-right profile-items" aria-labelledby="navbarDropdown">
 
                                     @auth
                                         @if (Auth::user()->hasRole('admin'))
-                                            <a class="dropdown-item" href="{{ route('admin.profiles.index') }}">Profile</a>
+                                            <a class="dropdown-item" href="{{ route('admin.profiles.index') }}">Profile
+                                            <i class="fas fa-user"></i>
+                                        </a>
                                         @endif
                                         @if (Auth::user()->hasRole('moderator'))
-                                            <a class="dropdown-item" href="{{ route('moderator.profiles.index') }}">Profile</a>
+                                            <a class="dropdown-item" href="{{ route('moderator.profiles.index') }}">Profile
+                                            <i class="fas fa-user"></i>
+                                        </a>
                                         @endif
                                         @if (Auth::user()->hasRole('client'))
-                                            <a class="dropdown-item" href="{{ route('client.profiles.index') }}">Profile</a>
+                                            <a class="dropdown-item" href="{{ route('client.profiles.index') }}">Profile
+                                            <i class="fas fa-user"></i>
+                                        </a>
                                         @endif
                                     @endauth
 
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a class="dropdown-item logout" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        Logout                                        
+                                        <i class="fas fa-sign-out-alt"></i>
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -114,12 +128,14 @@
                                 </div>
                             </li>
 
-                            <li id="dropMenu"class="hamburger">
-                                <button>
-                                    <h3>&#9776;</h3>
-                                </button>
-                            </li>
+            
 
+                        @endauth                
+                        <li id="dropMenu" class="hamburger">
+                            <button>
+                                <h3>&#9776;</h3>
+                            </button>
+                        </li>
                     @endguest
                 </ul>
             </div>
@@ -142,14 +158,16 @@
                 @auth
 
                     @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('moderator'))
-                        <li class="lg-items" data-aos="fade-right"><button  id="" class="dropbtn " > Users</button></li>
+                        <li class="lg-items"><button  id="" class="dropbtn " > Users</button></li>
                     @endif
 
                     <li class="lg-items"><button  id="" class="">Portfolio</button></li>
 
                     <li class="lg-items"><a class="" href="#">Watchlist</a></li>
 
-                    <li class="lg-items"><a class="" href="{{route('forum.index')}}">News & Boards</a><>
+                    <li class="lg-items"><a class="" href="{{route('forum.index')}}">News & Boards</a></li>
+
+                    <li>
                         @auth
                             @if (Auth::user()->hasRole('admin'))
                                 <a class="dropdown-item" href="{{ route('admin.profiles.index') }}">Profile</a>
@@ -163,8 +181,9 @@
                         @endauth
                     </li>
 
-                    <li>
-                        <a class="dropdown-item" href="{{ route('logout') }}"
+
+                    <li class="lg-items">
+                        <a class="dropdown-item" href="{{ route('logout') }}" 
                         onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
                             {{ __('Logout') }} 

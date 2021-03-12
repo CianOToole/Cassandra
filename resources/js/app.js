@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
             hamburger.classList.remove("rotation-1");
             hamburger.classList.add("rotation-2");
             document.getElementById("responsiveNavbar").style.display = "none";
-            collapse = false;
+            collapse = false;            
         }
     });
 });

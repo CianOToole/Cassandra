@@ -26,7 +26,6 @@ nav{
     height: 80px;
     font-family: 'Lato', 'sans-serif';
     font-size: 16px;
-    color: #fff;
     display: grid;
     grid-template-columns: 80px 1fr auto;
 }
@@ -50,7 +49,7 @@ nav{
 .nav-links {
     display: flex;
     align-items: center; 
-    grid-column-gap: 15px;
+    grid-column-gap: 25px;
     margin: 0;
 }
 
@@ -59,8 +58,16 @@ nav{
     align-items: center; 
 }
 
+.login-register {
+
+}
+
+.login-register a{
+    color: #fff;
+}
+
 // Navbar buttons & links styling
-.nav-links li a, .nav-links li  button{
+.lg-items button, .lg-items a{
     color: rgb(253, 253, 253);
     background-color: rgba(0, 0, 0, 0);
     border: none;   
@@ -78,16 +85,37 @@ nav{
 .dropdown-menu{
     border-radius: 0px;
     border: .5px solid rgb(22, 22, 22, .25);
-    box-shadow: -4px 4px 4px rgba(22, 22, 22, .25);
+    box-shadow: -4px 4px 4px rgba(22, 22, 22, .25);    
+    padding: 5px 0px;
 }
 
-.dropdown-item{
+.profile-items a{ 
     color: #222;
-    text-decoration: none;
+}
+
+.profile-items a:hover{
+    background-color: #E2E7EF;
+    text-decoration: none !important;
+}
+
+.logout{    color: rgba(206, 31, 31, 0.945)!important;}
+
+i{
+    padding-left: 3.5rem;    
+}
+.logout:hover{    
+    background-color: rgba(206, 31, 31, 0.945)!important;
+    color: rgba(255, 255, 255)!important;
+    transition-duration: .5s;
 }
 
 // Hamburger button styling
 .hamburger{display: none;}
+.hamburger button{
+    background-color: rgba(0, 0, 0, 0);
+    color: #fff;
+    border: 0px;
+}
 .hamburger h3{margin:0;}
 
 .rotation-1{
@@ -101,16 +129,15 @@ nav{
 
 // Links for small screens
 .responsive-navbar{
-    height: 100vh;
+    height: 700px;
     background-color: rgba(22, 22, 22, 0.9);
-    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-top: 1px solid rgba(17, 10, 10, 0.5);
     position: absolute;
     width: 100vw;
     z-index: 99;
+    padding-top: 5vh;
     display: none;
-    justify-content: center;
     text-align: center;
-    padding-top: 15%;
 }
 
 .responsive-navbar a, .responsive-navbar button{
@@ -118,6 +145,19 @@ nav{
     font-size: 20px;
     font-weight: 300;
     color: #fff;
+}
+
+.dropdown-item:hover, .dropdown-item:focus{
+    color: #fff;
+    text-decoration: none;
+    background-color: rgba(0,0,0,0);
+    outline: 0;
+}
+
+@media (min-width: 960px) { 
+    .responsive-navbar{
+        display: none;
+    }
 }
 
 @media (max-width: 960px) { 
