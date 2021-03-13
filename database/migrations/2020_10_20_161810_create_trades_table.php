@@ -19,6 +19,7 @@ class CreateTradesTable extends Migration
             $table->string('ticker', 100);
             $table->decimal('amount', 8, 2);
             $table->boolean('sellOrBuy');
+            $table->boolean('tradeClosed');
             $table->timestamps();
         });
     }

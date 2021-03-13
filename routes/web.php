@@ -149,6 +149,7 @@ Route::get('/trades/{id}', [TradeController::class, 'show'])->name('trades.show'
 Route::get('/trades/{id}/edit', [TradeController::class, 'edit'])->name('trades.edit');
 Route::put('/trades/{id}', [TradeController::class, 'update'])->name('trades.update'); //making a put request
 Route::delete('/trades/{id}', [TradeController::class, 'destroy'])->name('trades.destroy'); //making a delete request
+Route::get('/trade/history',[TradeController::class,'history'])->name('trades.history');
 
 Route::get('balances',[BalanceController::class,'index'])->name('balances.index');
 Route::get('/balances/create', [BalanceController::class, 'create'])->name('balances.create');
@@ -174,3 +175,7 @@ Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.de
 Route::get('/stock/{ticket}', function () {
     return view('stock');    
 })->name('stock');
+
+Route::get('/history', function () {
+    return view('trades.history');    
+})->name('history');

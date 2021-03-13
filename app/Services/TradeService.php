@@ -16,7 +16,7 @@ class TradeService
     {
         $totalGain = 0;
         $user = Auth::user()->id;
-        $trades = Trade::where('user_id', '=', $user)->get();
+        $trades = Trade::where('user_id', '=', $user)->where('tradeClosed', '=', false)->get();
         $balance = Balance::where('user_id', '=', $user)->get();
 
 

@@ -26,7 +26,7 @@ class TradeController extends Controller
     public function index()
     {
         $user = Auth::user()->id;
-        $trades = Trade::where('user_id', '=', $user)->get();
+        $trades = Trade::where('user_id', '=', $user)->where('tradeClosed', '=', false)->get();
         $gainLoss = (new TradeService())->calProfitLoss();
         $portfolioCash = 0;
         foreach ($trades as $trade) {
@@ -110,6 +110,7 @@ class TradeController extends Controller
         $trade->price_at_order = $request->price_at_order;
         $trade->amount = $request->amount;
         $trade->sellOrBuy = $request->sellOrBuy;
+        $trade->tradeClosed = false;
         $trade->user_id = Auth::id();
         $trade->ticker = $request->stock_ticker;
         $trade->save();
@@ -202,6 +203,7 @@ class TradeController extends Controller
      */
     public function destroy($id)
     {
+        
         $trades = Trade::findOrFail($id);
         (new UserBalanceService())->addProfit($trades);
         // $trades->delete();
@@ -209,5 +211,20 @@ class TradeController extends Controller
         return redirect()
             ->route('stocks.index')
             ->with('status', 'closed the selected Trade');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function history()
+    {
+        $user = Auth::user()->id;
+        $trades = Trade::where('user_id', '=', $user)->where('tradeClosed', '=', true)->get();
+        return view('trades.history', [
+            'trades' => $trades
+        ]);
     }
 }

@@ -130,7 +130,7 @@ table tbody tr td.update-required {
     background-color: rgb(32, 129, 249, .25);
 }
 
-// Portfolio bar ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Portfolio page ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .white {
     background-color: white !important;
 }
@@ -157,3 +157,33 @@ table tbody tr td.update-required {
     font-size: 20px;
     line-height: 27px;
 }
+
+.portfolioText {
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 27px;
+    color: #000;
+
+    text-decoration: none;
+}
+
+.historyText {
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 27px;
+    color: #000;
+
+    text-decoration: none;
+    margin-left: 15px;
+}
+
+.blockColour{
+    background: #FFFFFF;
+    border-radius: 10px;
+}
+
+
