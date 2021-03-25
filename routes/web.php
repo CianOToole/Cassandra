@@ -143,12 +143,13 @@ Route::put('/stocks/{id}', [StockController::class, 'update'])->name('stocks.upd
 Route::delete('/stocks/{id}', [StockController::class, 'destroy'])->name('stocks.destroy'); //making a delete request
 
 Route::get('trades',[TradeController::class,'index'])->name('trades.index');
-Route::get('/trades/create/{price}/{id}', [TradeController::class, 'create'])->name('trades.create');
+Route::get('/trades/create', [TradeController::class, 'create'])->name('trades.create');
 Route::post('/trades', [TradeController::class, 'store'])->name('trades.store'); // this will be making a post request
 Route::get('/trades/{id}', [TradeController::class, 'show'])->name('trades.show');
 Route::get('/trades/{id}/edit', [TradeController::class, 'edit'])->name('trades.edit');
 Route::put('/trades/{id}', [TradeController::class, 'update'])->name('trades.update'); //making a put request
 Route::delete('/trades/{id}', [TradeController::class, 'destroy'])->name('trades.destroy'); //making a delete request
+Route::get('/trade/history',[TradeController::class,'history'])->name('trades.history');
 
 Route::get('balances',[BalanceController::class,'index'])->name('balances.index');
 Route::get('/balances/create', [BalanceController::class, 'create'])->name('balances.create');
@@ -172,6 +173,9 @@ Route::get('/stock/{ticket}', function () {
     return view('stock');    
 })->name('stock');
 
+Route::get('/history', function () {
+    return view('trades.history');    
+})->name('history');
 // NEWS API ROUTE ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Route::get('/news', function () {

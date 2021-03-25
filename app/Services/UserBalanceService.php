@@ -29,15 +29,42 @@ class UserBalanceService
 
     public function addProfit($trade)
     {
-        $stockPast = Stock::findOrFail($trade->stock_id);
-        $stock = Stock::where('ticker', $stockPast->ticker)->get();
-        $id = $stock->count();
-        $stockNow = Stock::findOrFail($stock[$id-1]->id);
-        $sharePerStock = ($trade->amount / $stockPast->price);
-        $addToBalance = $sharePerStock * $stockNow->price;
+
+        set_time_limit(0);
+
+        $url_info = "https://financialmodelingprep.com/api/v3/profile/{$trade->ticker}?apikey=937d579e58c5f65961d708c85782f993";
+
+        $channel = curl_init();
+
+        curl_setopt($channel, CURLOPT_AUTOREFERER, TRUE);
+        curl_setopt($channel, CURLOPT_HEADER, 0);
+        curl_setopt($channel, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($channel, CURLOPT_URL, $url_info);
+        curl_setopt($channel, CURLOPT_FOLLOWLOCATION, TRUE);
+        curl_setopt($channel, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+        curl_setopt($channel, CURLOPT_TIMEOUT, 0);
+        curl_setopt($channel, CURLOPT_CONNECTTIMEOUT, 0);
+        curl_setopt($channel, CURLOPT_SSL_VERIFYHOST, FALSE);
+        curl_setopt($channel, CURLOPT_SSL_VERIFYPEER, FALSE);
+
+        $output = curl_exec($channel);
+
+        if (curl_error($channel)) {
+            return 'error:' . curl_error($channel);
+        } else {
+            $outputJSON = json_decode($output);
+            // array_push($totalGain, $outputJSON[0]->price - $trade->price_at_order);
+        }
+
+        $numOfShares = $trade->amount / $trade->price_at_order;
+        $diffCal =  $outputJSON[0]->price - $trade->price_at_order;
+        $profitOrLoss =  $numOfShares * $diffCal;
+
         $balance = Balance::where('user_id', Auth::id())->firstOrFail();
-        $balance->amount += $addToBalance; 
+        $balance->amount += $profitOrLoss;
         $balance->save();
+        $trade->tradeClosed = true;
+        $trade->save();
     }
 
     public function minusProfit($request)

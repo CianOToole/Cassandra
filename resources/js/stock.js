@@ -26,6 +26,8 @@ async function api() {
 
     console.log(ticket);
 
+    //let url = `https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=TSCO.LON&apikey=demo`;
+    // let url = `https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=${ticketDemo}&apikey=${apiKeyDemo}`;
     let url = `https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=${ticket}&apikey=${apiKeyYvan}`;
 
     let res = await fetch(url);
@@ -47,14 +49,14 @@ function extracter() {
 
         try {
             for (let i = 0; i <= seriesArray.length; i++) {
-                let plsWork = {
+                let data = {
                     time: timeArray[i],
                     open: parseFloat(seriesArray[i]['1. open']),
                     high: parseFloat(seriesArray[i]['2. high']),
                     low: parseFloat(seriesArray[i]['3. low']),
                     close: parseFloat(seriesArray[i]['4. close'])
                 };
-                stocks.push(plsWork);
+                stocks.push(data);
             }
         } catch (error) {
             console.log(error);

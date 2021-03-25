@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Trade;
+use App\Models\Balance;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Auth;
 use App\Services\UserBalanceService;
+use App\Services\TradeService;
 
 class TradeController extends Controller
 {
 
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('auth');
     }
     /**
@@ -22,10 +25,21 @@ class TradeController extends Controller
      */
     public function index()
     {
-        $trades = Trade::orderBy('created_at', 'desc')->paginate(8);
+        $user = Auth::user()->id;
+        $trades = Trade::where('user_id', '=', $user)->where('tradeClosed', '=', false)->get();
+        $gainLoss = (new TradeService())->calProfitLoss();
+        $portfolioCash = 0;
+        foreach ($trades as $trade) {
+            $portfolioCash = $trade->amount;
+        }
+        $portfolioCash += $gainLoss;
+        $balances = Balance::where('user_id', '=', $user)->get();
         return view('trades.index', [
-            'trades' => $trades
-        ]);  
+            'trades' => $trades,
+            'balances' => $balances,
+            'gainLoss' => $gainLoss,
+            'portfolioCash' => $portfolioCash
+        ]);
     }
 
     /**
@@ -34,12 +48,41 @@ class TradeController extends Controller
      *@param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function create($price, $id)
+    public function create(Request $request)
     {
-     return view('trades.create', [
-         'price_at_order' => $price,
-         'stock_id' => $id
-     ]);
+
+        $rules = [
+            'ticket' => 'required|string|min:2|max:191'
+        ];
+        $request->validate($rules);
+        set_time_limit(0);
+
+        $url_info = "https://financialmodelingprep.com/api/v3/profile/{$request->ticket}?apikey=937d579e58c5f65961d708c85782f993";
+
+        $channel = curl_init();
+
+        curl_setopt($channel, CURLOPT_AUTOREFERER, TRUE);
+        curl_setopt($channel, CURLOPT_HEADER, 0);
+        curl_setopt($channel, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($channel, CURLOPT_URL, $url_info);
+        curl_setopt($channel, CURLOPT_FOLLOWLOCATION, TRUE);
+        curl_setopt($channel, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+        curl_setopt($channel, CURLOPT_TIMEOUT, 0);
+        curl_setopt($channel, CURLOPT_CONNECTTIMEOUT, 0);
+        curl_setopt($channel, CURLOPT_SSL_VERIFYHOST, FALSE);
+        curl_setopt($channel, CURLOPT_SSL_VERIFYPEER, FALSE);
+
+        $output = curl_exec($channel);
+
+        if (curl_error($channel)) {
+            return 'error:' . curl_error($channel);
+        } else {
+            $outputJSON = json_decode($output);
+        }
+        return view('trades.create', [
+            'price_at_order'  => $outputJSON[0]->price,
+            'stock_ticker' => $request->ticket
+        ]);
     }
 
     /**
@@ -50,8 +93,8 @@ class TradeController extends Controller
      */
     public function store(Request $request)
     {
-          //validation rules
-          $rules = [
+        //validation rules
+        $rules = [
             'price_at_order' => 'required|string|min:2|max:191',
             'amount'  => 'required|string|min:2|max:1000',
             'sellOrBuy' => 'required|in:1,0',
@@ -67,8 +110,9 @@ class TradeController extends Controller
         $trade->price_at_order = $request->price_at_order;
         $trade->amount = $request->amount;
         $trade->sellOrBuy = $request->sellOrBuy;
+        $trade->tradeClosed = false;
         $trade->user_id = Auth::id();
-        $trade->stock_id = $request->stock_id;
+        $trade->ticker = $request->stock_ticker;
         $trade->save();
         (new UserBalanceService())->minusProfit($request);
         return redirect()
@@ -126,12 +170,12 @@ class TradeController extends Controller
             'phone'  => 'required|string|min:5|max:1000',
             'password'  => 'required|string|min:5|max:1000',
         ];
-        
+
         $messages = [
             'title.unique' => 'Todo title should be unique',
         ];
 
-        $request->validate($rules,$messages);
+        $request->validate($rules, $messages);
         $trade = Trade::findOrFail($id);
         $trade->first_name = $request->first_name;
         $trade->middle_name = $request->middle_name;
@@ -148,7 +192,7 @@ class TradeController extends Controller
 
         return redirect()
             ->route('trades.show', $id)
-            -> with('status','Updated the selected user');
+            ->with('status', 'Updated the selected user');
     }
 
     /**
@@ -159,12 +203,28 @@ class TradeController extends Controller
      */
     public function destroy($id)
     {
+        
         $trades = Trade::findOrFail($id);
-       (new UserBalanceService())->addProfit($trades);
-            // $trades->delete();
+        (new UserBalanceService())->addProfit($trades);
+        // $trades->delete();
         //Redirect to a specified route with flash message.
         return redirect()
-            ->route('trades.index')
-            -> with('status','closed the selected Trade');
+            ->route('stocks.index')
+            ->with('status', 'closed the selected Trade');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function history()
+    {
+        $user = Auth::user()->id;
+        $trades = Trade::where('user_id', '=', $user)->where('tradeClosed', '=', true)->get();
+        return view('trades.history', [
+            'trades' => $trades
+        ]);
     }
 }
