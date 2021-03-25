@@ -168,10 +168,7 @@ Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update
 Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy'); //making a delete request
 
 
-// TEST API
-// Route::get('/stock',[API::class,'index'])->name('stock');
-
-// Route::get('/stock/{ticket}')->name('stock');
+// STOCK API ROUTE ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Route::get('/stock/{ticket}', function () {
     return view('stock');    
 })->name('stock');
@@ -179,3 +176,15 @@ Route::get('/stock/{ticket}', function () {
 Route::get('/history', function () {
     return view('trades.history');    
 })->name('history');
+// NEWS API ROUTE ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Route::get('/news', function () {
+    return view('news');    
+})->name('news');
+
+
+Route::get('/data', function () {
+    return view('data');    
+})->name('data');
+
+

@@ -34,6 +34,7 @@
             <button type="submit" class="btn btn-primary">Create</button>
         </form>
 
+    </div>
 
 
         <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
