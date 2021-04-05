@@ -20,7 +20,9 @@
                     @endauth
                 </div>
 
-                <div class="card-body">                    
+
+
+                <div class="card-body">             
                     @if(count($board) === 0)
                         <p>No Such board</p>
                     @else
@@ -67,6 +69,7 @@
                         </table>
                     @endif                    
                 </div>
+                
 
             </div>
         </div>

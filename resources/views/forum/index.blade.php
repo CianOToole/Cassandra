@@ -21,7 +21,7 @@
                 </div>
 
                 <div class="card-body">
-                    
+                                        
                     @if(count($boards) === 0)
                         <p>There are no boards yet</p>
                     @else

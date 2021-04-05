@@ -54,40 +54,56 @@
                                 <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                             </li>
                         @endif
+
                         @else
 
                         @auth
- 
-                            @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('moderator'))
-    
-                                <li class="lg-items">
-                                    <button  id="" class="drop-btn" > Users</button>
-                                </li>
-                                {{--@auth
+
+                            @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('moderator'))    
+                                <div class="dropdown">
+                                    <li class="lg-items drop-btn">
+                                        <button  id="" class="" > Users</button>
+                                    </li>
+
+                                    <div class="dropdown-content">
+                                        @auth
                                         @if (Auth::user()->hasRole('admin'))
-                                            <a class="" href="{{ route('admin.moderators.index') }}">Moderators</a>
-                                            <a class="" href="{{ route('admin.clients.index') }}">Suscribers</a>
+                                            <li><a class="" href="{{ route('admin.moderators.index') }}">Moderators</a></li>
+                                            <li><a class="" href="{{ route('admin.clients.index') }}">Suscribers</a></li>
                                         @endif
                                         @if (Auth::user()->hasRole('moderator'))
-                                            <a class="" href="{{ route('admin.moderators.index') }}">Moderators</a>
-                                            <a class="" href="{{ route('admin.clients.index') }}">Suscribers</a>
+                                            <li><a class="" href="{{ route('admin.moderators.index') }}">Moderators</a></li>
+                                            <li><a class="" href="{{ route('admin.clients.index') }}">Suscribers</a></li>
                                         @endif
-                                @endauth --}}
+                                        @endauth
+                                    </div>
+                                </div>                                
                             @endif
     
-                                <li class="lg-items">
-                                    <button  id="" class="drop-btn">Portfolio</button>
+                                <li class="lg-items" style="padding-left: 15px;">
+                                    <a class="" href="#">Portfolio</a>    
                                 </li>
 
-                                <li class="lg-items">
+                                <div class="dropdown">
+                                    <li class="lg-items drop-btn">
+                                        <button  id="" class="">Forum</button>
+                                    </li>
+
+                                    <div class="dropdown-content">
+                                        <li class="lg-items">
+                                            <a class="" href="{{route('forum.index')}}">Boards</a>
+                                        </li>                                   
+                                        <li class="lg-items">
+                                            <a class="" href="{{route('news')}}">Newsfeed</a>
+                                        </li>   
+                                    </div>
+                                </div>   
+
+                                <li class="lg-items" style="padding-left: 15px;">
                                     <a class="" href="#">Watchlist</a>                                
                                 </li>
-
-                                <li class="lg-items">
-                                    <a class="" href="{{route('forum.index')}}">News & Boards</a>
-                                </li>   
                             
-   
+                            {{-- PROFILE --}}
                     
                             <li class="nav-item dropdown lg-items">
                                 <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -99,17 +115,17 @@
 
                                     @auth
                                         @if (Auth::user()->hasRole('admin'))
-                                            <a class="dropdown-item" href="{{ route('admin.profiles.index') }}">Profile
+                                            <a class="dropdown-item profile" href="{{ route('admin.profiles.index') }}">Profile
                                             <i class="fas fa-user"></i>
                                         </a>
                                         @endif
                                         @if (Auth::user()->hasRole('moderator'))
-                                            <a class="dropdown-item" href="{{ route('moderator.profiles.index') }}">Profile
+                                            <a class="dropdown-item profile" href="{{ route('moderator.profiles.index') }}">Profile
                                             <i class="fas fa-user"></i>
                                         </a>
                                         @endif
                                         @if (Auth::user()->hasRole('client'))
-                                            <a class="dropdown-item" href="{{ route('client.profiles.index') }}">Profile
+                                            <a class="dropdown-item profile" href="{{ route('client.profiles.index') }}">Profile
                                             <i class="fas fa-user"></i>
                                         </a>
                                         @endif
@@ -128,7 +144,7 @@
                                 </div>
                             </li>
 
-            
+                            {{-- PROFILE --}}
 
                         @endauth                
                         <li id="dropMenu" class="hamburger">
@@ -156,16 +172,22 @@
                 @endif
             @else
                 @auth
-
-                    @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('moderator'))
-                        <li class="lg-items"><button  id="" class="dropbtn " > Users</button></li>
+                    
+                    @if (Auth::user()->hasRole('admin'))
+                        <li><a class="" href="{{ route('admin.moderators.index') }}">Moderators</a></li>
+                        <li><a class="" href="{{ route('admin.clients.index') }}">Suscribers</a></li>
+                    @endif
+                    @if (Auth::user()->hasRole('moderator'))
+                        <li><a class="" href="{{ route('admin.clients.index') }}">Suscribers</a></li>
                     @endif
 
                     <li class="lg-items"><button  id="" class="">Portfolio</button></li>
 
                     <li class="lg-items"><a class="" href="#">Watchlist</a></li>
 
-                    <li class="lg-items"><a class="" href="{{route('forum.index')}}">News & Boards</a></li>
+                    <li class="lg-items"><a class="" href="{{route('forum.index')}}">Boards</a></li>
+
+                    <li class="lg-items"><a class="" href="{{route('news')}}">News</a></li>
 
                     <li>
                         @auth

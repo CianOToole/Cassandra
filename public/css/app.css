@@ -10925,6 +10925,14 @@ nav {
   grid-template-columns: 80px 1fr auto;
 }
 
+.navbar {
+  justify-content: end;
+}
+
+.login-register .nav-link {
+  padding: 0;
+}
+
 .logo {
   display: flex;
   align-items: center;
@@ -10957,6 +10965,10 @@ nav {
   color: #fff;
 }
 
+.profile-items .profile:hover {
+  color: black;
+}
+
 .lg-items button,
 .lg-items a {
   color: #fdfdfd;
@@ -10965,7 +10977,6 @@ nav {
   outline: 0;
 }
 
-.drop-btn:hover,
 .nav-links li a:hover {
   text-decoration: underline;
   -webkit-text-decoration-color: #2081F9;
@@ -10975,6 +10986,44 @@ nav {
 
 .nav-links button:focus {
   outline: 0;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.drop-btn {
+  padding-left: 15px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #2B2B2C;
+  color: white;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-top: 1px solid #C6C6C6;
+}
+
+.dropdown-content a {
+  color: white;
+  text-decoration: none;
+  padding: 5px 0;
+}
+
+.dropdown-content li {
+  padding: 15px;
+}
+
+.dropdown-content li:hover {
+  background-color: black;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 
 .dropdown-menu {
@@ -11168,8 +11217,37 @@ table tbody tr td.update-required {
   background-color: rgba(12, 99, 214, 0.342);
 }
 
-.newsfeed .data {
-  display: block;
+.bite {
+  position: relative;
+  display: inline-flex;
+}
+
+#searchGroup {
+  padding: 0px;
+  position: absolute;
+  z-index: 99;
+  list-style-type: none;
+  background-color: white;
+  top: 100%;
+  left: 0;
+  right: 0;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+}
+
+#searchGroup li {
+  padding-left: 10px;
+  border-bottom: 1px solid #222;
+}
+
+#searchGroup li:hover {
+  background-color: lightgrey;
+  cursor: pointer;
+}
+
+#searchGroup li:active {
+  background-color: rgba(32, 129, 249, 0.25);
 }
 
 .white {

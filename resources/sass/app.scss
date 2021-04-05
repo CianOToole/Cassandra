@@ -31,6 +31,10 @@ nav{
     grid-template-columns: 80px 1fr auto;
 }
 
+.navbar{
+    justify-content: end;
+}
+.login-register .nav-link{padding: 0;}
 .logo{
     display: flex;
     align-items: center;
@@ -59,13 +63,11 @@ nav{
     align-items: center; 
 }
 
-.login-register {
-
-}
-
 .login-register a{
     color: #fff;
 }
+
+.profile-items .profile:hover{color:black;}
 
 // Navbar buttons & links styling
 .lg-items button, .lg-items a{
@@ -75,13 +77,49 @@ nav{
     outline: 0;
 }
 
-.drop-btn:hover,
 .nav-links li a:hover{
     text-decoration: underline;
     text-decoration-color: #2081F9;
     text-decoration-thickness: 2px;
 }
 .nav-links button:focus{outline: 0;}
+
+// DROPDOWN LINKS-------------------------------------
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .drop-btn{padding-left: 15px;}
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #2B2B2C;
+    color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-top: 1px solid #C6C6C6;
+  }
+
+  .dropdown-content a{
+    color: white;
+    text-decoration: none;
+    padding: 5px 0;
+  }
+
+  .dropdown-content li{
+    padding: 15px;;
+  }
+
+  .dropdown-content li:hover{
+    background-color: black;
+  }
+  
+  .dropdown:hover .dropdown-content {display: block;}
+
+  // DROPDOWN LINKS-------------------------------------
 
 .dropdown-menu{
     border-radius: 0px;
