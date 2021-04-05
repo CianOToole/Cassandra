@@ -7,7 +7,7 @@ window.onload  = function search(){
     searchBar.value = "";
     searchBar.placeholder = "Search stock";
 
-    searchBar.addEventListener("input",async function(e) {            
+    searchBar.addEventListener("input",async function(e) {     
             let searchInput = document.getElementById("searchBar").value;
             let apiKeyYvan = "HXNZQEXJOAJMBD7G";
             // let apiKeyCian = "P7M1271DHCCEADYS";
@@ -26,7 +26,7 @@ window.onload  = function search(){
 }
 
 
-function cleanArray(_dataArray){
+function cleanArray(_dataArray){       
     //empty suggestions before populating the array with new suggestions
     suggestions = [];
     let counter = 0;

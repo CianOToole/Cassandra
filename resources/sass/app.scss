@@ -219,8 +219,8 @@ i{
 
 #searchGroup {
     padding: 0px;
-    position: absolute;
     z-index: 99;
+    position: absolute;
     list-style-type: none;
     background-color: white;
     top: 100%;
@@ -229,6 +229,9 @@ i{
     border: 1px solid #d4d4d4;
     border-bottom: none;
     border-top: none;
+    top: 15%;
+    left: 120px;
+    width: 500px;
 }
 
 #searchGroup li{
@@ -316,35 +319,6 @@ table tbody tr td.update-required {
     display: inline-flex;
 }
 
-// Search bar ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-#searchGroup {
-    padding: 0px;
-    position: absolute;
-    z-index: 99;
-    list-style-type: none;
-    background-color: white;
-    top: 100%;
-    left: 0;
-    right: 0;
-    border: 1px solid #d4d4d4;
-    border-bottom: none;
-    border-top: none;
-}
-
-#searchGroup li {
-    padding-left: 10px;
-    border-bottom: 1px solid #222;
-}
-
-#searchGroup li:hover {
-    background-color: lightgrey;
-    cursor: pointer;
-}
-
-#searchGroup li:active {
-    background-color: rgb(32, 129, 249, .25);
-}
 
 // Portfolio page ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .white {

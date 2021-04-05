@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <h3 class="text-center">Create Todo</h3>
+    <h3 class="text-center">Make order</h3>
     <form action="{{ route('trades.store') }}" method="post">
         @csrf
         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
@@ -35,6 +35,6 @@
                 </span>
             @endif
         </div>
-        <button type="submit" class="btn btn-primary">Create</button>
+        <button type="submit" class="btn btn-primary">Order</button>
     </form>
 @endsection

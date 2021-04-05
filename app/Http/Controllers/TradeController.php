@@ -116,7 +116,7 @@ class TradeController extends Controller
         $trade->save();
         (new UserBalanceService())->minusProfit($request);
         return redirect()
-            ->route('stocks.index')
+            ->route('trades.index')
             ->with('status', 'Created a new Trade!');
     }
 
@@ -203,13 +203,13 @@ class TradeController extends Controller
      */
     public function destroy($id)
     {
-        
+        // dd($id);
         $trades = Trade::findOrFail($id);
         (new UserBalanceService())->addProfit($trades);
         // $trades->delete();
         //Redirect to a specified route with flash message.
         return redirect()
-            ->route('stocks.index')
+            ->route('trades.index')
             ->with('status', 'closed the selected Trade');
     }
 

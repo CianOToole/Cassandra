@@ -31,7 +31,7 @@
             <div class="input-group">
                 <input type="hidden" id="hideBtn" name="ticket" value="">
             </div>
-            <button type="submit" class="btn btn-primary">Create</button>
+            <button type="submit" class="btn btn-primary">Order</button>
         </form>
 
     </div>

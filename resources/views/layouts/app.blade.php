@@ -81,7 +81,7 @@
                             @endif
     
                                 <li class="lg-items" style="padding-left: 15px;">
-                                    <a class="" href="#">Portfolio</a>    
+                                    <a class="" href="{{ route('trades.index') }}">Portfolio</a>    
                                 </li>
 
                                 <div class="dropdown">

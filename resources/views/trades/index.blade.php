@@ -31,6 +31,7 @@
                                 <td>bruh</td>
                                 <td>{{ $trade->ticker }}</td>
                                 <td>{{ $trade->amount }}</td>
+                                <td>{{ $trade->id }}</td>
                                 <td><button type="button" class="btn btn-danger" onclick="document.querySelector('#delete-form').submit()">End trade</button>
                                     <form method="POST" id="delete-form" action="{{route('trades.destroy',$trade->id)}}">
                                         @csrf
@@ -42,7 +43,6 @@
                     </tbody>
                 </table>
             </div>
-
 
             <div class="col-4 blockColour">
                 <div class="row">
@@ -73,5 +73,9 @@
                 </div>
             </div>
         </div>
+
+        <h1>            /!\ The deletion is under construction and may not work yet
+        </h1>
+
     </div>
 @endsection
