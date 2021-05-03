@@ -4,38 +4,39 @@
 <div class="container">
     <div class="row">
 
-        <div class="col-md-12">
 
-            <p id="alert-message" class="alert collapse"></p>
+            <div class="col-md-8 ">
+                <div class="media-holder">
 
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Boards</h3>
-                </div>
+                    <div class="col-12 media-switch">
+                        <h4>Boards</h4>
+                        <h4>Newsfeed</h4>
+                    </div>
 
-                <div class="card-body">
-                                        
-                    @if(count($boards) === 0)
-                        <p>There are no boards yet</p>
-                    @else
-                        <table id="table-visits" class="table table-hover">
-                            <thead>
-                                <th>Category</th>
-                            </thead>
+                    <div class="col-12">
 
-                            <tbody>
+                        <!--<div id="boards" class="board-lnk">
+                            @foreach ($boards as $board)
+                                <a href="{{ route( 'board.topics.index', $board->id) }}">{{ $board->category }}</a>
+                            @endforeach  
+                        </div>-->
 
-                                @foreach ($boards as $board)
-                                    <tr data-id=" {{ $board->id }} " data-href="{{ route( 'board.topics.index', $board->id) }}" class="">
-                                        <td>{{ $board->category }}</td>
-                                    </tr>
-                                @endforeach                        
-                            </body>
-                        </table>
-                    @endif
+                        <div id="news">
+                            <script src="{{ asset('js/news.js') }}" type="text/javascript"></script>
+                            <div id="newsfeed"></div>
+                        </div>
+
+                    </div>
+
                 </div>
             </div>
-        </div>
+
+            <div class="col-md-4">
+                <div class="">
+                    test
+                </div>
+            </div>
+
     </div>
 </div>
 @endsection

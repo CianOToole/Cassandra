@@ -166,11 +166,6 @@ Route::get('/history', function () {
 })->name('history');
 // NEWS API ROUTE ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Route::get('/news', function () {
-    return view('news');    
-})->name('news');
-
-
 Route::get('/data', function () {
     return view('data');    
 })->name('data');

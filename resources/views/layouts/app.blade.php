@@ -92,9 +92,7 @@
                                         <li class="lg-items">
                                             <a class="" href="{{route('forum.index')}}">Boards</a>
                                         </li>                                   
-                                        <li class="lg-items">
-                                            <a class="" href="{{route('news')}}">Newsfeed</a>
-                                        </li>   
+                                       
                                     </div>
                                 </div>   
 
@@ -186,8 +184,7 @@
 
                     <li class="lg-items"><a class="" href="{{route('forum.index')}}">Boards</a></li>
 
-                    <li class="lg-items"><a class="" href="{{route('news')}}">News</a></li>
-
+                    
                     <li>
                         @auth
                             @if (Auth::user()->hasRole('admin'))

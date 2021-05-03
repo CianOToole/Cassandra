@@ -10916,6 +10916,12 @@ a.text-dark:focus {
   margin: 0;
 }
 
+h4 {
+  font-family: "Open Sans", sans-serif;
+  font-size: 20px;
+  font-weight: 300;
+}
+
 nav {
   background-color: rgba(22, 22, 22, 0.9);
   height: 80px;
@@ -11273,5 +11279,60 @@ table tbody tr td.update-required {
 .blockColour {
   background: #FFFFFF;
   border-radius: 10px;
+}
+
+.media-holder {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 0;
+}
+
+.media-switch {
+  padding: 0;
+  border-bottom: 1px solid rgba(22, 22, 22, 0.15);
+  display: flex;
+}
+
+.media-switch h4 {
+  padding: 15px;
+}
+
+.board-lnk {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-gap: 5px;
+  font-size: 18px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  padding-top: 15px;
+}
+
+#newsfeed {
+  height: 285px;
+  overflow-y: auto;
+  padding-top: 5px;
+}
+
+#newsfeed li {
+  list-style-type: none;
+}
+
+.board-lnk a,
+#news #newsfeed li a {
+  font-size: 18px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  text-decoration: none;
+  color: #222;
+  padding: 8px;
+}
+
+.board-lnk a:hover,
+#news #newsfeed li a:hover {
+  color: #2081F9;
+}
+
+#news #newsfeed li {
+  padding: 7px 0;
 }
 
