@@ -90,9 +90,14 @@
 
                                     <div class="dropdown-content">
                                         <li class="lg-items">
-                                            <a class="" href="{{route('forum.index')}}">Boards</a>
-                                        </li>                                   
-                                       
+                                            @php
+                                                $dashboard = "board";
+                                            @endphp
+                                            <a class="" href="{{ route('forum.index', "board") }}">Boards</a>
+                                        </li>      
+                                        <li class="lg-items">
+                                            <a class="" href="{{ route('forum.index', "newsfeed") }}">Newsfeed</a>
+                                        </li>
                                     </div>
                                 </div>   
 
@@ -182,7 +187,9 @@
 
                     <li class="lg-items"><a class="" href="#">Watchlist</a></li>
 
-                    <li class="lg-items"><a class="" href="{{route('forum.index')}}">Boards</a></li>
+                    <li class="lg-items"><a class="" href="{{route('forum.index', "board")}}">Boards</a></li>
+                    
+                    <li class="lg-items"><a class="" href="{{route('forum.index', "newsfeed")}}">Newsfeed</a></li>
 
                     
                     <li>

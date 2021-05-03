@@ -17,10 +17,22 @@ class ForumController extends Controller{
     public function boards_index(){
         $boards = DB::table('boards')->get();
 
-        // dd($boards);
+        $admins = DB::table('users')
+            ->join('user_role', 'users.id', '=', 'user_role.user_id')
+            ->select('users.id', 'users.surname')        
+            ->where('role_id', 1)
+            ->get();
+
+        $moderators = DB::table('users')
+            ->join('user_role', 'users.id', '=', 'user_role.user_id')
+            ->select('users.id', 'users.surname')        
+            ->where('role_id', 2)
+            ->get();
 
         return view('forum.index',[
-            'boards' => $boards
+            'boards' => $boards,
+            'admins' => $admins,
+            'moderators' => $moderators,
         ]);
     }
 

@@ -85,21 +85,15 @@ Route::put('/moderator/unbanning/{id}', [ModCliController::class, 'unban'])->nam
 // FORUM CRUD ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // - BOARDS
-// - search route
-Route::get('/search', [Forum::class, 'search'])->name('forum.board');
 
 // - Admin -> boards
-Route::get('/boards', [Forum::class, 'boards_index'])->name('forum.index');
-Route::get('/boards/create', [Board::class, 'create'])->name('admin.board.create');
-Route::post ('/boards/store', [Board::class, 'store'])->name('admin.board.store');
-Route::get('/boards/clients/{id}/edit', [Board::class, 'edit'])->name('admin.board.edit');
-Route::put('/boards/clients/{id}', [Board::class, 'update'])->name('admin.board.update');
-Route::delete('/boards/clients/{id}', [Board::class, 'destroy'])->name('admin.board.destroy');
+Route::get('/forum', [Forum::class, 'boards_index'])->name('forum.index');
+Route::get('/forum/{tab}', [Forum::class, 'boards_index'])->name('forum.index');
 
 // - TOPICS
 // - search route
 Route::get('/search/{id}/topics', [Topic::class, 'search'])->name('forum.topic');
-//  - profiles
+//  - profiles with backup
 Route::get('/profile/{usid}/{brid}', [Topic::class, 'profile'])->name('profile.index');
 
 // - CRUD

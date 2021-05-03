@@ -18,5 +18,6 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/news.js', 'public/js')
     .js('resources/js/stockData.js', 'public/js')
     .js('resources/js/posts.js', 'public/js')
+    .js('resources/js/forum.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .sourceMaps();

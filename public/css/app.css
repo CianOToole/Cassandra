@@ -10920,6 +10920,7 @@ h4 {
   font-family: "Open Sans", sans-serif;
   font-size: 20px;
   font-weight: 300;
+  margin: 0;
 }
 
 nav {
@@ -11287,14 +11288,39 @@ table tbody tr td.update-required {
   padding: 0;
 }
 
-.media-switch {
+@media (max-width: 675px) {
+  .media-holder {
+    margin-bottom: 30px;
+  }
+}
+
+.list-moderators li {
+  display: inline;
+}
+
+.media-switch,
+.tab-header {
   padding: 0;
   border-bottom: 1px solid rgba(22, 22, 22, 0.15);
   display: flex;
 }
 
-.media-switch h4 {
+.tab-header {
+  font-size: 18px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
   padding: 15px;
+}
+
+.media-switch button {
+  background-color: rgba(0, 0, 0, 0);
+  border: 0;
+  padding: 15px;
+  outline: 0;
+}
+
+.media-switch button h4 {
+  margin: 0;
 }
 
 .board-lnk {
@@ -11334,5 +11360,13 @@ table tbody tr td.update-required {
 
 #news #newsfeed li {
   padding: 7px 0;
+}
+
+.toggle-out {
+  display: none;
+}
+
+.underline-tab {
+  border-bottom: 2px solid #2081F9 !important;
 }
 

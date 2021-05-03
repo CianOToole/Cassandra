@@ -23,7 +23,7 @@
                         {{$topics->onEachSide(4)->links()}}
                     </div>
                     
-                    <a href="{{ route('forum.index') }}" class="btn btn-primary">Boards</a>
+                    <a href="{{ route('forum.index', "boards") }}" class="btn btn-primary">Boards</a>
 
                     <div class="" style="float: right">                                 
                         <form class="form-inline my-2 my-lg-0" type="GET" action="{{ route('forum.topic', $board->id) }}">
