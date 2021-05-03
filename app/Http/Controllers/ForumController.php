@@ -14,25 +14,13 @@ use App\Models\Board;
 
 class ForumController extends Controller{
 
-    public function search(){
-        $search_text = $_GET['query'];
-        $board = Board::where('category', 'LIKE', '%' . $search_text . '%')->get();
-        $categories = Board::get('category')->pluck('category');
-
-        return view('forum.board',[
-            'board' => $board,
-            'categories' => $categories,
-        ]);
-    }
-
-
     public function boards_index(){
-        $boards = DB::table('boards')->orderBy('category')->paginate(8);
-        $categories = Board::orderBy('category')->get('category')->pluck('category');
+        $boards = DB::table('boards')->get();
+
+        // dd($boards);
 
         return view('forum.index',[
-            'boards' => $boards,
-            'categories' => $categories,
+            'boards' => $boards
         ]);
     }
 

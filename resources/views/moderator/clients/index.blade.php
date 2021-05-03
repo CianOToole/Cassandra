@@ -11,10 +11,7 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Clients Table</h3>
-                <a href=" {{ route('moderator.clients.create') }} " class="btn btn-primary float-right add-btn">
-                    <i class="fas fa-plus-circle"></i><span style="margin-left: 6px">Add</span>
-                </a>
-            </div>
+                </div>
 
                 <div class="card-body">
                     
@@ -82,9 +79,6 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route( 'moderator.clients.edit', $user->id) }}" class="btn btn-dark">
-                                                    <i class="fas fa-pen"></i>
-                                                </a>
                                                 <form style="display:inline-block" method="POST" action="{{ route( 'moderator.clients.destroy', $user->id) }}">
                                                     <input type="hidden" name="_method" value="DELETE">
                                                     <input type="hidden" name="_token" value=" {{ csrf_token() }} ">

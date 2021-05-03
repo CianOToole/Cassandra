@@ -44,9 +44,6 @@
                         
                     <div class="" style="float: right">
                         <a href="{{ route('admin.moderators.index') }} " class="btn btn-link">Back</a>
-                        <a href="{{ route('admin.moderators.edit', $moderator[0]->id) }} " class="btn btn-dark">
-                            <i class="fas fa-pen"></i>
-                        </a>
                         <form style="display:inline-block" method="POST" action="{{ route( 'admin.moderators.destroy', $moderator[0]->id) }}">
                             <input type="hidden" name="_method" value="DELETE">
                             <input type="hidden" name="_token" value=" {{ csrf_token() }} ">

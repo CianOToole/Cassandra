@@ -11,10 +11,7 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Moderators Table</h3>
-                <a href=" {{ route('admin.moderators.create') }} " class="btn btn-primary float-right add-btn">
-                    <i class="fas fa-plus-circle"></i><span style="margin-left: 6px">Add</span>
-                </a>
-            </div>
+                </div>
 
                 <div class="card-body">
                     
@@ -46,9 +43,6 @@
                                             <td>{{ $user->emp_number }}</td>
                                             <td>{{ $user->salary }} €</td>
                                             <td>
-                                                <a href="{{ route( 'admin.moderators.edit', $user->id) }}" class="btn btn-dark">
-                                                    <i class="fas fa-pen"></i>
-                                                </a>
                                                 <form style="display:inline-block" method="POST" action="{{ route( 'admin.moderators.destroy', $user->id) }}">
                                                     <input type="hidden" name="_method" value="DELETE">
                                                     <input type="hidden" name="_token" value=" {{ csrf_token() }} ">

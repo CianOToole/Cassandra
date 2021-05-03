@@ -11,13 +11,6 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Boards</h3>
-                    @auth
-                        @if (Auth::user()->hasRole('admin'))
-                        <a href=" {{ route('admin.board.create') }} " class="btn btn-primary float-right add-btn">  
-                            <i class="fas fa-plus-circle"></i><span style="margin-left: 6px">Add</span>
-                        </a>
-                        @endif
-                    @endauth
                 </div>
 
                 <div class="card-body">
@@ -28,47 +21,13 @@
                         <table id="table-visits" class="table table-hover">
                             <thead>
                                 <th>Category</th>
-                                @auth
-                                    @if (Auth::user()->hasRole('admin'))
-                                    <th style="float: right">Action</th>
-                                    @endif
-                                @endauth
                             </thead>
 
                             <tbody>
-                                
-                                <div class="" style="float: left">
-                                    {{$boards->onEachSide(1)->links()}}
-                                </div>
-
-                                <div class="" style="float: right">                                 
-                                    <form class="form-inline my-2 my-lg-0" type="GET" action="{{ route('forum.board') }}" style="display: inline">
-                                        <input type="search" placeholder="Search Board" name="query" id="boards" value="" class="form-control mr-sm-2">
-                                        <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
-                                    </form>
-                                </div>
 
                                 @foreach ($boards as $board)
                                     <tr data-id=" {{ $board->id }} " data-href="{{ route( 'board.topics.index', $board->id) }}" class="">
                                         <td>{{ $board->category }}</td>
-                                        @auth
-                                            @if (Auth::user()->hasRole('admin'))
-                                                <td>
-                                                    <a href="{{ route( 'admin.board.edit', $board->id) }}" class="btn btn-dark" title="Edit board" style="float: right">
-                                                        <i class="fas fa-pen"></i>
-                                                    </a>
-                                                    <div class="" style="float: right; margin-right: 3px">
-                                                        <form style="display:inline-block" method="POST" action="{{ route( 'admin.board.destroy', $board->id) }}">
-                                                            <input type="hidden" name="_method" value="DELETE">
-                                                            <input type="hidden" name="_token" value=" {{ csrf_token() }} ">
-                                                            <button type="submit" class="form-control btn btn-danger" title="Delete board">
-                                                                <i class="fas fa-trash"></i>
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </td>
-                                            @endif
-                                        @endauth
                                     </tr>
                                 @endforeach                        
                             </body>

@@ -78,9 +78,6 @@
                                     </button>
                             </form>
                         @endif
-                        <a href="{{ route('moderator.clients.edit', $client[0]->id) }} " class="btn btn-dark">
-                            <i class="fas fa-pen"></i>
-                        </a>
                         <form style="display:inline-block" method="POST" action="{{ route( 'moderator.clients.destroy', $client[0]->id) }}">
                             <input type="hidden" name="_method" value="DELETE">
                             <input type="hidden" name="_token" value=" {{ csrf_token() }} ">

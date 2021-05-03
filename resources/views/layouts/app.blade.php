@@ -27,7 +27,7 @@
         <nav>
             <div class="logo">
                 <a class="" href="{{ url('/') }}" >
-                    <img src="../../storage/Logo.svg" width="60px" height="60px"/>
+                    <img src="../../../storage/Logo.svg" width="60px" height="60px"/>
                 </a>
             </div>
 
@@ -72,8 +72,7 @@
                                             <li><a class="" href="{{ route('admin.clients.index') }}">Suscribers</a></li>
                                         @endif
                                         @if (Auth::user()->hasRole('moderator'))
-                                            <li><a class="" href="{{ route('admin.moderators.index') }}">Moderators</a></li>
-                                            <li><a class="" href="{{ route('admin.clients.index') }}">Suscribers</a></li>
+                                            <li><a class="" href="{{ route('moderator.clients.index') }}">Suscribers</a></li>
                                         @endif
                                         @endauth
                                     </div>
