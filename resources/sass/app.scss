@@ -46,6 +46,15 @@
     padding:0;
 }
 
+.flash-message{
+    position: fixed;
+    z-index: 99;
+}
+
+.alert{
+    border-left-width: 5px;
+}
+
 // NAVBAR   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 nav{
     background-color: rgb(22, 22, 22, .90); 
@@ -371,25 +380,34 @@ td{
     font-weight: 400;
 }
 
+.pin-holder button{
+    border: 0px;
+    font-size: 18px;
+    background-color: rgb(0, 0, 0, 0);
+    outline: 0;
+}
+
+.pin{
+    color: #222;
+}
+
+.unpin{
+    color: #BA182B;
+}
+
 .trend-mark{
     color: #BA182B;
 }
 
 .icon-cell{
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
 }
 
-.table-btns{
+.table-delete{
     background-color: rgb(0, 0, 0, 0);
     border: 0px;
     font-size: 18px;
-    padding-left: 15px;
-}
-.table-edit{
-    color: #2081F9;
-}
-.table-delete{
     color: rgba(186, 24, 43, .80)
 }
 

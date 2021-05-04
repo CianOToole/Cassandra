@@ -101,8 +101,6 @@ Route::get('/profile/{usid}/{brid}', [Topic::class, 'profile'])->name('profile.i
 Route::get('/board/{id}/topics', [Topic::class, 'index'])->name('board.topics.index');
 Route::get('/board/{id}/topics/create', [Topic::class, 'create'])->name('board.topics.create');
 Route::post('/board/{id}', [Topic::class, 'store'])->name('board.topics.store');
-Route::get('/board/topics/{brid}/{tpid}/edit/topic', [Topic::class, 'edit'])->name('board.topics.edit');
-Route::put('/board/topics/{brid}/{tpid}/topic', [Topic::class, 'update'])->name('board.topics.update');
 Route::delete('/board/{brid}/{tpid}/topic', [Topic::class, 'destroy'])->name('board.topics.destroy'); 
 
 // - POSTS

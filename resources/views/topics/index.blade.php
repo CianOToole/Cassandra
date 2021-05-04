@@ -52,7 +52,7 @@
                         <p>There are no topics yet</p>
                     @else
 
-                    <div class="">
+                    <div class="table-responsiveness">
 
                         <table id="table-visits" class="table table-hover">
                             
@@ -70,8 +70,22 @@
                             <tbody>
                                 @foreach ($topics as $topic)
                                     <tr data-id=" {{ $topic->id }} " data-href="{{ route( 'topic.posts.index', $topic->id) }}" class="">
+
                                         <td>
-                                            pin
+                                            <form method="POST" action="{{ route( 'pinning', [$board->id, $topic->id]) }}" class="pin-holder">                                                
+                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                <input type="hidden" name="_method" value="PUT">
+
+                                                @if($topic->isPinned == false  )
+                                                    <input class="radio-inline" type="hidden" aria-label="" name="isPinned" value="1">
+                                                    <button type="submit" class="pin" title="Pin topic" >
+                                                @else
+                                                    <input class="radio-inline" type="hidden" aria-label="" name="isPinned" value="0">
+                                                    <button type="submit" class="unpin" title="Unpin topic">
+                                                @endif                                                        
+                                                    <i class="fas fa-thumbtack" ></i>
+                                                </button>
+                                            </form>
                                         </td>
                                     
                                         @if($topic->replies >= 10)
@@ -89,54 +103,25 @@
                                                 
                                                 <div class="icon-cell">
                                                     @auth
-                                                        @if(Auth::user()->id == $topic->user_id)
-                                                            <a href="{{ route( 'board.topics.edit', [$board->id, $topic->id]) }}" class="table-btns table-edit" title="Edit topic">
-                                                                <i class="fas fa-pen"></i>
-                                                            </a>
-                                                        @endif
-                                                    @endauth
-
-                                                    @auth
                                                         <form  method="POST" action="{{ route( 'board.topics.destroy', [$board->id, $topic->id]) }}">
                                                             <input type="hidden" name="_method" value="DELETE">
                                                             <input type="hidden" name="_token" value=" {{ csrf_token() }} ">
                                                             
-                                                            <button type="submit" class="table-btns table-delete" title="Delete Topic">
+                                                            <button type="submit" class="table-delete" title="Delete Topic">
                                                                 <i class="fas fa-trash"></i>
                                                             </button>
                                                         </form>
                                                     @endauth
                                                 </div>
-
-                                                {{-- @if($topic->isPinned == false  )
-                                                    <form method="POST" action="{{ route( 'pinning', [$board->id, $topic->id]) }}" style="float: right">                                                
-                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                        <input type="hidden" name="_method" value="PUT">
-                                                        <input class="radio-inline" type="hidden" aria-label="" name="isPinned" value="1">
-                                                        <button type="submit" class="btn btn-outline-secondary" title="Pin topic" >
-                                                            <i class="fas fa-thumbtack" ></i>
-                                                        </button>
-                                                    </form>
-                                                @else
-                                                    <form method="POST" action="{{ route( 'pinning', [$board->id, $topic->id]) }}" style="float: right">     
-                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                        <input type="hidden" name="_method" value="PUT">
-                                                        <input class="radio-inline" type="hidden" aria-label="" name="isPinned" value="0">
-                                                        <button type="submit" class="btn btn-secondary" title="Unpin topic">
-                                                            <i class="fas fa-thumbtack" ></i>
-                                                        </button>
-                                                    </form>
-                                                @endif --}}
                                             </td>                                        
                                         @endif
+
                                     </tr>
                                 @endforeach                        
                             </tbody>
                             
-
                         </table>
                         
-
                     </div>
                     @endif     
                     {{-- <div>

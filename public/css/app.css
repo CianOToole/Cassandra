@@ -10941,6 +10941,15 @@ h6 {
   padding: 0;
 }
 
+.flash-message {
+  position: fixed;
+  z-index: 99;
+}
+
+.alert {
+  border-left-width: 5px;
+}
+
 nav {
   background-color: rgba(22, 22, 22, 0.9);
   height: 80px;
@@ -11277,27 +11286,34 @@ td {
   font-weight: 400;
 }
 
+.pin-holder button {
+  border: 0px;
+  font-size: 18px;
+  background-color: rgba(0, 0, 0, 0);
+  outline: 0;
+}
+
+.pin {
+  color: #222;
+}
+
+.unpin {
+  color: #BA182B;
+}
+
 .trend-mark {
   color: #BA182B;
 }
 
 .icon-cell {
   display: flex;
-  justify-content: flex-end;
-}
-
-.table-btns {
-  background-color: rgba(0, 0, 0, 0);
-  border: 0px;
-  font-size: 18px;
-  padding-left: 15px;
-}
-
-.table-edit {
-  color: #2081F9;
+  justify-content: center;
 }
 
 .table-delete {
+  background-color: rgba(0, 0, 0, 0);
+  border: 0px;
+  font-size: 18px;
   color: rgba(186, 24, 43, 0.8);
 }
 

@@ -112,28 +112,13 @@ class TopicController extends Controller{
     }
 
 
-    public function edit($board_id, $topic_id){
-        $board = Board::where('id', $board_id)->firstOrFail();
-        $topic = Topic::where('id', $topic_id)->firstOrFail();
-        
-        return view('topics.edit',[
-            'board' => $board,
-            'topic' => $topic,
-        ]);
+    public function edit(){
+
     }
 
 
-    public function update(Request $request, $board_id, $topic_id){
-        $request->validate([
-            'title' => ['required', 'string', 'max:50']
-        ]);
-        
-        $topic = Topic::findOrFail($topic_id);
-        $topic->title = $request->input('title');
-        $topic->save();
+    public function update(){
 
-        $request->session()->flash('info', 'Topic edited successfully!');
-        return redirect()->route('board.topics.index', $board_id);
     }
 
 
