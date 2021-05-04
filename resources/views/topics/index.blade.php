@@ -1,49 +1,69 @@
 @extends('layouts.app')
 
 @section('content')
+
+<p id="alert-message" class="alert collapse"></p>
+
 <div class="container">
     <div class="row">
 
-        <div class="col-md-12">
+        <div class="col-md-8 ">
 
-            <p id="alert-message" class="alert collapse"></p>
+            <div class="media-holder">
 
-            <div class="card">
+                {{-- TABLE HEADED --}}
 
-                <div class="card-header">
-                    <h3 class="card-title">{{$board->category}}</h3>
-                    <a href=" {{ route('board.topics.create', $board->id) }} " class="btn btn-primary float-right add-btn">  
-                        <i class="fas fa-plus-circle"></i><span style="margin-left: 6px">Add</span>
-                    </a>                        
+                <div class="col-12 tab-header">
+
+                    <h4 class="">{{$board->category}}</h4>
+
                 </div>
 
-                <div class="card-body">
+                {{-- SEARCH BAR --}}
 
-                    <div class="" style="float: left">
-                        {{$topics->onEachSide(4)->links()}}
-                    </div>
-                    
-                    <a href="{{ route('forum.index', "boards") }}" class="btn btn-primary">Boards</a>
+                <div class="col-12 table-search-bar">
+                    <div class="row">
 
-                    <div class="" style="float: right">                                 
-                        <form class="form-inline my-2 my-lg-0" type="GET" action="{{ route('forum.topic', $board->id) }}">
-                            <input type="search" placeholder="Search Topic" name="query" id="boards" value="" class="form-control mr-sm-2">
-                            <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
-                        </form>
+                        <div class="col-lg-7" style="padding-right: 0;">
+                            <form class="search-topic" type="GET" action="{{ route('forum.topic', $board->id) }}">
+                                <input type="search" placeholder="Search topic" class="topic-search-input" name="query" id="boards" value="" >
+                            </form>
+                        </div>
+
+                        <div class="col-lg-5 table-header-btns" style="padding-left: 0;">
+                            <h6>
+                                <a href=" {{ route('board.topics.create', $board->id) }} " class="form-btn">  
+                                    <i class="fas fa-plus-circle"></i><span style="margin-left: 6px">New topic</span>
+                                </a>
+                            </h6>    
+                            <h6>
+                                <a href="{{ route('forum.index', "boards") }}" class="form-btn-alt">Boards</a>
+                            </h6>
+                        </div>
+
                     </div>
-                    
+                </div>
+
+                {{-- TABLE BODY --}}
+
+                <div class="col-12">
+
                     @if(count($topics) === 0)
                         <p>There are no topics yet</p>
                     @else
+
+                    <div class="">
+
                         <table id="table-visits" class="table table-hover">
+                            
                             <thead>
                                 <th></th>
                                 <th>Title</th>
                                 <th>Original poster</th>
-                                <th>Number of Replies</th>
+                                <th>Replies</th>
                                 <th>Last Message</th>
                                 @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('moderator'))
-                                    <th style="float: right">Action</th>
+                                    <th >Action</th>
                                 @endif
                             </thead>
 
@@ -58,6 +78,7 @@
                                                 <i class="fas fa-fire" style="color: rgb(224, 34, 34)"></i>
                                             @endif
                                         </td>
+                                        
                                         <td>{{ $topic->title }}</td>
                                         <td><a href="{{ route( 'profile.index', [$topic->user_id, $board->id] ) }}">{{ $topic->surname }}</a></td>
                                         <td>{{ $topic->replies }}</td>
@@ -65,27 +86,29 @@
                                         
                                         @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('moderator'))
                                             <td>
-                                                @auth
-                                                    @if(Auth::user()->id == $topic->user_id)
-                                                        <a href="{{ route( 'board.topics.edit', [$board->id, $topic->id]) }}" class="btn btn-dark" title="Edit topic" style="float: right">
-                                                            <i class="fas fa-pen"></i>
-                                                        </a>
-                                                    @endif
-                                                @endauth
+                                                
+                                                <div class="icon-cell">
+                                                    @auth
+                                                        @if(Auth::user()->id == $topic->user_id)
+                                                            <a href="{{ route( 'board.topics.edit', [$board->id, $topic->id]) }}" class="table-btns table-edit" title="Edit topic">
+                                                                <i class="fas fa-pen"></i>
+                                                            </a>
+                                                        @endif
+                                                    @endauth
 
-                                                @auth
-                                                    <div class="" style="float: right; margin-right: 3px">
-                                                        <form style="display:inline-block" method="POST" action="{{ route( 'board.topics.destroy', [$board->id, $topic->id]) }}">
+                                                    @auth
+                                                        <form  method="POST" action="{{ route( 'board.topics.destroy', [$board->id, $topic->id]) }}">
                                                             <input type="hidden" name="_method" value="DELETE">
                                                             <input type="hidden" name="_token" value=" {{ csrf_token() }} ">
-                                                            <button type="submit" class="form-control btn btn-danger" title="Delete Topic">
+                                                            
+                                                            <button type="submit" class="table-btns table-delete" title="Delete Topic">
                                                                 <i class="fas fa-trash"></i>
                                                             </button>
                                                         </form>
-                                                    </div>
-                                                @endauth
+                                                    @endauth
+                                                </div>
 
-                                                @if($topic->isPinned == false  )
+                                                {{-- @if($topic->isPinned == false  )
                                                     <form method="POST" action="{{ route( 'pinning', [$board->id, $topic->id]) }}" style="float: right">                                                
                                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                         <input type="hidden" name="_method" value="PUT">
@@ -103,17 +126,62 @@
                                                             <i class="fas fa-thumbtack" ></i>
                                                         </button>
                                                     </form>
-                                                @endif
+                                                @endif --}}
                                             </td>                                        
                                         @endif
                                     </tr>
                                 @endforeach                        
                             </tbody>
+                            
+
                         </table>
-                    @endif
+                        
+
+                    </div>
+                    @endif     
+                    <!--<div class="" >
+                        {{$topics->onEachSide(4)->links()}}
+                    </div>-->               
+
+                </div>
+
+            </div>
+            
+        </div>
+
+        {{-- PROJECT MANAGMENT --}}
+
+        <div class="col-md-4">
+            <div class="media-holder">
+                <div class="col-12 tab-header">
+                    <h4>Forum Management</h4>
+                </div>
+
+                <div class="col-12 tab-cnt">
+
+                    <ul class="list-moderators">
+                        <li class="list-first-child">Admins:</li>
+                        @foreach ($admins as $admin)
+                            <li class="list-admins">
+                                <a href=" {{ route('forumManagers', $admin->id) }} "> {{ $admin->surname }} </a>
+                            </li>
+                        @endforeach  
+                    </ul>
+
+                    <ul class="list-moderators" style="padding-top: 15px">
+                        <li class="list-first-child">Moderators:</li>
+                        @foreach ($moderators as $moderator)
+                        <li class="list-mods">
+                            <a href=" {{ route('forumManagers', $moderator->id) }} "> {{ $moderator->surname }} </a>
+                        </li>
+                        @endforeach  
+                    </ul>
+
                 </div>
             </div>
+
         </div>
+
     </div>
 </div>
 @endsection

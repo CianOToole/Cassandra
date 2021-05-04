@@ -4,22 +4,19 @@
 <div class="container">
     <div class="row">
 
-<script>
-
-    </script>
             <div class="col-md-8 ">
                 <div class="media-holder">
 
                     <div class="col-12 media-switch">
-                        <button id="boardTab">
+                        <button id="boardTab" class="border-tab-btn">
                             <h4>Boards</h4>
                         </button>
-                        <button id="newsfeedTab">
+                        <button id="newsfeedTab" class="border-tab-btn">
                             <h4>Newsfeed</h4>
                         </button>
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-12 news-holder">
 
                         <div id="boards" class="board-lnk">
                             @foreach ($boards as $board)
@@ -36,6 +33,8 @@
 
                 </div>
             </div>
+
+            {{-- PROJECT MANAGMENT --}}
 
             <div class="col-md-4">
                 <div class="media-holder">
@@ -68,8 +67,6 @@
 
             </div>
             
-
-
     </div>
 </div>
 <script src="{{ asset('js/forum.js') }}" type="text/javascript"></script>

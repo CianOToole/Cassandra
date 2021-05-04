@@ -22,7 +22,7 @@
 
                 <div class="card-body">    
                     
-                    <a href="{{ route('forum.index') }}" class="btn btn-primary">Boards</a>
+                    <a href="{{ route('forum.index', "board") }}" class="btn btn-primary">Boards</a>
                     <a href="{{ route('board.topics.index', $board->id) }}" class="btn btn-outline-primary">Back</a>
 
                     <div class="" style="float: right">                                 
