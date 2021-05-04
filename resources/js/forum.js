@@ -8,6 +8,9 @@ document.addEventListener("DOMContentLoaded", () => {
     } else if(lastSegment == "newsfeed"){
         document.getElementById("boards").classList.add("toggle-out");
         document.getElementById("newsfeedTab").classList.add("underline-tab");
+    } else {
+        document.getElementById("news").classList.add("toggle-out");
+        document.getElementById("boardTab").classList.add("underline-tab");
     }
 });
 

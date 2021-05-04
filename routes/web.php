@@ -89,10 +89,11 @@ Route::put('/moderator/unbanning/{id}', [ModCliController::class, 'unban'])->nam
 // - Admin -> boards
 Route::get('/forum', [Forum::class, 'boards_index'])->name('forum.index');
 Route::get('/forum/{tab}', [Forum::class, 'boards_index'])->name('forum.index');
+Route::get('/manager/{userId}', [Forum::class, 'forumManagers'])->name('forumManagers');
 
 // - TOPICS
 // - search route
-Route::get('/search/{id}/topics', [Topic::class, 'search'])->name('forum.topic');
+Route::get('/search/{id}/topics', [Topic::class, 'search'])->name('forum.topic');  
 //  - profiles with backup
 Route::get('/profile/{usid}/{brid}', [Topic::class, 'profile'])->name('profile.index');
 

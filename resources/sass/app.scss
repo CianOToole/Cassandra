@@ -28,6 +28,13 @@
     margin: 0;
   }
 
+  h5{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0;
+  }
+
 // NAVBAR   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 nav{
     background-color: rgb(22, 22, 22, .90); 
@@ -384,7 +391,7 @@ table tbody tr td.update-required {
 }
 
 
-// BOARD & NEWSFEED INDEX PAGE  ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// FORUM INDEX PAGE  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 .media-holder{
     background-color: #fff;
@@ -394,10 +401,6 @@ table tbody tr td.update-required {
 
 @media (max-width: 675px) { 
     .media-holder {margin-bottom: 30px;}
-}
-
-.list-moderators li{
-    display: inline;
 }
 
 .media-switch,
@@ -412,6 +415,10 @@ table tbody tr td.update-required {
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
     padding: 15px;
+}
+
+.underline-tab{
+    border-bottom: 2px solid #2081F9 !important;
 }
 
 .media-switch button {
@@ -466,7 +473,41 @@ table tbody tr td.update-required {
     display: none;
 }
 
-.underline-tab{
-    border-bottom: 2px solid #2081F9 !important;
+// PROJECT MANAGEMENT TAB  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+.tab-cnt{
+    padding: 15px;
 }
 
+.list-moderators {
+    margin: 0;
+}
+
+.list-moderators li{
+    display: inline;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    margin: 0;
+}
+
+.list-first-child{
+    font-size: 18px;
+}
+
+.list-moderators li a{
+    font-size: 14px;
+    padding: 0px 2px;
+    text-decoration: none;
+}
+
+.list-admins a{
+    color: #BA182B;
+}
+
+.list-mods a{
+    color: #2081F9;
+}
+
+.list-moderators li a:hover{
+    color: #222;
+}

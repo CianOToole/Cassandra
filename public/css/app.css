@@ -10923,6 +10923,13 @@ h4 {
   margin: 0;
 }
 
+h5 {
+  font-family: "Open Sans", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0;
+}
+
 nav {
   background-color: rgba(22, 22, 22, 0.9);
   height: 80px;
@@ -11294,10 +11301,6 @@ table tbody tr td.update-required {
   }
 }
 
-.list-moderators li {
-  display: inline;
-}
-
 .media-switch,
 .tab-header {
   padding: 0;
@@ -11310,6 +11313,10 @@ table tbody tr td.update-required {
   font-family: "Open Sans", sans-serif;
   font-weight: 400;
   padding: 15px;
+}
+
+.underline-tab {
+  border-bottom: 2px solid #2081F9 !important;
 }
 
 .media-switch button {
@@ -11366,7 +11373,40 @@ table tbody tr td.update-required {
   display: none;
 }
 
-.underline-tab {
-  border-bottom: 2px solid #2081F9 !important;
+.tab-cnt {
+  padding: 15px;
+}
+
+.list-moderators {
+  margin: 0;
+}
+
+.list-moderators li {
+  display: inline;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  margin: 0;
+}
+
+.list-first-child {
+  font-size: 18px;
+}
+
+.list-moderators li a {
+  font-size: 14px;
+  padding: 0px 2px;
+  text-decoration: none;
+}
+
+.list-admins a {
+  color: #BA182B;
+}
+
+.list-mods a {
+  color: #2081F9;
+}
+
+.list-moderators li a:hover {
+  color: #222;
 }
 

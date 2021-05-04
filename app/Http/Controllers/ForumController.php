@@ -36,6 +36,14 @@ class ForumController extends Controller{
         ]);
     }
 
+    public function forumManagers($id){
+        $user = User::where('id', '=', $id)->get();
+
+        return view('forumManagers',[
+            'user' => $user,
+        ]);
+    }
+
     public function create() {
 
     }

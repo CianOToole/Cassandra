@@ -43,21 +43,26 @@
                         <h4>Forum Management</h4>
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-12 tab-cnt">
+
                         <ul class="list-moderators">
-                            <li>Admins:</li>
+                            <li class="list-first-child">Admins:</li>
                             @foreach ($admins as $admin)
-                                <li>
-                                    <a href=" {{ route('profile.indexOne', $admin->id) }} "> {{ $admin->surname }} </a>
+                                <li class="list-admins">
+                                    <a href=" {{ route('forumManagers', $admin->id) }} "> {{ $admin->surname }} </a>
                                 </li>
                             @endforeach  
                         </ul>
-                        <ul class="list-moderators">
-                            <li>Moderators:</li>
+
+                        <ul class="list-moderators" style="padding-top: 15px">
+                            <li class="list-first-child">Moderators:</li>
                             @foreach ($moderators as $moderator)
-                                <li>{{ $moderator->id }}</li>
+                            <li class="list-mods">
+                                <a href=" {{ route('forumManagers', $moderator->id) }} "> {{ $moderator->surname }} </a>
+                            </li>
                             @endforeach  
                         </ul>
+
                     </div>
                 </div>
 
