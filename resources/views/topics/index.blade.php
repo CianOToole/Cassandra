@@ -71,15 +71,15 @@
                                 @foreach ($topics as $topic)
                                     <tr data-id=" {{ $topic->id }} " data-href="{{ route( 'topic.posts.index', $topic->id) }}" class="">
                                         <td>
-                                            @if($topic->isPinned == true)
-                                                <i class="fas fa-check-circle" style="color: rgb(224, 34, 34)"></i>
-                                            @endif
-                                            @if($topic->replies >= 10)
-                                                <i class="fas fa-fire" style="color: rgb(224, 34, 34)"></i>
-                                            @endif
+                                            pin
                                         </td>
+                                    
+                                        @if($topic->replies >= 10)
+                                            <td class="trend-mark">{{ $topic->title }}</td>
+                                        @else
+                                            <td class="">{{ $topic->title }}</td>
+                                        @endif
                                         
-                                        <td>{{ $topic->title }}</td>
                                         <td><a href="{{ route( 'profile.index', [$topic->user_id, $board->id] ) }}">{{ $topic->surname }}</a></td>
                                         <td>{{ $topic->replies }}</td>
                                         <td>{{ substr($topic->updated_at, 11,18) }}</td>
@@ -139,10 +139,9 @@
 
                     </div>
                     @endif     
-                    <!--<div class="" >
+                    {{-- <div>
                         {{$topics->onEachSide(4)->links()}}
-                    </div>-->               
-
+                    </div> --}}
                 </div>
 
             </div>

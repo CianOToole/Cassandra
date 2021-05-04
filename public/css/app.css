@@ -11277,6 +11277,10 @@ td {
   font-weight: 400;
 }
 
+.trend-mark {
+  color: #BA182B;
+}
+
 .icon-cell {
   display: flex;
   justify-content: flex-end;

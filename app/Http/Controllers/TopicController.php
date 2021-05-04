@@ -43,29 +43,14 @@ class TopicController extends Controller{
             ->where('board_id', $id)       
             ->orderByDesc('isPinned')
             ->orderByDesc('updated_at')
-            ->join('users', 'topics.user_id', '=', 'users.id')
-            ->join('posts', 'topics.user_id', '=', 'posts.topic_id')               
-            ->select('users.surname', 'topics.*', DB::raw("COUNT('posts.id') as replies"))  
+            ->join('users', 'topics.user_id', '=', 'users.id')       
+            ->select('users.surname', 'topics.*')
+            ->join('posts', 'topics.id', '=', 'posts.topic_id')  
+            ->selectRaw('count(posts.topic_id) as replies')
             ->groupBy('id')
             ->distinct()
             ->paginate(10);
 
-            $topic = DB::table('topics')
-            ->where('board_id', $id)       
-            ->orderByDesc('isPinned')
-            ->orderByDesc('updated_at')
-            ->join('users', 'topics.user_id', '=', 'users.id')       
-            ->select('users.surname', 'topics.*')
-            ->join('posts', 'topics.user_id', '=', 'posts.topic_id')  
-            ->selectRaw('count(topics.id) as replies')
-            ->groupBy('id')
-            ->get();  
-            
-            
-
-
-
-           print_r($topic);
 
         $admins = DB::table('users')
         ->join('user_role', 'users.id', '=', 'user_role.user_id')
