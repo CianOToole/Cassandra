@@ -52,6 +52,16 @@
                             $quote_id = $post->id;
                             $edit_id = $post->id;
                             $post_id = $post->id;
+
+                            if($post->experience == true){
+                                $border = "experienced";
+                            }else if($post->role == 1){
+                                $border = "admin";
+                            }else if($post->role == 2){
+                                $border = "moderator";
+                            }else{
+                                $border = null;
+                            }
                         @endphp
 
                         <div class="row">
@@ -60,15 +70,18 @@
                                 <div class="{{ $switch_bcg }} post">
 
                                     <div class="post-header">
-                                        @if($post->avatar == "default-pp.png")
-                                            <figure>
-                                                <img class="post-img" src=" {{ asset('img/default.png') }}">
-                                            </figure>
-                                        @else
-                                            <figure>
-                                                <img class="post-img" src=" {{ asset('storage/avatar/' . $post->avatar) }}">
-                                            </figure>
-                                        @endif
+
+                                        <figure>
+                                            @if($post->avatar == "default-pp.png")
+                                                <img class="post-img {{ $border }}-border" src=" {{ asset('img/default.png') }}">
+                                            @else
+                                                <img class="post-img {{ $border }}-border" src=" {{ asset('storage/avatar/' . $post->avatar) }}">
+                                            @endif
+                                        </figure>
+
+                                        {{-- {{ $post->role }}
+                                        {{ $post->experience }}
+                                        {{ $border }} --}}
 
                                         <div class="post-data">
                                             <div class=" ">
@@ -184,7 +197,7 @@
     <script type="text/javascript">
         function quote(id){
             var posts_cnt = document.getElementsByClassName(id);
-            var text = posts_cnt[0].textContent.italics();        
+            var text = posts_cnt[0].textContent;        
             console.log(text);
             var post_txt = document.getElementById('post_txt');
             post_txt.innerHTML += text;

@@ -20,10 +20,12 @@ class PostController extends Controller
 
         $posts = DB::table('posts')
             ->where('topic_id', $topic_id)
-            ->join('users', 'posts.user_id', '=', 'users.id')    
+            ->join('users', 'posts.user_id', '=', 'users.id') 
+            ->join('user_role', 'users.id', '=', 'user_role.user_id')   
+            ->join('roles', 'user_role.role_id', '=', 'roles.id')   
             ->leftJoin('employees', 'users.id', '=', 'employees.user_id')                   
             ->leftJoin('clients', 'users.id', '=', 'clients.user_id')
-            ->select('posts.*', 'users.surname', 'users.avatar',  'employees.name as emp_name', 'clients.name as clt_name') 
+            ->select('posts.*', 'users.surname', 'users.avatar',  'employees.name as emp_name', 'clients.name as clt_name', 'clients.isExperienced as experience', 'clients.isBanned as banned', 'roles.id as role')
             ->orderBy('updated_at')
             ->paginate(10);
 
