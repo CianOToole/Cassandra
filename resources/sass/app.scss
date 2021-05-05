@@ -59,6 +59,7 @@
 
 .alert{
     border-left-width: 5px;
+    border-right-width: 5px;
 }
 
 .pagination-holder {
@@ -494,7 +495,7 @@ table tbody tr td.update-required {
 }
 
 .blue-bck {
-    background-color: rgba(12, 99, 214, 0.342);
+    background-color: rgba(12, 99, 214, 0.10);
 }
 
 .bite {
@@ -695,14 +696,26 @@ table tbody tr td.update-required {
 
 // POSTS THREAD  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 .post-hdr-btn{padding: 15px 0px;}
-.thread-brd{border-top: 1px solid rgb(22, 22, 22, .25);}
 
 .thread{
     // padding-top: 30px;
 }
 
-.post-header{
+.post{
+    margin: 7.5px 0px;
+    border: 1px solid rgba(22, 22, 22, .10);
+}
 
+.post-header{
+    display: grid;
+    grid-template-columns: 100px repeat(2, 1fr);
+}
+
+.post-header figure{
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    padding: 15px 0px;
 }
 
 .post-img{
@@ -710,4 +723,118 @@ table tbody tr td.update-required {
     height: 65px;
     object-fit: fill;
     border-radius: 3px;
+    margin: 0;
+    border: 1px solid rgba(22, 22, 22, .10);
+}
+
+.post-data{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.post-data div p{
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+}
+
+.post-surname p{
+    padding-bottom: 15px;
+    font-size: 18px;
+}
+
+.post-date p{
+    padding-top: 15px;
+    font-size: 11px;
+    color: rgb(22, 22, 22, .60);
+}
+
+.post-btns{
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px;
+    outline: 0;
+}
+
+.post-btns div,
+.post-btns form{
+    padding-left: 10px;
+}
+
+.quote-btn button{
+    background-color: rgb(0, 0, 0, 0);
+    border: 0px;
+    font-size: 18px;
+    color: rgba(22, 22, 22, .75)
+}
+
+.quote-btn button:hover{
+    color: rgba(22, 22, 22, 1)
+}
+
+.edit-btn button{
+    background-color: rgb(0, 0, 0, 0);
+    border: 0px;
+    font-size: 18px;
+    color: rgba(32, 129, 249, .80)
+}
+
+.edit-btn button:hover{
+    color: #2081F9;
+}
+
+.post-cnt{
+    border-top: 1px solid rgba(22, 22, 22, .15);
+    padding: 15px 15px 0px 15px;
+    margin: 0px 15px;
+}
+
+.text-post-cnt{
+    padding-top: 10px;
+}
+
+.txt-post{
+    width: 100%;
+    padding: 5px;
+    border: 1px solid rgba(22, 22, 22, .15);
+}
+
+.txt-post:focus{
+    border: 1px solid rgba(22, 22, 22, .50);
+}
+
+.post-btn{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.post-btn button{
+    border: 0px;
+    margin-bottom: 15px;
+}
+
+@media (max-width: 675px) { 
+    .responsive-thread{
+        padding: 0px;
+    }
+    .post-btns{
+        justify-content: flex-end;
+        padding-left: 5px;
+    }
+    .post-header figure{
+        justify-content: flex-start;
+        padding-left: 15px;
+    }
+    .post-cnt{
+        border-top: 1px solid rgba(22, 22, 22, .15);
+        padding: 5px 5px 0px 5px;
+        margin: 0px 5px;
+    }
+    .back-btn{
+        margin: 0;
+    }
+    .text-post-cnt{
+        padding: 10px 0px;
+    }
 }

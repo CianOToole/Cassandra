@@ -6,7 +6,7 @@
     $count = 1;   
 @endphp
 
-<div class="container-fluid">
+<div class="container">
     <div class="row">
 
         <div class="col-md-8">
@@ -16,7 +16,7 @@
                 {{-- TABLE HEADED --}}
 
                 <div class="col-12 tab-header">
-                    <h3>{{$topic_title[0]}}</h3>
+                    <h4>{{$topic_title[0]}}</h4>
                 </div>
 
                 {{-- BUTTON --}}
@@ -38,7 +38,7 @@
 
                 <div class="col-12 thread">
 
-                    <div class="thread-brd"></div>
+                    {{-- <div class="thread-brd"></div> --}}
 
                     @foreach ($posts as $post)
 
@@ -54,24 +54,15 @@
                             $post_id = $post->id;
                         @endphp
 
-                        <div class="row" >
+                        <div class="row">
 
-                            {{-- <div class="col-12" >
-                                <div class="" style="float: right"> --}}
-
-                                    
-
-
-                                {{-- </div>
-                            </div> --}}
-
-                            <div class="col-12">
-                                <div class="{{ $switch_bcg }}">
+                            <div class="col-12 responsive-thread">
+                                <div class="{{ $switch_bcg }} post">
 
                                     <div class="post-header">
-                                        @if($post->avatar = "default-pp.png")
+                                        @if($post->avatar == "default-pp.png")
                                             <figure>
-                                                <img class="post-img" src=" {{ asset('img/EU.jpg') }}">
+                                                <img class="post-img" src=" {{ asset('img/default.png') }}">
                                             </figure>
                                         @else
                                             <figure>
@@ -79,34 +70,41 @@
                                             </figure>
                                         @endif
 
-                                        <div>
-                                            <p>{{ ($post->emp_name != null) ?  $post->emp_name : $post->clt_name}}  {{$post->surname}}</p>                                 
+                                        <div class="post-data">
+                                            <div class=" ">
+                                                <p>{{ ($post->emp_name != null) ?  $post->emp_name : $post->clt_name}}  {{$post->surname}}</p>
+                                            </div>   
+                                            <div class="post-date">
+                                                <p>{{$date}}</p>        
+                                            </div>                         
                                         </div>    
 
-                                        <div class="post-date">
-                                            <p>{{$date}}</p>
-                                        </div>
-
-                                        <button id="{{ $quote_id }}"  onClick="quote(this.id)" class="btn btn-primary">
-                                            <i class="fas fa-quote-right"></i>
-                                        </button>
-
-                                        @if($user = Auth::user()->id == $post->user_id)        
-
-                                            <button id="{{$edit_id}}" onClick="editPost(this.id, this.formAction)" class="btn btn-dark btn-{{$edit_id}}" 
-                                            formAction="{{ route( 'topic.posts.update', [$topic_id, $post_id ]) }}" >
-                                                <i class="fas fa-pen"></i>
-                                            </button>         
-
-                                            <form style="display:inline-block" method="POST" action="{{ route( 'topic.posts.destroy', [$topic_id, $post->id]) }}">
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                <input type="hidden" name="_token" value=" {{ csrf_token() }} ">                                        
-                                                <button type="submit" class="form-control btn btn-danger" title="Delete post">
-                                                    <i class="fas fa-trash"></i>
+                                        <div class="post-btns">
+                                            <div class="quote-btn">
+                                                <button id="{{ $quote_id }}"  onClick="quote(this.id)" class="" title="Quote post">
+                                                    <i class="fas fa-quote-right"></i>
                                                 </button>
-                                            </form>
-                                            
-                                        @endif
+                                            </div>
+
+                                            @if($user = Auth::user()->id == $post->user_id)        
+
+                                                <div class="edit-btn">
+                                                    <button id="{{$edit_id}}" onClick="editPost(this.id, this.formAction)" class="" 
+                                                    formAction="{{ route( 'topic.posts.update', [$topic_id, $post_id ]) }}" >
+                                                        <i class="fas fa-pen"></i>
+                                                    </button>         
+                                                </div>
+
+                                                <form method="POST" action="{{ route( 'topic.posts.destroy', [$topic_id, $post->id]) }}">
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <input type="hidden" name="_token" value=" {{ csrf_token() }} ">                                        
+                                                    <button type="submit" class="table-delete" title="Delete post">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                                
+                                            @endif
+                                        </div>
 
                                     </div>
 
@@ -126,20 +124,22 @@
                     @endforeach
                 </div>
 
-                {{-- <div class="">
+                <div class="col-12 text-post-cnt">
                     <form id="form_post" method="POST" action="{{ route( 'topic.posts.store', [$topic_id]) }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" >
                         <input id="form_post_put" type="hidden" name="_method" value="">
                         <div class="form-group">
-                        <textarea type="text" class="form-control" id="post_txt" name="post" placeholder="Post what you have to say, nobody is here to judge you.."></textarea>
+                            <textarea type="text" class="txt-post" id="post_txt" name="post" placeholder="Post what you have to say, nobody is here to judge you.."></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Post</button>
+                        <h6 class="post-btn">
+                            <button type="submit" class="form-btn-alt">Post</button>
+                        </h6>
                     </form>
-                </div> --}}
+                </div>
 
-                {{-- <div class="pagination-holder">
+                <div class="pagination-holder">
                     {{$posts->onEachSide(4)->links()}}
-                </div> --}}
+                </div>
             </div>
 
         </div>
@@ -184,7 +184,7 @@
     <script type="text/javascript">
         function quote(id){
             var posts_cnt = document.getElementsByClassName(id);
-            var text = posts_cnt[0].textContent;        
+            var text = posts_cnt[0].textContent.italics();        
             console.log(text);
             var post_txt = document.getElementById('post_txt');
             post_txt.innerHTML += text;
