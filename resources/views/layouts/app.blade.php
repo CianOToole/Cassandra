@@ -226,9 +226,8 @@
         <main id="mainContainer"class="py-4">
             <div class="container">
                 <div class="row-justify-content-center">
-                    <div class="col-12">
-                        <b></b>
-                        <div class="flash-message">
+                    <div class="col-12 alert-group">
+                        <div class="flash-message col-11">
                             @foreach (['success', 'info', 'danger', 'warning'] as $key)
                                 @if(Session::has($key))
                                     <div class="flash alert alert-{{$key}}">{{ Session::get($key) }}
@@ -237,7 +236,6 @@
                                 @endif                                                            
                             @endforeach    
                         </div>
-                        <b></b>
                     </div>
                 </div>
             </div>
@@ -249,7 +247,7 @@
 
 <script src="https://kit.fontawesome.com/b0365a380f.js" crossorigin="anonymous"></script>
 <script>
-    setTimeout(function(){ $('.flash').alert('close') }, 300000); 
+    setTimeout(function(){ $('.flash').alert('close') }, 3000); 
 </script>
 
 <script src="posts.js"></script>

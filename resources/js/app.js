@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // TABLE SORTING ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 $(function() {
     $('table')
-        .on('click', 'th', function() {
+        .on('click', ".sort", function() {
             var index = $(this).index(),
                 rows = [],
                 thClass = $(this).hasClass('asc') ? 'desc' : 'asc';

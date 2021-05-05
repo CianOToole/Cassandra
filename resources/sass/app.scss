@@ -46,13 +46,33 @@
     padding:0;
 }
 
+.alert-group{
+    display: flex;
+    justify-content: space-around;
+}
+
 .flash-message{
     position: fixed;
     z-index: 99;
+    padding: 0px 10px;
 }
 
 .alert{
     border-left-width: 5px;
+}
+
+.pagination-holder {
+    display: flex;
+    justify-content: space-around;
+    height: 60px;
+}
+
+.pagination-holder nav{
+    background-color: rgb(0, 0, 0, 0);
+}
+
+.pagination{
+    margin: 0;
 }
 
 // NAVBAR   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -370,7 +390,7 @@ table thead:hover {
 
 th{
     font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
 }
 
@@ -387,17 +407,29 @@ td{
     outline: 0;
 }
 
-.pin{
-    color: #222;
+.unpin-alt {
+    margin: 0px;
 }
 
-.unpin{
+.unpin-alt i{
+    font-size: 18px;
     color: #BA182B;
 }
 
-.trend-mark{
+.unpin-alt-2 i{
+    font-size: 18px;
     color: #BA182B;
 }
+
+.pin{color: rgba(0, 2, 34, .5);}
+
+.pin:hover{color: #222;}
+
+.unpin{color: rgba(186, 24, 43, .75);}
+
+.unpin:hover{color: #BA182B;}
+
+.trend-mark{color: #BA182B;}
 
 .icon-cell{
     display: flex;
@@ -425,19 +457,19 @@ table tbody tr td.update-required {
 
 // table sorting ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-#table-visits th:after {
+#table-visits .sort:after {
     display: inline;
     content: ' ▲';
     font-size: 8px;
 }
 
-#table-visits th.asc:after {
+#table-visits .sort.asc:after {
     display: inline;
     content: ' ▼';
     font-size: 8px;
 }
 
-#table-visits th.desc:after {
+#table-visits .sort.desc:after {
     display: inline;
     content: ' ▲';
     font-size: 8px;
