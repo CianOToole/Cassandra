@@ -141,7 +141,7 @@
             
         </div>
 
-        {{-- PROJECT MANAGMENT --}}
+        {{-- FORUM MANAGMENT --}}
 
         <div class="col-md-4">
             <div class="media-holder">

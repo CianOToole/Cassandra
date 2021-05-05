@@ -310,6 +310,7 @@ i{
 .search-topic{
     padding: 7px 10px 7px 0px;
 }
+
 .topic-search-input{
     padding: 5px 7px;
     width: 100%;
@@ -340,6 +341,12 @@ i{
 
 .fa-plus-circle{
     padding: 0px 2px;
+}
+
+.back-btn{
+    border-width: 0px;
+    font-weight: 700;
+    height: 33px;
 }
 
 .form-btn,
@@ -684,4 +691,23 @@ table tbody tr td.update-required {
 
 .list-moderators li a:hover{
     color: #222;
+}
+
+// POSTS THREAD  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+.post-hdr-btn{padding: 15px 0px;}
+.thread-brd{border-top: 1px solid rgb(22, 22, 22, .25);}
+
+.thread{
+    // padding-top: 30px;
+}
+
+.post-header{
+
+}
+
+.post-img{
+    width: 65px;
+    height: 65px;
+    object-fit: fill;
+    border-radius: 3px;
 }

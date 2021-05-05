@@ -11250,6 +11250,12 @@ i {
   padding: 0px 2px;
 }
 
+.back-btn {
+  border-width: 0px;
+  font-weight: 700;
+  height: 33px;
+}
+
 .form-btn,
 .form-btn-alt {
   border-radius: 2px;
@@ -11595,5 +11601,21 @@ table tbody tr td.update-required {
 
 .list-moderators li a:hover {
   color: #222;
+}
+
+.post-hdr-btn {
+  padding: 15px 0px;
+}
+
+.thread-brd {
+  border-top: 1px solid rgba(22, 22, 22, 0.25);
+}
+
+.post-img {
+  width: 65px;
+  height: 65px;
+  -o-object-fit: fill;
+     object-fit: fill;
+  border-radius: 3px;
 }
 

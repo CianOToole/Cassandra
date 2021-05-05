@@ -1,136 +1,209 @@
 @extends('layouts.app')
 
 @section('content')
+
 @php
     $count = 1;   
 @endphp
 
-<div class="container-fluid" style="display: inline-block">
+<div class="container-fluid">
     <div class="row">
 
-        <div class="col-md-8 block">
+        <div class="col-md-8">
 
-            <div class="col-12 post-title">
-                <div class="" style="float: left">
-                    {{$posts->onEachSide(4)->links()}}
+            <div class="media-holder">
+
+                {{-- TABLE HEADED --}}
+
+                <div class="col-12 tab-header">
+                    <h3>{{$topic_title[0]}}</h3>
                 </div>
-                <h3>{{$topic_title[0]}}</h3>
-                <hr>
-            </div>
 
-            <div class="col-12 post-body">
+                {{-- BUTTON --}}
 
-                @foreach ($posts as $post)
-                    @php           
-                        $switch_bcg;         
-                        ($count % 2 == 0) ? $switch_bcg = "blue-bck" : $switch_bcg = null;
-                        $refine_date = $post->updated_at;
-                        $date = date("d/m/Y H:i:s", strtotime($refine_date));  
-                        
-                        $quote_id = $post->id;
-                        $edit_id = $post->id;
-                        $post_id = $post->id;
-                    @endphp
-
-                    <div class="row {{ $switch_bcg }}" >
-                        <div class="col-12" >
-                            <div class="" style="float: right">
-
-                                <button id="{{ $quote_id }}"  onClick="quote(this.id)" class="btn btn-primary">
-                                    <i class="fas fa-quote-right"></i>
+                <div class="col-12 table-search-bar">
+                        <div class="table-header-btns post-hdr-btn" >
+                            <h6>
+                                <button type="button" onclick="history.back()" class="form-btn back-btn">  
+                                    <span >Back to topic</span>
                                 </button>
+                            </h6>    
+                            <h6>
+                                <a href="{{ route('forum.index', "boards") }}" class="form-btn-alt">Boards</a>
+                            </h6>
+                        </div>
+                </div>
 
-                                @if($user = Auth::user()->id == $post->user_id)        
+                {{-- POSTS --}}
 
-                                    <button id="{{$edit_id}}" onClick="editPost(this.id, this.formAction)" class="btn btn-dark btn-{{$edit_id}}" 
-                                    formAction="{{ route( 'topic.posts.update', [$topic_id, $post_id ]) }}" >
-                                        <i class="fas fa-pen"></i>
-                                    </button>         
+                <div class="col-12 thread">
 
-                                    <form style="display:inline-block" method="POST" action="{{ route( 'topic.posts.destroy', [$topic_id, $post->id]) }}">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <input type="hidden" name="_token" value=" {{ csrf_token() }} ">                                        
-                                        <button type="submit" class="form-control btn btn-danger" title="Delete post">
-                                            <i class="fas fa-trash"></i>
+                    <div class="thread-brd"></div>
+
+                    @foreach ($posts as $post)
+
+                        @php           
+                            $switch_bcg;         
+                            ($count % 2 != 0) ? $switch_bcg = "blue-bck" : $switch_bcg = null;
+                            // 
+                            $refine_date = $post->updated_at;
+                            $date = date("d/m/Y H:i:s", strtotime($refine_date));  
+                            // 
+                            $quote_id = $post->id;
+                            $edit_id = $post->id;
+                            $post_id = $post->id;
+                        @endphp
+
+                        <div class="row" >
+
+                            {{-- <div class="col-12" >
+                                <div class="" style="float: right"> --}}
+
+                                    
+
+
+                                {{-- </div>
+                            </div> --}}
+
+                            <div class="col-12">
+                                <div class="{{ $switch_bcg }}">
+
+                                    <div class="post-header">
+                                        @if($post->avatar = "default-pp.png")
+                                            <figure>
+                                                <img class="post-img" src=" {{ asset('img/EU.jpg') }}">
+                                            </figure>
+                                        @else
+                                            <figure>
+                                                <img class="post-img" src=" {{ asset('storage/avatar/' . $post->avatar) }}">
+                                            </figure>
+                                        @endif
+
+                                        <div>
+                                            <p>{{ ($post->emp_name != null) ?  $post->emp_name : $post->clt_name}}  {{$post->surname}}</p>                                 
+                                        </div>    
+
+                                        <div class="post-date">
+                                            <p>{{$date}}</p>
+                                        </div>
+
+                                        <button id="{{ $quote_id }}"  onClick="quote(this.id)" class="btn btn-primary">
+                                            <i class="fas fa-quote-right"></i>
                                         </button>
-                                    </form>
-                                @endif
-                            </div>
-                        </div>
 
-                        <div class="col-md-12">
-                            <div class="row">
+                                        @if($user = Auth::user()->id == $post->user_id)        
 
-                                <div class="col-9" style="display: inline-flex">
-                                    <figure>
-                                        <img src=" {{ asset('storage/avatar/' . $post->avatar) }} " width="45px" height='45px'  
-                                        style="object-fit: fill;"" class = "">
-                                    </figure>
-                                    <p>
-                                        {{ ($post->emp_name != null) ?  $post->emp_name : $post->clt_name}}  {{$post->surname}}                                        
-                                    </p>        
+                                            <button id="{{$edit_id}}" onClick="editPost(this.id, this.formAction)" class="btn btn-dark btn-{{$edit_id}}" 
+                                            formAction="{{ route( 'topic.posts.update', [$topic_id, $post_id ]) }}" >
+                                                <i class="fas fa-pen"></i>
+                                            </button>         
+
+                                            <form style="display:inline-block" method="POST" action="{{ route( 'topic.posts.destroy', [$topic_id, $post->id]) }}">
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <input type="hidden" name="_token" value=" {{ csrf_token() }} ">                                        
+                                                <button type="submit" class="form-control btn btn-danger" title="Delete post">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                            
+                                        @endif
+
+                                    </div>
+
+                                    <div class="post-cnt">
+                                        <p class="{{ $post->id }}">{{$post->post}}</p>
+                                    </div>
+                                    
                                 </div>
-
-                                <div class="col-3">
-                                    <p style="float: right">{{$date}}</p>
-                                </div>
-                                
                             </div>
-                            <hr>
+
                         </div>
 
-                        <div class="col-md-12">
-                            <p class="{{ $post->id }}">{{$post->post}}</p>
+                        @php
+                            $count++;   
+                        @endphp
+
+                    @endforeach
+                </div>
+
+                {{-- <div class="">
+                    <form id="form_post" method="POST" action="{{ route( 'topic.posts.store', [$topic_id]) }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" >
+                        <input id="form_post_put" type="hidden" name="_method" value="">
+                        <div class="form-group">
+                        <textarea type="text" class="form-control" id="post_txt" name="post" placeholder="Post what you have to say, nobody is here to judge you.."></textarea>
                         </div>
+                        <button type="submit" class="btn btn-primary">Post</button>
+                    </form>
+                </div> --}}
 
-                    </div>
-
-                    @php
-                        $count++;   
-                    @endphp
-                @endforeach
-            </div>
-
-            <div class="">
-                <form id="form_post" method="POST" action="{{ route( 'topic.posts.store', [$topic_id]) }}">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}" >
-                    <input id="form_post_put" type="hidden" name="_method" value="">
-                    <div class="form-group">
-                      <textarea type="text" class="form-control" id="post_txt" name="post" placeholder="Post what you have to say, nobody is here to judge you.."></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Post</button>
-                  </form>
+                {{-- <div class="pagination-holder">
+                    {{$posts->onEachSide(4)->links()}}
+                </div> --}}
             </div>
 
         </div>
 
-        <div class="col-md-4">bite</div>
-        {{--  quote passes the id on the clicked button (determined by the post id) --}}
-{{-- each post share in their class the id nmb which we fetch to get the textContent of the p element --}}
-{{-- then, we fetch the text area to prompt the textContent in it to quote --}}
-<script type="text/javascript">
-    function quote(id){
-        var posts_cnt = document.getElementsByClassName(id);
-        var text = posts_cnt[0].textContent;        
-        console.log(text);
-        var post_txt = document.getElementById('post_txt');
-        post_txt.innerHTML += text;
-    }
+        {{-- FORUM MANAGMENT --}}
 
-    function editPost(id, action){
-        var posts_cnt = document.getElementsByClassName(id);
-        var text = posts_cnt[0].textContent;      
-        var post_txt = document.getElementById('post_txt');
-        post_txt.innerHTML += text;
+        <div class="col-md-4">
+            <div class="media-holder">
 
-        $("#form_post_put").attr("value", "PUT");
-        
-        console.log(action);
-        
-        $("#form_post").attr("action", action);
+                <div class="col-12 tab-header">
+                    <h4>Forum Management</h4>
+                </div>
 
-        }
-  </script>
+                <div class="col-12 tab-cnt">
+                    <ul class="list-moderators">
+                        <li class="list-first-child">Admins:</li>
+                        @foreach ($admins as $admin)
+                            <li class="list-admins">
+                                <a href=" {{ route('forumManagers', $admin->id) }} "> {{ $admin->surname }} </a>
+                            </li>
+                        @endforeach  
+                    </ul>
+
+                    <ul class="list-moderators" style="padding-top: 15px">
+                        <li class="list-first-child">Moderators:</li>
+                        @foreach ($moderators as $moderator)
+                        <li class="list-mods">
+                            <a href=" {{ route('forumManagers', $moderator->id) }} "> {{ $moderator->surname }} </a>
+                        </li>
+                        @endforeach  
+                    </ul>
+                </div>
+
+            </div>            
+        </div>
+
     </div>
+
+    {{--  quote passes the id on the clicked button (determined by the post id) --}}
+    {{-- each post share in their class the id nmb which we fetch to get the textContent of the p element --}}
+    {{-- then, we fetch the text area to prompt the textContent in it to quote --}}
+    <script type="text/javascript">
+        function quote(id){
+            var posts_cnt = document.getElementsByClassName(id);
+            var text = posts_cnt[0].textContent;        
+            console.log(text);
+            var post_txt = document.getElementById('post_txt');
+            post_txt.innerHTML += text;
+        }
+
+        function editPost(id, action){
+            var posts_cnt = document.getElementsByClassName(id);
+            var text = posts_cnt[0].textContent;      
+            var post_txt = document.getElementById('post_txt');
+            post_txt.innerHTML += text;
+
+            $("#form_post_put").attr("value", "PUT");
+            
+            console.log(action);
+            
+            $("#form_post").attr("action", action);
+
+            }
+    </script>
+
 </div>
 @endsection
