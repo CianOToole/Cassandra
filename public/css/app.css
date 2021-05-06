@@ -11020,6 +11020,10 @@ nav {
   color: #fff;
 }
 
+.pp-bubble {
+  margin: 0px;
+}
+
 .profile-items .profile:hover {
   color: black;
 }
@@ -11368,10 +11372,6 @@ td {
 
 .table-delete:hover {
   color: #BA182B;
-}
-
-table tbody tr.status-banned {
-  background-color: rgba(255, 0, 0, 0.1);
 }
 
 table tbody tr td.update-required {
@@ -11761,6 +11761,54 @@ table tbody tr td.update-required {
 
   .text-post-cnt {
     padding: 10px 0px;
+  }
+}
+
+.bo-clients {
+  padding-top: 30px;
+}
+
+.bo-btns {
+  padding: 15px 0px;
+}
+
+.bo-del,
+.bo-ban {
+  display: flex;
+  justify-content: center;
+}
+
+.table-banning {
+  background-color: rgba(0, 0, 0, 0);
+  border: 0px;
+  font-size: 18px;
+}
+
+.table-unban {
+  color: rgba(32, 129, 249, 0.8);
+}
+
+.table-unban:hover {
+  color: #2081f9;
+}
+
+.table-ban {
+  color: rgba(255, 117, 40, 0.8);
+}
+
+.table-ban:hover {
+  color: #ff7528;
+}
+
+.exp-user {
+  color: #2081f9;
+}
+
+@media (min-width: 675px) {
+  .bo-btns {
+    padding: 15px;
+    display: flex;
+    justify-content: flex-end;
   }
 }
 

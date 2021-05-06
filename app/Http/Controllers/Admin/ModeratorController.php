@@ -28,7 +28,7 @@ class ModeratorController extends Controller{
             ->select('users.*', 'employees.name', 'employees.emp_number', 'employees.salary')        
             ->join('user_role', 'users.id', '=', 'user_role.user_id')
             ->where('role_id', 2)
-            ->paginate(8);
+            ->paginate(10);
 
 
         return view('admin.moderators.index',[

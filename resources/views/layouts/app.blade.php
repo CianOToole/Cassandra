@@ -69,10 +69,10 @@
                                         @auth
                                         @if (Auth::user()->hasRole('admin'))
                                             <li><a class="" href="{{ route('admin.moderators.index') }}">Moderators</a></li>
-                                            <li><a class="" href="{{ route('admin.clients.index') }}">Suscribers</a></li>
+                                            <li><a class="" href="{{ route('admin.clients.index') }}">Clients</a></li>
                                         @endif
                                         @if (Auth::user()->hasRole('moderator'))
-                                            <li><a class="" href="{{ route('moderator.clients.index') }}">Suscribers</a></li>
+                                            <li><a class="" href="{{ route('moderator.clients.index') }}">Clients</a></li>
                                         @endif
                                         @endauth
                                     </div>
@@ -109,8 +109,13 @@
                     
                             <li class="nav-item dropdown lg-items">
                                 <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <img src=" {{ asset('storage/avatar/' . Auth::user()->avatar) }} " width='30px' height="30px" 
-                                        style="object-fit: fill;" class = "rounded-circle mr-1 ">
+                                        <figure class="pp-bubble">
+                                            @if(Auth::user()->avatar == "default-pp.png")
+                                                <img src=" {{ asset('img/default.png') }} " width='30px' height="30px"style="object-fit: fill;" class = "rounded-circle mr-1 ">
+                                            @else
+                                                <img src=" {{ asset('storage/avatar/' . Auth::user()->avatar) }} " width='30px' height="30px" style="object-fit: fill;" class = "rounded-circle mr-1 ">
+                                            @endif
+                                        </figure>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right profile-items" aria-labelledby="navbarDropdown">
@@ -177,10 +182,10 @@
                     
                     @if (Auth::user()->hasRole('admin'))
                         <li><a class="" href="{{ route('admin.moderators.index') }}">Moderators</a></li>
-                        <li><a class="" href="{{ route('admin.clients.index') }}">Suscribers</a></li>
+                        <li><a class="" href="{{ route('admin.clients.index') }}">Clients</a></li>
                     @endif
                     @if (Auth::user()->hasRole('moderator'))
-                        <li><a class="" href="{{ route('admin.clients.index') }}">Suscribers</a></li>
+                        <li><a class="" href="{{ route('admin.clients.index') }}">Clients</a></li>
                     @endif
 
                     <li class="lg-items"><button  id="" class="">Portfolio</button></li>

@@ -14,9 +14,7 @@
                 {{-- TABLE HEADED --}}
 
                 <div class="col-12 tab-header">
-
                     <h4 class="">{{$board->category}}</h4>
-
                 </div>
 
                 {{-- SEARCH BAR --}}
