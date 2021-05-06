@@ -14,9 +14,10 @@ class PostController extends Controller
 
     public function index($topic_id){
         $topic_id = $topic_id;
-        $topic_title = DB::table('topics')
+        $topic = DB::table('topics')
+            ->select('topics.board_id', 'topics.title')        
             ->where('id', $topic_id)
-            ->pluck('title');
+            ->get();
 
         $posts = DB::table('posts')
             ->where('topic_id', $topic_id)
@@ -43,7 +44,7 @@ class PostController extends Controller
 
         return view('posts.index',[
             'posts' => $posts,
-            'topic_title' => $topic_title,
+            'topic' => $topic,
             'topic_id' => $topic_id,
             'admins' => $admins,
             'moderators' => $moderators,

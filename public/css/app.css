@@ -11626,15 +11626,15 @@ table tbody tr td.update-required {
 }
 
 .admin-border {
-  border: 1px solid #BA182B !important;
+  border: 1.5px solid #BA182B !important;
 }
 
 .moderator-border {
-  border: 1px solid #ff7528 !important;
+  border: 1.5px solid #ff7528 !important;
 }
 
 .experienced-border {
-  border: 1px solid #2081F9 !important;
+  border: 1.5px solid #2081F9 !important;
 }
 
 .post-img {

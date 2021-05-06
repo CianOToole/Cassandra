@@ -13,10 +13,10 @@
 
             <div class="media-holder">
 
-                {{-- TABLE HEADED --}}
+                {{-- TABLE HEAD --}}
 
                 <div class="col-12 tab-header">
-                    <h4>{{$topic_title[0]}}</h4>
+                    <h4>{{ $topic[0]->title }} </h4>
                 </div>
 
                 {{-- BUTTON --}}
@@ -24,9 +24,7 @@
                 <div class="col-12 table-search-bar">
                         <div class="table-header-btns post-hdr-btn" >
                             <h6>
-                                <button type="button" onclick="history.back()" class="form-btn back-btn">  
-                                    <span >Back to topic</span>
-                                </button>
+                                <a href="{{ route('board.topics.index', $topic[0]->board_id) }}" class="form-btn">Boards</a>
                             </h6>    
                             <h6>
                                 <a href="{{ route('forum.index', "boards") }}" class="form-btn-alt">Boards</a>
@@ -37,8 +35,6 @@
                 {{-- POSTS --}}
 
                 <div class="col-12 thread">
-
-                    {{-- <div class="thread-brd"></div> --}}
 
                     @foreach ($posts as $post)
 
@@ -142,7 +138,7 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" >
                         <input id="form_post_put" type="hidden" name="_method" value="">
                         <div class="form-group">
-                            <textarea type="text" class="txt-post" id="post_txt" name="post" placeholder="Post what you have to say, nobody is here to judge you.."></textarea>
+                            <textarea type="text" class="txt-post" id="post_txt" name="post" placeholder="Listen to many, speak to a few."></textarea>
                         </div>
                         <h6 class="post-btn">
                             <button type="submit" class="form-btn-alt">Post</button>
