@@ -26,9 +26,22 @@ class ProfileController extends Controller
             ->select('name', 'emp_number', 'salary')
             ->get();
 
+        $posts = DB::table('posts')
+            ->where('user_id', $user->id)
+            // ->join('users', 'posts.user_id', '=', 'users.id') 
+            // ->join('user_role', 'users.id', '=', 'user_role.user_id')   
+            // ->join('roles', 'user_role.role_id', '=', 'roles.id')   
+            // ->leftJoin('employees', 'users.id', '=', 'employees.user_id')
+            // ->leftJoin('clients', 'users.id', '=', 'clients.user_id')
+            ->select('posts.*')
+            ->orderByDesc('updated_at')
+            ->paginate(10);
+            // print_r($posts);
+
         return view('admin.profiles.index', [
             'profile' => $user,
             'admin' => $admin,
+            'posts' => $posts
             ]);
     }
 
@@ -45,8 +58,7 @@ class ProfileController extends Controller
     }
 
 
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
 
         $request->validate([
             'name' => ['required', 'string', 'max:255'],

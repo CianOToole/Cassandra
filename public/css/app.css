@@ -11838,7 +11838,6 @@ table tbody tr td.update-required {
   padding: 0px;
   border-left: 1px solid rgba(22, 22, 22, 0.75);
   border-right: 1px solid rgba(22, 22, 22, 0.75);
-  height: 100vh;
 }
 
 .profile-head {
@@ -11848,7 +11847,8 @@ table tbody tr td.update-required {
 
 .profile-foot {
   border-top: 1px solid rgba(22, 22, 22, 0.75);
-  padding-bottom: 50px;
+  height: 100vh;
+  overflow-y: auto;
 }
 
 .profile-left {
@@ -11873,6 +11873,7 @@ table tbody tr td.update-required {
 .profile-btns {
   display: flex;
   justify-content: flex-end;
+  align-items: flex-start;
   padding: 15px;
   outline: 0;
   font-size: 21px;
@@ -11890,13 +11891,17 @@ table tbody tr td.update-required {
   padding-left: 15px;
 }
 
-.gg {
+.prf-data {
   display: grid;
   grid-auto-flow: column;
-  grid-template-rows: repeat(3, auto);
+  grid-template-rows: repeat(2, auto);
 }
 
 .personal-dt {
   padding-bottom: 15px;
+}
+
+.prf-h3 {
+  padding: 20px 0px;
 }
 
