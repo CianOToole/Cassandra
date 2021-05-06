@@ -1,68 +1,95 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="card-body">
-            @if (session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
-                </div>
-            @endif
-        
-            <div class="col-md-8 col-md-offset-2">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Admin: {{ $admin[0]->name }} {{ $profile->surname }}</h3>
+
+<div class="container" style="margin-top: -1.5rem; margin-bottom: -1.5rem;">
+    <div class="row">
+        <div class="col">
+            <div class="profile-holder">
+
+                @if (session('status'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
                     </div>
-        
-                    <div class="card-body">
-                            <table id="table-visit" class="table table-hover">
-                                    <tbody>
-                                        <tr>
-                                            <td rowspan="6">
-                                                <img src=" {{ asset('storage/avatar/' . $profile->avatar) }} " width="125px" height='125px'  
-                                                style="object-fit: fill;"" class = "rounded-circle">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Email</td>
-                                            <td>{{ $profile->email }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Phone</td>
-                                            <td>{{ $profile->phone }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Address</td>
-                                            <td>{{ $profile->address }}</td>
-                                        </tr>   
-                                        <tr>
-                                            <td>Employee Number</td>
-                                            <td>{{ $admin[0]->emp_number }}</td>
-                                        </tr>   
-                                        <tr>
-                                            <td>Salary</td>
-                                            <td>{{ $admin[0]->salary }} €</td>
-                                        </tr>   
-                                    </body>
-                            </table>
-                            
-                        <div class="" style="float: right">    
-                            <a href="{{ route('admin.home') }} " class="btn btn-link">Back</a>
-                            <a href="{{ route('admin.profiles.edit', $profile->id) }} " class="btn btn-dark">
-                                <i class="fas fa-pen"></i>
-                            </a>
+                @endif
+
+                <div class="profile-head"></div>
+
+                <div class="profile">
+                    <div class="row">
+
+                        <div class="col-md-3 profile-left">
+                            <div class="col-12">
+                                <figure class="profile-pic">
+                                    <img src=" {{ asset('storage/avatar/' . $profile->avatar) }} " width="125px" height='125px' style="object-fit: fill;"" class = "rounded-circle">
+                                </figure>
+                            </div>
+                            <div class="col-12 id-left">
+                                <h4> {{ $admin[0]->name }} {{ $profile->surname }} </h4>
+                            </div>
                         </div>
+
+                        <div class="col-md-9">
+                            <div class="col-12 profile-btns">    
+                                <div>
+                                    <a class="prf-home" href="{{ route('admin.home') }} " title="Back home">
+                                        <i class="fas fa-home"></i>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a class="prf-edit" href="{{ route('admin.profiles.edit', $profile->id) }} " title="Edit my profile">
+                                        <i class="fas fa-pen"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-12">    
+                                <div class="gg">
+                                    <div class="personal-dt">
+                                        <h4>Email: {{ $profile->email }}</h4>
+                                    </div>
+                                    <div class="personal-dt">
+                                        <h4>Phone: {{ $profile->phone }}</h4>
+                                    </div>
+                                    <div class="personal-dt">
+                                        <h4>Address: {{ $profile->address }}</h4>
+                                    </div>
+                                    <div class="personal-dt">
+                                        <h4>Employee number: {{ $admin[0]->emp_number }}</h4>
+                                    </div>
+                                    <div class="personal-dt">
+                                        <h4>Salary: {{ $admin[0]->salary }}</h4>
+                                    </div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-        
+
+                <div class="profile-foot"></div>
             </div>
-        
-        
         </div>
     </div>
 </div>
+
+{{-- 
+<td>Email</td>
+<td>{{ $profile->email }}</td>
+
+<td>Phone</td>
+<td>{{ $profile->phone }}</td>
+
+<td>Address</td>
+<td>{{ $profile->address }}</td>
+
+<td>Employee Number</td>
+<td>{{ $admin[0]->emp_number }}</td>
+
+<td>Salary</td>
+<td>{{ $admin[0]->salary }} €</td>
+--}}
 @endsection
 
 

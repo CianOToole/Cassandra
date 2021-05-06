@@ -10916,6 +10916,27 @@ a.text-dark:focus {
   margin: 0;
 }
 
+h1 {
+  font-family: "Open Sans", sans-serif;
+  font-size: 40px;
+  font-weight: 300;
+  margin: 0;
+}
+
+h2 {
+  font-family: "Open Sans", sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  margin: 0;
+}
+
+h3 {
+  font-family: "Open Sans", sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  margin: 0;
+}
+
 h4 {
   font-family: "Open Sans", sans-serif;
   font-size: 20px;
@@ -11810,5 +11831,72 @@ table tbody tr td.update-required {
     display: flex;
     justify-content: flex-end;
   }
+}
+
+.profile-holder {
+  background-color: #fff;
+  padding: 0px;
+  border-left: 1px solid rgba(22, 22, 22, 0.75);
+  border-right: 1px solid rgba(22, 22, 22, 0.75);
+  height: 100vh;
+}
+
+.profile-head {
+  border-bottom: 1px solid rgba(22, 22, 22, 0.75);
+  padding-top: 50px;
+}
+
+.profile-foot {
+  border-top: 1px solid rgba(22, 22, 22, 0.75);
+  padding-bottom: 50px;
+}
+
+.profile-left {
+  border-right: 1px solid rgba(22, 22, 22, 0.75);
+  padding-right: 0;
+}
+
+.profile-left div {
+  display: flex;
+  justify-content: center;
+}
+
+.profile-pic {
+  padding: 20px 0px 10px 0px;
+  margin: 0px;
+}
+
+.id-left {
+  padding: 10px 0px 20px 0px;
+}
+
+.profile-btns {
+  display: flex;
+  justify-content: flex-end;
+  padding: 15px;
+  outline: 0;
+  font-size: 21px;
+}
+
+.prf-home {
+  color: rgba(22, 22, 22, 0.6);
+}
+
+.prf-home:hover {
+  color: #161616;
+}
+
+.prf-edit {
+  padding-left: 15px;
+}
+
+.gg {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(3, auto);
+}
+
+.personal-dt {
+  padding-bottom: 15px;
 }
 
