@@ -43,10 +43,10 @@ $(function() {
                 rows = [],
                 thClass = $(this).hasClass('asc') ? 'desc' : 'asc';
 
-            $('#table-visits th').removeClass('asc desc');
+            $('.table-sort th').removeClass('asc desc');
             $(this).addClass(thClass);
 
-            $('#table-visits tbody tr').each(function(index, row) {
+            $('.table-sort tbody tr').each(function(index, row) {
                 rows.push($(row).detach());
             });
 
@@ -66,7 +66,7 @@ $(function() {
             }
 
             $.each(rows, function(index, row) {
-                $('#table-visits tbody').append(row);
+                $('.table-sort tbody').append(row);
             });
         });
 });

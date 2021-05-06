@@ -75,10 +75,6 @@
                                             @endif
                                         </figure>
 
-                                        {{-- {{ $post->role }}
-                                        {{ $post->experience }}
-                                        {{ $border }} --}}
-
                                         <div class="post-data">
                                             <div class=" ">
                                                 <p>{{ ($post->emp_name != null) ?  $post->emp_name : $post->clt_name}}  {{$post->surname}}</p>

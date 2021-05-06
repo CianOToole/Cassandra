@@ -11378,19 +11378,19 @@ table tbody tr td.update-required {
   font-style: italic;
 }
 
-#table-visits .sort:after {
+.table-sort .sort:after {
   display: inline;
   content: " \25B2";
   font-size: 8px;
 }
 
-#table-visits .sort.asc:after {
+.table-sort .sort.asc:after {
   display: inline;
   content: " \25BC";
   font-size: 8px;
 }
 
-#table-visits .sort.desc:after {
+.table-sort .sort.desc:after {
   display: inline;
   content: " \25B2";
   font-size: 8px;

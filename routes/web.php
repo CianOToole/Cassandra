@@ -62,7 +62,9 @@ Route::put('/client/profile/{id}', [ClientProfile::class, 'update'])->name('clie
 
 // - Admin -> moderators
 Route::get('/admin/moderators', [ModController::class, 'index'])->name('admin.moderators.index');
+Route::get('/admin/moderators/create', [ModController::class, 'create'])->name('admin.moderators.create');
 Route::get('/admin/moderators/{id}', [ModController::class, 'show'])->name('admin.moderators.show');
+Route::post ('/admin/moderators/store', [ModController::class, 'store'])->name('admin.moderators.store');
 Route::delete('/admin/moderators/{id}', [ModController::class, 'destroy'])->name('admin.moderators.destroy');
 
 // - Admin ->  clients

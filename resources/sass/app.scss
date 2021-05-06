@@ -465,19 +465,19 @@ table tbody tr td.update-required {
 
 // table sorting ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-#table-visits .sort:after {
+.table-sort .sort:after {
     display: inline;
     content: ' ▲';
     font-size: 8px;
 }
 
-#table-visits .sort.asc:after {
+.table-sort .sort.asc:after {
     display: inline;
     content: ' ▼';
     font-size: 8px;
 }
 
-#table-visits .sort.desc:after {
+.table-sort .sort.desc:after {
     display: inline;
     content: ' ▲';
     font-size: 8px;
@@ -696,10 +696,6 @@ table tbody tr td.update-required {
 
 // POSTS THREAD  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 .post-hdr-btn{padding: 15px 0px;}
-
-.thread{
-    // padding-top: 30px;
-}
 
 .post{
     margin: 7.5px 0px;

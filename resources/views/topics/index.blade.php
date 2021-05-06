@@ -54,7 +54,7 @@
 
                     <div class="table-responsiveness">
 
-                        <table id="table-visits" class="table table-hover">
+                        <table id="" class="table table-hover table-sort">
                             
                             <thead>
                                 @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('moderator'))
