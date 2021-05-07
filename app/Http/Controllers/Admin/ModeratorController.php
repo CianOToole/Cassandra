@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Employee;
 use App\Models\Role;
+use App\Models\Post;
+use App\Models\Topic;
 use Hash;
 use Illuminate\Support\Facades\DB;
 use Storage;
@@ -117,17 +119,29 @@ class ModeratorController extends Controller{
 
     
     public function destroy(Request $request, $id){
-        // $visits = Visit::where('doctor_id', $id)->get();
-
-        // foreach($visits as $visit){
-        //     echo($visit);
-        //     $visit->delete();
-        // }
-
         $moderator = Employee::where('user_id', $id)->firstOrFail();
         $moderator->delete();
 
+        $moderators = User::where('id', $moderator->user_id)->get();
+
         $user = User::where('id', $moderator->user_id)->get();
+        $posts = Post::where('user_id', $user[0]->id)->get();
+
+        foreach ($posts as $post) {
+            $post->delete();
+        } 
+
+        $topics = Topic::where('user_id', $user[0]->id)->get();
+
+        foreach ($topics as $topic) {
+            $posts = Post::where('topic_id', $topic->id)->get();
+            foreach ($posts as $post) {
+                $post->delete();
+            }
+            $topic->delete();
+        } 
+
+
         $user[0]->roles()->detach();
         Storage::delete("public/avatar/{$user[0]->avatar}");
         $user[0]->delete();
