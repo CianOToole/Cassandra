@@ -32,13 +32,13 @@ class PostController extends Controller
 
         $admins = DB::table('users')
             ->join('user_role', 'users.id', '=', 'user_role.user_id')
-            ->select('users.id', 'users.surname')        
+            ->select('users.id', 'users.surname', 'users.email', 'users.avatar')       
             ->where('role_id', 1)
             ->get();
 
         $moderators = DB::table('users')
             ->join('user_role', 'users.id', '=', 'user_role.user_id')
-            ->select('users.id', 'users.surname')        
+            ->select('users.id', 'users.surname', 'users.email', 'users.avatar')       
             ->where('role_id', 2)
             ->get();
 

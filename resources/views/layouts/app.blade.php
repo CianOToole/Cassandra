@@ -111,9 +111,9 @@
                                 <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         <figure class="pp-bubble">
                                             @if(Auth::user()->avatar == "default-pp.png")
-                                                <img src=" {{ asset('img/default.svg') }} " width='30px' height="30px"style="object-fit: fill;" class = "rounded-circle mr-1 ">
+                                                <img src=" {{ asset('img/default.png') }} " width='30px' height="30px"style="object-fit: fill;" class = "rounded-circle mr-1 ">
                                             @else
-                                                <img src=" {{ asset('storage/avatar/' . Auth::user()->avatar) }} " width='30px' height="30px" style="object-fit: fill;" class = "rounded-circle mr-1 ">
+                                                <img src=" {{ asset('storage/avatar/' . Auth::user()->avatar) }} " width='30px' height="30px" style="object-fit: fit;" class = "rounded-circle mr-1 ">
                                             @endif
                                         </figure>
                                 </a>

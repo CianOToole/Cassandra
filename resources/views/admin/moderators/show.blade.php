@@ -40,6 +40,13 @@
                         <div class="col-md-9">
                             {{-- TOP LEFT SIDE --}}
                             <div class="col-12 profile-btns-alt">    
+                                <form class="bo-del" method="POST" action="{{ route( 'admin.moderators.destroy', $moderator[0]->id) }}">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="_token" value=" {{ csrf_token() }} ">
+                                    <button type="submit" class="table-delete-alt" title="Delete Moderator">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
                                 <h6>
                                     <a href="{{ route('admin.moderators.index') }} " class="form-btn-alt" title="Back to moderators table">Back to table</a>
                                 </h6>

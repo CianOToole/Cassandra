@@ -25,9 +25,16 @@ class ProfileController extends Controller
             ->select('name', 'middle_name', 'DOB', 'gender', 'postcode', 'country', 'isExperienced', 'isBanned')
             ->get();
 
+        $posts = DB::table('posts')
+            ->where('user_id', $user->id)
+            ->select('posts.*')
+            ->orderByDesc('updated_at')
+            ->paginate(10);
+
         return view('client.profiles.index', [
             'profile' => $user,
             'client' => $client,
+            'posts' => $posts
             ]);
     }
 

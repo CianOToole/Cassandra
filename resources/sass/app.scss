@@ -462,7 +462,22 @@ td{
 
 .unpin:hover{color: #BA182B;}
 
-.trend-mark{color: #BA182B;}
+.trend-mark a{color: #BA182B !important;}
+
+.op_btn{
+    background-color: rgb(0, 0, 0, 0);
+    border: 0px;
+    color: #2081F9;
+}
+
+.op_btn p{
+    margin: 0;
+}
+
+.op_btn p:hover{
+    text-decoration: underline;
+}
+
 
 .icon-cell{
     display: flex;
@@ -473,10 +488,22 @@ td{
     background-color: rgb(0, 0, 0, 0);
     border: 0px;
     font-size: 18px;
-    color: rgba(186, 24, 43, .80)
+    color: rgba(186, 24, 43, .80);
 }
 
 .table-delete:hover{
+    color: #BA182B;
+}
+
+.table-delete-alt{
+    background-color: rgb(0, 0, 0, 0);
+    border: 0px;
+    font-size: 24px;
+    color: rgba(186, 24, 43, .80);
+    margin-left: 15px;
+}
+
+.table-delete-alt:hover{
     color: #BA182B;
 }
 
@@ -683,7 +710,7 @@ table tbody tr td.update-required {
 }
 
 .list-moderators {
-    margin: 0;
+    padding: 3px 0px;
 }
 
 .list-moderators li{
@@ -703,16 +730,29 @@ table tbody tr td.update-required {
     text-decoration: none;
 }
 
-.list-admins a{
+.list-admins{
+    border: 0px;
     color: #BA182B;
+    background: rgb(0, 0, 0, 0);
+    padding: 0px 3px;
 }
-
-.list-mods a{
-    color: #2081F9;
-}
-
-.list-moderators li a:hover{
+.list-admins:hover{
     color: #222;
+}
+
+.list-mods {
+    border: 0px;
+    color: #2081F9;
+    background: rgb(0, 0, 0, 0);
+    padding: 0px 3px;
+}
+
+.list-moderators:hover{
+    color: #222;
+}
+
+.pm-details{
+    padding: 5px 15px;;
 }
 
 // POSTS THREAD  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

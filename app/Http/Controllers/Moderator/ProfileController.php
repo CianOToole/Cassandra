@@ -25,9 +25,16 @@ class ProfileController extends Controller
             ->select('name', 'emp_number', 'salary')
             ->get();
 
+        $posts = DB::table('posts')
+            ->where('user_id', $user->id)
+            ->select('posts.*')
+            ->orderByDesc('updated_at')
+            ->paginate(10);
+
         return view('moderator.profiles.index', [
             'profile' => $user,
             'moderator' => $moderator,
+            'posts' => $posts
             ]);
     }
 

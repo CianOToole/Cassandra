@@ -36,13 +36,20 @@ class ClientController extends Controller{
 
     public function show($id){
         $client = DB::table('users')        
-        ->join('clients', 'users.id', '=', 'clients.user_id')
-        ->select("users.*",  'clients.name', 'clients.middle_name', 'clients.DOB', 'clients.gender', 'clients.postcode', 'clients.country', 'clients.isExperienced', 'clients.isBanned')      
-        ->where('users.id', $id)
-        ->get();
+            ->join('clients', 'users.id', '=', 'clients.user_id')
+            ->select("users.*",  'clients.name', 'clients.middle_name as mn', 'clients.DOB as dob', 'clients.gender', 'clients.postcode', 'clients.country', 'clients.isExperienced', 'clients.isBanned')    
+            ->where('users.id', $id)
+            ->get();
+
+        $posts = DB::table('posts')
+            ->where('user_id', $client[0]->id)
+            ->select('posts.*')
+            ->orderByDesc('updated_at')
+            ->paginate(10);
 
         return view('moderator.clients.show',[
             'client' => $client,
+            'posts' => $posts,
         ]);   
     }
 

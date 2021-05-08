@@ -61,6 +61,14 @@
                                     </form>
                                 @endif
 
+                                <form class="bo-del" method="POST" action="{{ route( 'admin.clients.destroy', $client[0]->id) }}">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="_token" value=" {{ csrf_token() }} ">
+                                    <button type="submit" class="table-delete-alt" title="Delete Clients">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+
                                 <h6>
                                     <a href="{{ route('admin.clients.index') }} " class="form-btn-alt" title="Back to Clients table">Back to table</a>
                                 </h6>

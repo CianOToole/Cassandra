@@ -26,7 +26,7 @@ class TopicController extends Controller{
             ->orderByDesc('isPinned')
             ->orderByDesc('updated_at')
             ->join('users', 'topics.user_id', '=', 'users.id')  
-            ->select('users.surname', 'topics.*')          
+            ->select('users.id as op_id','users.surname as op_surname', 'users.avatar as op_avatar', 'users.email as op_email', 'topics.*')
             ->join('posts', 'topics.id', '=', 'posts.topic_id')     
             ->selectRaw('count(posts.topic_id) as replies')
             ->groupBy('id')
@@ -35,13 +35,13 @@ class TopicController extends Controller{
 
         $admins = DB::table('users')
             ->join('user_role', 'users.id', '=', 'user_role.user_id')
-            ->select('users.id', 'users.surname')        
+            ->select('users.id', 'users.surname', 'users.email', 'users.avatar')       
             ->where('role_id', 1)
             ->get();
 
         $moderators = DB::table('users')
             ->join('user_role', 'users.id', '=', 'user_role.user_id')
-            ->select('users.id', 'users.surname')        
+            ->select('users.id', 'users.surname', 'users.email', 'users.avatar')        
             ->where('role_id', 2)
             ->get();
 
@@ -62,7 +62,7 @@ class TopicController extends Controller{
             ->orderByDesc('isPinned')
             ->orderByDesc('updated_at')
             ->join('users', 'topics.user_id', '=', 'users.id')       
-            ->select('users.surname', 'topics.*')
+            ->select('users.id as op_id','users.surname as op_surname', 'users.avatar as op_avatar', 'users.email as op_email', 'topics.*')
             ->join('posts', 'topics.id', '=', 'posts.topic_id')  
             ->selectRaw('count(posts.topic_id) as replies')
             ->groupBy('id')
@@ -71,22 +71,23 @@ class TopicController extends Controller{
 
 
         $admins = DB::table('users')
-        ->join('user_role', 'users.id', '=', 'user_role.user_id')
-        ->select('users.id', 'users.surname')        
-        ->where('role_id', 1)
-        ->get();
+            ->join('user_role', 'users.id', '=', 'user_role.user_id')
+            ->select('users.id', 'users.surname', 'users.email', 'users.avatar')    
+            ->where('role_id', 1)
+            ->get();
 
         $moderators = DB::table('users')
             ->join('user_role', 'users.id', '=', 'user_role.user_id')
-            ->select('users.id', 'users.surname')        
+            ->select('users.id', 'users.surname', 'users.email', 'users.avatar')          
             ->where('role_id', 2)
             ->get();
+
 
         return view('topics.index',[
             'topics' => $topics,
             'board' => $board,
             'admins' => $admins,
-            'moderators' => $moderators,
+            'moderators' => $moderators
         ]);
     }
 

@@ -94,9 +94,7 @@ Route::get('/forum/{tab}', [Forum::class, 'boards_index'])->name('forum.index');
 
 // - TOPICS
 // - search route
-Route::get('/search/{id}/topics', [Topic::class, 'search'])->name('forum.topic');  
-//  - profiles with backup
-Route::get('/profile/{usid}/{brid}', [Topic::class, 'profile'])->name('profile.index');
+Route::get('/search/{id}/topics', [Topic::class, 'search'])->name('forum.topic');
 
 // - CRUD
 Route::get('/board/{id}/topics', [Topic::class, 'index'])->name('board.topics.index');

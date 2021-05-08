@@ -2,6 +2,10 @@
 
 @section('content')
 
+@php
+    $count = 1;   
+@endphp
+
 <p id="alert-message" class="alert collapse"></p>
 
 <div class="container">
@@ -71,7 +75,13 @@
 
                             <tbody>
                                 @foreach ($topics as $topic)
-                                    <tr data-id=" {{ $topic->id }} " data-href="{{ route( 'topic.posts.index', $topic->id) }}">
+
+                                    @php           
+                                        $switch_bcg;         
+                                        ($count % 2 != 0) ? $switch_bcg = "blue-bck" : $switch_bcg = null;
+                                    @endphp
+
+                                    <tr class="{{ $switch_bcg }}" data-id=" {{ $topic->id }}" >
 
                                         <td>
                                             @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('moderator'))
@@ -97,12 +107,52 @@
                                         </td>
                                     
                                         @if($topic->replies >= 10)
-                                            <td class="trend-mark">{{ $topic->title }}</td>
+                                            <td class="trend-mark topic-tt">
+                                                <a href="{{ route( 'topic.posts.index', $topic->id) }}">{{ $topic->title }}</a>
+                                            </td>
                                         @else
-                                            <td class="">{{ $topic->title }}</td>
+                                            <td class=" topic-tt">
+                                                <a href="{{ route( 'topic.posts.index', $topic->id) }}" style="color: #2081F9">{{ $topic->title }}</a>
+                                            </td>
                                         @endif
                                         
-                                        <td><a href="{{ route( 'profile.index', [$topic->user_id, $board->id] ) }}">{{ $topic->surname }}</a></td>
+                                        <td>
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="op_btn" data-toggle="modal" data-target="#tableModal{{$topic->op_id}}">
+                                                <p>{{$topic->op_surname}}</p>
+                                            </button>
+                                            
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="tableModal{{$topic->op_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title" id="label{{$topic->op_id}}">Original poster </h4>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="col-12">
+                                                                @if($topic->op_avatar == "default-pp.png")
+                                                                    <img src=" {{ asset('img/default.svg') }} " width="50px" height='50px' style="object-fit: fill;"" class = "rounded-circle">
+                                                                @else
+                                                                    <img src=" {{ asset('storage/avatar/' . $topic->op_avatar) }} " width="50px" height='50px' style="object-fit: fill;"" class = "rounded-circle">
+                                                                @endif
+                                                            </div>
+                                                            <hr>
+                                                            <div class="col-12 pm-details">
+                                                                <h5>{{ $topic->op_surname }}</h5>
+                                                            </div>
+                                                            <div class="col-12 pm-details">
+                                                                <h5>{{ $topic->op_email }}</h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+
                                         <td>{{ $topic->replies }}</td>
                                         <td>{{ substr($topic->updated_at, 11,18) }}</td>
                                         
@@ -123,6 +173,9 @@
                                         @endif
 
                                     </tr>
+                                    @php
+                                        $count++;   
+                                    @endphp
                                 @endforeach                        
                             </tbody>
                             
@@ -139,7 +192,7 @@
             
         </div>
 
-        {{-- FORUM MANAGMENT --}}
+        {{-- PROJECT MANAGMENT --}}
 
         <div class="col-md-4">
             <div class="media-holder">
@@ -152,24 +205,85 @@
                     <ul class="list-moderators">
                         <li class="list-first-child">Admins:</li>
                         @foreach ($admins as $admin)
-                            <li class="list-admins">
-                                <a href=" {{ route('forumManagers', $admin->id) }} "> {{ $admin->surname }} </a>
-                            </li>
+
+                            <button type="button" class="list-admins" data-toggle="modal" data-target="#exampleModal{{$admin->id}}">
+                                {{ $admin->surname }} 
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal{{$admin->id}}" tabindex="-1" role="dialog" aria-labelledby="labe{{$admin->id}}" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="labe{{$admin->id}}">Admin </h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="col-12">
+                                                @if($admin->avatar == "default-pp.png")
+                                                    <img src=" {{ asset('img/default.svg') }} " width="50px" height='50px' style="object-fit: fill;"" class = "rounded-circle">
+                                                @else
+                                                    <img src=" {{ asset('storage/avatar/' . $admin->avatar) }} " width="50px" height='50px' style="object-fit: fill;"" class = "rounded-circle">
+                                                @endif
+                                            </div>
+                                            <hr>
+                                            <div class="col-12 pm-details">
+                                                <h5>{{ $admin->surname }}</h5>
+                                            </div>
+                                            <div class="col-12 pm-details">
+                                                <h5>{{ $admin->email }}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         @endforeach  
                     </ul>
 
-                    <ul class="list-moderators" style="padding-top: 15px">
+                    <ul class="list-moderators">
                         <li class="list-first-child">Moderators:</li>
                         @foreach ($moderators as $moderator)
-                        <li class="list-mods">
-                            <a href=" {{ route('forumManagers', $moderator->id) }} "> {{ $moderator->surname }} </a>
-                        </li>
+
+                            <button type="button" class="list-mods" data-toggle="modal" data-target="#exampleModal{{$moderator->id}}">
+                                {{ $moderator->surname }} 
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal{{$moderator->id}}" tabindex="-1" role="dialog" aria-labelledby="labe{{$admin->id}}" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="labe{{$moderator->id}}">Moderator </h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="col-12">
+                                                @if($moderator->avatar == "default-pp.png")
+                                                    <img src=" {{ asset('img/default.svg') }} " width="50px" height='50px' style="object-fit: fill;"" class = "rounded-circle">
+                                                @else
+                                                    <img src=" {{ asset('storage/avatar/' . $moderator->avatar) }} " width="50px" height='50px' style="object-fit: fill;"" class = "rounded-circle">
+                                                @endif
+                                            </div>
+                                            <hr>
+                                            <div class="col-12 pm-details">
+                                                <h5>{{ $moderator->surname }}</h5>
+                                            </div>
+                                            <div class="col-12 pm-details">
+                                                <h5>{{ $moderator->email }}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         @endforeach  
                     </ul>
-
                 </div>
-            </div>
 
+            </div>
         </div>
 
     </div>
