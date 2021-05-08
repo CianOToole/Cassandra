@@ -24,7 +24,7 @@
                 <div class="col-12 table-search-bar">
                         <div class="table-header-btns post-hdr-btn" >
                             <h6>
-                                <a href="{{ route('board.topics.index', $topic[0]->board_id) }}" class="form-btn">Boards</a>
+                                <a href="{{ route('board.topics.index', $topic[0]->board_id) }}" class="form-btn">Back to topic</a>
                             </h6>    
                             <h6>
                                 <a href="{{ route('forum.index', "boards") }}" class="form-btn-alt">Boards</a>
@@ -69,7 +69,7 @@
 
                                         <figure>
                                             @if($post->avatar == "default-pp.png")
-                                                <img class="post-img {{ $border }}-border" src=" {{ asset('img/default.png') }}">
+                                                <img class="post-img {{ $border }}-border" src=" {{ asset('img/default.svg') }}">
                                             @else
                                                 <img class="post-img {{ $border }}-border" src=" {{ asset('storage/avatar/' . $post->avatar) }}">
                                             @endif

@@ -8,7 +8,7 @@
 
 <div class="container" style="margin-top: -1.5rem; margin-bottom: -1.5rem;">
     <div class="row">
-        <div class="col">
+        <div class="col prf-responsiveness">
             <div class="profile-holder">
 
                 @if (session('status'))
@@ -25,7 +25,11 @@
                         <div class="col-md-3 profile-left">
                             <div class="col-12">
                                 <figure class="profile-pic">
-                                    <img src=" {{ asset('storage/avatar/' . $profile->avatar) }} " width="125px" height='125px' style="object-fit: fill;"" class = "rounded-circle">
+                                    @if($profile->avatar == "default-pp.png")
+                                        <img class="post-img" src=" {{ asset('img/default.svg') }} " width="15px" height='125px' style="object-fit: fill;"" class = "rounded-circle">
+                                    @else
+                                        <img src=" {{ asset('storage/avatar/' . $profile->avatar) }} " width="125px" height='125px' style="object-fit: fill;"" class = "rounded-circle">
+                                    @endif
                                 </figure>
                             </div>
                             <div class="col-12 id-left">
@@ -107,7 +111,7 @@
 
                                         <figure>
                                             @if($profile->avatar == "default-pp.png")
-                                                <img class="post-img" src=" {{ asset('img/default.png') }}">
+                                                <img class="post-img" src=" {{ asset('img/default.svg') }}">
                                             @else
                                                 <img class="post-img" src=" {{ asset('storage/avatar/' . $profile->avatar) }} ">
                                             @endif
@@ -123,24 +127,19 @@
                                         </div>    
 
                                         <div class="post-btns">
+                                            <h6>
+                                                <a href=" {{ route('topic.posts.index', $post->topic_id) }} " class="form-btn prf-thred-btn">  
+                                                    <span>Go to topic</span>
+                                                </a>
+                                            </h6> 
 
-                                            @if($user = Auth::user()->id == $post->user_id)        
-
-                                                <h6>
-                                                    <a href=" {{ route('topic.posts.index', $post->topic_id) }} " class="form-btn">  
-                                                        <span style="margin-left: 6px">Go to topic</span>
-                                                    </a>
-                                                </h6> 
-
-                                                <form method="POST" action="{{ route( 'topic.posts.destroy', [$post->topic_id, $post->id]) }}">
-                                                    <input type="hidden" name="_method" value="DELETE">
-                                                    <input type="hidden" name="_token" value=" {{ csrf_token() }} ">                                        
-                                                    <button type="submit" class="table-delete" title="Delete post">
-                                                        <i class="fas fa-trash" style="font-size: 24px"></i>
-                                                    </button>
-                                                </form>
-                                                
-                                            @endif
+                                            <form method="POST" action="{{ route( 'topic.posts.destroy', [$post->topic_id, $post->id]) }}">
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <input type="hidden" name="_token" value=" {{ csrf_token() }} ">                                        
+                                                <button type="submit" class="table-delete" title="Delete post">
+                                                    <i class="fas fa-trash" style="font-size: 24px"></i>
+                                                </button>
+                                            </form>
                                         </div>
 
                                     </div>

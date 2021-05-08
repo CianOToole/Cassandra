@@ -43,13 +43,20 @@ class ModeratorController extends Controller{
     public function show($id){
 
         $moderator = DB::table('users')        
-        ->join('employees', 'users.id', '=', 'employees.user_id')
-        ->select("users.*",  'employees.name', 'employees.emp_number', 'employees.salary')
-        ->where('users.id', $id)
-        ->get();
+            ->join('employees', 'users.id', '=', 'employees.user_id')
+            ->select("users.*",  'employees.name', 'employees.emp_number', 'employees.salary')
+            ->where('users.id', $id)
+            ->get();
+
+        $posts = DB::table('posts')
+            ->where('user_id', $moderator[0]->id)
+            ->select('posts.*')
+            ->orderByDesc('updated_at')
+            ->paginate(10);
 
         return view('admin.moderators.show',[
             'moderator' => $moderator,
+            'posts' => $posts,
         ]);     
 
     }
@@ -121,8 +128,6 @@ class ModeratorController extends Controller{
     public function destroy(Request $request, $id){
         $moderator = Employee::where('user_id', $id)->firstOrFail();
         $moderator->delete();
-
-        $moderators = User::where('id', $moderator->user_id)->get();
 
         $user = User::where('id', $moderator->user_id)->get();
         $posts = Post::where('user_id', $user[0]->id)->get();

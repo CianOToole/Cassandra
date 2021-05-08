@@ -842,7 +842,9 @@ table tbody tr td.update-required {
     border: 0px;
     margin-bottom: 15px;
 }
+// @media (max-width: 540px) { 
 
+// }
 @media (max-width: 675px) { 
     .responsive-thread{
         padding: 0px;
@@ -851,6 +853,7 @@ table tbody tr td.update-required {
         justify-content: flex-end;
         padding-left: 5px;
     }
+    .post-header{grid-template-columns: 100px repeat(2, 1fr);}
     .post-header figure{
         justify-content: flex-start;
         padding-left: 15px;
@@ -888,6 +891,12 @@ table tbody tr td.update-required {
     font-size: 18px;
 }
 
+.table-banning-alt{
+    background-color: rgb(0, 0, 0, 0);
+    border: 0px;
+    font-size: 24px;
+}
+
 .table-unban{color: rgba(32, 129, 249, .80);}
 .table-unban:hover{color: rgba(32, 129, 249, 1);}
 
@@ -911,23 +920,15 @@ table tbody tr td.update-required {
     padding: 0px;
     border-left: 1px solid rgba(22, 22, 22, .75);
     border-right: 1px solid rgba(22, 22, 22, .75);
-    // height: 100vh;
 }
 
-.profile-head{
-    border-bottom: 1px solid rgba(22, 22, 22, .75);
-    padding-top: 50px;
-}
+.profile-head{border-bottom: 1px solid rgba(22, 22, 22, .75);}
 
-.profile-foot{
-    border-top: 1px solid rgba(22, 22, 22, .75);
-    height: 100vh;
-    overflow-y: auto;
-}
+.profile-foot{border-top: 1px solid rgba(22, 22, 22, .75);}
 
 .profile-left{
-    border-right: 1px solid rgba(22, 22, 22, .75);
     padding-right: 0;
+    text-align: center;
 }
 
 .profile-left div{
@@ -938,14 +939,21 @@ table tbody tr td.update-required {
     padding: 20px 0px 10px 0px;
     margin: 0px;
 }
-.id-left{
-    padding: 10px 0px 20px 0px;
-}
+.id-left{padding: 10px 0px 20px 0px;}
 
 .profile-btns{
     display: flex;
     justify-content: flex-end;
     align-items: flex-start;
+    padding: 15px;
+    outline: 0;
+    font-size: 21px;
+}
+
+.profile-btns-alt{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
     padding: 15px;
     outline: 0;
     font-size: 21px;
@@ -977,8 +985,16 @@ table tbody tr td.update-required {
     padding: 20px 0px;
 }
 
+@media (min-width: 960px) { 
+    .profile-head{padding-top: 50px;}
+    .profile-left{
+        border-right: 1px solid rgba(22, 22, 22, .75);
+    }
+}
+
 @media (max-width: 675px) { 
-    // .profile-btns{
-    //     justify-content: flex-start;
-    // }
+    .prf-responsiveness{padding: 0;}
+    .prf-data{grid-template-rows: repeat(3, auto);}
+    .prf-thred-btn{padding: 5px 5px;}
+    .post-btns{align-items: center;}
 }

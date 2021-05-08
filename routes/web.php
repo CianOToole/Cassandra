@@ -91,7 +91,6 @@ Route::put('/moderator/unbanning/{id}', [ModCliController::class, 'unban'])->nam
 // - Admin -> boards
 Route::get('/forum', [Forum::class, 'boards_index'])->name('forum.index');
 Route::get('/forum/{tab}', [Forum::class, 'boards_index'])->name('forum.index');
-Route::get('/manager/{userId}', [Forum::class, 'forumManagers'])->name('forumManagers');
 
 // - TOPICS
 // - search route
