@@ -30,9 +30,9 @@
 
                         <div class="col-lg-5 table-header-btns" style="padding-left: 0;">
                             <h6>
-                                <a href=" {{ route('board.topics.create', $board->id) }} " class="form-btn">  
+                                {{-- <a href=" {{ route('board.topics.create', $board->id) }} " class="form-btn">  
                                     <i class="fas fa-plus-circle"></i><span style="margin-left: 6px">New topic</span>
-                                </a>
+                                </a> --}}
                             </h6>    
                             <h6>
                                 <a href="{{ route('forum.index', "boards") }}" class="form-btn-alt">Boards</a>
