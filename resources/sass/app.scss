@@ -475,6 +475,11 @@ td{
 .op_btn{
     background-color: rgb(0, 0, 0, 0);
     border: 0px;
+}
+
+.op_btn p{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
     color: #2081F9;
 }
 
@@ -863,7 +868,7 @@ table tbody tr td.update-required {
 
 .post-cnt{
     border-top: 1px solid rgba(22, 22, 22, .15);
-    padding: 15px 15px 0px 15px;
+    padding: 15px;
     margin: 0px 15px;
 }
 
@@ -1181,3 +1186,94 @@ table tbody tr td.update-required {
         padding: 34px 1%;
     }
 }
+
+// FORM  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+.form-holder{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 75vh;
+}
+
+.form{
+    background-color: white;
+    width: 340px;
+    height: 400px;
+    box-shadow: -4px 4px 5px rgba(22,22,22, .15);
+    border: 1px solid rgba(22,22,22, .35);
+    border-radius: 3px;
+}
+
+.form h1{
+    padding: 35px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.form-holder form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-holder label,
+.form-holder i{
+    color: #444;
+}
+
+.form-group-parent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    width: 100%;
+    padding: 0px 15px;
+}
+
+.form-group,
+.input-holder,
+.input-holder input{
+    width: 100%;
+}
+
+.form-group{
+    margin-bottom: 21px;
+}
+
+form i{
+    padding-left: 0px;
+}
+
+.input-holder input{
+    width: 100%;
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid #222;
+    outline: 0;
+}
+
+.input-holder input:focus{
+    border-color: rgba(32, 129, 249, 1);
+}
+
+.login-group{
+    margin-top: 17px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.login-group button{
+    background-color: rgba(32, 129, 249, .80);
+    border: 0px;
+    color: #fff;
+    width: 100%;
+    padding: 15px 0px;
+    border-radius: 3px;
+    text-transform: uppercase;
+}
+
+.login-group button:hover{
+    background-color: rgba(32, 129, 249, 1);
+}
+
