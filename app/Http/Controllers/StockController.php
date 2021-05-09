@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Stock;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\Trade;
+use App\Models\Balance;
+use Illuminate\Support\Facades\Hash;
 use Auth;
+use App\Services\UserBalanceService;
+use App\Services\TradeService;
 
 class StockController extends Controller
 {
@@ -20,18 +24,21 @@ class StockController extends Controller
      */
     public function index()
     {
-        // $user = Auth::user();
-        // $stocks = $user->trades()->orderBy('created_at', 'desc')->paginate(8);
-        // return view('stocks.index', [
-        //     'stocks' => $stocks
-        // ]);
-         $stocks = Stock::orderBy('created_at', 'asc')->paginate(31);
-        //  $test = Stock::groupBy('ticker')->get();
-        //   $stocks = Stock::select("select DISTINCT ticker from stocks")->orderBy('created_at', 'desc');
-        return view('stocks.index',[
-            'stocks' => $stocks
+        $user = Auth::user()->id;
+        $trades = Trade::where('user_id', '=', $user)->where('tradeClosed', '=', false)->get();
+        $gainLoss = (new TradeService())->calProfitLoss();
+        $portfolioCash = 0;
+        foreach ($trades as $trade) {
+            $portfolioCash = $trade->amount;
+        }
+        $portfolioCash += $gainLoss;
+        $balances = Balance::where('user_id', '=', $user)->get();
+        return view('stock', [
+            'trades' => $trades,
+            'balances' => $balances,
+            'gainLoss' => $gainLoss,
+            'portfolioCash' => $portfolioCash
         ]);
-
        
     }
 

@@ -11223,6 +11223,7 @@ table tbody tr td.update-required {
 .bite {
   position: relative;
   display: inline-flex;
+  margin-left: 15px;
 }
 
 .white {
@@ -11273,5 +11274,48 @@ table tbody tr td.update-required {
 .blockColour {
   background: #FFFFFF;
   border-radius: 10px;
+}
+
+.stockAndExchange {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  padding-top: 10px;
+}
+
+.priceOfStock {
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 40px;
+  line-height: 54px;
+}
+
+.stockButton {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  background: rgba(37, 165, 10, 0.75);
+  width: 72px;
+  height: 30px;
+  margin-top: 45px;
+  margin-left: 400px;
+}
+
+.stockButton:hover {
+  background-color: #0fa61b;
+}
+
+.stockHiddenInputForm {
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.stockData {
+  margin-bottom: 15px;
 }
 

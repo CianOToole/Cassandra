@@ -169,9 +169,11 @@ Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.de
 
 
 // STOCK API ROUTE ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Route::get('/stock/{ticket}', function () {
-    return view('stock');    
-})->name('stock');
+Route::get('/stock/{ticket}',[StockController::class, 'index'])->name('stock');
+
+// Route::get('/stock/{ticket}', function () {
+//     return view('stock');    
+// })->name('stock');
 
 Route::get('/history', function () {
     return view('trades.history');    

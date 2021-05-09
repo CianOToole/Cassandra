@@ -8,22 +8,24 @@
 .red {
     background: rgba(206, 31, 31, 0.945);
 }
+
 .green {
     background: rgba(31, 206, 104, 0.863);
 }
+
 .blue {
     background: rgba(31, 121, 206, 0.945);
 }
 
-*{
+* {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-  }
+}
 
 // NAVBAR   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-nav{
-    background-color: rgb(22, 22, 22, .90); 
+nav {
+    background-color: rgb(22, 22, 22, .90);
     height: 80px;
     font-family: 'Lato', 'sans-serif';
     font-size: 16px;
@@ -31,143 +33,168 @@ nav{
     grid-template-columns: 80px 1fr auto;
 }
 
-.navbar{
+.navbar {
     justify-content: end;
 }
-.login-register .nav-link{padding: 0;}
-.logo{
+
+.login-register .nav-link {
+    padding: 0;
+}
+
+.logo {
     display: flex;
     align-items: center;
     justify-content: space-around;
 }
 
-.search-stock{
+.search-stock {
     display: grid;
     align-items: center;
     padding: 0px 3%;
 }
 
-.form-control{
+.form-control {
     max-width: 500px;
 }
 
 .nav-links {
     display: flex;
-    align-items: center; 
+    align-items: center;
     grid-column-gap: 25px;
     margin: 0;
 }
 
-.nav-links li{
+.nav-links li {
     list-style-type: none;
-    align-items: center; 
+    align-items: center;
 }
 
-.login-register a{
+.login-register a {
     color: #fff;
 }
 
-.profile-items .profile:hover{color:black;}
+.profile-items .profile:hover {
+    color: black;
+}
 
 // Navbar buttons & links styling
-.lg-items button, .lg-items a{
+.lg-items button,
+.lg-items a {
     color: rgb(253, 253, 253);
     background-color: rgba(0, 0, 0, 0);
-    border: none;   
+    border: none;
     outline: 0;
 }
 
-.nav-links li a:hover{
+.nav-links li a:hover {
     text-decoration: underline;
     text-decoration-color: #2081F9;
     text-decoration-thickness: 2px;
 }
-.nav-links button:focus{outline: 0;}
+
+.nav-links button:focus {
+    outline: 0;
+}
 
 // DROPDOWN LINKS-------------------------------------
 .dropdown {
     position: relative;
     display: inline-block;
-  }
+}
 
-  .drop-btn{padding-left: 15px;}
-  
-  .dropdown-content {
+.drop-btn {
+    padding-left: 15px;
+}
+
+.dropdown-content {
     display: none;
     position: absolute;
     background-color: #2B2B2C;
     color: white;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
     border-top: 1px solid #C6C6C6;
-  }
+}
 
-  .dropdown-content a{
+.dropdown-content a {
     color: white;
     text-decoration: none;
     padding: 5px 0;
-  }
+}
 
-  .dropdown-content li{
-    padding: 15px;;
-  }
+.dropdown-content li {
+    padding: 15px;
+    ;
+}
 
-  .dropdown-content li:hover{
+.dropdown-content li:hover {
     background-color: black;
-  }
-  
-  .dropdown:hover .dropdown-content {display: block;}
+}
 
-  // DROPDOWN LINKS-------------------------------------
+.dropdown:hover .dropdown-content {
+    display: block;
+}
 
-.dropdown-menu{
+// DROPDOWN LINKS-------------------------------------
+
+.dropdown-menu {
     border-radius: 0px;
     border: .5px solid rgb(22, 22, 22, .25);
-    box-shadow: -4px 4px 4px rgba(22, 22, 22, .25);    
+    box-shadow: -4px 4px 4px rgba(22, 22, 22, .25);
     padding: 5px 0px;
 }
 
-.profile-items a{ 
+.profile-items a {
     color: #222;
 }
 
-.profile-items a:hover{
+.profile-items a:hover {
     background-color: #E2E7EF;
     text-decoration: none !important;
 }
 
-.logout{    color: rgba(206, 31, 31, 0.945)!important;}
-
-i{
-    padding-left: 3.5rem;    
+.logout {
+    color: rgba(206, 31, 31, 0.945) !important;
 }
-.logout:hover{    
-    background-color: rgba(206, 31, 31, 0.945)!important;
-    color: rgba(255, 255, 255)!important;
+
+i {
+    padding-left: 3.5rem;
+}
+
+.logout:hover {
+    background-color: rgba(206, 31, 31, 0.945) !important;
+    color: rgba(255, 255, 255) !important;
     transition-duration: .5s;
 }
 
 // Hamburger button styling
-.hamburger{display: none;}
-.hamburger button{
+.hamburger {
+    display: none;
+}
+
+.hamburger button {
     background-color: rgba(0, 0, 0, 0);
     color: #fff;
     border: 0px;
 }
-.hamburger h3{margin:0;}
 
-.rotation-1{
+.hamburger h3 {
+    margin: 0;
+}
+
+.rotation-1 {
     transform: rotate(180deg);
     transition-duration: .5s;
 }
-.rotation-2{
+
+.rotation-2 {
     transform: rotate(-180deg);
     transition-duration: .5s;
 }
 
 // Links for small screens
-.responsive-navbar{
+.responsive-navbar {
     height: 700px;
     background-color: rgba(22, 22, 22, 0.9);
     border-top: 1px solid rgba(17, 10, 10, 0.5);
@@ -179,40 +206,43 @@ i{
     text-align: center;
 }
 
-.responsive-navbar a, .responsive-navbar button{
+.responsive-navbar a,
+.responsive-navbar button {
     font-family: 'Open Sans', 'sans serif';
     font-size: 20px;
     font-weight: 300;
     color: #fff;
 }
 
-.dropdown-item:hover, .dropdown-item:focus{
+.dropdown-item:hover,
+.dropdown-item:focus {
     color: #fff;
     text-decoration: none;
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(0, 0, 0, 0);
     outline: 0;
 }
 
-@media (min-width: 960px) { 
-    .responsive-navbar{
+@media (min-width: 960px) {
+    .responsive-navbar {
         display: none;
     }
 }
 
-@media (max-width: 960px) { 
-    nav { 
-        .hamburger{
+@media (max-width: 960px) {
+    nav {
+        .hamburger {
             display: block;
         }
-        .lg-items{
+
+        .lg-items {
             display: none;
         }
-    } 
+    }
 }
 
 // Search bar ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#searchBar:focus{
+#searchBar:focus {
     box-shadow: 0 1px 1px rgba(255, 255, 255, 0.75) inset, 0 0 8px rgba(255, 255, 255, 0.75);
     outline: 0 none;
 }
@@ -234,17 +264,17 @@ i{
     width: 500px;
 }
 
-#searchGroup li{
+#searchGroup li {
     padding-left: 10px;
     border-bottom: 1px solid #222;
 }
 
-#searchGroup li:hover{
+#searchGroup li:hover {
     background-color: lightgrey;
     cursor: pointer;
 }
 
-#searchGroup li:active{
+#searchGroup li:active {
     background-color: rgb(32, 129, 249, .25);
 }
 
@@ -301,7 +331,7 @@ table tbody tr td.update-required {
 
 // Radical Dsg ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-.bx-cnt{
+.bx-cnt {
     background-color: #fff;
 }
 
@@ -317,6 +347,7 @@ table tbody tr td.update-required {
 .bite {
     position: relative;
     display: inline-flex;
+    margin-left: 15px;
 }
 
 
@@ -371,9 +402,52 @@ table tbody tr td.update-required {
     margin-left: 15px;
 }
 
-.blockColour{
+.blockColour {
     background: #FFFFFF;
     border-radius: 10px;
 }
 
+////////////////////////////////////////////////////////Stock Page/////////////////////////////
+.stockAndExchange {
+    font-family: Lato;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    padding-top: 10px;
+}
 
+.priceOfStock {
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 40px;
+    line-height: 54px;
+}
+
+.stockButton {
+    font-family: Lato;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+
+    background: rgba(37, 165, 10, 0.75);
+    width: 72px;
+    height: 30px;
+    margin-top: 45px;
+    margin-left: 400px;
+}
+
+.stockButton:hover {
+    background-color: #0fa61b;
+  }
+
+.stockHiddenInputForm {
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.stockData{
+    margin-bottom: 15px;
+}

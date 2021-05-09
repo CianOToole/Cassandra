@@ -4,41 +4,82 @@
 
     <div class="container work">
 
-        <div class="row bite">
-
-            <div class="col-md-8 graph">
-                <script src="{{ asset('js/stock.js') }}" type="text/javascript"></script>
-                
+        <div class="row blockColour stockHiddenInputForm">
+                <div class="col-md-6">
+                    <p class="stockAndExchange" id="myBtn"></p>
+                    <p class="priceOfStock" id="myBtn2"></p>
+                </div>
+            <div class="col-md-6">
+               
+                <form action="{{ route('trades.create') }}" method="get">
+                    <div class="input-group ">
+                        <input type="hidden" id="hideBtn" name="ticket" value="">
+                    </div>
+                    <button type="submit" class="btn btn-primary stockButton">Order</button>
+                </form>
             </div>
-            <div class="col-md-4">
-                <h1>Lorem ipsum dolor sit amet.</h1>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Distinctio, quaerat in? Inventore amet eligendi cupiditate fugit aut nihil repellat debitis,
-                nisi labore incidunt modi provident suscipit natus necessitatibus in voluptatem, ad repellendus non culpa.
-                Nemo non at, recusandae dolore, eum, similique ratione voluptas eligendi nisi expedita fuga error! Vero
-                facilis,
-                optio dolore repudiandae alias officia reiciendis animi soluta commodi facere debitis sint consectetur,
-                ducimus repellendus,
-                porro rem! Provident esse eaque non iste, doloribus vitae repudiandae rerum eligendi quas sequi! Harum
-                cupiditate magni commodi e
-                sse, officia, facilis quam perspiciatis dolor a earum laborum id iste accusamus fugit! Ipsa nesciunt
-                dignissimos dolores.
-            </div>
-            {{-- href="{{route('trades.create',$stock->price)}}" --}}
-            {{-- <a href="#" onmousedown="promptOrder()" id="myBtn" class="btn btn-primary float-left">Order</a> --}}
         </div>
-        <form action="{{ route('trades.create') }}" method="get">
-            <div class="input-group">
-                <input type="hidden" id="hideBtn" name="ticket" value="">
+
+        <div class="row">
+            <div class="row bite blockColour  col-md-8 ">
+                <div class="col-md-12 graph col-sm-6">
+                    <script src="{{ asset('js/stock.js') }}" type="text/javascript"></script>
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary">Order</button>
-        </form>
+
+            <div class="row bite position-sticky col-md-4">
+                <div class="col-md-12 blockColour stockData ">
+                    <h1 id="myBtn4"></h1>
+                    <p  id="myBtn5"></p>
+                    <hr>
+                    <p  id="myBtn6"></p>
+                    <hr>
+                    <p  id="myBtn7"></p>
+                    <hr>
+                    <p  id="myBtn8"></p>
+                    <hr>
+                    <p  id="myBtn9"></p>
+                    <hr>
+                    <p  id="myBtn10"></p>
+                </div>
+
+                <div class="col-md-12 blockColour">
+                    <div class="row">
+                        <h2 class="walletText col">Wallet</h2>
+                        <button type="submit" class="btn btn-primary moveRight col">Fund</button>
+                    </div>
+                    {{-- <hr> --}}
+                    <div class="row">
+                        @foreach ($balances as $balance)
+                            <h2 class="walletText col">Balance</h2>
+                            <h2 class="walletText col">{{ $balance->amount + $portfolioCash }}</h2>
+                        @endforeach
+                    </div>
+                    {{-- <hr> --}}
+                    <div class="row">
+                        <h2 class="walletText col">Portfolio</h2>
+                        <h2 class="walletText col">{{ $portfolioCash }}</h2>
+                    </div>
+                    <div class="row">
+                        @foreach ($balances as $balance)
+                            <h2 class="walletText col">Available to trade</h2>
+                            <h2 class="walletText col">€{{ $balance->amount }}</h2>
+                        @endforeach
+                    </div>
+                    <div class="row">
+                        <h2 class="walletText col">Daily +/-</h2>
+                        <h2 class="walletText col">{{ $gainLoss }}€</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
     </div>
 
 
-        <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
-        <script src="{{ asset('js/balance.js') }}" type="text/javascript"></script>
+    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+    <script src="{{ asset('js/balance.js') }}" type="text/javascript"></script>
 
     </div>
 

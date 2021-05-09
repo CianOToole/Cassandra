@@ -127,7 +127,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _bab
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Knut\WAF\MyLaravelProjects\Cassandra\resources\js\news.js */"./resources/js/news.js");
+module.exports = __webpack_require__(/*! E:\YEAR 3\project\Cassandra\resources\js\news.js */"./resources/js/news.js");
 
 
 /***/ })
