@@ -26,6 +26,10 @@
                     </thead>
                     <tbody>
                         @foreach ($trades as $trade)
+                        @php
+                                        $switch_bcg;         
+                                        ($count % 2 != 0) ? $switch_bcg = "blue-bck" : $switch_bcg = null;
+                                    @endphp
                             <tr>
                                 <th scope="row">{{ $trade->ticker }}</th>
                                 <td>bruh</td>
@@ -74,8 +78,7 @@
             </div>
         </div>
 
-        <h1>            /!\ The deletion is under construction and may not work yet
-        </h1>
+        
 
     </div>
 @endsection
