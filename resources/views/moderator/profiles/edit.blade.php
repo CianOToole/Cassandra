@@ -1,155 +1,140 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
 
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="card">
+<div class="form-holder-alt">
+    <div class="form-alt">
+        <div class="form-alt-header">
+            <h3> Edit {{ $moderator[0]->name }} {{ $moderator[0]->surname }}'s Profile </h3>
+        </div>
 
-                <div class="card-header">
-                    <h3 class="card-title"> Edit {{ $moderator[0]->name }} {{ $moderator[0]->surname }}'s Profile </h3>
+        <div class="form-alt-body">
+
+            <form method="POST" action="{{ route('moderator.profiles.update', $moderator[0]->id) }}"  enctype="multipart/form-data">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="_method" value="PUT">
+                @csrf
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <h5><label for="name">Name</label></h5>
+                        <input type="text" class="form-control input-alt @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name', $moderator[0]->name) }}" />
+
+                        @error('name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-6">
+                        <h5><label for="surname">Surname</label></h5>
+                        <input type="text" class="form-control input-alt @error('surname') is-invalid @enderror" id="surname" name="surname" value="{{ old('surname', $moderator[0]->surname) }}" />
+
+                        @error('surname')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
                 </div>
 
-                <div class="card-body">
-                    @if($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    
-                    <form method="POST" action="{{ route('moderator.profiles.update', $moderator[0]->id) }}"  enctype="multipart/form-data">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <input type="hidden" name="_method" value="PUT">
+                <div class="form-group">
+                    <h5><label for="address">Address</label></h5>
+                    <input type="text" class="form-control input-alt @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address', $moderator[0]->address) }}" />
 
-                        <div class="form-group">
-                            <label for="avatar">Profile picture</label>                            
-                            <div class="">
-                                <input type="file" class="form-control" id="avatar" name="avatar" value="" />
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="name" class="">{{ __('Name') }}</label>
+                    @error('address')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
 
-                            <div class="">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" 
-                                value="{{ old('name', $moderator[0]->name) }}" required autocomplete="name" autofocus>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <h5><label for="emp_number">Employee number</label></h5>
+                        <input type="text" class="form-control input-alt @error('emp_number') is-invalid @enderror" 
+                        id="emp_number" name="emp_number" value="{{ old('emp_number', $moderator[0]->emp_number) }}" oninput="empNumber()" />
 
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+                        @error('emp_number')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-6">
+                        <h5><label for="salary">Salary</label></h5>
+                        <input type="text" class="form-control input-alt @error('salary') is-invalid @enderror" id="salary" name="salary" value="{{ old('salary', $moderator[0]->salary) }}" placeholder="€" />
 
-                        <div class="form-group">
-                            <div class="">
-                                <label for="surname" class="">{{ __('Surname') }}</label>
-                                <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" 
-                                value="{{ old('surname', $moderator[0]->surname) }}" required autocomplete="surname" autofocus>
+                        @error('salary')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
 
-                                @error('surname')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+                <div class="form-group">
+                    <h5><label for="email">Email</label></h5>
+                    <input type="email" class="form-control input-alt @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email', $moderator[0]->email) }}" />
 
-                        <div class="form-group">
-                            <label for="email" class="">{{ __('E-Mail Address') }}</label>
+                    @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
 
-                            <div class="">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" 
-                                value="{{ old('email', $moderator[0]->email) }}" required autocomplete="email">
+                <div class="form-group">
+                    <h5><label for="phone">Phone</label></h5>
+                    <input type="tel" class="form-control input-alt @error('phone') is-invalid @enderror" 
+                    id="phone" name="phone" value="{{  old('phone', $moderator[0]->phone) }}" oninput="phoneNumber()" />
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+                    @error('phone')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
 
-                        <div class="form-group ">
-                            <label for="phone" class="">{{ __('Phone') }}</label>
+                <div class="form-group">
+                    <h5><label for="avatar">Profile picture</label></h5>
+                    <input type="file" class="form-control input-alt @error('avatar') is-invalid @enderror" id="avatar" name="avatar" value="{{ old('avatar') }}" />
 
-                            <div class="">
-                                <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" 
-                                value="{{ old('phone', $moderator[0]->phone) }}" required autocomplete="phone" placeholder="08x-xxxx-xxx" 
-                                pattern="[0-9]{3}-[0-9]{4}-[0-9]{3}"
-                                autofocus>
+                    @error('avatar')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
 
-                                @error('phone')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>  
+                <div class="submit-btn">
+                    <a href="{{ route('moderator.profiles.index') }}" class="btn btn-link">Cancel</a>
+                    <button type="submit" class="">Submit</button>
+                </div>      
 
-                        <div class="form-group">
-                            <label for="address" class="">{{ __('Address') }}</label>
-
-                            <div class="">
-                                <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" 
-                                value="{{ old('address', $moderator[0]->address) }}"" required autocomplete="address" autofocus>
-
-                                @error('address')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="emp_number" class="">{{ __('Employee Number') }}</label>
-
-                            <div class="">
-                                <input id="emp_number" type="text" class="form-control @error('address') is-invalid @enderror" name="emp_number" 
-                                value="{{ old('emp_number', $moderator[0]->emp_number) }}"" required 
-                                pattern="[0-9-A-Z]{5}" autocomplete="emp_number" autofocus>
-
-                                @error('emp_number')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="salary" class="">{{ __('Salary') }}</label>
-
-                            <div class="">
-                                <input id="salary" type="text" class="form-control @error('salary') is-invalid @enderror" name="salary" 
-                                value="{{ old('salary', $moderator[0]->salary) }} " required autocomplete="salary" autofocus>
-
-                                @error('salary')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="float-right">
-                            <a href="{{ route('moderator.profiles.index') }}" class="btn btn-link">Cancel</a>
-                            <button type="submit" class="btn btn-primary pull-right">Submit</button>
-                        </div>      
-
-                    </form>
-
-                </div>  
-            </div>
+            </form>
+            
         </div>
     </div>
 </div>
+
+<script>
+    function empNumber(){
+        let empNumb = document.getElementById('emp_number');
+        let toUpperCase = empNumb.value.toUpperCase();
+        empNumb.value = toUpperCase;
+        (empNumb.value.length > 5) ? (empNumb.value = empNumb.value.slice(0, 5)) : null;
+    }
+
+    function phoneNumber(){
+        let input = document.getElementById('phone');
+        let phone= input.value;
+
+        (phone.length == 3) ? (input.value = `${phone}-`) 
+        : (phone.length == 8) ? (input.value = `${phone}-`) 
+        : (phone.length > 11) ? (input.value = phone.slice(0, 12)) 
+        : null;
+    }
+</script>
+
 @endsection

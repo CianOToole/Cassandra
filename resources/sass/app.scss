@@ -110,6 +110,7 @@ input[type="email"],
 input[type="tel"],
 input[type="password"],
 input[type="file"],
+select,
  textarea {
     outline: none;
     box-shadow:none !important;
@@ -817,7 +818,7 @@ table tbody tr td.update-required {
 .post-img{
     width: 65px;
     height: 65px;
-    object-fit: fill;
+    object-fit: cover;
     border-radius: 3px;
     margin: 0;
     border: 1px solid rgba(22, 22, 22, .10);
@@ -1358,8 +1359,13 @@ textarea:focus{
     border: 1px solid rgb(22, 22, 22, .60);
 }
 
-.input-alt:focus{
-    border-color: rgba(32, 129, 249, 1);
+select{
+    border-color: rgba(22, 22, 22, .60) !important;
+}
+
+.input-alt:focus,
+select:focus{
+    border-color: rgba(32, 129, 249, 1) !important;
 }
 
 .form-control {
@@ -1381,6 +1387,7 @@ textarea:focus{
     background-color: #BA182B;
     color: #fff;
     transition: .5s;
+    text-decoration: none !important;
 }
 
 @media (max-width: 992px) {

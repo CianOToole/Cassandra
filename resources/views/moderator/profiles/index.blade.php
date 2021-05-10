@@ -26,9 +26,9 @@
                             <div class="col-12">
                                 <figure class="profile-pic">
                                     @if($profile->avatar == "default-pp.png")
-                                        <img class="post-img" src=" {{ asset('img/default.svg') }} " width="15px" height='125px' style="object-fit: fill;"" class = "rounded-circle">
+                                        <img class="post-img" src=" {{ asset('img/default.svg') }} " width="15px" height='125px' style="object-fit: cover;" class = "rounded-circle">
                                     @else
-                                        <img src=" {{ asset('storage/avatar/' . $profile->avatar) }} " width="125px" height='125px' style="object-fit: fill;"" class = "rounded-circle">
+                                        <img src=" {{ asset('storage/avatar/' . $profile->avatar) }} " width="125px" height='125px' style="object-fit: cover;" class = "rounded-circle">
                                     @endif
                                 </figure>
                             </div>
