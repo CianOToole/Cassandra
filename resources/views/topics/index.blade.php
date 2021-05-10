@@ -72,7 +72,7 @@
                                                         <div class="form-group">
                                                             <h5><label for="title" class="">{{ __('Title') }}</label></h5>
                                                             <div class="input-holder">
-                                                                <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}" />
+                                                                <input type="text" class="" id="title" name="title" value="{{ old('title') }}" />
                                                             </div>
                                                             @error('title')
                                                                 <span class="invalid-feedback" role="alert">
@@ -82,22 +82,23 @@
                                                         </div>
                                                     </div>
                             
-                                                    <div class="form-group ">
-                                                        <h5><label for="post" class="">{{ __('Post') }}</label></h5>
-                                                        <div class="input-holder">
-                                                            <textarea class="form-control" id="post" name="post" value="{{ old('post') }}"
-                                                            placeholder="“Listen to many, speak to a few.” ... "> </textarea>
+                                                    <div class="form-group-parent">
+                                                        <div class="form-group ">
+                                                            <h5><label for="post" class="">{{ __('Post') }}</label></h5>
+                                                            <div class="input-holder">
+                                                                <textarea class="" id="post" name="post" value="{{ old('post') }}"
+                                                                placeholder="“Listen to many, speak to a few.” ... "> </textarea>
+                                                            </div>
+                                                            @error('post')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
                                                         </div>
-                                                        @error('post')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
                                                     </div>
                             
-                                                    <div class="float-right">
-                                                        <a href="{{ route('board.topics.index', $board->id) }}" class="btn btn-link">Cancel</a>
-                                                        <button type="submit" class="btn btn-primary pull-right">Submit</button>
+                                                    <div class="submit-btn">
+                                                        <button type="submit" class="">Submit</button>
                                                     </div>    
                             
                                                 </form>

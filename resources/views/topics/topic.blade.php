@@ -29,11 +29,83 @@
                         </div>
 
                         <div class="col-lg-5 table-header-btns" style="padding-left: 0;">
-                            <h6>
-                                {{-- <a href=" {{ route('board.topics.create', $board->id) }} " class="form-btn">  
-                                    <i class="fas fa-plus-circle"></i><span style="margin-left: 6px">New topic</span>
-                                </a> --}}
-                            </h6>    
+
+                            {{-- NEW TOPIC MODAL FORM --}}
+
+                            <!-- Button trigger modal -->
+                            <button type="button" class="form-btn" data-toggle="modal" data-target="#newTopic" style="padding-top: 5px; padding-bottom: 5px">
+                                <i class="fas fa-plus-circle"></i>
+                                <span style="margin-left: 6px">New topic</span>
+                            </button>
+                            
+                            <!-- Modal -->
+                            <div class="modal fade" id="newTopic" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="exampleModalLabel">New topic</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+
+                                        <div class="modal-body">
+
+                                            @if($errors->any())
+                                                <div class="alert alert-danger">
+                                                    <ul>
+                                                        @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            @endif
+                                                    
+                                            <form action="{{route('board.topics.store', $board->id) }}" method="POST" enctype="multipart/form-data">
+                                                @csrf
+                                                <div class="form-group-parent">
+                                                    <div class="form-group">
+                                                        <h5><label for="title" class="">{{ __('Title') }}</label></h5>
+                                                        <div class="input-holder">
+                                                            <input type="text" class="" id="title" name="title" value="{{ old('title') }}" />
+                                                        </div>
+                                                        @error('title')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                        
+                                                <div class="form-group-parent">
+                                                    <div class="form-group ">
+                                                        <h5><label for="post" class="">{{ __('Post') }}</label></h5>
+                                                        <div class="input-holder">
+                                                            <textarea class="" id="post" name="post" value="{{ old('post') }}"
+                                                            placeholder="“Listen to many, speak to a few.” ... "> </textarea>
+                                                        </div>
+                                                        @error('post')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                        
+                                                <div class="submit-btn">
+                                                    <button type="submit" class="">Submit</button>
+                                                </div>    
+                        
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- END NEW TOPIC MODAL FORM --}}
+
                             <h6>
                                 <a href="{{ route('forum.index', "boards") }}" class="form-btn-alt">Boards</a>
                             </h6>

@@ -12199,15 +12199,17 @@ form i {
   padding-left: 0px;
 }
 
-.input-holder input {
+.input-holder input,
+textarea {
   width: 100%;
-  padding: 5px;
+  padding: 5px 10px;
   border-radius: 3px;
   border: 1px solid #222;
   outline: 0;
 }
 
-.input-holder input:focus {
+.input-holder input:focus,
+textarea:focus {
   border-color: #2081f9;
 }
 
@@ -12230,5 +12232,59 @@ form i {
 
 .login-group button:hover {
   background-color: #2081f9;
+}
+
+.submit-btn {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 15px;
+}
+
+.submit-btn button {
+  margin-left: 13px;
+  background: rgba(32, 129, 249, 0.8);
+  border: 0px;
+  color: #fff;
+  border-radius: 3px;
+  font-size: 16px;
+  font-family: Lato, sans-serif;
+  padding: 3px 8px;
+}
+
+.submit-btn button:hover {
+  background: #2081f9;
+  border: 0px;
+  color: #fff;
+  border-radius: 3px;
+  font-size: 16px;
+  font-family: Lato, sans-serif;
+  padding: 3px 8px;
+}
+
+.form-holder-alt {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.form-alt {
+  width: 50vw;
+  background-color: #fff;
+  box-shadow: -4px 4px 5px rgba(22, 22, 22, 0.15);
+  border: 1px solid rgba(22, 22, 22, 0.35);
+  border-radius: 3px;
+}
+
+.form-alt-header {
+  border-bottom: 1px solid rgba(22, 22, 22, 0.15);
+  padding: 15px;
+}
+
+.form-alt-body {
+  padding: 15px;
+}
+
+.form-control {
+  max-width: 100%;
 }
 

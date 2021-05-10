@@ -1248,17 +1248,21 @@ form i{
     padding-left: 0px;
 }
 
-.input-holder input{
+.input-holder input,
+textarea{
     width: 100%;
-    padding: 5px;
+    padding: 5px 10px;
     border-radius: 3px;
     border: 1px solid #222;
     outline: 0;
 }
 
-.input-holder input:focus{
+.input-holder input:focus,
+textarea:focus{
     border-color: rgba(32, 129, 249, 1);
 }
+
+
 
 .login-group{
     margin-top: 17px;
@@ -1281,3 +1285,60 @@ form i{
     background-color: rgba(32, 129, 249, 1);
 }
 
+
+.submit-btn{
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 15px;
+}
+
+.submit-btn button{
+    margin-left: 13px;
+    background: rgba(32, 129, 249, .80);
+    border: 0px;
+    color: #fff;
+    border-radius: 3px;
+    font-size: 16px;
+    font-family: Lato, sans-serif;
+    padding: 3px 8px;
+}
+
+.submit-btn button:hover{
+    background: rgba(32, 129, 249, 1);
+    border: 0px;
+    color: #fff;
+    border-radius: 3px;
+    font-size: 16px;
+    font-family: Lato, sans-serif;
+    padding: 3px 8px;
+}
+
+// FORM ALT  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+.form-holder-alt{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    // height: 25vh;
+}
+
+.form-alt{
+    width: 50vw;
+    background-color: #fff;
+    box-shadow: -4px 4px 5px rgba(22,22,22, .15);
+    border: 1px solid rgba(22,22,22, .35);
+    border-radius: 3px;
+}
+
+.form-alt-header{
+    border-bottom: 1px solid rgba(22, 22, 22, 0.15);
+    padding: 15px;
+}
+
+.form-alt-body{
+    padding: 15px;
+}
+
+.form-control {
+    max-width: 100%;
+}
