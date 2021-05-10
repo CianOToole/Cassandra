@@ -16,8 +16,8 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="name">Name</label>
-                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" />
+                        <h5><label for="name">Name</label></h5>
+                        <input type="text" class="form-control input-alt @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" />
 
                         @error('name')
                             <span class="invalid-feedback" role="alert">
@@ -26,8 +26,8 @@
                         @enderror
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="surname">Surname</label>
-                        <input type="text" class="form-control @error('surname') is-invalid @enderror" id="surname" name="surname" value="{{ old('surname') }}" />
+                        <h5><h5><label for="surname">Surname</label></h5>
+                        <input type="text" class="form-control input-alt @error('surname') is-invalid @enderror" id="surname" name="surname" value="{{ old('surname') }}" />
 
                         @error('surname')
                             <span class="invalid-feedback" role="alert">
@@ -38,8 +38,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="address">Address</label>
-                    <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address') }}" />
+                    <h5><label for="address">Address</label></h5>
+                    <input type="text" class="form-control input-alt @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address') }}" />
 
                     @error('address')
                         <span class="invalid-feedback" role="alert">
@@ -50,9 +50,9 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="emp_number">Employee number</label>
-                        <input type="text" class="form-control @error('emp_number') is-invalid @enderror" 
-                        id="emp_number" name="emp_number" value="{{ old('emp_number') }}" placeholder="Ex: DG9J1" pattern="[0-9-A-Z]{5}" oninput="empNumber()" />
+                        <h5><label for="emp_number">Employee number</label></h5>
+                        <input type="text" class="form-control input-alt @error('emp_number') is-invalid @enderror" 
+                        id="emp_number" name="emp_number" value="{{ old('emp_number') }}" oninput="empNumber()" />
 
                         @error('emp_number')
                             <span class="invalid-feedback" role="alert">
@@ -61,8 +61,8 @@
                         @enderror
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="salary">Salary</label>
-                        <input type="text" class="form-control @error('salary') is-invalid @enderror" id="salary" name="salary" value="{{ old('salary') }}" placeholder="€" />
+                        <h5><label for="salary">Salary</label></h5>
+                        <input type="text" class="form-control input-alt @error('salary') is-invalid @enderror" id="salary" name="salary" value="{{ old('salary') }}" placeholder="€" />
 
                         @error('salary')
                             <span class="invalid-feedback" role="alert">
@@ -73,8 +73,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" />
+                    <h5><label for="email">Email</label></h5>
+                    <input type="email" class="form-control input-alt @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" />
 
                     @error('email')
                         <span class="invalid-feedback" role="alert">
@@ -84,9 +84,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="phone">Phone</label>
-                    <input type="tel" class="form-control @error('phone') is-invalid @enderror" 
-                    id="phone" name="phone" value="{{ old('phone') }}" placeholder="082-3278-23x" pattern="[0-9]{3}-[0-9]{4}-[0-9]{3}" oninput="phoneNumber()" />
+                    <h5><label for="phone">Phone</label></h5>
+                    <input type="tel" class="form-control input-alt @error('phone') is-invalid @enderror" 
+                    id="phone" name="phone" value="{{ old('phone') }}" oninput="phoneNumber()" />
 
                     @error('phone')
                         <span class="invalid-feedback" role="alert">
@@ -96,8 +96,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="avatar">Profile picture</label>
-                    <input type="file" class="form-control @error('avatar') is-invalid @enderror" id="avatar" name="avatar" value="{{ old('avatar') }}" />
+                    <h5><label for="avatar">Profile picture</label></h5>
+                    <input type="file" class="form-control input-alt @error('avatar') is-invalid @enderror" id="avatar" name="avatar" value="{{ old('avatar') }}" />
 
                     @error('avatar')
                         <span class="invalid-feedback" role="alert">
@@ -108,8 +108,8 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" autocomplete="new-password"/>
+                        <h5><label for="password">Password</label></h5>
+                        <input type="password" class="form-control input-alt @error('password') is-invalid @enderror" id="password" name="password" autocomplete="new-password"/>
 
                         @error('password')
                             <span class="invalid-feedback" role="alert">
@@ -119,8 +119,8 @@
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label for="passwordConfirm">Confirm Password</label>
-                        <input type="password" class="form-control @error('passwordConfirm') is-invalid @enderror" id="passwordConfirm" name="password_confirmation">
+                        <h5><label for="passwordConfirm">Confirm Password</label></h5>
+                        <input type="password" class="form-control input-alt @error('passwordConfirm') is-invalid @enderror" id="passwordConfirm" name="password_confirmation">
 
                         @error('passwordConfirm')
                             <span class="invalid-feedback" role="alert">
@@ -130,9 +130,9 @@
                     </div>
                 </div>
 
-                <div class="float-right">
-                    <a href="{{ route('admin.moderators.index') }}" class="btn btn-link">Cancel</a>
-                    <button type="submit" class="btn btn-primary pull-right">Submit</button>
+                <div class="submit-btn">
+                    <a href="{{ route('admin.moderators.index') }}" class="">Cancel</a>
+                    <button type="submit" class="">Submit</button>
                 </div>      
 
             </form>
@@ -150,7 +150,13 @@
     }
 
     function phoneNumber(){
-        console.log("bite")
+        let input = document.getElementById('phone');
+        let phone= input.value;
+
+        (phone.length == 3) ? (input.value = `${phone}-`) 
+        : (phone.length == 8) ? (input.value = `${phone}-`) 
+        : (phone.length > 11) ? (input.value = phone.slice(0, 12)) 
+        : null;
     }
 </script>
 

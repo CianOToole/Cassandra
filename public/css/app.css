@@ -11000,6 +11000,16 @@ p {
   margin: 0;
 }
 
+input[type=text],
+input[type=email],
+input[type=tel],
+input[type=password],
+input[type=file],
+textarea {
+  outline: none;
+  box-shadow: none !important;
+}
+
 nav {
   background-color: rgba(22, 22, 22, 0.9);
   height: 80px;
@@ -11978,6 +11988,12 @@ table tbody tr td.update-required {
   padding: 20px 0px;
 }
 
+.special-msg {
+  padding: 25px 0px;
+  color: #BA182B;
+  text-align: center;
+}
+
 @media (min-width: 960px) {
   .profile-head {
     padding-top: 50px;
@@ -12004,6 +12020,10 @@ table tbody tr td.update-required {
   .post-btns {
     align-items: center;
   }
+}
+
+.no-post {
+  border-bottom: 1px solid rgba(22, 22, 22, 0.75);
 }
 
 .hp-sec-1 {
@@ -12172,7 +12192,8 @@ table tbody tr td.update-required {
 }
 
 .form-holder label,
-.form-holder i {
+.form-holder i,
+label {
   color: #444;
 }
 
@@ -12281,10 +12302,51 @@ textarea:focus {
 }
 
 .form-alt-body {
-  padding: 15px;
+  padding: 25px 15px;
+}
+
+.input-alt {
+  border: 1px solid rgba(22, 22, 22, 0.6);
+}
+
+.input-alt:focus {
+  border-color: #2081f9;
 }
 
 .form-control {
   max-width: 100%;
+}
+
+.submit-btn a {
+  color: #BA182B;
+  text-decoration: none;
+  border: 1px solid #BA182B;
+  border-radius: 3px;
+  font-size: 16px;
+  font-family: Lato, sans-serif;
+  padding: 3px 8px;
+  transition: 0.5s;
+}
+
+.submit-btn a:hover {
+  background-color: #BA182B;
+  color: #fff;
+  transition: 0.5s;
+}
+
+@media (max-width: 992px) {
+  .form-alt {
+    width: 75vw;
+  }
+}
+
+@media (max-width: 576px) {
+  .form-holder-alt {
+    margin: -24px 0px;
+  }
+
+  .form-alt {
+    width: 100vw;
+  }
 }
 

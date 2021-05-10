@@ -79,12 +79,25 @@
                 </div>
 
                 {{-- POSTS --}}
+                @if(count($posts) === 0)
+                    @php
+                        $noPost = "no-post"
+                    @endphp
+                @else
+                    @php
+                        $noPost = null;
+                    @endphp
+                @endif
 
-                <div class="profile-foot col-12 thread">
+                <div class="profile-foot col-12 thread {{ $noPost }}">
+
+                    @if(count($posts) === 0)
+                        <h4 class="special-msg">You haven't posted yet</h4>
+                    @else
 
                     <div class="row">
                         <div class="col-12">
-                            <h3 class="prf-h3">Your previous posts</h3>
+                            <h3 class="prf-h3">User posts</h3>
                         </div>
                     </div>
                     
@@ -161,6 +174,8 @@
                     <div class="pagination-holder">
                         {{$posts->onEachSide(4)->links()}}
                     </div>
+
+                    @endif
                 </div>
                     
             </div>

@@ -26,7 +26,7 @@ class ClientController extends Controller{
         ->select('users.*', 'clients.name', 'clients.middle_name', 'clients.DOB', 'clients.gender', 'clients.isExperienced', 'clients.isBanned') 
         ->join('user_role', 'users.id', '=', 'user_role.user_id')
         ->where('role_id', 3)
-        ->paginate(8);
+        ->paginate(10);
 
 
     return view('moderator.clients.index',[

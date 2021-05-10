@@ -93,7 +93,7 @@ class TopicController extends Controller{
 
     public function store(Request $request, $id){
         $request->validate([
-            'title' => ['required', 'string', 'max:50'],
+            'title' => ['required', 'string'],
             'post' => ['required', 'string'],
         ]);
 

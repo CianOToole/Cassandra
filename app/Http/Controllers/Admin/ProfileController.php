@@ -54,18 +54,19 @@ class ProfileController extends Controller
 
     public function update(Request $request, $id){
 
+        $user = User::findOrFail($id);
+
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
             'email' => 'required|string|email|max:255',
             'phone' => ['required','string'],
-            'address' => ['required', 'string', 'max:255'],
-            'emp_number' => ['required', 'alpha_num', 'min:5', 'max:5'],
+            'address' => 'required|string|max:35|unique:users,address,' . $user->id,
+            'emp_number' => 'required|alpha_num|min:5|max:5|unique:employees,emp_number,' . $user->id,
             'salary' => 'required',
             'avatar' => 'file|image'
         ]);
 
-        $user = User::findOrFail($id);
 
         if($request->hasFile('avatar')){
             Storage::delete("public/avatar/{$user->avatar}");
