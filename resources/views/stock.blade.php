@@ -30,6 +30,7 @@
             <div class="row bite position-sticky col-md-4">
                 <div class="col-md-12 blockColour stockData ">
                     <h1 id="myBtn4"></h1>
+                    <hr>
                     <p  id="myBtn5"></p>
                     <hr>
                     <p  id="myBtn6"></p>

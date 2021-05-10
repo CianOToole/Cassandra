@@ -45,7 +45,7 @@ function promptOrder(_data) {
 
         document.getElementById('myBtn5').innerHTML = ` Price       ${_data[0].price} `;
         document.getElementById('myBtn6').innerHTML = `Market's Cap    ${_data[0].mktCap} `;
-        document.getElementById('myBtn7').innerHTML = `Average Volume${_data[0].volAvg} `;
+        document.getElementById('myBtn7').innerHTML = `Average Volume ${_data[0].volAvg} `;
         document.getElementById('myBtn8').innerHTML = `Sector    ${_data[0].sector} `;
         document.getElementById('myBtn9').innerHTML = `Range    ${_data[0].range} `;
         document.getElementById('myBtn10').innerHTML = `Industry   ${_data[0].industry} `;
