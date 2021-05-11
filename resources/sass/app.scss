@@ -1433,3 +1433,59 @@ select:focus{
 @media (max-width: 576px) {
     // .form-holder-halt{padding-top: 50%;}
 }
+
+// FUND BOX ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+.fund-box{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fund-box button{
+    text-transform: uppercase;
+    background-color: rgba(32, 129, 249, .80);
+    border: 0px;
+    border-radius: 3px;
+    padding: 5px 21px;
+    color: #fff;
+    font-weight: 700;
+}
+
+.fund-box button:hover{
+    background-color: rgba(32, 129, 249, 1);
+}
+
+.balance-header{
+    display: flex;
+    padding: 0px 5px 10px 5px;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(22, 22, 22, 0.15);
+}
+
+.balance-body{
+    padding: 15px 5px 0px 5px;
+}
+
+.balance-row{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 13px;
+}
+
+// WATCHLIST ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+.watchlist-tbl{
+    table-layout: auto;
+    border-collapse: collapse;
+    width: 100%;
+    cursor: unset;
+}
+
+.watchlist-tbl thead,
+.watchlist-tbl tbody tr{
+    border-bottom: 1px solid rgba(22,22,22, .15);
+}
+
+.watchlist-tbl th,
+.watchlist-tbl td{
+    padding: 10px;
+}
