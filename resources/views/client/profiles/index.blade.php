@@ -26,9 +26,9 @@
                             <div class="col-12">
                                 <figure class="profile-pic">
                                     @if($profile->avatar == "default-pp.png")
-                                        <img class="post-img" src=" {{ asset('img/default.svg') }} " width="15px" height='125px' style="object-fit: fill;"" class = "rounded-circle">
+                                        <img class="post-img" src=" {{ asset('img/default.svg') }} " width="15px" height='125px' style="object-fit: cover;" class = "rounded-circle">
                                     @else
-                                        <img src=" {{ asset('storage/avatar/' . $profile->avatar) }} " width="125px" height='125px' style="object-fit: fill;"" class = "rounded-circle">
+                                        <img src=" {{ asset('storage/avatar/' . $profile->avatar) }} " width="125px" height='125px' style="object-fit: cover;" class = "rounded-circle">
                                     @endif
                                 </figure>
                             </div>
@@ -82,6 +82,27 @@
                 </div>
 
                 {{-- POSTS --}}
+                @if(count($posts) === 0)
+                    @php
+                        $noPost = "no-post"
+                    @endphp
+                @else
+                    @php
+                        $noPost = null;
+                    @endphp
+                @endif
+
+                <div class="profile-foot col-12 thread {{ $noPost }}">
+
+                    @if(count($posts) === 0)
+                        <h4 class="special-msg">You haven't posted yet</h4>
+                    @else
+
+                    <div class="row">
+                        <div class="col-12">
+                            <h3 class="prf-h3">User posts</h3>
+                        </div>
+                    </div>
 
                 <div class="profile-foot col-12 thread">
 
@@ -164,6 +185,8 @@
                     <div class="pagination-holder">
                         {{$posts->onEachSide(4)->links()}}
                     </div>
+
+                    @endif
                 </div>
                     
             </div>

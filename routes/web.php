@@ -96,9 +96,8 @@ Route::get('/forum/{tab}', [Forum::class, 'boards_index'])->name('forum.index');
 // - search route
 Route::get('/search/{id}/topics', [Topic::class, 'search'])->name('forum.topic');
 
-// - CRUD
+// - crud
 Route::get('/board/{id}/topics', [Topic::class, 'index'])->name('board.topics.index');
-Route::get('/board/{id}/topics/create', [Topic::class, 'create'])->name('board.topics.create');
 Route::post('/board/{id}', [Topic::class, 'store'])->name('board.topics.store');
 Route::delete('/board/{brid}/{tpid}/topic', [Topic::class, 'destroy'])->name('board.topics.destroy'); 
 

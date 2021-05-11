@@ -27,7 +27,7 @@
         <nav>
             <div class="logo">
                 <a class="" href="{{ url('/') }}" >
-                    <img src="../../../storage/Logo.svg" width="60px" height="60px"/>
+                    <img src=" {{ asset('img/Logo.svg') }}" width="60px" height="60px"/>
                 </a>
             </div>
 
@@ -111,39 +111,43 @@
                                 <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         <figure class="pp-bubble">
                                             @if(Auth::user()->avatar == "default-pp.png")
-                                                <img src=" {{ asset('img/default.png') }} " width='30px' height="30px"style="object-fit: fill;" class = "rounded-circle mr-1 ">
+                                                <img src=" {{ asset('img/default.png') }} " width='30px' height="30px"style="object-fit: cover;" class = "rounded-circle mr-1 ">
                                             @else
-                                                <img src=" {{ asset('storage/avatar/' . Auth::user()->avatar) }} " width='30px' height="30px" style="object-fit: fit;" class = "rounded-circle mr-1 ">
+                                                <img src=" {{ asset('storage/avatar/' . Auth::user()->avatar) }} " width='30px' height="30px" style="object-fit: cover;" class = "rounded-circle mr-1 ">
                                             @endif
                                         </figure>
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right profile-items" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu dropdown-menu-right profile-items pp-profile-items" aria-labelledby="navbarDropdown">
 
-                                    @auth
-                                        @if (Auth::user()->hasRole('admin'))
-                                            <a class="dropdown-item profile" href="{{ route('admin.profiles.index') }}">Profile
-                                            <i class="fas fa-user"></i>
-                                        </a>
-                                        @endif
-                                        @if (Auth::user()->hasRole('moderator'))
-                                            <a class="dropdown-item profile" href="{{ route('moderator.profiles.index') }}">Profile
-                                            <i class="fas fa-user"></i>
-                                        </a>
-                                        @endif
-                                        @if (Auth::user()->hasRole('client'))
-                                            <a class="dropdown-item profile" href="{{ route('client.profiles.index') }}">Profile
-                                            <i class="fas fa-user"></i>
-                                        </a>
-                                        @endif
-                                    @endauth
+                                    <div class="pp-profiles">
+                                        @auth
+                                            @if (Auth::user()->hasRole('admin'))
+                                                <a class="dropdown-item profile" href="{{ route('admin.profiles.index') }}">Profile
+                                                <i class="fas fa-user"></i>
+                                            </a>
+                                            @endif
+                                            @if (Auth::user()->hasRole('moderator'))
+                                                <a class="dropdown-item profile" href="{{ route('moderator.profiles.index') }}">Profile
+                                                <i class="fas fa-user"></i>
+                                            </a>
+                                            @endif
+                                            @if (Auth::user()->hasRole('client'))
+                                                <a class="dropdown-item profile" href="{{ route('client.profiles.index') }}">Profile
+                                                <i class="fas fa-user"></i>
+                                            </a>
+                                            @endif
+                                        @endauth
+                                    </div>
 
-                                    <a class="dropdown-item logout" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
-                                        Logout                                        
-                                        <i class="fas fa-sign-out-alt"></i>
-                                    </a>
+                                    <div class="">
+                                        <a class="dropdown-item logout" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                            Logout                                        
+                                            <i class="fas fa-sign-out-alt"></i>
+                                        </a>
+                                    </div>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf

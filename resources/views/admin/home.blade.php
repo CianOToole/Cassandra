@@ -1,23 +1,79 @@
 @extends('layouts.app')
 
 @section('content')
+<script src="{{ asset('js/watchlist.js') }}"></script>
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+    <div class="row">
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+            <div class="col-md-8 ">
+                <div class="media-holder">
+
+                    <div class="col-12 tab-header">
+                        <h4>Watchlist</h4>
+                    </div>
+
+                    <div class="col-12 tab-cnt">
+
+                        <div class="table-responsiveness">
+                            <table id="" class="watchlist-tbl">    
+                                <thead>
+                                    <th class="sort"><h5>Company</h5></th>
+                                    <th class="sort"><h5>Exchange</h5></th>
+                                    <th class="sort"><h5>Price</h5></th>
+                                    <th class="sort"><h5>Volume</h5></th>
+                                </thead>
+
+                                <tbody id="watchlistBody">
+                                    <tr data-id="" class="">
+                                        <td class="">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit, minus.</td>
+                                        <td class="">Lorem, ipsum.</td>
+                                        <td class="">Lorem ipsum dolor sit amet.</td>
+                                        <td class="">test<td>
+                                    </tr>  
+                                </tbody>    
+
+                            </table>                        
                         </div>
-                    @endif
 
-                    You are logged in as an Admin user.
+                    </div>
+
                 </div>
             </div>
-        </div>
+
+            {{-- FUND SECTION --}}
+
+            <div class="col-md-4">
+                <div class="media-holder">
+
+                    <div class="col-12 tab-header fund-box">
+                        <h4>Wallet</h4>
+                        <h6><button type="submit" class="">Fund</button> </h6>
+                    </div>
+
+                    <div class="col-12 tab-cnt">
+                        <div class="balance-header">
+                            <h5>Balance</h5>
+                            <h5>9999.99€</h5>
+                        </div>
+                        <div class="balance-body">
+                            <div class="balance-row">
+                                <h6>Portfolio</h6>
+                                <h6>22389.22€</h6>
+                            </div>
+                            <div class="balance-row">
+                                <h6>Available to trade</h6>
+                                <h6>1112,389.21€</h6>
+                            </div>
+                            <div class="balance-row">
+                                <h6>Daily +/-</h6>
+                                <h6>-5692.21.99€</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
     </div>
 </div>
 @endsection

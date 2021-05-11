@@ -91,19 +91,10 @@ class TopicController extends Controller{
         ]);
     }
 
-
-    public function create($id){
-        $board = Board::where('id', '=', $id)->firstOrFail();
-        return view('topics.create',[
-            'board' => $board,
-        ]);
-    }
-
-
     public function store(Request $request, $id){
         $request->validate([
-            'title' => ['required', 'string', 'max:50'],
-            'post' => ['required', 'string', 'min:10'],
+            'title' => ['required', 'string'],
+            'post' => ['required', 'string'],
         ]);
 
         $user = Auth::user();

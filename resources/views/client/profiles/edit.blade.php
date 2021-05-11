@@ -4,6 +4,8 @@
 
 @php
 
+$genders = array("male", "female");
+
 $countries = array("Afghanistan", "Albania", "Algeria", "American Samoa", "Andorra", "Angola", "Anguilla", "Antarctica", 
 "Antigua and Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", 
 "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia and Herzegowina", "Botswana", 
@@ -35,208 +37,218 @@ $countries = array("Afghanistan", "Albania", "Algeria", "American Samoa", "Andor
 
 @endphp
 
-<div class="container">
+<div class="form-holder-alt">
+    <div class="form-alt">
+        <div class="form-alt-header">
+            <h3> Edit my profile </h3>
+        </div>
 
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="card">
+        <div class="form-alt-body">
 
-                <div class="card-header">
-                    <h3 class="card-title"> Edit {{ $client[0]->name }} {{ $client[0]->surname }}'s Profile </h3>
+            <form method="POST" action="{{ route('client.profiles.update', $client[0]->id) }}"  enctype="multipart/form-data">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="_method" value="PUT">
+                @csrf
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <h5><label for="name">Name</label></h5>
+                        <input type="text" class="form-control input-alt @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name', $client[0]->name) }}" />
+
+                        @error('name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-6">
+                        <h5><label for="middle_name">Middle name</label></h5>
+                        <input type="text" class="form-control input-alt @error('middle_name') is-invalid @enderror" id="middle_name" name="middle_name" value="{{ old('middle_name', $client[0]->middle_name) }}" />
+
+                        @error('middle_name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
                 </div>
 
-                <div class="card-body">
-                    @if($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <h5><label for="surname">Surname</label></h5>
+                        <input type="text" class="form-control input-alt @error('surname') is-invalid @enderror" id="surname" name="surname" value="{{ old('surname', $client[0]->surname) }}" />
+
+                        @error('surname')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-6">
+                        <h5><label for="DOB">Date of birth</label></h5>
+                        <input type="text" class="form-control input-alt @error('DOB') is-invalid @enderror" 
+                        id="DOB" name="DOB" value="{{ old('DOB', $client[0]->DOB) }}" placeholder="1990-01-01" oninput="formatDOB()"/>
+
+                        @error('DOB')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <h5><label for="address">Address</label></h5>
+                    <input type="text" class="form-control input-alt @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address', $client[0]->address) }}" />
+
+                    @error('address')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <h5><label for="postcode">Postcode</label></h5>
+                    <input type="text" class="form-control input-alt @error('postcode') is-invalid @enderror" 
+                    id="postcode" name="postcode" value="{{ old('postcode', $client[0]->postcode) }}" />
+
+                    @error('postcode')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                                {{-- <label for="">Gender</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <input id="gender" type="radio" class="@error('gender') is-invalid @enderror" name="gender" 
+                            value="male" {{ old('gender') }} required autofocus >
+                        </div>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Text input with radio button" placeholder="male">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <input id="gender" type="radio" class=" @error('gender') is-invalid @enderror" name="gender" 
+                            value="female" {{ old('gender') }} required autofocus>
+                        </div>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Text input with radio button" placeholder="female">
+                
+                    @error('gender')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div> --}}
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <h5><label for="gender">Gender</label></h5>
+                        <select class="custom-select" id="gender" name="gender">
+                                @foreach ($genders as $gender)
+                                    <option value= "{{$gender}}">{{ $gender}}</option>
                                 @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    
-                    <form method="POST" action="{{ route('client.profiles.update', $client[0]->id) }}"  enctype="multipart/form-data">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <input type="hidden" name="_method" value="PUT">
+                        </select>
 
-                        <div class="form-group">
-                            <label for="avatar">Profile picture</label>                            
-                            <div class="">
-                                <input type="file" class="form-control" id="avatar" name="avatar" value="" />
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="name" class="">{{ __('Name') }}</label>
+                        @error('gender')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
 
-                            <div class="">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" 
-                                value="{{ old('name', $client[0]->name) }}" required autocomplete="name" autofocus>
+                    <div class="form-group col-md-6">
+                        <h5><label for="country">Country</label></h5>
+                        <select class="custom-select" id="country" name="country">
+                            <option value="{{ old('country', $client[0]->country) }}">{{ old('country', $client[0]->country) }}</option>
+                                @foreach ($countries as $country)
+                                    <option value= "{{$country}}">
+                                    {{ $country}}</option>
+                                @endforeach
+                        </select>
 
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+                        @error('country')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
 
-                        <div class="form-group">
-                            <label for="middle_name" class="">{{ __('Middle Name') }}</label>
+                <div class="form-group">
+                    <h5><label for="email">Email</label></h5>
+                    <input type="email" class="form-control input-alt @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email', $client[0]->email) }}" />
 
-                            <div class="">
-                                <input id="middle_name" type="text" class="form-control 
-                                @error('middle_name') is-invalid @enderror" name="middle_name" 
-                                value="{{ old('middle_name', $client[0]->middle_name) }}" required autocomplete="name" autofocus>
+                    @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
 
-                                @error('middle_name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+                <div class="form-group">
+                    <h5><label for="phone">Phone</label></h5>
+                    <input type="tel" class="form-control input-alt @error('phone') is-invalid @enderror" 
+                    id="phone" name="phone" value="{{  old('phone', $client[0]->phone) }}" oninput="phoneNumber()" />
 
-                        <div class="form-group">
-                            <div class="">
-                                <label for="surname" class="">{{ __('Surname') }}</label>
-                                <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" 
-                                value="{{ old('surname', $client[0]->surname) }}" required autocomplete="surname" autofocus>
+                    @error('phone')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
 
-                                @error('surname')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+                <div class="form-group">
+                    <h5><label for="avatar">Profile picture</label></h5>
+                    <input type="file" class="form-control input-alt @error('avatar') is-invalid @enderror" id="avatar" name="avatar" value="{{ old('avatar') }}" />
 
-                        <div class="form-group">
-                            <label for="email" class="">{{ __('E-Mail Address') }}</label>
+                    @error('avatar')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
 
-                            <div class="">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" 
-                                value="{{ old('email', $client[0]->email) }}" required autocomplete="email">
+                <div class="submit-btn">
+                    <a href="{{ route('client.profiles.index') }}" class="btn btn-link">Cancel</a>
+                    <button type="submit" class="btn btn-primary pull-right">Submit</button>
+                </div>      
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group ">
-                            <label for="phone" class="">{{ __('Phone') }}</label>
-
-                            <div class="">
-                                <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" 
-                                value="{{ old('phone', $client[0]->phone) }}" required autocomplete="phone" placeholder="08x-xxxx-xxx" 
-                                pattern="[0-9]{3}-[0-9]{4}-[0-9]{3}"
-                                autofocus>
-
-                                @error('phone')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>  
-
-                        <div class="form-group">
-                            <label for="address" class="">{{ __('Address') }}</label>
-
-                            <div class="">
-                                <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" 
-                                value="{{ old('address', $client[0]->address) }}"" required autocomplete="address" autofocus>
-
-                                @error('address')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="postcode" class="">{{ __('Postcode') }}</label>
-
-                            <div class="">
-                                <input id="postcode" type="text" class="form-control @error('postcode') is-invalid @enderror" name="postcode" 
-                                value="{{ old('postcode', $client[0]->postcode) }}"" required autocomplete="address" autofocus>
-
-                                @error('postcode')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <label for="">Country</label>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                            </div>
-                            <select class="custom-select" id="country" name="country">
-                                <option value="{{ old('title', $client[0]->country) }}">{{ old('title', $client[0]->country) }}</option>
-                                    @foreach ($countries as $country)
-                                        <option value= "{{$country}}"  >
-                                        {{ $country}}</option>
-                                    @endforeach
-                            </select>
-                          </div>
-
-                          <div class="form-group">
-                            <label for="DOB" class="">{{ __('Date of Birth') }}</label>
-
-                            <div class="">
-                                <input id="DOB" type="date" class="form-control @error('DOB') is-invalid @enderror" name="DOB" 
-                                value="{{ old('DOB', $client[0]->DOB) }}"" required autocomplete="DOB" autofocus>
-
-                                @error('DOB')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <label for="">Gender</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <input id="gender" type="radio" class="@error('gender') is-invalid @enderror" name="gender" 
-                                    value="male" {{ old('gender') }} required autofocus >
-                                </div>
-                            </div>
-                            <input type="text" class="form-control" aria-label="Text input with radio button" placeholder="male">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <input id="gender" type="radio" class=" @error('gender') is-invalid @enderror" name="gender" 
-                                    value="female" {{ old('gender') }} required autofocus>
-                                </div>
-                            </div>
-                            <input type="text" class="form-control" aria-label="Text input with radio button" placeholder="female">
-                        
-                            @error('gender')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-
-                        <div class="float-right" style="margin-top:16px">
-                            <a href="{{ route('client.profiles.index') }}" class="btn btn-link">Cancel</a>
-                            <button type="submit" class="btn btn-primary pull-right">Submit</button>
-                        </div>      
-
-                    </form>
-
-                </div>  
-            </div>
+            </form>
+            
         </div>
     </div>
 </div>
+
+<script>
+    function formatPostcode(){
+        let postcode = document.getElementById('postcode');
+        let toUpperCase = postcode.value.toUpperCase();
+        postcode.value = toUpperCase;
+        (postcode.value.length > 12) ? (postcode.value = postcode.value.slice(0, 12)) : null;
+    }
+    function formatDOB(){
+        let date = document.getElementById('DOB');
+        let newFormat= date.value;
+
+        (newFormat.length == 4) ? (date.value = `${newFormat}-`) 
+        : (newFormat.length == 7) ? (date.value = `${newFormat}-`) 
+        : (newFormat.length > 10) ? (date.value = newFormat.slice(0, 10)) 
+        : null;
+    }
+    function phoneNumber(){
+        let input = document.getElementById('phone');
+        let phone= input.value;
+
+        (phone.length == 3) ? (input.value = `${phone}-`) 
+        : (phone.length == 8) ? (input.value = `${phone}-`) 
+        : (phone.length > 11) ? (input.value = phone.slice(0, 12)) 
+        : null;
+    }
+</script>
+
+
 @endsection

@@ -1,115 +1,163 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
 
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="card">
+<div class="form-holder-alt">
+    <div class="form-alt">
+        <div class="form-alt-header">
+            <h3>New Moderator</h3>
+        </div>
 
-                <div class="card-header">
-                    <h3 class="card-title">Add new Moderator</h3>
+        <div class="form-alt-body">
+
+            <form method="POST" action="{{route('admin.moderators.store')}}" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <h5><label for="name">Name</label></h5>
+                        <input type="text" class="form-control input-alt @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" />
+
+                        @error('name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-6">
+                        <h5><h5><label for="surname">Surname</label></h5>
+                        <input type="text" class="form-control input-alt @error('surname') is-invalid @enderror" id="surname" name="surname" value="{{ old('surname') }}" />
+
+                        @error('surname')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
                 </div>
 
-                <div class="card-body">
-                    @if($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    
-                    <form action="{{route('admin.moderators.store')}}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <div class="form-group">
+                    <h5><label for="address">Address</label></h5>
+                    <input type="text" class="form-control input-alt @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address') }}" />
 
-                        <div class="form-group ">
-                            <label for="cover">Profile picture</label>                            
-                            <div class="col-md-8">
-                                <input type="file" class="form-control" id="avatar" name="avatar" value="" />
-                            </div>
-                        </div>
+                    @error('address')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
 
-                        <div class="form-group ">
-                            <label for="name">Name</label>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" />
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <label for="surname">Surname</label>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" id="surname" name="surname" value="{{ old('surname') }}" />
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <label for="email">Email</label>
-                            <div class="col-md-8">
-                                <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" />
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <label for="phone">Phone</label>
-                            <div class="col-md-8">
-                                <input type="tel" class="form-control" id="phone" name="phone" value="{{ old('phone') }}" 
-                                placeholder="08x-xxxx-xxx" pattern="[0-9]{3}-[0-9]{4}-[0-9]{3}"/>
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <label for="address">Address</label>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" id="address" name="address" value="{{ old('address') }}"/>
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <label for="emp_number">Employee Number</label>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" id="emp_number" name="emp_number" 
-                                            value="{{ old('emp_number') }}" placeholder="Ex: DG9J1" pattern="[0-9-A-Z]{5}"/>
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <label for="salary">Salary</label>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" id="salary" name="salary" value="{{ old('salary') }}" placeholder="€"/>
-                            </div>
-                        </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <h5><label for="emp_number">Employee number</label></h5>
+                        <input type="text" class="form-control input-alt @error('emp_number') is-invalid @enderror" 
+                        id="emp_number" name="emp_number" value="{{ old('emp_number') }}" oninput="empNumber()" />
 
-                        <div class="form-group">
-                            <label for="password" class=" col-form-label ">{{ __('Password') }}</label>
+                        @error('emp_number')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-6">
+                        <h5><label for="salary">Salary</label></h5>
+                        <input type="text" class="form-control input-alt @error('salary') is-invalid @enderror" id="salary" name="salary" value="{{ old('salary') }}" placeholder="€" />
 
-                            <div class="col-md-8">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                        @error('salary')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
 
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+                <div class="form-group">
+                    <h5><label for="email">Email</label></h5>
+                    <input type="email" class="form-control input-alt @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" />
 
-                        <div class="form-group ">
-                            <label for="password-confirm" class="col-form-label ">{{ __('Confirm Password') }}</label>
+                    @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
 
-                            <div class="col-md-8">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
+                <div class="form-group">
+                    <h5><label for="phone">Phone</label></h5>
+                    <input type="tel" class="form-control input-alt @error('phone') is-invalid @enderror" 
+                    id="phone" name="phone" value="{{ old('phone') }}" oninput="phoneNumber()" />
 
-                        <div class="float-right">
-                            <a href="{{ route('admin.moderators.index') }}" class="btn btn-link">Cancel</a>
-                            <button type="submit" class="btn btn-primary pull-right">Submit</button>
-                        </div>      
+                    @error('phone')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
 
-                    </form>
+                <div class="form-group">
+                    <h5><label for="avatar">Profile picture</label></h5>
+                    <input type="file" class="form-control input-alt @error('avatar') is-invalid @enderror" id="avatar" name="avatar" value="{{ old('avatar') }}" />
 
-                </div>  
-            </div>
+                    @error('avatar')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <h5><label for="password">Password</label></h5>
+                        <input type="password" class="form-control input-alt @error('password') is-invalid @enderror" id="password" name="password" autocomplete="new-password"/>
+
+                        @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <h5><label for="passwordConfirm">Confirm Password</label></h5>
+                        <input type="password" class="form-control input-alt @error('passwordConfirm') is-invalid @enderror" id="passwordConfirm" name="password_confirmation">
+
+                        @error('passwordConfirm')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="submit-btn">
+                    <a href="{{ route('admin.moderators.index') }}" class="">Cancel</a>
+                    <button type="submit" class="">Submit</button>
+                </div>      
+
+            </form>
+            
         </div>
     </div>
 </div>
+
+<script>
+    function empNumber(){
+        let empNumb = document.getElementById('emp_number');
+        let toUpperCase = empNumb.value.toUpperCase();
+        empNumb.value = toUpperCase;
+        (empNumb.value.length > 5) ? (empNumb.value = empNumb.value.slice(0, 5)) : null;
+    }
+
+    function phoneNumber(){
+        let input = document.getElementById('phone');
+        let phone= input.value;
+
+        (phone.length == 3) ? (input.value = `${phone}-`) 
+        : (phone.length == 8) ? (input.value = `${phone}-`) 
+        : (phone.length > 11) ? (input.value = phone.slice(0, 12)) 
+        : null;
+    }
+</script>
+
 @endsection

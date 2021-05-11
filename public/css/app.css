@@ -11000,6 +11000,17 @@ p {
   margin: 0;
 }
 
+input[type=text],
+input[type=email],
+input[type=tel],
+input[type=password],
+input[type=file],
+select,
+textarea {
+  outline: none;
+  box-shadow: none !important;
+}
+
 nav {
   background-color: rgba(22, 22, 22, 0.9);
   height: 80px;
@@ -11051,10 +11062,6 @@ nav {
 
 .pp-bubble {
   margin: 0px;
-}
-
-.profile-items .profile:hover {
-  color: black;
 }
 
 .lg-items button,
@@ -11121,17 +11128,39 @@ nav {
   padding: 5px 0px;
 }
 
-.profile-items a {
-  color: #222;
+.profile-items {
+  border-top: 1px solid;
+  padding: 0;
+  background-color: #2B2B2C;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  border-top: 1px solid #C6C6C6;
 }
 
 .profile-items a:hover {
-  background-color: #E2E7EF;
   text-decoration: none !important;
 }
 
+.profile,
 .logout {
-  color: rgba(206, 31, 31, 0.945) !important;
+  padding: 15px !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pp-profiles:hover {
+  background-color: #000;
+}
+
+.pp-profiles a:hover {
+  text-decoration: underline !important;
+  -webkit-text-decoration-color: #2081F9 !important;
+          text-decoration-color: #2081F9 !important;
+  text-decoration-thickness: 2px !important;
+}
+
+.logout {
+  color: #fff !important;
 }
 
 i {
@@ -11276,7 +11305,7 @@ i {
 @media (max-width: 960px) {
   .table-header-btns {
     padding: 15px;
-    justify-content: flex-start;
+    justify-content: flex-end;
   }
 }
 
@@ -11307,6 +11336,10 @@ i {
 
 .form-btn {
   background-color: rgba(255, 117, 40, 0.8);
+  font-family: "Open Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  border: 0px;
 }
 
 .form-btn-alt {
@@ -11714,8 +11747,8 @@ table tbody tr td.update-required {
 .post-img {
   width: 65px;
   height: 65px;
-  -o-object-fit: fill;
-     object-fit: fill;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 3px;
   margin: 0;
   border: 1px solid rgba(22, 22, 22, 0.1);
@@ -11829,8 +11862,8 @@ table tbody tr td.update-required {
 
   .post-cnt {
     border-top: 1px solid rgba(22, 22, 22, 0.15);
-    padding: 5px 5px 0px 5px;
-    margin: 0px 5px;
+    padding: 15px 5px;
+    margin: 5px;
   }
 
   .back-btn {
@@ -11974,6 +12007,12 @@ table tbody tr td.update-required {
   padding: 20px 0px;
 }
 
+.special-msg {
+  padding: 25px 0px;
+  color: #BA182B;
+  text-align: center;
+}
+
 @media (min-width: 960px) {
   .profile-head {
     padding-top: 50px;
@@ -12000,6 +12039,10 @@ table tbody tr td.update-required {
   .post-btns {
     align-items: center;
   }
+}
+
+.no-post {
+  border-bottom: 1px solid rgba(22, 22, 22, 0.75);
 }
 
 .hp-sec-1 {
@@ -12168,7 +12211,8 @@ table tbody tr td.update-required {
 }
 
 .form-holder label,
-.form-holder i {
+.form-holder i,
+label {
   color: #444;
 }
 
@@ -12176,7 +12220,7 @@ table tbody tr td.update-required {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: start;
+  align-items: flex-start;
   width: 100%;
   padding: 0px 15px;
 }
@@ -12195,15 +12239,17 @@ form i {
   padding-left: 0px;
 }
 
-.input-holder input {
+.input-holder input,
+textarea {
   width: 100%;
-  padding: 5px;
+  padding: 5px 10px;
   border-radius: 3px;
   border: 1px solid #222;
   outline: 0;
 }
 
-.input-holder input:focus {
+.input-holder input:focus,
+textarea:focus {
   border-color: #2081f9;
 }
 
@@ -12226,5 +12272,173 @@ form i {
 
 .login-group button:hover {
   background-color: #2081f9;
+}
+
+.submit-btn {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 15px;
+}
+
+.submit-btn button {
+  margin-left: 13px;
+  background: rgba(32, 129, 249, 0.8);
+  border: 0px;
+  color: #fff;
+  border-radius: 3px;
+  font-size: 16px;
+  font-family: Lato, sans-serif;
+  padding: 3px 8px;
+}
+
+.submit-btn button:hover {
+  background: #2081f9;
+  border: 0px;
+  color: #fff;
+  border-radius: 3px;
+  font-size: 16px;
+  font-family: Lato, sans-serif;
+  padding: 3px 8px;
+}
+
+.form-holder-alt {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.form-alt {
+  width: 50vw;
+  background-color: #fff;
+  box-shadow: -4px 4px 5px rgba(22, 22, 22, 0.15);
+  border: 1px solid rgba(22, 22, 22, 0.35);
+  border-radius: 3px;
+}
+
+.form-alt-header {
+  border-bottom: 1px solid rgba(22, 22, 22, 0.15);
+  padding: 15px;
+}
+
+.form-alt-body {
+  padding: 25px 15px;
+}
+
+.input-alt {
+  border: 1px solid rgba(22, 22, 22, 0.6);
+}
+
+select {
+  border-color: rgba(22, 22, 22, 0.6) !important;
+}
+
+.input-alt:focus,
+select:focus {
+  border-color: #2081f9 !important;
+}
+
+.form-control {
+  max-width: 100%;
+}
+
+.submit-btn a {
+  color: #BA182B;
+  text-decoration: none;
+  border: 1px solid #BA182B;
+  border-radius: 3px;
+  font-size: 16px;
+  font-family: Lato, sans-serif;
+  padding: 3px 8px;
+  transition: 0.5s;
+}
+
+.submit-btn a:hover {
+  background-color: #BA182B;
+  color: #fff;
+  transition: 0.5s;
+  text-decoration: none !important;
+}
+
+@media (max-width: 992px) {
+  .form-alt {
+    width: 75vw;
+  }
+}
+
+@media (max-width: 576px) {
+  .form-holder-alt {
+    margin: -24px 0px;
+  }
+
+  .form-alt {
+    width: 100vw;
+  }
+}
+
+.register {
+  height: auto;
+  width: 500px;
+}
+
+.form-holder-halt {
+  height: auto;
+}
+
+.login-group-alt {
+  padding-bottom: 34px;
+}
+
+.fund-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fund-box button {
+  text-transform: uppercase;
+  background-color: rgba(32, 129, 249, 0.8);
+  border: 0px;
+  border-radius: 3px;
+  padding: 5px 21px;
+  color: #fff;
+  font-weight: 700;
+}
+
+.fund-box button:hover {
+  background-color: #2081f9;
+}
+
+.balance-header {
+  display: flex;
+  padding: 0px 5px 10px 5px;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(22, 22, 22, 0.15);
+}
+
+.balance-body {
+  padding: 15px 5px 0px 5px;
+}
+
+.balance-row {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 13px;
+}
+
+.watchlist-tbl {
+  table-layout: auto;
+  border-collapse: collapse;
+  width: 100%;
+  cursor: unset;
+}
+
+.watchlist-tbl thead,
+.watchlist-tbl tbody tr {
+  border-bottom: 1px solid rgba(22, 22, 22, 0.15);
+}
+
+.watchlist-tbl th,
+.watchlist-tbl td {
+  padding: 10px;
 }
 
