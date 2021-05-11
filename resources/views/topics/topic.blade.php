@@ -1,118 +1,345 @@
 @extends('layouts.app')
 
 @section('content')
+
+<p id="alert-message" class="alert collapse"></p>
+
 <div class="container">
     <div class="row">
 
-        <div class="col-md-12">
+        <div class="col-md-8 ">
 
-            <p id="alert-message" class="alert collapse"></p>
+            <div class="media-holder">
 
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Topic</h3>
-                    @auth
-                        @if (Auth::user()->hasRole('admin'))               
-                            <a href=" {{ route('board.topics.create', $board->id) }} " class="btn btn-primary float-right add-btn">  
-                                <i class="fas fa-plus-circle"></i><span style="margin-left: 6px">Add</span>
-                            </a>
-                        @endif
-                    @endauth
+                {{-- TABLE HEADED --}}
+
+                <div class="col-12 tab-header">
+                    <h4 class="">{{$board->category}}</h4>
                 </div>
 
-                <div class="card-body">    
-                    
-                    <a href="{{ route('forum.index') }}" class="btn btn-primary">Boards</a>
-                    <a href="{{ route('board.topics.index', $board->id) }}" class="btn btn-outline-primary">Back</a>
+                {{-- SEARCH BAR --}}
 
-                    <div class="" style="float: right">                                 
-                        <form class="form-inline my-2 my-lg-0" type="GET" action="{{ route('forum.topic', $board->id) }}">
-                            <input type="search" placeholder="Search topic" name="query" id="topics" value="" class="form-control mr-sm-2">
-                            <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
-                        </form>
+                <div class="col-12 table-search-bar">
+                    <div class="row">
+
+                        <div class="col-lg-7" style="padding-right: 0;">
+                            <form class="search-topic" type="GET" action="{{ route('forum.topic', $board->id) }}">
+                                <input type="search" placeholder="Search topic" class="topic-search-input" name="query" id="boards" value="" >
+                            </form>
+                        </div>
+
+                        <div class="col-lg-5 table-header-btns" style="padding-left: 0;">
+
+                            {{-- NEW TOPIC MODAL FORM --}}
+
+                            <!-- Button trigger modal -->
+                            <button type="button" class="form-btn" data-toggle="modal" data-target="#newTopic" style="padding-top: 5px; padding-bottom: 5px">
+                                <i class="fas fa-plus-circle"></i>
+                                <span style="margin-left: 6px">New topic</span>
+                            </button>
+                            
+                            <!-- Modal -->
+                            <div class="modal fade" id="newTopic" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="exampleModalLabel">New topic</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+
+                                        <div class="modal-body">
+
+                                            @if($errors->any())
+                                                <div class="alert alert-danger">
+                                                    <ul>
+                                                        @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            @endif
+                                                    
+                                            <form action="{{route('board.topics.store', $board->id) }}" method="POST" enctype="multipart/form-data">
+                                                @csrf
+                                                <div class="form-group-parent">
+                                                    <div class="form-group">
+                                                        <h5><label for="title" class="">{{ __('Title') }}</label></h5>
+                                                        <div class="input-holder">
+                                                            <input type="text" class="" id="title" name="title" value="{{ old('title') }}" />
+                                                        </div>
+                                                        @error('title')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                        
+                                                <div class="form-group-parent">
+                                                    <div class="form-group ">
+                                                        <h5><label for="post" class="">{{ __('Post') }}</label></h5>
+                                                        <div class="input-holder">
+                                                            <textarea class="" id="post" name="post" value="{{ old('post') }}"
+                                                            placeholder="“Listen to many, speak to a few.” ... "> </textarea>
+                                                        </div>
+                                                        @error('post')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                        
+                                                <div class="submit-btn">
+                                                    <button type="submit" class="">Submit</button>
+                                                </div>    
+                        
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- END NEW TOPIC MODAL FORM --}}
+
+                            <h6>
+                                <a href="{{ route('forum.index', "boards") }}" class="form-btn-alt">Boards</a>
+                            </h6>
+                        </div>
+
                     </div>
-                    
+                </div>
+
+                {{-- TABLE BODY --}}
+
+                <div class="col-12">
+
                     @if(count($topic) === 0)
-                        <p>No Such topic</p>
+                        <p>There are no topics yet</p>
                     @else
-                        <table id="table-visits" class="table table-hover">
+
+                    <div class="table-responsiveness">
+
+                        <table id="" class="table table-hover table-sort">
+                            
                             <thead>
-                                <th></th>
-                                <th>Title</th>
-                                <th>Original poster</th>
-                                <th>Number of Replies</th>
-                                <th>Last Message</th>
                                 @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('moderator'))
-                                    <th>Action</th>                                
+                                    <th>Pin</th>
+                                @elseif(Auth::user()->hasRole('client'))
+                                    <th>Pinned</th>
+                                @endif
+                                <th class="sort">Title</th>
+                                <th class="sort">Original poster</th>
+                                <th class="sort">Replies</th>
+                                <th class="sort">Last Message</th>
+                                @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('moderator'))
+                                    <th>Delete</th>
                                 @endif
                             </thead>
 
                             <tbody>
 
-                                <tr data-id=" {{ $topic[0]->id }} " data-href="{{ route( 'topic.posts.index', $topic[0]->id) }}" class="">
+                                <tr data-id=" {{ $topic[0]->id }}" >
+                                    
                                     <td>
-                                        @if($topic[0]->isPinned == true)
-                                            <i class="fas fa-check-circle" style="color: rgb(224, 34, 34)"></i>
-                                        @endif
-                                        @if($topic[0]->replies >= 10)
-                                            <i class="fas fa-fire" style="color: rgb(224, 34, 34)"></i>
+                                        @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('moderator'))
+                                            <form method="POST" action="{{ route( 'pinning', [$board->id, $topic[0]->id]) }}" class="pin-holder">                                                
+                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                <input type="hidden" name="_method" value="PUT">
+
+                                                @if($topic[0]->isPinned == false)
+                                                    <input class="radio-inline" type="hidden" aria-label="" name="isPinned" value="1">
+                                                    <button type="submit" class="pin" title="Pin topic" >
+                                                @else
+                                                    <input class="radio-inline" type="hidden" aria-label="" name="isPinned" value="0">
+                                                    <button type="submit" class="unpin" title="Unpin topic">
+                                                @endif                                                        
+                                                    <i class="fas fa-thumbtack" ></i>
+                                                </button>
+                                            </form>
+                                        @elseif(Auth::user()->hasRole('client') && $topic[0]->isPinned == true)
+                                            <p class="unpin unpin-alt" >
+                                                <i class="fas fa-thumbtack" ></i>
+                                            </p>
                                         @endif
                                     </td>
-                                    <td>{{ $topic[0]->title }}</td>
-                                    <td><a href="{{ route( 'profile.index', [$topic[0]->user_id, $board->id] ) }}">{{ $topic[0]->surname }}</a></td>
+
+                                    @if($topic[0]->replies >= 10)
+                                        <td class="trend-mark topic-tt">
+                                            <a href="{{ route( 'topic.posts.index', $topic[0]->id) }}">{{ $topic[0]->title }}</a>
+                                        </td>
+                                    @else
+                                    <td class=" topic-tt">
+                                        <a href="{{ route( 'topic.posts.index', $topic[0]->id) }}" style="color: #2081F9">{{ $topic[0]->title }}</a>
+                                    </td>
+                                    @endif
+
+                                    <td>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="op_btn" data-toggle="modal" data-target="#tableModal{{$topic[0]->op_id}}">
+                                            <p>{{$topic[0]->op_surname}}</p>
+                                        </button>
+                                        
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="tableModal{{$topic[0]->op_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" id="label{{$topic[0]->op_id}}">Original poster </h4>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="col-12">
+                                                            @if($topic[0]->op_avatar == "default-pp.png")
+                                                                <img src=" {{ asset('img/default.svg') }} " width="50px" height='50px' style="object-fit: fill;"" class = "rounded-circle">
+                                                            @else
+                                                                <img src=" {{ asset('storage/avatar/' . $topic[0]->op_avatar) }} " width="50px" height='50px' style="object-fit: fill;"" class = "rounded-circle">
+                                                            @endif
+                                                        </div>
+                                                        <hr>
+                                                        <div class="col-12 pm-details">
+                                                            <h5>{{ $topic[0]->op_surname }}</h5>
+                                                        </div>
+                                                        <div class="col-12 pm-details">
+                                                            <h5>{{ $topic[0]->op_email }}</h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+
                                     <td>{{ $topic[0]->replies }}</td>
                                     <td>{{ substr($topic[0]->updated_at, 11,18) }}</td>
+
                                     @if(Auth::user()->hasRole('admin') || Auth::user()->hasRole('moderator'))
                                         <td>
-                                            @auth
-                                                @if(Auth::user()->id == $topic[0]->user_id)
-                                                    <a href="{{ route( 'board.topics.edit', [$board->id, $topic[0]->id] ) }}" class="btn btn-dark" title="Edit user's profile" style="float: right">
-                                                        <i class="fas fa-pen"></i>
-                                                    </a>
-                                                @endif
-                                            @endauth  
-
-                                            @auth
-                                                <div class="" style="float: right; margin-right: 3px">
-                                                    <form style="display:inline-block" method="POST" action="{{ route( 'board.topics.destroy',[ $board->id, $topic[0]->id]) }}">
+                                            <div class="icon-cell">
+                                                @auth
+                                                    <form method="POST" action="{{ route( 'board.topics.destroy',[ $board->id, $topic[0]->id]) }}">
                                                         <input type="hidden" name="_method" value="DELETE">
                                                         <input type="hidden" name="_token" value=" {{ csrf_token() }} ">
-                                                        <button type="submit" class="form-control btn btn-danger" title="Delete user's profile">
+                                                        <button type="submit" class="table-delete" title="Delete Topic">
                                                             <i class="fas fa-trash"></i>
                                                         </button>
                                                     </form>
-                                                </div>
-                                            @endauth
-
-                                            @if($topic[0]->isPinned == false)
-                                                <form method="POST" action="{{ route( 'pinning', [$board->id, $topic[0]->id]) }}" style="float: right">                                                
-                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                    <input type="hidden" name="_method" value="PUT">
-                                                    <input class="radio-inline" type="hidden" aria-label="" name="isPinned" value="1">
-                                                    <button type="submit" class="btn btn-outline-secondary" title="Pin topic" >
-                                                        <i class="fas fa-thumbtack" ></i>
-                                                    </button>
-                                                </form>
-                                                @else
-                                                <form method="POST" action="{{ route( 'pinning', [$board->id, $topic[0]->id]) }}" style="float: right">     
-                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                    <input type="hidden" name="_method" value="PUT">
-                                                    <input class="radio-inline" type="hidden" aria-label="" name="isPinned" value="0">
-                                                    <button type="submit" class="btn btn-secondary" title="Unpin topic">
-                                                        <i class="fas fa-thumbtack" ></i>
-                                                    </button>
-                                                </form>
-                                            @endif
+                                                @endauth
+                                            </div>
                                         </td>
-                                    @endif    
+                                    @endif 
+
                                 </tr>
                             </body>
-                        </table>
-                    @endif                    
+                        </table>                               
+                    </div>
+                    @endif      
+                    <div class="pagination-holder">
+                        {{$topic->onEachSide(4)->links()}}
+                    </div>  
                 </div>
 
             </div>
         </div>
+        {{-- PROJECT MANAGMENT --}}
+
+        <div class="col-md-4">
+            <div class="media-holder">
+                <div class="col-12 tab-header">
+                    <h4>Forum Management</h4>
+                </div>
+
+                <div class="col-12 tab-cnt">
+
+                    <ul class="list-moderators">
+                        <li class="list-first-child">Admins:</li>
+                        @foreach ($admins as $admin)
+
+                            <button type="button" class="list-admins" data-toggle="modal" data-target="#exampleModal{{$admin->id}}">
+                                {{ $admin->surname }} 
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal{{$admin->id}}" tabindex="-1" role="dialog" aria-labelledby="labe{{$admin->id}}" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="labe{{$admin->id}}">Admin </h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="col-12">
+                                                @if($admin->avatar == "default-pp.png")
+                                                    <img src=" {{ asset('img/default.svg') }} " width="50px" height='50px' style="object-fit: fill;"" class = "rounded-circle">
+                                                @else
+                                                    <img src=" {{ asset('storage/avatar/' . $admin->avatar) }} " width="50px" height='50px' style="object-fit: fill;"" class = "rounded-circle">
+                                                @endif
+                                            </div>
+                                            <hr>
+                                            <div class="col-12 pm-details">
+                                                <h5>{{ $admin->surname }}</h5>
+                                            </div>
+                                            <div class="col-12 pm-details">
+                                                <h5>{{ $admin->email }}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach  
+                    </ul>
+
+                    <ul class="list-moderators">
+                        <li class="list-first-child">Moderators:</li>
+                        @foreach ($moderators as $moderator)
+
+                            <button type="button" class="list-mods" data-toggle="modal" data-target="#exampleModal{{$moderator->id}}">
+                                {{ $moderator->surname }} 
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal{{$moderator->id}}" tabindex="-1" role="dialog" aria-labelledby="labe{{$admin->id}}" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="labe{{$moderator->id}}">Moderator </h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="col-12">
+                                                @if($moderator->avatar == "default-pp.png")
+                                                    <img src=" {{ asset('img/default.svg') }} " width="50px" height='50px' style="object-fit: fill;"" class = "rounded-circle">
+                                                @else
+                                                    <img src=" {{ asset('storage/avatar/' . $moderator->avatar) }} " width="50px" height='50px' style="object-fit: fill;"" class = "rounded-circle">
+                                                @endif
+                                            </div>
+                                            <hr>
+                                            <div class="col-12 pm-details">
+                                                <h5>{{ $moderator->surname }}</h5>
+                                            </div>
+                                            <div class="col-12 pm-details">
+                                                <h5>{{ $moderator->email }}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach  
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
     </div>
 </div>
 @endsection

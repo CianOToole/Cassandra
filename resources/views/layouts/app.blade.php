@@ -27,7 +27,7 @@
         <nav>
             <div class="logo">
                 <a class="" href="{{ url('/') }}" >
-                    <img src="../../storage/Logo.svg" width="60px" height="60px"/>
+                    <img src=" {{ asset('img/Logo.svg') }}" width="60px" height="60px"/>
                 </a>
             </div>
 
@@ -69,11 +69,10 @@
                                         @auth
                                         @if (Auth::user()->hasRole('admin'))
                                             <li><a class="" href="{{ route('admin.moderators.index') }}">Moderators</a></li>
-                                            <li><a class="" href="{{ route('admin.clients.index') }}">Suscribers</a></li>
+                                            <li><a class="" href="{{ route('admin.clients.index') }}">Clients</a></li>
                                         @endif
                                         @if (Auth::user()->hasRole('moderator'))
-                                            <li><a class="" href="{{ route('admin.moderators.index') }}">Moderators</a></li>
-                                            <li><a class="" href="{{ route('admin.clients.index') }}">Suscribers</a></li>
+                                            <li><a class="" href="{{ route('moderator.clients.index') }}">Clients</a></li>
                                         @endif
                                         @endauth
                                     </div>
@@ -91,11 +90,14 @@
 
                                     <div class="dropdown-content">
                                         <li class="lg-items">
-                                            <a class="" href="{{route('forum.index')}}">Boards</a>
-                                        </li>                                   
+                                            @php
+                                                $dashboard = "board";
+                                            @endphp
+                                            <a class="" href="{{ route('forum.index', "board") }}">Boards</a>
+                                        </li>      
                                         <li class="lg-items">
-                                            <a class="" href="{{route('news')}}">Newsfeed</a>
-                                        </li>   
+                                            <a class="" href="{{ route('forum.index', "newsfeed") }}">Newsfeed</a>
+                                        </li>
                                     </div>
                                 </div>   
 
@@ -107,36 +109,45 @@
                     
                             <li class="nav-item dropdown lg-items">
                                 <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <img src=" {{ asset('storage/avatar/' . Auth::user()->avatar) }} " width='30px' height="30px" 
-                                        style="object-fit: fill;" class = "rounded-circle mr-1 ">
+                                        <figure class="pp-bubble">
+                                            @if(Auth::user()->avatar == "default-pp.png")
+                                                <img src=" {{ asset('img/default.png') }} " width='30px' height="30px"style="object-fit: cover;" class = "rounded-circle mr-1 ">
+                                            @else
+                                                <img src=" {{ asset('storage/avatar/' . Auth::user()->avatar) }} " width='30px' height="30px" style="object-fit: cover;" class = "rounded-circle mr-1 ">
+                                            @endif
+                                        </figure>
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right profile-items" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu dropdown-menu-right profile-items pp-profile-items" aria-labelledby="navbarDropdown">
 
-                                    @auth
-                                        @if (Auth::user()->hasRole('admin'))
-                                            <a class="dropdown-item profile" href="{{ route('admin.profiles.index') }}">Profile
-                                            <i class="fas fa-user"></i>
-                                        </a>
-                                        @endif
-                                        @if (Auth::user()->hasRole('moderator'))
-                                            <a class="dropdown-item profile" href="{{ route('moderator.profiles.index') }}">Profile
-                                            <i class="fas fa-user"></i>
-                                        </a>
-                                        @endif
-                                        @if (Auth::user()->hasRole('client'))
-                                            <a class="dropdown-item profile" href="{{ route('client.profiles.index') }}">Profile
-                                            <i class="fas fa-user"></i>
-                                        </a>
-                                        @endif
-                                    @endauth
+                                    <div class="pp-profiles">
+                                        @auth
+                                            @if (Auth::user()->hasRole('admin'))
+                                                <a class="dropdown-item profile" href="{{ route('admin.profiles.index') }}">Profile
+                                                <i class="fas fa-user"></i>
+                                            </a>
+                                            @endif
+                                            @if (Auth::user()->hasRole('moderator'))
+                                                <a class="dropdown-item profile" href="{{ route('moderator.profiles.index') }}">Profile
+                                                <i class="fas fa-user"></i>
+                                            </a>
+                                            @endif
+                                            @if (Auth::user()->hasRole('client'))
+                                                <a class="dropdown-item profile" href="{{ route('client.profiles.index') }}">Profile
+                                                <i class="fas fa-user"></i>
+                                            </a>
+                                            @endif
+                                        @endauth
+                                    </div>
 
-                                    <a class="dropdown-item logout" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
-                                        Logout                                        
-                                        <i class="fas fa-sign-out-alt"></i>
-                                    </a>
+                                    <div class="">
+                                        <a class="dropdown-item logout" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                            Logout                                        
+                                            <i class="fas fa-sign-out-alt"></i>
+                                        </a>
+                                    </div>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
@@ -175,20 +186,21 @@
                     
                     @if (Auth::user()->hasRole('admin'))
                         <li><a class="" href="{{ route('admin.moderators.index') }}">Moderators</a></li>
-                        <li><a class="" href="{{ route('admin.clients.index') }}">Suscribers</a></li>
+                        <li><a class="" href="{{ route('admin.clients.index') }}">Clients</a></li>
                     @endif
                     @if (Auth::user()->hasRole('moderator'))
-                        <li><a class="" href="{{ route('admin.clients.index') }}">Suscribers</a></li>
+                        <li><a class="" href="{{ route('admin.clients.index') }}">Clients</a></li>
                     @endif
 
                     <li class="lg-items"><button  id="" class="">Portfolio</button></li>
 
                     <li class="lg-items"><a class="" href="#">Watchlist</a></li>
 
-                    <li class="lg-items"><a class="" href="{{route('forum.index')}}">Boards</a></li>
+                    <li class="lg-items"><a class="" href="{{route('forum.index', "board")}}">Boards</a></li>
+                    
+                    <li class="lg-items"><a class="" href="{{route('forum.index', "newsfeed")}}">Newsfeed</a></li>
 
-                    <li class="lg-items"><a class="" href="{{route('news')}}">News</a></li>
-
+                    
                     <li>
                         @auth
                             @if (Auth::user()->hasRole('admin'))
@@ -223,8 +235,8 @@
         <main id="mainContainer"class="py-4">
             <div class="container">
                 <div class="row-justify-content-center">
-                    <div class="col-md-12">
-                        <div class="flash-message">
+                    <div class="col-12 alert-group">
+                        <div class="flash-message col-11">
                             @foreach (['success', 'info', 'danger', 'warning'] as $key)
                                 @if(Session::has($key))
                                     <div class="flash alert alert-{{$key}}">{{ Session::get($key) }}

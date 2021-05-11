@@ -14,23 +14,40 @@ class PostController extends Controller
 
     public function index($topic_id){
         $topic_id = $topic_id;
-        $topic_title = DB::table('topics')
+        $topic = DB::table('topics')
+            ->select('topics.board_id', 'topics.title')        
             ->where('id', $topic_id)
-            ->pluck('title');
+            ->get();
 
         $posts = DB::table('posts')
             ->where('topic_id', $topic_id)
-            ->join('users', 'posts.user_id', '=', 'users.id')    
+            ->join('users', 'posts.user_id', '=', 'users.id') 
+            ->join('user_role', 'users.id', '=', 'user_role.user_id')   
+            ->join('roles', 'user_role.role_id', '=', 'roles.id')   
             ->leftJoin('employees', 'users.id', '=', 'employees.user_id')                   
             ->leftJoin('clients', 'users.id', '=', 'clients.user_id')
-            ->select('posts.*', 'users.surname', 'users.avatar',  'employees.name as emp_name', 'clients.name as clt_name') 
-            ->orderByDesc('updated_at')
-            ->paginate(20);
+            ->select('posts.*', 'users.surname', 'users.avatar',  'employees.name as emp_name', 'clients.name as clt_name', 'clients.isExperienced as experience', 'clients.isBanned as banned', 'roles.id as role')
+            ->orderBy('updated_at')
+            ->paginate(10);
+
+        $admins = DB::table('users')
+            ->join('user_role', 'users.id', '=', 'user_role.user_id')
+            ->select('users.id', 'users.surname', 'users.email', 'users.avatar')       
+            ->where('role_id', 1)
+            ->get();
+
+        $moderators = DB::table('users')
+            ->join('user_role', 'users.id', '=', 'user_role.user_id')
+            ->select('users.id', 'users.surname', 'users.email', 'users.avatar')       
+            ->where('role_id', 2)
+            ->get();
 
         return view('posts.index',[
             'posts' => $posts,
-            'topic_title' => $topic_title,
+            'topic' => $topic,
             'topic_id' => $topic_id,
+            'admins' => $admins,
+            'moderators' => $moderators,
         ]);
     }
 

@@ -21,17 +21,35 @@ class TopicController extends Controller{
     public function search($id){
         $board = Board::where('id', '=', $id)->firstOrFail();
         $search_text = $_GET['query'];
+        
         $topic = Topic::where('title', 'LIKE', '%' . $search_text . '%')
-            ->join('users', 'topics.user_id', '=', 'users.id')            
-            ->join('posts', 'topics.user_id', '=', 'posts.topic_id')     
-            ->select('users.surname', 'topics.*', DB::raw("COUNT('posts.topic_id') as replies")) 
+            ->orderByDesc('isPinned')
+            ->orderByDesc('updated_at')
+            ->join('users', 'topics.user_id', '=', 'users.id')  
+            ->select('users.id as op_id','users.surname as op_surname', 'users.avatar as op_avatar', 'users.email as op_email', 'topics.*')
+            ->join('posts', 'topics.id', '=', 'posts.topic_id')     
+            ->selectRaw('count(posts.topic_id) as replies')
             ->groupBy('id')
             ->distinct()
+            ->paginate(8);
+
+        $admins = DB::table('users')
+            ->join('user_role', 'users.id', '=', 'user_role.user_id')
+            ->select('users.id', 'users.surname', 'users.email', 'users.avatar')       
+            ->where('role_id', 1)
+            ->get();
+
+        $moderators = DB::table('users')
+            ->join('user_role', 'users.id', '=', 'user_role.user_id')
+            ->select('users.id', 'users.surname', 'users.email', 'users.avatar')        
+            ->where('role_id', 2)
             ->get();
 
         return view('topics.topic',[
             'board' => $board,
             'topic' => $topic,
+            'admins' => $admins,
+            'moderators' => $moderators,
         ]);
     }
 
@@ -43,32 +61,40 @@ class TopicController extends Controller{
             ->where('board_id', $id)       
             ->orderByDesc('isPinned')
             ->orderByDesc('updated_at')
-            ->join('users', 'topics.user_id', '=', 'users.id')
-            ->join('posts', 'topics.user_id', '=', 'posts.topic_id')               
-            ->select('users.surname', 'topics.*', DB::raw("COUNT('posts.topic_id') as replies"))  
+            ->join('users', 'topics.user_id', '=', 'users.id')       
+            ->select('users.id as op_id','users.surname as op_surname', 'users.avatar as op_avatar', 'users.email as op_email', 'topics.*')
+            ->join('posts', 'topics.id', '=', 'posts.topic_id')  
+            ->selectRaw('count(posts.topic_id) as replies')
             ->groupBy('id')
             ->distinct()
-            ->paginate(10);
+            ->paginate(8);
+
+
+        $admins = DB::table('users')
+            ->join('user_role', 'users.id', '=', 'user_role.user_id')
+            ->select('users.id', 'users.surname', 'users.email', 'users.avatar')    
+            ->where('role_id', 1)
+            ->get();
+
+        $moderators = DB::table('users')
+            ->join('user_role', 'users.id', '=', 'user_role.user_id')
+            ->select('users.id', 'users.surname', 'users.email', 'users.avatar')          
+            ->where('role_id', 2)
+            ->get();
+
 
         return view('topics.index',[
             'topics' => $topics,
             'board' => $board,
+            'admins' => $admins,
+            'moderators' => $moderators
         ]);
     }
-
-
-    public function create($id){
-        $board = Board::where('id', '=', $id)->firstOrFail();
-        return view('topics.create',[
-            'board' => $board,
-        ]);
-    }
-
 
     public function store(Request $request, $id){
         $request->validate([
-            'title' => ['required', 'string', 'max:50'],
-            'post' => ['required', 'string', 'min:10'],
+            'title' => ['required', 'string'],
+            'post' => ['required', 'string'],
         ]);
 
         $user = Auth::user();
@@ -96,28 +122,13 @@ class TopicController extends Controller{
     }
 
 
-    public function edit($board_id, $topic_id){
-        $board = Board::where('id', $board_id)->firstOrFail();
-        $topic = Topic::where('id', $topic_id)->firstOrFail();
-        
-        return view('topics.edit',[
-            'board' => $board,
-            'topic' => $topic,
-        ]);
+    public function edit(){
+
     }
 
 
-    public function update(Request $request, $board_id, $topic_id){
-        $request->validate([
-            'title' => ['required', 'string', 'max:50']
-        ]);
-        
-        $topic = Topic::findOrFail($topic_id);
-        $topic->title = $request->input('title');
-        $topic->save();
+    public function update(){
 
-        $request->session()->flash('info', 'Topic edited successfully!');
-        return redirect()->route('board.topics.index', $board_id);
     }
 
 

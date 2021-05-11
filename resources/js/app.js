@@ -1,6 +1,6 @@
 require('./bootstrap');
 
-//HAMBURGER MENU  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//HAMBURGER MENU  ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 document.addEventListener("DOMContentLoaded", () => {
 
     let collapse = false;
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// clickable rows    ////////////////////////////////////////////////////////////////////////////////////////////////////
+// clickable rows    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // DOMContentLoaded waits for the brower to download the DOM structure before anything else 
 document.addEventListener("DOMContentLoaded", () => {
@@ -34,18 +34,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// TABLE SORTING ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// TABLE SORTING ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 $(function() {
     $('table')
-        .on('click', 'th', function() {
+        .on('click', ".sort", function() {
             var index = $(this).index(),
                 rows = [],
                 thClass = $(this).hasClass('asc') ? 'desc' : 'asc';
 
-            $('#table-visits th').removeClass('asc desc');
+            $('.table-sort th').removeClass('asc desc');
             $(this).addClass(thClass);
 
-            $('#table-visits tbody tr').each(function(index, row) {
+            $('.table-sort tbody tr').each(function(index, row) {
                 rows.push($(row).detach());
             });
 
@@ -65,9 +66,7 @@ $(function() {
             }
 
             $.each(rows, function(index, row) {
-                $('#table-visits tbody').append(row);
+                $('.table-sort tbody').append(row);
             });
         });
 });
-
-// POSTS ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

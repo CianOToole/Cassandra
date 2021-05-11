@@ -1,3 +1,5 @@
+const { stubString } = require("lodash");
+
 newsfeed();
 
 
@@ -15,17 +17,19 @@ newsfeed();
         alert(err); 
       }
 
-      news.forEach(n => {
+      news.forEach(art => {
         news = {
           id: counter,
-          title: n.abstract,
-          url: n.web_url,
-          pub_at: n.pub_date
+          title: formatTitle(art.abstract),
+          url: art.web_url,
+          pub_at: formatDate(art.pub_date)
         }
 
         counter++;
         newsfeed.push(news)
       });
+
+
 
     (function(){
         newsfeed.forEach(article => {
@@ -34,11 +38,24 @@ newsfeed();
           let art = document.createElement("a");
           art.setAttribute("href", article.url);
           art.target = "_blank";
-          art.innerHTML = `${article.pub_at} - ${article.title}`;
+          art.innerHTML = `${article.pub_at}  -  ${article.title}`;
           container.appendChild(list).appendChild(art);
         });    
     })();
 
 }
 
+function formatDate(_date){
+    let date = _date;    
+    let month = date.substring(5, 7);
+    let day = date.substring(8, 10);
+    let reformatedDate = `${day}/${month}`;
 
+    return reformatedDate;
+}
+
+function formatTitle(_title){
+  let title = `${_title.substring(0, 60)}...`;    
+
+  return title;
+}

@@ -80,7 +80,7 @@ function extracter() {
 function candleStickChart() {
 
     var chart = LightweightCharts.createChart(document.body, {
-        width: 730,
+        width: 700,
         height: 500,
         layout: {
             backgroundColor: '#fff',

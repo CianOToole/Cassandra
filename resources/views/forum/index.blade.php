@@ -4,79 +4,131 @@
 <div class="container">
     <div class="row">
 
-        <div class="col-md-12">
+            <div class="col-md-8 ">
+                <div class="media-holder">
 
-            <p id="alert-message" class="alert collapse"></p>
+                    <div class="col-12 media-switch">
+                        <button id="boardTab" class="border-tab-btn">
+                            <h4>Boards</h4>
+                        </button>
+                        <button id="newsfeedTab" class="border-tab-btn">
+                            <h4>Newsfeed</h4>
+                        </button>
+                    </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Boards</h3>
-                    @auth
-                        @if (Auth::user()->hasRole('admin'))
-                        <a href=" {{ route('admin.board.create') }} " class="btn btn-primary float-right add-btn">  
-                            <i class="fas fa-plus-circle"></i><span style="margin-left: 6px">Add</span>
-                        </a>
-                        @endif
-                    @endauth
-                </div>
+                    <div class="col-12 news-holder">
 
-                <div class="card-body">
-                                        
-                    @if(count($boards) === 0)
-                        <p>There are no boards yet</p>
-                    @else
-                        <table id="table-visits" class="table table-hover">
-                            <thead>
-                                <th>Category</th>
-                                @auth
-                                    @if (Auth::user()->hasRole('admin'))
-                                    <th style="float: right">Action</th>
-                                    @endif
-                                @endauth
-                            </thead>
+                        <div id="boards" class="board-lnk">
+                            @foreach ($boards as $board)
+                                <a href="{{ route( 'board.topics.index', $board->id) }}">{{ $board->category }}</a>
+                            @endforeach  
+                        </div>
 
-                            <tbody>
-                                
-                                <div class="" style="float: left">
-                                    {{$boards->onEachSide(1)->links()}}
-                                </div>
+                        <div id="news">
+                            <script src="{{ asset('js/news.js') }}" type="text/javascript"></script>
+                            <div id="newsfeed"></div>
+                        </div>
 
-                                <div class="" style="float: right">                                 
-                                    <form class="form-inline my-2 my-lg-0" type="GET" action="{{ route('forum.board') }}" style="display: inline">
-                                        <input type="search" placeholder="Search Board" name="query" id="boards" value="" class="form-control mr-sm-2">
-                                        <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
-                                    </form>
-                                </div>
+                    </div>
 
-                                @foreach ($boards as $board)
-                                    <tr data-id=" {{ $board->id }} " data-href="{{ route( 'board.topics.index', $board->id) }}" class="">
-                                        <td>{{ $board->category }}</td>
-                                        @auth
-                                            @if (Auth::user()->hasRole('admin'))
-                                                <td>
-                                                    <a href="{{ route( 'admin.board.edit', $board->id) }}" class="btn btn-dark" title="Edit board" style="float: right">
-                                                        <i class="fas fa-pen"></i>
-                                                    </a>
-                                                    <div class="" style="float: right; margin-right: 3px">
-                                                        <form style="display:inline-block" method="POST" action="{{ route( 'admin.board.destroy', $board->id) }}">
-                                                            <input type="hidden" name="_method" value="DELETE">
-                                                            <input type="hidden" name="_token" value=" {{ csrf_token() }} ">
-                                                            <button type="submit" class="form-control btn btn-danger" title="Delete board">
-                                                                <i class="fas fa-trash"></i>
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </td>
-                                            @endif
-                                        @endauth
-                                    </tr>
-                                @endforeach                        
-                            </body>
-                        </table>
-                    @endif
                 </div>
             </div>
-        </div>
+
+            {{-- PROJECT MANAGMENT --}}
+
+            <div class="col-md-4">
+                <div class="media-holder">
+                    <div class="col-12 tab-header">
+                        <h4>Forum Management</h4>
+                    </div>
+
+                    <div class="col-12 tab-cnt">
+
+                        <ul class="list-moderators">
+                            <li class="list-first-child">Admins:</li>
+                            @foreach ($admins as $admin)
+
+                                <button type="button" class="list-admins" data-toggle="modal" data-target="#exampleModal{{$admin->id}}">
+                                    {{ $admin->surname }} 
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal{{$admin->id}}" tabindex="-1" role="dialog" aria-labelledby="labe{{$admin->id}}" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="labe{{$admin->id}}">Admin </h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="col-12">
+                                                    @if($admin->avatar == "default-pp.png")
+                                                        <img src=" {{ asset('img/default.svg') }} " width="50px" height='50px' style="object-fit: fill;"" class = "rounded-circle">
+                                                    @else
+                                                        <img src=" {{ asset('storage/avatar/' . $admin->avatar) }} " width="50px" height='50px' style="object-fit: fill;"" class = "rounded-circle">
+                                                    @endif
+                                                </div>
+                                                <hr>
+                                                <div class="col-12 pm-details">
+                                                    <h5>{{ $admin->surname }}</h5>
+                                                </div>
+                                                <div class="col-12 pm-details">
+                                                    <h5>{{ $admin->email }}</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach  
+                        </ul>
+
+                        <ul class="list-moderators">
+                            <li class="list-first-child">Moderators:</li>
+                            @foreach ($moderators as $moderator)
+
+                                <button type="button" class="list-mods" data-toggle="modal" data-target="#exampleModal{{$moderator->id}}">
+                                    {{ $moderator->surname }} 
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal{{$moderator->id}}" tabindex="-1" role="dialog" aria-labelledby="labe{{$admin->id}}" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="labe{{$moderator->id}}">Moderator </h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="col-12">
+                                                    @if($moderator->avatar == "default-pp.png")
+                                                        <img src=" {{ asset('img/default.svg') }} " width="50px" height='50px' style="object-fit: fill;" class = "rounded-circle">
+                                                    @else
+                                                        <img src=" {{ asset('storage/avatar/' . $moderator->avatar) }} " width="50px" height='50px' style="object-fit: fill;" class = "rounded-circle">
+                                                    @endif
+                                                </div>
+                                                <hr>
+                                                <div class="col-12 pm-details">
+                                                    <h5>{{ $moderator->surname }}</h5>
+                                                </div>
+                                                <div class="col-12 pm-details">
+                                                    <h5>{{ $moderator->email }}</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach  
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            
     </div>
 </div>
+<script src="{{ asset('js/forum.js') }}" type="text/javascript"></script>
 @endsection

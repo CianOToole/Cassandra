@@ -11,7 +11,7 @@ class BoardSeeder extends Seeder{
     public function run(){
 
         $categories = ['Africa', 'Asia', 'China', 'Commodities', 'Currencies', 'Crypto', 'EFTs', 'Entertainment', 'EU', 'Goods',
-                                'Finance', 'Food', 'Indices', 'Insurance', 'North America', 'Ociean', 'Pharma', 'South America', 'Stocks', 'Tech', 
+                                'Finance', 'Food', 'Indices', 'Insurance', 'North America', 'Oceania', 'Pharma', 'South America', 'Stocks', 'Technology', 
                                 'US'];
 
         foreach($categories as $category){

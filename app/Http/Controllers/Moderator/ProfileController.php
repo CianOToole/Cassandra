@@ -25,9 +25,16 @@ class ProfileController extends Controller
             ->select('name', 'emp_number', 'salary')
             ->get();
 
+        $posts = DB::table('posts')
+            ->where('user_id', $user->id)
+            ->select('posts.*')
+            ->orderByDesc('updated_at')
+            ->paginate(10);
+
         return view('moderator.profiles.index', [
             'profile' => $user,
             'moderator' => $moderator,
+            'posts' => $posts
             ]);
     }
 
@@ -44,21 +51,18 @@ class ProfileController extends Controller
     }
 
 
-    public function update(Request $request, $id)
-    {
-
+    public function update(Request $request, $id){
+        $user = User::findOrFail($id);
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
             'email' => 'required|string|email|max:255',
             'phone' => ['required','string'],
-            'address' => ['required', 'string', 'max:255'],
-            'emp_number' => ['required', 'alpha_num', 'min:5', 'max:5'],
+            'address' => 'required|string|max:35|unique:users,address,' . $user->id,
+            'emp_number' => 'required|alpha_num|min:5|max:5',
             'salary' => 'required',
             'avatar' => 'file|image'
         ]);
-
-        $user = User::findOrFail($id);
 
         if($request->hasFile('avatar')){
             Storage::delete("public/avatar/{$user->avatar}");
@@ -76,11 +80,11 @@ class ProfileController extends Controller
         $user->address = $request->input('address');
         $user->save();
 
-        $admin = Employee::where('user_id', $id)->firstOrFail();
-        $admin->name = $request->input('name');
-        $admin->emp_number = $request->input('emp_number');
-        $admin->salary = $request->input('salary');
-        $admin->save();
+        $moderator = Employee::where('user_id', $id)->firstOrFail();
+        $moderator->name = $request->input('name');
+        $moderator->emp_number = $request->input('emp_number');
+        $moderator->salary = $request->input('salary');
+        $moderator->save();
 
         $request->session()->flash('info', 'Profile edited successfully!');
 

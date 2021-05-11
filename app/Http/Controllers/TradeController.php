@@ -81,6 +81,10 @@ class TradeController extends Controller
         }
         return view('trades.create', [
             'price_at_order'  => $outputJSON[0]->price,
+            'beta'  => $outputJSON[0]->beta,
+            'volAvg'  => $outputJSON[0]->volAvg,
+            'changes'  => $outputJSON[0]->changes,
+            'range'  => $outputJSON[0]->range,
             'stock_ticker' => $request->ticket
         ]);
     }
@@ -113,6 +117,11 @@ class TradeController extends Controller
         $trade->tradeClosed = false;
         $trade->user_id = Auth::id();
         $trade->ticker = $request->stock_ticker;
+
+        $trade->beta = $request->beta;
+        $trade->volAvg = $request->volAvg;
+        $trade->changes = $request->changes;
+        $trade->range = $request->range;
         $trade->save();
         (new UserBalanceService())->minusProfit($request);
         return redirect()

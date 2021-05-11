@@ -25,9 +25,16 @@ class ProfileController extends Controller
             ->select('name', 'middle_name', 'DOB', 'gender', 'postcode', 'country', 'isExperienced', 'isBanned')
             ->get();
 
+        $posts = DB::table('posts')
+            ->where('user_id', $user->id)
+            ->select('posts.*')
+            ->orderByDesc('updated_at')
+            ->paginate(10);
+
         return view('client.profiles.index', [
             'profile' => $user,
             'client' => $client,
+            'posts' => $posts
             ]);
     }
 
@@ -44,14 +51,14 @@ class ProfileController extends Controller
     }
 
 
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
+        $user = User::findOrFail($id);
 
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'middle_name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
-            'email' => 'required|string|email|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'phone' => ['required','string'],
             'address' => ['required', 'string', 'max:255'],
             'postcode' => ['required', 'alpha_num', 'min:8', 'max:12'],
@@ -61,7 +68,6 @@ class ProfileController extends Controller
             'profile_picture' => 'file|image',
         ]);
 
-        $user = User::findOrFail($id);
 
         if($request->hasFile('avatar')){
             Storage::delete("public/avatar/{$user->avatar}");
