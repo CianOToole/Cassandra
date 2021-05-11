@@ -17,6 +17,10 @@ class CreateTradesTable extends Migration
             $table->id();
             $table->decimal('price_at_order', 8, 2);
             $table->string('ticker', 100);
+            $table->string('beta', 100);
+            $table->string('volAvg', 100);
+            $table->string('changes', 100);
+            $table->string('range', 100);
             $table->decimal('amount', 8, 2);
             $table->boolean('sellOrBuy');
             $table->boolean('tradeClosed');

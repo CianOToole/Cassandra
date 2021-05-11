@@ -14,11 +14,10 @@
                 <a href="{{route('trades.show',$trade->id)}}">Read More</a>
             </li> --}}
 
-                <table class="table table-striped ">
+                <table class="table table-striped">
                     <thead class="white">
                         <tr>
                             <th scope="col">Stock</th>
-                            <th scope="col">Performance</th>
                             <th scope="col">Low</th>
                             <th scope="col">High</th>
                             <th scope="col">Avg Price</th>

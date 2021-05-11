@@ -407,6 +407,10 @@ table tbody tr td.update-required {
     border-radius: 10px;
 }
 
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+    background: rgba(32, 129, 249, 0.05);
+ }
+
 ////////////////////////////////////////////////////////Stock Page/////////////////////////////
 .stockAndExchange {
     font-family: Lato;

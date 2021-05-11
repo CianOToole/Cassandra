@@ -9,15 +9,13 @@
                     <p class="stockAndExchange" id="myBtn"></p>
                     <p class="priceOfStock" id="myBtn2"></p>
                 </div>
-            <div class="col-md-6">
-               
-                <form action="{{ route('trades.create') }}" method="get">
-                    <div class="input-group ">
+     
+                <form class="col-md-6" action="{{ route('trades.create') }}" method="get">
+                    <div class="input-group">
                         <input type="hidden" id="hideBtn" name="ticket" value="">
                     </div>
                     <button type="submit" class="btn btn-primary stockButton">Order</button>
                 </form>
-            </div>
         </div>
 
         <div class="row">

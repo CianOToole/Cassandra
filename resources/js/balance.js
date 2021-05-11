@@ -39,6 +39,7 @@ async function api() {
 function promptOrder(_data) {
     console.log(_data);
     // window.addEventListener('load', function () {
+        document.getElementById("hideBtn").value = ticket;
         document.getElementById('myBtn').innerHTML = `${_data[0].symbol} | ${_data[0].exchangeShortName}`;
         document.getElementById('myBtn2').innerHTML = _data[0].price;
         document.getElementById('myBtn4').innerHTML = `${_data[0].companyName} Data`;
@@ -52,7 +53,7 @@ function promptOrder(_data) {
         
     //   })
 
-    // let test = document.getElementById("hideBtn");
+    
     // document.getElementById("demo").innerHTML
     // document.getElementById("myBtn").value = "POG";
 
