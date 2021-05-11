@@ -11064,10 +11064,6 @@ nav {
   margin: 0px;
 }
 
-.profile-items .profile:hover {
-  color: black;
-}
-
 .lg-items button,
 .lg-items a {
   color: #fdfdfd;
@@ -11132,17 +11128,39 @@ nav {
   padding: 5px 0px;
 }
 
-.profile-items a {
-  color: #222;
+.profile-items {
+  border-top: 1px solid;
+  padding: 0;
+  background-color: #2B2B2C;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  border-top: 1px solid #C6C6C6;
 }
 
 .profile-items a:hover {
-  background-color: #E2E7EF;
   text-decoration: none !important;
 }
 
+.profile,
 .logout {
-  color: rgba(206, 31, 31, 0.945) !important;
+  padding: 15px !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pp-profiles:hover {
+  background-color: #000;
+}
+
+.pp-profiles a:hover {
+  text-decoration: underline !important;
+  -webkit-text-decoration-color: #2081F9 !important;
+          text-decoration-color: #2081F9 !important;
+  text-decoration-thickness: 2px !important;
+}
+
+.logout {
+  color: #fff !important;
 }
 
 i {
@@ -12355,5 +12373,18 @@ select:focus {
   .form-alt {
     width: 100vw;
   }
+}
+
+.register {
+  height: auto;
+  width: 500px;
+}
+
+.form-holder-halt {
+  height: auto;
+}
+
+.login-group-alt {
+  padding-bottom: 34px;
 }
 
