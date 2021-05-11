@@ -11557,6 +11557,20 @@ table tbody tr td.update-required {
   border-radius: 10px;
 }
 
+.table-striped > tbody > tr:nth-child(2n+1) > td,
+.table-striped > tbody > tr:nth-child(2n+1) > th {
+  background: rgba(32, 129, 249, 0.05);
+}
+
+.stockAndExchange {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  padding-top: 10px;
+}
+
 .media-holder {
   background-color: #fff;
   border-radius: 10px;
@@ -12441,19 +12455,6 @@ select:focus {
 .watchlist-tbl th,
 .watchlist-tbl td {
   padding: 10px;
-}
-.table-striped > tbody > tr:nth-child(2n+1) > td,
-.table-striped > tbody > tr:nth-child(2n+1) > th {
-  background: rgba(32, 129, 249, 0.05);
-}
-
-.stockAndExchange {
-  font-family: Lato;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 16px;
-  line-height: 19px;
-  padding-top: 10px;
 }
 
 .priceOfStock {
