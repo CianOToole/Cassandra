@@ -3,7 +3,8 @@
 let stockData;
 let test;
 let ticket;
-api().then(res => stockData = res);
+let apiData = api().then(res => stockData = res);
+
 async function api() {
 
 
@@ -18,26 +19,48 @@ async function api() {
         ticket = localStorage.getItem('ticket');
     })();
 
-    console.log(ticket);
+    // console.log(ticket);
 
     let url = `https://financialmodelingprep.com/api/v3/profile/${ticket}?apikey=937d579e58c5f65961d708c85782f993`;
 
     let res = await fetch(url);
     let data = await res.json();
-    // console.log(data);
-    promptOrder();
-    return data;
+   
+    setTimeout(function() {
+        // console.log(data);
+        promptOrder(data);
+        return data;
+    }, 3000);
 }
 
 
 
 
-function promptOrder() {
+function promptOrder(_data) {
+    console.log(_data);
+    // window.addEventListener('load', function () {
+        document.getElementById("hideBtn").value = ticket;
+        document.getElementById('myBtn').innerHTML = `${_data[0].symbol} | ${_data[0].exchangeShortName}`;
+        document.getElementById('myBtn2').innerHTML = _data[0].price;
+        document.getElementById('myBtn4').innerHTML = `${_data[0].companyName} Data`;
 
+        document.getElementById('myBtn5').innerHTML = ` Price       ${_data[0].price} `;
+        document.getElementById('myBtn6').innerHTML = `Market's Cap    ${_data[0].mktCap} `;
+        document.getElementById('myBtn7').innerHTML = `Average Volume ${_data[0].volAvg} `;
+        document.getElementById('myBtn8').innerHTML = `Sector    ${_data[0].sector} `;
+        document.getElementById('myBtn9').innerHTML = `Range    ${_data[0].range} `;
+        document.getElementById('myBtn10').innerHTML = `Industry   ${_data[0].industry} `;
+        
+    //   })
 
-    // let test = document.getElementById("hideBtn");
+    
     // document.getElementById("demo").innerHTML
-    document.getElementById("hideBtn").value = ticket;
+    // document.getElementById("myBtn").value = "POG";
+
+    // let name = document.getElementById('myBtn'),
+    // factionName = name.value;
+
+    // document.getElementById('myBtn').innerHTML = "POG";
 
     // setTimeout(function () {
     // let stock = suggestions[_listIdentifier];

@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+
+
     <div class="container">
         <div class="row">
             <div class="col-8">
@@ -26,11 +28,9 @@
                     </thead>
                     <tbody>
                         @foreach ($trades as $trade)
-                        @php
-                                        $switch_bcg;         
-                                        ($count % 2 != 0) ? $switch_bcg = "blue-bck" : $switch_bcg = null;
-                                    @endphp
-                            <tr>
+                       
+
+                            <tr >
                                 <th scope="row">{{ $trade->ticker }}</th>
                                 <td>bruh</td>
                                 <td>{{ $trade->ticker }}</td>
