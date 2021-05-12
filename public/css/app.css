@@ -12491,3 +12491,18 @@ select:focus {
   margin-bottom: 15px;
 }
 
+@media (min-width: 720px) {
+  .watchlist,
+  .wallet {
+    padding-top: 15px;
+  }
+}
+
+.bid-win {
+  color: #0fa61b;
+}
+
+.bid-loss {
+  color: #BA182B;
+}
+

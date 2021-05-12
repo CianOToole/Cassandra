@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Hash;
 use Storage;
 Use Auth;
+use App\Models\Balance;
 Use App\Models\Post;
 
 class PostController extends Controller
@@ -42,12 +43,33 @@ class PostController extends Controller
             ->where('role_id', 2)
             ->get();
 
+        $balance = Balance::where('user_id', Auth::id())->get();
+        
+            if ($balance[0]->amount >  0) {
+                return view('posts.index',[
+                    'posts' => $posts,
+                    'topic' => $topic,
+                    'topic_id' => $topic_id,
+                    'admins' => $admins,
+                    'moderators' => $moderators,
+                    'balance' => $balance[0],
+                ]);
+            } else {
+                $balance = new Balance;
+                $balance->type_of_currency = "Euro";
+                $balance->amount = 100000.0;
+                $balance->user_id = Auth::id();
+                $balance->save();
+            }
+            $balance = Balance::where('user_id', Auth::id())->count();
+
         return view('posts.index',[
             'posts' => $posts,
             'topic' => $topic,
             'topic_id' => $topic_id,
             'admins' => $admins,
             'moderators' => $moderators,
+            'balance' => $balance,
         ]);
     }
 

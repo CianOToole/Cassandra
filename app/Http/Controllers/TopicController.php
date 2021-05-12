@@ -13,6 +13,7 @@ use App\Models\Employee;
 use App\Models\Board;
 use App\Models\Topic;
 use App\Models\Post;
+use App\Models\Balance;
 use Illuminate\Support\Arr;
 Use Auth;
 
@@ -45,11 +46,31 @@ class TopicController extends Controller{
             ->where('role_id', 2)
             ->get();
 
+        $balance = Balance::where('user_id', Auth::id())->get();
+        
+        if ($balance[0]->amount >  0) {
+            return view('topics.topic',[
+                'board' => $board,
+                'topic' => $topic,
+                'admins' => $admins,
+                'moderators' => $moderators,
+                'balance' => $balance[0],
+            ]);
+        } else {
+            $balance = new Balance;
+            $balance->type_of_currency = "Euro";
+            $balance->amount = 100000.0;
+            $balance->user_id = Auth::id();
+            $balance->save();
+        }
+        $balance = Balance::where('user_id', Auth::id())->count();
+
         return view('topics.topic',[
             'board' => $board,
             'topic' => $topic,
             'admins' => $admins,
             'moderators' => $moderators,
+            'balance' => $balance,
         ]);
     }
 
@@ -82,12 +103,32 @@ class TopicController extends Controller{
             ->where('role_id', 2)
             ->get();
 
+        $balance = Balance::where('user_id', Auth::id())->get();
+        
+            if ($balance[0]->amount >  0) {
+                return view('topics.index',[
+                    'topics' => $topics,
+                    'board' => $board,
+                    'admins' => $admins,
+                    'moderators' => $moderators,
+                    'balance' => $balance[0],
+                ]);
+            } else {
+                $balance = new Balance;
+                $balance->type_of_currency = "Euro";
+                $balance->amount = 100000.0;
+                $balance->user_id = Auth::id();
+                $balance->save();
+            }
+            $balance = Balance::where('user_id', Auth::id())->count();
+
 
         return view('topics.index',[
             'topics' => $topics,
             'board' => $board,
             'admins' => $admins,
-            'moderators' => $moderators
+            'moderators' => $moderators,
+            'balance' => $balance,
         ]);
     }
 

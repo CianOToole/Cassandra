@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<script src="{{ asset('js/watchlist.js') }}"></script>
+
+{{-- <script src="{{ asset('js/watchlist.js') }}"></script> --}}
 <div class="container">
     <div class="row">
 
@@ -15,22 +16,16 @@
                     <div class="col-12 tab-cnt">
 
                         <div class="table-responsiveness">
-                            <table id="" class="watchlist-tbl">    
+                            <table id="" class="watchlist-tbl table-hover table-sort">    
                                 <thead>
-                                    <th class="sort"><h5>Company</h5></th>
-                                    <th class="sort"><h5>Exchange</h5></th>
-                                    <th class="sort"><h5>Price</h5></th>
-                                    <th class="sort"><h5>Volume</h5></th>
+                                    <th class="sort">Company</th>
+                                    <th class="sort">Exchange</th>
+                                    <th class="sort">Price</th>
+                                    <th class="sort">Open</th>
+                                    <th class="sort">Volume</th>
                                 </thead>
 
-                                <tbody id="watchlistBody">
-                                    <tr data-id="" class="">
-                                        <td class="">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit, minus.</td>
-                                        <td class="">Lorem, ipsum.</td>
-                                        <td class="">Lorem ipsum dolor sit amet.</td>
-                                        <td class="">test<td>
-                                    </tr>  
-                                </tbody>    
+                                <tbody id="watchlistBody"></tbody>    
 
                             </table>                        
                         </div>
@@ -53,7 +48,7 @@
                     <div class="col-12 tab-cnt">
                         <div class="balance-header">
                             <h5>Balance</h5>
-                            <h5>9999.99€</h5>
+                            <h5>{{ $balance->amount }}€</h5>
                         </div>
                         <div class="balance-body">
                             <div class="balance-row">
