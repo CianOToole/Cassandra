@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Role;
 use App\Models\Employee;
 use App\Models\Client;
+use App\Models\Balance;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
             ClientSeeder::class,
             BoardSeeder::class,
             TopicSeeder::class,
+            BalanceSeeder::class,
         ]);
     }
 }

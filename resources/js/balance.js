@@ -41,15 +41,15 @@ function promptOrder(_data) {
     // window.addEventListener('load', function () {
         document.getElementById("hideBtn").value = ticket;
         document.getElementById('myBtn').innerHTML = `${_data[0].symbol} | ${_data[0].exchangeShortName}`;
-        document.getElementById('myBtn2').innerHTML = _data[0].price;
-        document.getElementById('myBtn4').innerHTML = `${_data[0].companyName} Data`;
+        document.getElementById('myBtn2').innerHTML = `€${_data[0].price}`;
+        document.getElementById('companyName').innerHTML = `${_data[0].companyName} Data`;
 
-        document.getElementById('myBtn5').innerHTML = ` Price       ${_data[0].price} `;
-        document.getElementById('myBtn6').innerHTML = `Market's Cap    ${_data[0].mktCap} `;
-        document.getElementById('myBtn7').innerHTML = `Average Volume ${_data[0].volAvg} `;
-        document.getElementById('myBtn8').innerHTML = `Sector    ${_data[0].sector} `;
-        document.getElementById('myBtn9').innerHTML = `Range    ${_data[0].range} `;
-        document.getElementById('myBtn10').innerHTML = `Industry   ${_data[0].industry} `;
+        document.getElementById('stockPrice').innerHTML = `${_data[0].price}€ `;
+        document.getElementById('stockCap').innerHTML = `${_data[0].mktCap}B `;
+        document.getElementById('stockVol').innerHTML = `${_data[0].volAvg} `;
+        document.getElementById('stockSector').innerHTML = `${_data[0].sector} `;
+        document.getElementById('stockRange').innerHTML = `${_data[0].range} `;
+        document.getElementById('stockIndutry').innerHTML = `${_data[0].industry} `;
         
     //   })
 

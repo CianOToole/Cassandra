@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Balance;
 Use Auth;
+// return view('moderator.home');
 
 class HomeController extends Controller
 {
@@ -16,10 +17,9 @@ class HomeController extends Controller
     }
 
     public function index(){
-        // return view('moderator.home');
         $balance = Balance::where('user_id', Auth::id())->get();
         
-        if ($balance->amount >  0) {
+        if ($balance[0]->amount >  0) {
             return view('moderator.home',[
                 'balance' => $balance[0],
             ]);

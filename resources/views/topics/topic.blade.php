@@ -94,8 +94,12 @@
                                                 </div>
                         
                                                 <div class="submit-btn">
+                                                    @if(Auth::user()->hasRole('client') && $isBanned[0]->banned)
+                                                        <p id="bannedMessage">You are banned and can no longer post on the forum. See our <span style="text-decoration: underline">guideline</span>.</p>
+                                                    @else
                                                     <button type="submit" class="">Submit</button>
-                                                </div>    
+                                                    @endif
+                                                </div>     
                         
                                             </form>
                                         </div>

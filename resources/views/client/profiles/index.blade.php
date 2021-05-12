@@ -19,14 +19,14 @@
 
                 <div class="profile-head"></div>
 
-                <div class="profile">
+                <div class="">
                     <div class="row">
 
                         <div class="col-md-3 profile-left">
                             <div class="col-12">
                                 <figure class="profile-pic">
                                     @if($profile->avatar == "default-pp.png")
-                                        <img class="post-img" src=" {{ asset('img/default.svg') }} " width="15px" height='125px' style="object-fit: cover;" class = "rounded-circle">
+                                        <img class="" src=" {{ asset('img/default.svg') }} " width="125px" height='125px' style="object-fit: cover;" class = "rounded-circle">
                                     @else
                                         <img src=" {{ asset('storage/avatar/' . $profile->avatar) }} " width="125px" height='125px' style="object-fit: cover;" class = "rounded-circle">
                                     @endif

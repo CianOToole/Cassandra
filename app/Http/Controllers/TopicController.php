@@ -46,6 +46,18 @@ class TopicController extends Controller{
             ->where('role_id', 2)
             ->get();
 
+        try {
+            $user = Auth::user();
+            $isBanned = DB::table('clients')
+                ->select('clients.isBanned as banned')          
+                ->where('user_id', $user->id)
+                ->get();
+                
+            // dd($isBanned[0]);
+        } catch (Exception $e) {
+            echo($e);
+        }
+
         $balance = Balance::where('user_id', Auth::id())->get();
         
         if ($balance[0]->amount >  0) {
@@ -54,6 +66,7 @@ class TopicController extends Controller{
                 'topic' => $topic,
                 'admins' => $admins,
                 'moderators' => $moderators,
+                'isBanned' => $isBanned,
                 'balance' => $balance[0],
             ]);
         } else {
@@ -70,13 +83,14 @@ class TopicController extends Controller{
             'topic' => $topic,
             'admins' => $admins,
             'moderators' => $moderators,
+            'isBanned' => $isBanned,
             'balance' => $balance,
         ]);
     }
 
     public function index($id){
 
-        $board = Board::where('id', '=', $id)->firstOrFail();
+        $board = Board::where('id', '=', $id)->firstOrFail();        
 
         $topics = DB::table('topics')
             ->where('board_id', $id)       
@@ -103,6 +117,19 @@ class TopicController extends Controller{
             ->where('role_id', 2)
             ->get();
 
+        
+        try {
+            $user = Auth::user();
+            $isBanned = DB::table('clients')
+                ->select('clients.isBanned as banned')          
+                ->where('user_id', $user->id)
+                ->get();
+                
+            // dd($isBanned[0]);
+        } catch (Exception $e) {
+            echo($e);
+        }
+
         $balance = Balance::where('user_id', Auth::id())->get();
         
             if ($balance[0]->amount >  0) {
@@ -111,6 +138,7 @@ class TopicController extends Controller{
                     'board' => $board,
                     'admins' => $admins,
                     'moderators' => $moderators,
+                    'isBanned' => $isBanned,
                     'balance' => $balance[0],
                 ]);
             } else {
@@ -128,6 +156,7 @@ class TopicController extends Controller{
             'board' => $board,
             'admins' => $admins,
             'moderators' => $moderators,
+            'isBanned' => $isBanned,
             'balance' => $balance,
         ]);
     }

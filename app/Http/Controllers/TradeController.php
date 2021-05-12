@@ -33,10 +33,11 @@ class TradeController extends Controller
             $portfolioCash = $trade->amount;
         }
         $portfolioCash += $gainLoss;
-        $balances = Balance::where('user_id', '=', $user)->get();
+        $balance = Balance::where('user_id', '=', $user)->get();
+        // dd($balance[0]);
         return view('trades.index', [
             'trades' => $trades,
-            'balances' => $balances,
+            'balance' => $balance,
             'gainLoss' => $gainLoss,
             'portfolioCash' => $portfolioCash
         ]);

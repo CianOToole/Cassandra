@@ -2,118 +2,149 @@
 
 @section('content')
 
-    <div class="container work">
+<div class="container">
+    <div class="row">
 
-        <div class="row blockColour stockHiddenInputForm">
-            <div class="col-12">
-                <div class="col-md-6">
-                    <p class="stockAndExchange" id="myBtn"></p>
-                    <p class="priceOfStock" id="myBtn2"></p>
-                </div>
-     
-                <form class="col-md-6" action="{{ route('trades.create') }}" method="get">
-                    <div class="input-group">
-                        <input type="hidden" id="hideBtn" name="ticket" value="">
+            <div class="col-12">    
+                <div class="media-holder">
+
+                    <div class="stock-banner">
+                        {{-- <div class="col-12"> --}}
+                            <div class="">
+                                <p class="" id="myBtn"></p>
+                                <h1 class="" id="myBtn2"></h1>
+                            </div>
+                    
+                            <form class="" action="{{ route('trades.create') }}" method="get">
+                                <div class="input-group">
+                                    <input type="hidden" id="hideBtn" name="ticket" value="">
+                                </div>
+                                <button type="submit" class="order-stock">Order</button>
+                            </form>
+                        {{-- </div> --}}
                     </div>
-                    <button type="submit" class="btn btn-primary stockButton">Order</button>
-                </form>
+                
+                </div>
             </div>
         </div>
+
 
         <div class="row">
-            <div class="row bite blockColour  col-md-8 ">
-                <div class="col-md-12 graph col-sm-6">
-                    <script src="{{ asset('js/stock.js') }}" type="text/javascript"></script>
+
+            <div class="col-md-8">    
+                <div class="media-holder graph graph-holder" >
+                        <script src="{{ asset('js/stock.js') }}" type="text/javascript"></script>
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4">    
 
-                <div class="col-12">
-                    <div class="media-holder">
-                        <div class="col-12 tab-header">
-                            <h4 id="myBtn4"></h4>
-                        </div>
-                        {{-- <h1 id="myBtn4"></h1> --}}
-                        {{-- <hr> --}}
-                        <p  id="myBtn5"></p>
-                        <hr>
-                        <p  id="myBtn6"></p>
-                        <hr>
-                        <p  id="myBtn7"></p>
-                        <hr>
-                        <p  id="myBtn8"></p>
-                        <hr>
-                        <p  id="myBtn9"></p>
-                        <hr>
-                        <p  id="myBtn10"></p>
+                <div class="media-holder">
+                    <div class="col-12 tab-header">
+                        <h4 id="companyName"></h4>
+                    </div>
+                    <div class="stock-sheet">
+                        <p>Price</p>
+                        <h6  id="stockPrice" ></h6>
+                    </div>
+                    <div class="stock-sheet">
+                        <p>Market's cap</p>
+                        <h6  id="stockCap" ></h6>
+                    </div>
+                    <div class="stock-sheet">
+                        <p>Average volume</p>
+                        <h6  id="stockVol" ></h6>
+                    </div>
+                    <div class="stock-sheet">
+                        <p>Sector</p>
+                        <h6  id="stockSector" ></h6>
+                    </div>
+                    <div class="stock-sheet">
+                        <p>Range</p>
+                        <h6  id="stockRange" ></h6>
+                    </div>
+                    <div class="stock-sheet">
+                        <p>Insdustry</p>
+                        <h6  id="stockIndutry" ></h6>
                     </div>
                 </div>
 
-                <div class="col-12">
+                {{-- <div class="media-holder "> --}}
+                    {{-- FUND SECTION --}}
 
-                    <div class="media-holder">
+                    <div class="wallet">
+                        <div class="media-holder ">
 
-                        <div class="col-12 tab-header fund-box">
-                            <h4>Wallet</h4>
-                            <h6><button type="submit" class="">Fund</button> </h6>
-                        </div>
-    
-                        <div class="col-12 tab-cnt">
-                            <div class="balance-header">
-                                <h5>Balance</h5>
-                                <h5>9999.99€</h5>
+                            <div class="col-12 tab-header fund-box">
+                                <h4>Wallet</h4>
+                                <h6><button type="submit" class="">Fund</button> </h6>
                             </div>
-                            <div class="balance-body">
-                                <div class="balance-row">
-                                    <h6>Portfolio</h6>
-                                    <h6>22389.22€</h6>
+
+                            <div class="col-12 tab-cnt">
+                                <div class="balance-header">
+                                    <h5>Balance</h5>
+                                    <h5>{{ $balance->amount }}€</h5>
                                 </div>
-                                <div class="balance-row">
-                                    <h6>Available to trade</h6>
-                                    <h6>1112,389.21€</h6>
-                                </div>
-                                <div class="balance-row">
-                                    <h6>Daily +/-</h6>
-                                    <h6>-5692.21.99€</h6>
+                                <div class="balance-body">
+                                    <div class="balance-row">
+                                        <h6>Portfolio</h6>
+                                        <h6>22389.22€</h6>
+                                    </div>
+                                    <div class="balance-row">
+                                        <h6>Available to trade</h6>
+                                        <h6>1112,389.21€</h6>
+                                    </div>
+                                    <div class="balance-row">
+                                        <h6>Daily +/-</h6>
+                                        <h6>-5692.21.99€</h6>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-    
-                    </div>
 
-                    {{-- <hr>
-                    <div class="row">
-                        @foreach ($balances as $balance)
-                            <h2 class="walletText col">Balance</h2>
-                            <h2 class="walletText col">{{ $balance->amount + $portfolioCash }}</h2>
-                        @endforeach
+                        </div>
                     </div>
-                    <div class="row">
-                        <h2 class="walletText col">Portfolio</h2>
-                        <h2 class="walletText col">{{ $portfolioCash }}</h2>
-                    </div>
-                    <div class="row">
-                        @foreach ($balances as $balance)
-                            <h2 class="walletText col">Available to trade</h2>
-                            <h2 class="walletText col">€{{ $balance->amount }}</h2>
-                        @endforeach
-                    </div>
-                    <div class="row">
-                        <h2 class="walletText col">Daily +/-</h2>
-                        <h2 class="walletText col">{{ $gainLoss }}€</h2>
-                    </div> --}}
-                </div>
+                {{-- </div> --}}
             </div>
-        </div>
-
 
     </div>
 
+    <div class="row watchlist">
+        <script src="{{ asset('js/watchlist.js') }}"></script>
+
+        <div class="col-md-8 ">
+            <div class="media-holder ">
+
+                <div class="col-12 tab-header">
+                    <h4>Watchlist</h4>
+                </div>
+
+                <div class="col-12 tab-cnt">
+
+                    <div class="table-responsiveness">
+                        <table id="" class="watchlist-tbl table-hover table-sort">    
+                            <thead>
+                                <th class="sort">Company</th>
+                                <th class="sort">Exchange</th>
+                                <th class="sort">Price</th>
+                                <th class="sort">Open</th>
+                                <th class="sort">Volume</th>
+                            </thead>
+
+                            <tbody id="watchlistBody"></tbody>    
+
+                        </table>                        
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
 
     <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
     <script src="{{ asset('js/balance.js') }}" type="text/javascript"></script>
 
-    </div>
+</div>
 
 @endsection

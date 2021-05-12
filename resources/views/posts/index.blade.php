@@ -137,7 +137,13 @@
                             <textarea type="text" class="txt-post" id="post_txt" name="post" placeholder="Listen to many, speak to a few."></textarea>
                         </div>
                         <h6 class="post-btn">
-                            <button type="submit" class="form-btn-alt">Post</button>
+                            <div class="submit-btn">
+                                @if(Auth::user()->hasRole('client') && $isBanned[0]->banned)
+                                <p id="bannedMessage">You are banned and can no longer post on the forum. See our <span style="text-decoration: underline">guideline</span>.</p>
+                                @else
+                                <button type="submit" class="form-btn-alt">Post</button>
+                                @endif
+                            </div>    
                         </h6>
                     </form>
                 </div>

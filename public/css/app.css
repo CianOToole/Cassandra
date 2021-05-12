@@ -11571,6 +11571,44 @@ table tbody tr td.update-required {
   padding-top: 10px;
 }
 
+.stock-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.order-stock {
+  border: 0px;
+  font-size: 14px;
+  text-transform: uppercase;
+  border-radius: 3px;
+  padding: 8px 15px;
+  background-color: rgba(255, 117, 40, 0.8);
+  color: #fff;
+  font-weight: 400;
+  font-family: "Open Sans", sans-serif;
+}
+
+.order-stock:hover {
+  background-color: #ff7528;
+}
+
+.graph-holder {
+  padding: 15px;
+  overflow-x: auto;
+}
+
+.stock-sheet {
+  padding: 10px 10px;
+  border-bottom: 1px solid rgba(22, 22, 22, 0.15);
+  margin: 0px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .media-holder {
   background-color: #fff;
   border-radius: 10px;
@@ -11854,6 +11892,11 @@ table tbody tr td.update-required {
 .post-btn button {
   border: 0px;
   margin-bottom: 15px;
+}
+
+#bannedMessage {
+  color: #ba182bd7;
+  padding: 0px 5px;
 }
 
 @media (max-width: 675px) {
@@ -12465,23 +12508,6 @@ select:focus {
   line-height: 54px;
 }
 
-.stockButton {
-  font-family: Lato;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 16px;
-  line-height: 19px;
-  background: rgba(37, 165, 10, 0.75);
-  width: 72px;
-  height: 30px;
-  margin-top: 45px;
-  margin-left: 400px;
-}
-
-.stockButton:hover {
-  background-color: #0fa61b;
-}
-
 .stockHiddenInputForm {
   padding-bottom: 10px;
   margin-bottom: 15px;
@@ -12492,9 +12518,12 @@ select:focus {
 }
 
 @media (min-width: 720px) {
-  .watchlist,
-  .wallet {
+  .watchlist {
     padding-top: 15px;
+  }
+
+  .wallet {
+    margin-top: 15px;
   }
 }
 

@@ -11,8 +11,8 @@ class TopicSeeder extends Seeder
 
     public function run(){
 
-        for($i = 1; $i <=100 ; $i++){
-            Topic::factory()->hasPosts(mt_rand(1,15))->create();
+        for($i = 1; $i <=250 ; $i++){
+            Topic::factory()->hasPosts(mt_rand(8,55))->create();
         }
 
     }

@@ -18,9 +18,8 @@
                 {{-- TABLE HEADED --}}
 
                 <div class="col-12 tab-header">
-                    <h4 class="">{{$board->category}}</h4>
+                    <h4 class="">{{$board->category}} </h4>
                 </div>
-
                 {{-- SEARCH BAR --}}
 
                 <div class="col-12 table-search-bar">
@@ -98,7 +97,11 @@
                                                     </div>
                             
                                                     <div class="submit-btn">
+                                                        @if(Auth::user()->hasRole('client') && $isBanned[0]->banned)
+                                                            <p id="bannedMessage">You are banned and can no longer post on the forum. See our <span style="text-decoration: underline">guideline</span>.</p>
+                                                        @else
                                                         <button type="submit" class="">Submit</button>
+                                                        @endif
                                                     </div>    
                             
                                                 </form>

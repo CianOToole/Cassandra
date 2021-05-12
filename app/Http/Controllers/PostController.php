@@ -27,9 +27,22 @@ class PostController extends Controller
             ->join('roles', 'user_role.role_id', '=', 'roles.id')   
             ->leftJoin('employees', 'users.id', '=', 'employees.user_id')                   
             ->leftJoin('clients', 'users.id', '=', 'clients.user_id')
-            ->select('posts.*', 'users.surname', 'users.avatar',  'employees.name as emp_name', 'clients.name as clt_name', 'clients.isExperienced as experience', 'clients.isBanned as banned', 'roles.id as role')
+            ->select('posts.*', 'users.surname', 'users.avatar',  'employees.name as emp_name', 'clients.name as clt_name', 'clients.isExperienced as experience', 'roles.id as role')
             ->orderBy('updated_at')
             ->paginate(10);
+
+        try {
+            $user = Auth::user();
+            $isBanned = DB::table('clients')
+                ->select('clients.isBanned as banned')          
+                ->where('user_id', $user->id)
+                ->get();
+                    
+                // dd($isBanned[0]);
+            } catch (Exception $e) {
+                echo($e);
+            }
+    
 
         $admins = DB::table('users')
             ->join('user_role', 'users.id', '=', 'user_role.user_id')
@@ -52,6 +65,7 @@ class PostController extends Controller
                     'topic_id' => $topic_id,
                     'admins' => $admins,
                     'moderators' => $moderators,
+                    'isBanned' => $isBanned,
                     'balance' => $balance[0],
                 ]);
             } else {
@@ -69,6 +83,7 @@ class PostController extends Controller
             'topic_id' => $topic_id,
             'admins' => $admins,
             'moderators' => $moderators,
+            'isBanned' => $isBanned,
             'balance' => $balance,
         ]);
     }

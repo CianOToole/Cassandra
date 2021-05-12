@@ -49,31 +49,40 @@
             </div>
 
             <div class="col-4 blockColour">
-                <div class="row">
-                    <h2 class="walletText col">Wallet</h2>
-                    <button type="submit" class="btn btn-primary moveRight col">Fund</button>
-                </div>
-                {{-- <hr> --}}
-                <div class="row">
-                    @foreach ($balances as $balance)
-                        <h2 class="walletText col">Balance</h2>
-                        <h2 class="walletText col">{{ $balance->amount + $portfolioCash }}</h2>
-                    @endforeach
-                </div>
-                {{-- <hr> --}}
-                <div class="row">
-                    <h2 class="walletText col">Portfolio</h2>
-                    <h2 class="walletText col">{{ $portfolioCash }}</h2>
-                </div>
-                <div class="row">
-                    @foreach ($balances as $balance)
-                        <h2 class="walletText col">Available to trade</h2>
-                        <h2 class="walletText col">€{{ $balance->amount }}</h2>
-                    @endforeach
-                </div>
-                <div class="row">
-                    <h2 class="walletText col">Daily +/-</h2>
-                    <h2 class="walletText col">{{ $gainLoss }}€</h2>
+                <div class="media-holder ">
+                    {{-- FUND SECTION --}}
+
+                    <div class="wallet">
+                        <div class="media-holder ">
+
+                            <div class="col-12 tab-header fund-box">
+                                <h4>Wallet</h4>
+                                <h6><button type="submit" class="">Fund</button> </h6>
+                            </div>
+
+                            <div class="col-12 tab-cnt">
+                                <div class="balance-header">
+                                    <h5>Balance</h5>
+                                    <h5>{{ $balance[0]->amount }}€</h5>
+                                </div>
+                                <div class="balance-body">
+                                    <div class="balance-row">
+                                        <h6>Portfolio</h6>
+                                        <h6>22389.22€</h6>
+                                    </div>
+                                    <div class="balance-row">
+                                        <h6>Available to trade</h6>
+                                        <h6>1112,389.21€</h6>
+                                    </div>
+                                    <div class="balance-row">
+                                        <h6>Daily +/-</h6>
+                                        <h6>-5692.21.99€</h6>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
