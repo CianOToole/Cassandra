@@ -104,7 +104,7 @@ eval("// quote passes the id on the clicked button (determined by the post id) \
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Knut\WAF\MyLaravelProjects\Cassandra\resources\js\posts.js */"./resources/js/posts.js");
+module.exports = __webpack_require__(/*! E:\YEAR 3\project\Cassandra\resources\js\posts.js */"./resources/js/posts.js");
 
 
 /***/ })

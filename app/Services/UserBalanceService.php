@@ -14,8 +14,9 @@ class UserBalanceService
 
     public function createUserBalance()
     {
-        $balance = Balance::where('user_id', Auth::id())->count();
-        if ($balance > 0) {
+        $balance = Balance::where('user_id', Auth::id())->get();
+       
+        if (count($balance) > 0 || $balance == null) {
             return;
         } else {
             $balance = new Balance;

@@ -20,10 +20,10 @@
                     <thead class="white">
                         <tr>
                             <th scope="col">Stock</th>
-                            <th scope="col">Performance</th>
-                            <th scope="col">Low</th>
-                            <th scope="col">High</th>
-                            <th scope="col">Avg Price</th>
+                            <th scope="col">Changes</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Range</th>
+                            <th scope="col">Beta</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -32,10 +32,11 @@
 
                             <tr >
                                 <th scope="row">{{ $trade->ticker }}</th>
-                                <td>bruh</td>
-                                <td>{{ $trade->ticker }}</td>
+                                <td>{{ $trade->changes }}</td>
                                 <td>{{ $trade->amount }}</td>
-                                <td>{{ $trade->id }}</td>
+                                <td>{{ $trade->range }}</td>
+                                <td>{{ $trade->beta }}</td>
+                              
                                 <td><button type="button" class="btn btn-danger" onclick="document.querySelector('#delete-form').submit()">End trade</button>
                                     <form method="POST" id="delete-form" action="{{route('trades.destroy',$trade->id)}}">
                                         @csrf
