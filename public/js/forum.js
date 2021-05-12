@@ -104,7 +104,7 @@ eval("document.addEventListener(\"DOMContentLoaded\", function () {\n  var url =
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Knut\WAF\MyLaravelProjects\Cassandra\resources\js\forum.js */"./resources/js/forum.js");
+module.exports = __webpack_require__(/*! E:\YEAR 3\project\Cassandra\resources\js\forum.js */"./resources/js/forum.js");
 
 
 /***/ })
