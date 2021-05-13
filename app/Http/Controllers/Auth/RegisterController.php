@@ -10,6 +10,7 @@ use App\Models\Client;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Balance;
 
 class RegisterController extends Controller
 {
@@ -72,8 +73,14 @@ class RegisterController extends Controller
         $client->isExperienced = 0;
         $client->isBanned = 0;
         $client->user_id = $user->id;
-
         $client->save();
+
+        $balance = new Balance();
+        $balance->type_of_currency  = "Euro";
+        $balance->amount  = 10000.00;
+        $balance->user_id  = $user->id;
+        $balance->save();
+
         return $user;
     }
 }
