@@ -34,13 +34,6 @@
                                 <td>{{ $trade->amount }}</td>
                                 <td>{{ $trade->range }}</td>
                                 <td>{{ $trade->beta }}</td>
-                              
-                                <td><button type="button" class="btn btn-danger" onclick="document.querySelector('#delete-form').submit()">End trade</button>
-                                    <form method="POST" id="delete-form" action="{{route('trades.destroy',$trade->id)}}">
-                                        @csrf
-                                        @method('DELETE')
-                                    </form>
-                                </td>
                             </tr>
                         @endforeach
                     </tbody>
