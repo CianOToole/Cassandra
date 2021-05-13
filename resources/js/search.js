@@ -20,7 +20,15 @@ window.onload  = function search(){
 
             cleanArray(dataArray);
             dropSuggestions();
+
+            window.addEventListener('click', function(e){   
+                if (!document.getElementById('searchGroup').contains(e.target)){
+                    searchGroup.classList.add("hide-drop"); 
+                }
+                });
+
             clickListElement();
+
     }); 
 
 }
@@ -42,6 +50,7 @@ function cleanArray(_dataArray){
 }
 
 function dropSuggestions(){
+    searchGroup.classList.remove("hide-drop"); 
     let counter = 0;
     searchGroup.innerHTML ="";
 
@@ -52,6 +61,9 @@ function dropSuggestions(){
         searchGroup.appendChild(list);
         counter++;
     });
+
+    let className = "search-max-h";
+    searchGroup.classList.add(className);
 }
 
 
@@ -66,12 +78,12 @@ function clickListElement(listIdentifier){
             searchBar.select();
         });
     });
-
 }
 
 function promptIntoSearch(_listIdentifier){
+    searchGroup.classList.remove("search-max-h");
     let stock = suggestions[_listIdentifier];
-    searchBar.value = stock.symbol;
+    searchBar.value = stock.symbol + " - " + stock.name;
     let ticket = stock.symbol;
 
     // Save the ticket to the localstorage

@@ -11017,7 +11017,7 @@ nav {
   font-family: "Lato", "sans-serif";
   font-size: 16px;
   display: grid;
-  grid-template-columns: 80px 1fr auto;
+  grid-template-columns: 80px minmax(175px, 1fr) auto;
 }
 
 .navbar {
@@ -11032,23 +11032,6 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-around;
-}
-
-.search-stock {
-  display: grid;
-  align-items: center;
-  padding: 0px 3%;
-}
-
-.form-control {
-  max-width: 500px;
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  grid-column-gap: 25px;
-  margin: 0;
 }
 
 .nav-links li {
@@ -11246,35 +11229,72 @@ i {
   outline: 0 none;
 }
 
-#searchGroup {
-  padding: 0px;
-  z-index: 99;
-  position: absolute;
-  list-style-type: none;
-  background-color: white;
-  top: 100%;
-  left: 0;
-  right: 0;
-  border: 1px solid #d4d4d4;
-  border-bottom: none;
-  border-top: none;
-  top: 15%;
-  left: 120px;
+.search-stock {
+  display: flex;
+  align-items: center;
+  padding: 0px 3%;
+}
+
+.search-group {
   width: 500px;
 }
 
-#searchGroup li {
-  padding-left: 10px;
-  border-bottom: 1px solid #222;
+#searchBar {
+  width: 208px;
+  border: 0px;
+  border-radius: 3px;
+  padding: 5px 10px;
 }
 
-#searchGroup li:hover {
-  background-color: lightgrey;
+.search-list {
+  background-color: #fff;
+  list-style-type: none;
+  position: absolute;
+  width: initial;
+  z-index: 99;
+  overflow-y: scroll;
+  box-shadow: -4px 4px 5px rgba(22, 22, 22, 0.15);
+}
+
+.search-max-h {
+  width: 208px;
+  max-height: 150px;
+}
+
+.hide-drop {
+  display: none;
+}
+
+.search-list li {
+  padding: 5px;
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  border-bottom: 1px solid rgba(22, 22, 22, 0.15);
   cursor: pointer;
 }
 
-#searchGroup li:active {
+.search-list li:hover {
   background-color: rgba(32, 129, 249, 0.25);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+@media (min-width: 720px) {
+  .nav-links {
+    grid-column-gap: 25px;
+  }
+
+  #searchBar {
+    width: 100%;
+  }
+
+  .search-max-h {
+    width: 500px;
+  }
 }
 
 .search-topic {
@@ -12481,6 +12501,7 @@ select:focus {
   display: flex;
   justify-content: space-between;
   padding-bottom: 13px;
+  align-items: center;
 }
 
 .watchlist-tbl {

@@ -44,7 +44,7 @@ function promptOrder(_data) {
         document.getElementById('myBtn2').innerHTML = `€${_data[0].price}`;
         document.getElementById('companyName').innerHTML = `${_data[0].companyName} Data`;
 
-        document.getElementById('stockPrice').innerHTML = `${_data[0].price}€ `;
+        document.getElementById('stockPrice').innerHTML = `${_data[0].price}$ `;
         document.getElementById('stockCap').innerHTML = `${_data[0].mktCap}B `;
         document.getElementById('stockVol').innerHTML = `${_data[0].volAvg} `;
         document.getElementById('stockSector').innerHTML = `${_data[0].sector} `;

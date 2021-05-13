@@ -25,7 +25,7 @@ class TopicController extends Controller{
         
         $topic = Topic::where('title', 'LIKE', '%' . $search_text . '%')
             ->orderByDesc('isPinned')
-            ->orderByDesc('updated_at')
+            ->orderBy('updated_at')
             ->join('users', 'topics.user_id', '=', 'users.id')  
             ->select('users.id as op_id','users.surname as op_surname', 'users.avatar as op_avatar', 'users.email as op_email', 'topics.*')
             ->join('posts', 'topics.id', '=', 'posts.topic_id')     
@@ -95,7 +95,7 @@ class TopicController extends Controller{
         $topics = DB::table('topics')
             ->where('board_id', $id)       
             ->orderByDesc('isPinned')
-            ->orderByDesc('updated_at')
+            ->orderBy('updated_at')
             ->join('users', 'topics.user_id', '=', 'users.id')       
             ->select('users.id as op_id','users.surname as op_surname', 'users.avatar as op_avatar', 'users.email as op_email', 'topics.*')
             ->join('posts', 'topics.id', '=', 'posts.topic_id')  

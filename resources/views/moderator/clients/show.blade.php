@@ -19,7 +19,7 @@
 
                 <div class="profile-head"></div>
 
-                <div class="profile">
+                <div class="">
                     <div class="row">
 
                         <div class="col-md-3 profile-left">

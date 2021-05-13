@@ -265,15 +265,15 @@
                         </div>
                         <div class="balance-body">
                             <div class="balance-row">
-                                <h6>Portfolio</h6>
+                                <p>Portfolio</p>
                                 <h6>22389.22€</h6>
                             </div>
                             <div class="balance-row">
-                                <h6>Available to trade</h6>
+                                <p>Available to trade</p>
                                 <h6>1112,389.21€</h6>
                             </div>
                             <div class="balance-row">
-                                <h6>Daily +/-</h6>
+                                <p>Daily +/-</p>
                                 <h6>-5692.21.99€</h6>
                             </div>
                         </div>
