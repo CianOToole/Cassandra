@@ -33,8 +33,10 @@
 
             @auth
                 <form id="searchStock" class="search-stock" method="GET" action=""  >
-                    <input id="searchBar" type="search" class="form-control" autocomplete="off">
-                    <ul id="searchGroup"></ul>
+                    <div class="search-group">
+                        <input id="searchBar" type="search" class="" autocomplete="off">
+                        <div id="searchGroup" class="search-list"></div>
+                    </div>
                 </form>
             @endauth
 
