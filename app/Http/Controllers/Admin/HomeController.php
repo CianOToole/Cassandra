@@ -15,6 +15,8 @@ class HomeController extends Controller
         $this->middleware('role:admin');
     }
 
+    // The index function manages users home page
+    // the index function get the users balance details that are then prompt within the wallet box (see home.blade)
     public function index(){
         $balance = Balance::where('user_id', Auth::id())->get();
         

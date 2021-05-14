@@ -17,6 +17,7 @@ class UserSeeder extends Seeder
     public function run()
     {
 
+        // UserSeeder hardcode three users for testing puurposes and another 62 users
         $role_admin = Role::where('name', 'admin')->first();
         $role_moderator = Role::where('name', 'moderator')->first();
         $role_client = Role::where('name', 'client')->first();

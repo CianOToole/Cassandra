@@ -22,6 +22,7 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        // the user factory create fake data for each new users created when seedng the database
         return [
             'surname' => $this->faker->lastName,
             'email' => $this->faker->unique()->safeEmail,

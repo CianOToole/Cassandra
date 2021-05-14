@@ -7,11 +7,7 @@ use App\Models\Role;
 
 class RoleSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
+    // the roles determine a users rights and bilities to interact with the platorm, as well as features
     public function run()
     {
         $role_admin = new Role();

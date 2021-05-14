@@ -1,5 +1,6 @@
 // API key: 1001c8ec6521e9e5a86ad2a88190bef0
-
+// stockData retrieves the data if a specifc stock provided via the local storage. That data is then prompt into a a table on the from stock.blade
+// to do so, the script creates a li items taht are prompt to a <div> holder
 (async function(){
    let data;    
    let quote = [];

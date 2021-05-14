@@ -1,6 +1,8 @@
 require('./bootstrap');
 
 //HAMBURGER MENU  ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// The function below manages the hamburger menu's rotation when clicking on the icon y adding or removing the CCSS classes rotation-1 & 2
+// and by either hidding od displayin gthe regular navbar
 document.addEventListener("DOMContentLoaded", () => {
 
     let collapse = false;
@@ -23,7 +25,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // clickable rows    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-// DOMContentLoaded waits for the brower to download the DOM structure before anything else 
+// DOMContentLoaded waits for the browser to download the DOM structure before anything else 
+// when done, the user checks if a table is present on the page, if yeas, it gets all the table row data-href value and save them within an array rows
+// if a user click on a row, the application redirects the user to a view page were the id is given by data-href.
+// window.location.href is responsible for the page navigation
 document.addEventListener("DOMContentLoaded", () => {
     const rows = document.querySelectorAll("tr[data-href]");
 

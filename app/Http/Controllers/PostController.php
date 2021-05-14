@@ -12,7 +12,12 @@ Use App\Models\Post;
 
 class PostController extends Controller
 {
+// PossControllers holds all the logic behind posts interaction
 
+// Index get all the posts of a matching topic from its original poster name/surname, avatar and role
+// lines 31 & 32 use leftJoin since some data is shares among the clients and employees, while other can be ignored
+// the functon also retrieves the admins and moderators to be displayed on the forum managment box & the balandce of the user for the wallet box
+// Finally, index checks if the clients are banned. That information is imprtant to restrict access to the banned users certain features of the forum
     public function index($topic_id){
         $topic_id = $topic_id;
         $topic = DB::table('topics')
@@ -42,7 +47,6 @@ class PostController extends Controller
             } catch (Exception $e) {
                 echo($e);
             }
-    
 
         $admins = DB::table('users')
             ->join('user_role', 'users.id', '=', 'user_role.user_id')
@@ -88,6 +92,7 @@ class PostController extends Controller
         ]);
     }
 
+    // Store saves a new post. A post is made of the posting user's id, topic id and the post itself
     public function store(Request $request, $topic_id){
 
         $request->validate([
@@ -104,18 +109,10 @@ class PostController extends Controller
         $post->save();
 
         $request->session()->flash('success', 'Post added successfully!');
-
         return redirect()->route('topic.posts.index', $topic_id);      
-
     }
 
-
-
-    public function edit($id){
-
-    }
-
-
+    // Update allows the user to update their post
     public function update(Request $request, $topic_id, $post_id){
         $request->validate([
             'post' => ['required']
@@ -129,7 +126,7 @@ class PostController extends Controller
         return redirect()->route('topic.posts.index', $topic_id);
     }
 
-
+// While destroy enable deletion for the post's author
     public function destroy(Request $request, $topic_id, $post_id){
         $post = Post::where('id', $post_id)->firstOrFail();
         $post->delete();
