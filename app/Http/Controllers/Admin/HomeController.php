@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Balance;
+use App\Models\Trade;
+use App\Services\UserBalanceService;
+use App\Services\TradeService;
 use Illuminate\Http\Request;
 Use Auth;
 
@@ -18,11 +21,20 @@ class HomeController extends Controller
     // The index function manages users home page
     // the index function get the users balance details that are then prompt within the wallet box (see home.blade)
     public function index(){
-        $balance = Balance::where('user_id', Auth::id())->get();
-        
-        if ($balance[0]->amount >  0) {
+        $balances = Balance::where('user_id', Auth::id())->get();
+        $trades = Trade::where('user_id', '=', Auth::id())->where('tradeClosed', '=', false)->get();
+        $gainLoss = (new TradeService())->calProfitLoss();
+        $portfolioCash = 0;
+        foreach ($trades as $trade) {
+            $portfolioCash = $trade->amount;
+        }
+        $portfolioCash += $gainLoss;
+        if ($balances[0]->amount >  0) {
             return view('admin.home',[
-                'balance' => $balance[0],
+                'trades' => $trades,
+                'balances' => $balances,
+                'gainLoss' => $gainLoss,
+                'portfolioCash' => $portfolioCash
             ]);
         } else {
             $balance = new Balance;
@@ -31,9 +43,12 @@ class HomeController extends Controller
             $balance->user_id = Auth::id();
             $balance->save();
         }
-        $balance = Balance::where('user_id', Auth::id())->count();
+        
         return view('admin.home',[
-            'balance' => $balance,
+            'trades' => $trades,
+            'balances' => $balances,
+            'gainLoss' => $gainLoss,
+            'portfolioCash' => $portfolioCash
         ]);
     }
 }

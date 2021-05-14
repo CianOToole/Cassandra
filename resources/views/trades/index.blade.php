@@ -2,51 +2,63 @@
 
 @section('content')
 
+@php
+    $count = 1;   
+@endphp
+
 
     <div class="container">
         <div class="row">
             <div class="col-8">
-                <a href="{{route('trades.index')}}" class="float-left portfolioText">Portfolio</a>
-                <a href="{{route('trades.history')}}" class="historyText">History</a>
+                <div class="media-holder">
 
-                {{-- <li class="list-group-item my-2">
-                <h5>{{ $trade->id }}</h5>
-                <p>{{ Str::limit($trade->amount,10) }}</p>
-                <small class="float-right">{{ $trade->created_at->diffForHumans() }}</small>
-                <a href="{{route('trades.show',$trade->id)}}">Read More</a>
-            </li> --}}
+                    <div class="col-12 tab-header">
+                        <a href="{{ route('trades.index') }}" class="float-left portfolioText">Portfolio</a>
+                        <a href="{{ route('trades.history') }}" class="historyText">History</a>
+                    </div>
 
-                <table class="table table-striped ">
-                    <thead class="white">
-                        <tr>
-                            <th scope="col">Stock</th>
-                            <th scope="col">Changes</th>
-                            <th scope="col">Amount</th>
-                            <th scope="col">Range</th>
-                            <th scope="col">Beta</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($trades as $trade)
-                       
 
-                            <tr >
-                                <th scope="row">{{ $trade->ticker }}</th>
-                                <td>{{ $trade->changes }}</td>
-                                <td>{{ $trade->amount }}</td>
-                                <td>{{ $trade->range }}</td>
-                                <td>{{ $trade->beta }}</td>
-                              
-                                <td><button type="button" class="btn btn-danger" onclick="document.querySelector('#delete-form').submit()">End trade</button>
-                                    <form method="POST" id="delete-form" action="{{route('trades.destroy',$trade->id)}}">
-                                        @csrf
-                                        @method('DELETE')
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+
+                    <div class="table-responsiveness">
+                        <table class="table table-hover table-sort">
+                            <thead class="white">
+                                <th scope="col">Stock</th>
+                                <th scope="col">Changes</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Range</th>
+                                <th scope="col">Beta</th>
+                                <th scope="col">End Trade</th>
+                            </thead>
+                            <tbody>
+                                @foreach ($trades as $trade)
+                                    @php
+                                        $switch_bcg;
+                                        $count % 2 != 0 ? ($switch_bcg = 'blue-bck') : ($switch_bcg = null);
+                                    @endphp
+                                    <tr class="{{ $switch_bcg }}">
+                                        <th >{{ $trade->ticker }}</th>
+                                        <td>{{ $trade->changes }}</td>
+                                        <td>{{ $trade->amount }}</td>
+                                        <td>{{ $trade->range }}</td>
+                                        <td>{{ $trade->beta }}</td>
+
+                                        <td><button type="button" class="btn btn-danger"
+                                                onclick="document.querySelector('#delete-form').submit()">End trade</button>
+                                            <form method="POST" id="delete-form"
+                                                action="{{ route('trades.destroy', $trade->id) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @php
+                                        $count++;   
+                                    @endphp
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
 
             <div class="col-4">
@@ -63,21 +75,23 @@
 
                             <div class="col-12 tab-cnt">
                                 <div class="balance-header">
-                                    <h5>Balance</h5>
-                                    <h5>{{ $balance[0]->amount }}€</h5>
+                                    @foreach ($balances as $balance)
+                                        <h5>Balance</h5>
+                                        <h5>{{ $balance->amount + $portfolioCash }}€</h5>
+                                    @endforeach
                                 </div>
                                 <div class="balance-body">
                                     <div class="balance-row">
                                         <p>Portfolio</p>
-                                        <h6>22389.22€</h6>
+                                        <h6>{{ $portfolioCash }}</h6>
                                     </div>
                                     <div class="balance-row">
                                         <p>Available to trade</p>
-                                        <h6>1112,389.21€</h6>
+                                        <h6>€{{ $balance->amount }}</h6>
                                     </div>
                                     <div class="balance-row">
                                         <p>Daily +/-</p>
-                                        <h6>-5692.21.99€</h6>
+                                        <h6>{{ $gainLoss }}€</h6>
                                     </div>
                                 </div>
                             </div>
@@ -87,8 +101,6 @@
                 </div>
             </div>
         </div>
-
-        
-
     </div>
+
 @endsection

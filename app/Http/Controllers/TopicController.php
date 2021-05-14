@@ -21,6 +21,14 @@ class TopicController extends Controller{
 
     // Search work similarly to index, but retrieves only one post
     public function search($id){
+        $balances = Balance::where('user_id', Auth::id())->get();
+        $trades = Trade::where('user_id', '=', Auth::id())->where('tradeClosed', '=', false)->get();
+        $gainLoss = (new TradeService())->calProfitLoss();
+        $portfolioCash = 0;
+        foreach ($trades as $trade) {
+            $portfolioCash = $trade->amount;
+        }
+        $portfolioCash += $gainLoss;
         $board = Board::where('id', '=', $id)->firstOrFail();
         $search_text = $_GET['query'];
         
@@ -59,7 +67,7 @@ class TopicController extends Controller{
             echo($e);
         }
 
-        $balance = Balance::where('user_id', Auth::id())->get();
+        
         
         if ($balance[0]->amount >  0) {
             return view('topics.topic',[
@@ -68,7 +76,10 @@ class TopicController extends Controller{
                 'admins' => $admins,
                 'moderators' => $moderators,
                 'isBanned' => $isBanned,
-                'balance' => $balance[0],
+                'trades' => $trades,
+                'balances' => $balances,
+                'gainLoss' => $gainLoss,
+                'portfolioCash' => $portfolioCash
             ]);
         } else {
             $balance = new Balance;
@@ -77,7 +88,7 @@ class TopicController extends Controller{
             $balance->user_id = Auth::id();
             $balance->save();
         }
-        $balance = Balance::where('user_id', Auth::id())->count();
+      
 
         return view('topics.topic',[
             'board' => $board,
@@ -85,7 +96,10 @@ class TopicController extends Controller{
             'admins' => $admins,
             'moderators' => $moderators,
             'isBanned' => $isBanned,
-            'balance' => $balance,
+            'trades' => $trades,
+            'balances' => $balances,
+            'gainLoss' => $gainLoss,
+            'portfolioCash' => $portfolioCash
         ]);
     }
 
@@ -135,16 +149,26 @@ class TopicController extends Controller{
             echo($e);
         }
 
-        $balance = Balance::where('user_id', Auth::id())->get();
+        $balances = Balance::where('user_id', Auth::id())->get();
+        $trades = Trade::where('user_id', '=', Auth::id())->where('tradeClosed', '=', false)->get();
+        $gainLoss = (new TradeService())->calProfitLoss();
+        $portfolioCash = 0;
+        foreach ($trades as $trade) {
+            $portfolioCash = $trade->amount;
+        }
+        $portfolioCash += $gainLoss;
         
-            if ($balance[0]->amount >  0) {
+            if ($balances[0]->amount >  0) {
                 return view('topics.index',[
                     'topics' => $topics,
                     'board' => $board,
                     'admins' => $admins,
                     'moderators' => $moderators,
                     'isBanned' => $isBanned,
-                    'balance' => $balance[0],
+                    'trades' => $trades,
+                    'balances' => $balances,
+                    'gainLoss' => $gainLoss,
+                    'portfolioCash' => $portfolioCash
                 ]);
             } else {
                 $balance = new Balance;
@@ -153,7 +177,7 @@ class TopicController extends Controller{
                 $balance->user_id = Auth::id();
                 $balance->save();
             }
-            $balance = Balance::where('user_id', Auth::id())->count();
+           
 
 
         return view('topics.index',[
@@ -162,7 +186,10 @@ class TopicController extends Controller{
             'admins' => $admins,
             'moderators' => $moderators,
             'isBanned' => $isBanned,
-            'balance' => $balance,
+            'trades' => $trades,
+            'balances' => $balances,
+            'gainLoss' => $gainLoss,
+            'portfolioCash' => $portfolioCash
         ]);
     }
 

@@ -2,7 +2,7 @@
 
 @section('content')
 
-{{-- <script src="{{ asset('js/watchlist.js') }}"></script> --}}
+<script src="{{ asset('js/watchlist.js') }}"></script>
 <div class="container">
     <div class="row">
 
@@ -47,21 +47,23 @@
 
                     <div class="col-12 tab-cnt">
                         <div class="balance-header">
+                        @foreach ($balances as $balance)
                             <h5>Balance</h5>
-                            <h5>{{ $balance->amount }}€</h5>
+                            <h5>{{$balance->amount + $portfolioCash }}€</h5>
+                        @endforeach
                         </div>
                         <div class="balance-body">
                             <div class="balance-row">
                                 <p>Portfolio</p>
-                                <h6>22389.22€</h6>
+                                <h6>{{ $portfolioCash }}</h6>
                             </div>
                             <div class="balance-row">
                                 <p>Available to trade</p>
-                                <h6>1112,389.21€</h6>
+                                <h6>€{{ $balance->amount }}</h6>
                             </div>
                             <div class="balance-row">
                                 <p>Daily +/-</p>
-                                <h6>-5692.21.99€</h6>
+                                <h6>{{ $gainLoss }}€</h6>
                             </div>
                         </div>
                     </div>

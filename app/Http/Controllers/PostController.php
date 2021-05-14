@@ -8,6 +8,9 @@ use Hash;
 use Storage;
 Use Auth;
 use App\Models\Balance;
+use App\Models\Trade;
+use App\Services\UserBalanceService;
+use App\Services\TradeService;
 Use App\Models\Post;
 
 class PostController extends Controller
@@ -19,6 +22,16 @@ class PostController extends Controller
 // the functon also retrieves the admins and moderators to be displayed on the forum managment box & the balandce of the user for the wallet box
 // Finally, index checks if the clients are banned. That information is imprtant to restrict access to the banned users certain features of the forum
     public function index($topic_id){
+        $balances = Balance::where('user_id', Auth::id())->get();
+        $trades = Trade::where('user_id', '=', Auth::id())->where('tradeClosed', '=', false)->get();
+        $gainLoss = (new TradeService())->calProfitLoss();
+        $portfolioCash = 0;
+        foreach ($trades as $trade) {
+            $portfolioCash = $trade->amount;
+        }
+        $portfolioCash += $gainLoss;
+
+
         $topic_id = $topic_id;
         $topic = DB::table('topics')
             ->select('topics.board_id', 'topics.title')        
@@ -62,7 +75,7 @@ class PostController extends Controller
 
         $balance = Balance::where('user_id', Auth::id())->get();
         
-            if ($balance[0]->amount >  0) {
+            if ($$balances[0]->amount >  0) {
                 return view('posts.index',[
                     'posts' => $posts,
                     'topic' => $topic,
@@ -70,7 +83,10 @@ class PostController extends Controller
                     'admins' => $admins,
                     'moderators' => $moderators,
                     'isBanned' => $isBanned,
-                    'balance' => $balance[0],
+                    'trades' => $trades,
+                    'balances' => $balances,
+                    'gainLoss' => $gainLoss,
+                    'portfolioCash' => $portfolioCash
                 ]);
             } else {
                 $balance = new Balance;
@@ -79,7 +95,7 @@ class PostController extends Controller
                 $balance->user_id = Auth::id();
                 $balance->save();
             }
-            $balance = Balance::where('user_id', Auth::id())->count();
+          
 
         return view('posts.index',[
             'posts' => $posts,
@@ -88,7 +104,10 @@ class PostController extends Controller
             'admins' => $admins,
             'moderators' => $moderators,
             'isBanned' => $isBanned,
-            'balance' => $balance,
+            'trades' => $trades,
+            'balances' => $balances,
+            'gainLoss' => $gainLoss,
+            'portfolioCash' => $portfolioCash
         ]);
     }
 
