@@ -22,6 +22,7 @@ Use Auth;
 
 class TopicController extends Controller{
 
+    // Search work similarly to index, but retrieves only one post
     public function search($id){
         $balances = Balance::where('user_id', Auth::id())->get();
         $trades = Trade::where('user_id', '=', Auth::id())->where('tradeClosed', '=', false)->get();
@@ -105,6 +106,10 @@ class TopicController extends Controller{
         ]);
     }
 
+    // Index get all the topics of a matching board
+    // line 107 calculates the umber of posts related to the topic, so that if a topic is deemed as trendy, its title on the board's page is colored in red
+    // the functon also retrieves the admins and moderators to be displayed on the forum managment box & the balandce of the user for the wallet box
+    // Finally, index checks if the clients are banned. That information is imprtant to restrict access to the banned users certain features of the forum
     public function index($id){
 
         $board = Board::where('id', '=', $id)->firstOrFail();        
@@ -191,6 +196,8 @@ class TopicController extends Controller{
         ]);
     }
 
+    // Store stores a new topc. A topic holds the poster's id, the board id it belongs to, a title and stores a post, the original one
+    // the post also precise that it isn't pinned (see pin and unpin function below)
     public function store(Request $request, $id){
         $request->validate([
             'title' => ['required', 'string'],
@@ -216,22 +223,7 @@ class TopicController extends Controller{
         return redirect()->route('board.topics.index', $id);         
     }
 
-
-    public function show($id){
-        
-    }
-
-
-    public function edit(){
-
-    }
-
-
-    public function update(){
-
-    }
-
-
+    // The destroy function deletes all the post related to the topic before deleting the topic itself
     public function destroy(Request $request, $board_id, $topic_id){
 
         $topic = Topic::where('id', $topic_id)->firstOrFail();
@@ -262,6 +254,8 @@ class TopicController extends Controller{
     
     }
 
+    // pin and upin are two function that deal only with the isPinned column of the Topics table
+    // If a topic is pinned, then it will be pushed to the top of the board page. Otherwise, the order by which a topic appears on the board page is determined by its creation date.
     public function pin(Request $request, $board_id, $topic_id){
         $request->validate([
             'isPinned' => ['required']

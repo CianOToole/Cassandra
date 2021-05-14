@@ -21,6 +21,8 @@ class ModeratorController extends Controller{
         $this->middleware('role:admin');  
     }
 
+    // The ModeratorControlelr 's logic is the same as ClientController
+    // plese, us ClientController from the admin folder as reference
 
     public function index(){
 
@@ -107,21 +109,6 @@ class ModeratorController extends Controller{
         $request->session()->flash('success', 'Moderator added successfully!');
 
         return redirect()->route('admin.moderators.index');
-    }
-
-
-    public function edit($id){
-
-        $moderator = DB::table('users')        
-        ->join('employees', 'users.id', '=', 'employees.user_id')
-        ->select("users.*",  'employees.name', 'employees.emp_number', 'employees.salary')
-        ->where('users.id', $id)
-        ->get();
-
-        return view('admin.moderators.edit',[
-            'moderator' => $moderator
-        ]);
-
     }
 
     

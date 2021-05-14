@@ -21,7 +21,9 @@ class ClientController extends Controller{
         $this->middleware('role:admin');  
     }
 
+    // ClientController manages all the logic necessary for the admin/moderator role to retrieve, view, (un)ban and delete the cleint profiles
 
+    // index get all the user whose user role is client (line 34)
     public function index(){
 
         $users = DB::table('users')
@@ -38,7 +40,8 @@ class ClientController extends Controller{
 
     }
 
-    
+    // show work similarly to index, but retrieve one user instead of many by passing to the function the user id as a parameter
+    // further more, the function gets all the posts that the user made
     public function show($id){
 
         $client = DB::table('users')        
@@ -60,7 +63,12 @@ class ClientController extends Controller{
 
     }
 
-
+    // the destriy function allow the the admins/mderators to deldte the clients. 
+    // To do so, the function as to follow precie steps to avoid conflict with the db constraint. 
+    // Step one retrieve and deletes the information related to the user on the client table
+    // Step two gets all the posts made by the user ad delete them
+    // Step three gets all the topics created by the user, deleted the posts from those topic and finalyl delete the said topics
+    // Step for detach, of breaks the relatonship betwenn the user and its role to finnally delte the user (line 97)
     public function destroy(Request $request, $id){
         $client = Client::where('user_id', $id)->firstOrFail();
         $client->delete();
@@ -91,6 +99,9 @@ class ClientController extends Controller{
         $request->session()->flash('danger', 'Client removed successfully!');
         return redirect()->route('admin.clients.index');
     }
+
+    // Ban and unban manage the isBanned column on the clients table
+    // isBanned expects either 0 or 1. Depending on whtehr is banned or not, some features are enabled
 
     public function banning(Request $request, $id){
 

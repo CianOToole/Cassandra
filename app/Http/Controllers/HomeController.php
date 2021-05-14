@@ -25,6 +25,8 @@ class HomeController extends Controller
     public function index()
     {
 
+        // HomeController catches a users request to get to a home page, looks at its role and assign that user the matching home page
+
         $user = Auth::user();
         $home = 'home';
 

@@ -13,6 +13,7 @@ class BalanceSeeder extends Seeder{
 
     public function run(){
         
+        // each user is given 10000.00€
         for($i = 1; $i < 63 ; $i++){
             $balance = new Balance();
             $balance->type_of_currency  = "Euro";

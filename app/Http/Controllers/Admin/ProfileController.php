@@ -19,6 +19,10 @@ class ProfileController extends Controller
         $this->middleware('role:admin');  
     }
 
+    // ProfileController is used throughout the user roles, it manages the profile page, from displayong the personal data, to the 
+    // edit form, as ell as retrieving the old post written by the user
+
+    // profile get the user personnal data & previosu posts
     public function profile(){
         $user = Auth::user();
         $admin = DB::table('employees')
@@ -39,6 +43,8 @@ class ProfileController extends Controller
             ]);
     }
 
+    // the edit function retrieve the user personnal data that are then displayed within the input fields
+    // see edit.blade files on the profile folders 
     public function edit($id){
         $admin = User::findOrFail($id)
             ->join('employees', "users.id", '=', "employees.user_id")
@@ -51,7 +57,13 @@ class ProfileController extends Controller
         ]);
     }
 
-
+// update determines what rules the user the request data must folow
+// e.g. line 72 checks the uniqueness of the employees number. Hence, a user cannot enter anither user's id if it is already taken, unless its his.
+// the employee number can be alpha-numerical, and must be 5 characters long.
+// line 8à to 88 manages a new profile picture
+// if the form send a new profile picture, the function deleted any previous profile picture, gets its file extension and plug to its name the date when the image was uploaded.
+//  the image is then stored in a specific folder and sent to the database
+// once the request data is verified, a $user object storing all the details is sent to the database for storage
     public function update(Request $request, $id){
 
         $user = User::findOrFail($id);

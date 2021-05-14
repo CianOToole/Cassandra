@@ -1,6 +1,10 @@
-// API key: 1001c8ec6521e9e5a86ad2a88190bef0
+// watachlis.js is responsible for providing the watchlist component data.
+// upon retrieveing the selected data, the script reformat the data with a set of specific properties to display (line 34 to 42)
+// it then created table cells (53/57) that are prompt to a list holder.
+// Also, the scrip adds a class colouring each row with a blue background if the id value of the row is odd (l. 51)
 
-  // let watchlist = ["AAPL", "MSFT", "FB", "GME", "AMZN", "AIR.PA", "TSLA", "RXT" ];
+// API key: 1001c8ec6521e9e5a86ad2a88190bef0
+// let watchlist = ["AAPL", "MSFT", "FB", "GME", "AMZN", "AIR.PA", "TSLA", "RXT" ];
   let watchlist = ["AAPL", "MSFT", "FB", "RXT"];
   let data;    
   let quote = [];

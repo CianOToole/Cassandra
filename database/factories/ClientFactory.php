@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class ClientFactory extends Factory
 {
 
+    // The client factory makes n number of client determined in UserSeeder.
+    // Each client is given client properties either by the faker library, or exp & ban function.
+    // the latters determine randomly if a user is experieced and banned (those attributes have effect on the blade pages, such as colouring the posts avatars to highlight a user experience)
     protected $model = Client::class;
 
     public function definition(){
