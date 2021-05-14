@@ -12,6 +12,7 @@ use Auth;
 
 class TradeService
 {
+    //This method calculates the profit or loss of a user by getting all of thier open trades
     public function calProfitLoss()
     {
         $totalGain = 0;

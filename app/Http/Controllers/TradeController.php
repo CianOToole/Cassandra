@@ -216,6 +216,7 @@ class TradeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //sets a trade to be Closed
     public function destroy($id)
     {
         $trades = Trade::findOrFail($id);
@@ -235,6 +236,8 @@ class TradeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    //gets the users trade history
     public function history()
     {
         $user = Auth::user()->id;

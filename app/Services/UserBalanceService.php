@@ -11,7 +11,7 @@ use Auth;
 
 class UserBalanceService
 {
-
+    //if a user doesn't have a balance this makes one for them
     public function createUserBalance()
     {
         $balance = Balance::where('user_id', Auth::id())->get();
@@ -27,10 +27,9 @@ class UserBalanceService
         }
     }
 
-
+    //add profits to the users balance
     public function addProfit($trade)
     {
-       
         set_time_limit(0);
 
         $url_info = "https://financialmodelingprep.com/api/v3/profile/{$trade->ticker}?apikey=937d579e58c5f65961d708c85782f993";
@@ -66,6 +65,7 @@ class UserBalanceService
         $balance->save();
     }
 
+    //this takes away from the balance
     public function minusProfit($request)
     {
         $balance = Balance::where('user_id', Auth::id())->firstOrFail();
