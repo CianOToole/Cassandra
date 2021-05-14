@@ -383,7 +383,7 @@
     </div>
 
     <div class="row watchlist">
-        {{-- <script src="{{ asset('js/watchlist.js') }}"></script> --}}
+        <script src="{{ asset('js/watchlist.js') }}"></script>
 
         <div class="col-md-8 ">
             <div class="media-holder ">

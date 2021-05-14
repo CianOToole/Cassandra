@@ -1,3 +1,6 @@
+// stock.js get a stock's information via a ticket, format the data into a new object that is sent to candleStickChart()
+// candleStickChart then draw to the screen a graph, the code is getting from TradingView.
+
 // stockData stores JSON file data from api()
 let stockData;
 api().then(res => stockData = res);

@@ -75,7 +75,7 @@ class PostController extends Controller
 
         $balance = Balance::where('user_id', Auth::id())->get();
         
-            if ($$balances[0]->amount >  0) {
+            if ($balances[0]->amount >  0) {
                 return view('posts.index',[
                     'posts' => $posts,
                     'topic' => $topic,

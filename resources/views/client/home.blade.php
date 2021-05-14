@@ -2,7 +2,7 @@
 
 @section('content')
 
-{{-- <script src="{{ asset('js/watchlist.js') }}"></script> --}}
+<script src="{{ asset('js/watchlist.js') }}"></script>
 <div class="container">
     <div class="row">
 
