@@ -25,6 +25,7 @@ class StockController extends Controller
     public function index()
     {
         $user = Auth::user()->id;
+        $balances = Balance::where('user_id', Auth::id())->get();
         $trades = Trade::where('user_id', '=', $user)->where('tradeClosed', '=', false)->get();
         $gainLoss = (new TradeService())->calProfitLoss();
         $portfolioCash = 0;
@@ -34,29 +35,11 @@ class StockController extends Controller
         $portfolioCash += $gainLoss;
         $balance = Balance::where('user_id', Auth::id())->get();
         
-        if ($balance[0]->amount >  0) {
-            return view('stock',[
-                'trades' => $trades,
-                'gainLoss' => $gainLoss,
-                'portfolioCash' => $portfolioCash,
-                'balance' => $balance[0],
-            ]);
-        } else {
-            $balance = new Balance;
-            $balance->type_of_currency = "Euro";
-            $balance->amount = 100000.0;
-            $balance->user_id = Auth::id();
-            $balance->save();
-        }
-
-        $balance = Balance::where('user_id', Auth::id())->get();
-        
-        if ($balance[0]->amount >  0) {
+        if ($balances[0]->amount >  0) {
             return view('stock',[
                 'trades' => $trades,
                 'balances' => $balances,
                 'gainLoss' => $gainLoss,
-                'balance' => $balance[0],
                 'portfolioCash' => $portfolioCash
             ]);
         } else {
@@ -66,12 +49,11 @@ class StockController extends Controller
             $balance->user_id = Auth::id();
             $balance->save();
         }
-        $balance = Balance::where('user_id', Auth::id())->count();
+
         return view('stock', [
             'trades' => $trades,
             'balances' => $balances,
             'gainLoss' => $gainLoss,
-            'balance' => $balance,
             'portfolioCash' => $portfolioCash
         ]);
        
