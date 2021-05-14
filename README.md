@@ -12,6 +12,8 @@ sites:
     - map: project.test
       to: /home/vagrant/WAF/MyLaravelProjects/Cassandra/public
 
+(pagination is sensitive)
+
 databases:
     - cassandra
 
