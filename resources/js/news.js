@@ -1,7 +1,9 @@
+// news.js gets the articles that are displayed on the neewsfeed from the New York times
+// after formating the atricles by keeping only the titles, date of publocation and URL (line 22),
+// the articales are prompted in a <li> elements, append to a <ul> element
 const { stubString } = require("lodash");
 
 newsfeed();
-
 
  async function newsfeed(){
 
@@ -28,8 +30,6 @@ newsfeed();
         counter++;
         newsfeed.push(news)
       });
-
-
 
     (function(){
         newsfeed.forEach(article => {

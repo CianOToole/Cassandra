@@ -1,3 +1,5 @@
+// forum.js manages the board and newsfeed tabs by remving and adding classes that either show or hide the required tabs
+
 document.addEventListener("DOMContentLoaded", () => {
     let url = window.location.href;
     let lastSegment = url.split("/").pop();

@@ -1,3 +1,7 @@
+//for every input on the seach bar, the script checks what stocks could match the query, the data retreieved is then prompted within a suggestion list
+// in the webpage. When a user click on a stock (clickListElement()), the script deletes the list, prompt the stock symbol & name in the input value,
+//  When the presses enter, the functon promptIntoSearch() is triggered, line 96 change the form action via jQuery by adding the ticket to the URL
+// L37 to 31 removes the list via the class hide-drop if the user clicks away the dropdown list
 let suggestions = [];
 let searchGroup = document.getElementById("searchGroup");
 let searchBar = document.getElementById("searchBar");
