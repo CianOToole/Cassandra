@@ -104,7 +104,7 @@ eval("// forum.js manages the board and newsfeed tabs by remving and adding clas
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Knut\WAF\MyLaravelProjects\Cassandra\resources\js\forum.js */"./resources/js/forum.js");
+module.exports = __webpack_require__(/*! E:\YEAR 3\project\Cassandra\resources\js\forum.js */"./resources/js/forum.js");
 
 
 /***/ })
