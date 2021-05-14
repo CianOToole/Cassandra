@@ -13,7 +13,10 @@ use App\Models\Employee;
 use App\Models\Board;
 use App\Models\Topic;
 use App\Models\Post;
+use App\Models\Trade;
 use App\Models\Balance;
+use App\Services\UserBalanceService;
+use App\Services\TradeService;
 use Illuminate\Support\Arr;
 Use Auth;
 

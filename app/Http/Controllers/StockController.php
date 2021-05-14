@@ -22,6 +22,9 @@ class StockController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+    //  gives the user the stock blade file and returns data for the balance box
     public function index()
     {
         $user = Auth::user()->id;
@@ -128,10 +131,4 @@ class StockController extends Controller
         //
     }
 
-    public function showAllTodos(){
-        $stocks = Stock::orderBy('created_at', 'desc')->paginate(8);
-        return view('stocks.index',[
-            'stocks' => $stocks
-        ]);
-    }
 }

@@ -23,6 +23,9 @@ class TradeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+     //gives the user back the index trade page and the data needed for balance box
     public function index()
     {
         $user = Auth::user()->id;
@@ -49,6 +52,7 @@ class TradeController extends Controller
      *@param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //when a user creates a trades the data passed to the page is needed to be saved to the backend in the trades table
     public function create(Request $request)
     {
 
@@ -96,6 +100,7 @@ class TradeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    //the new trade is made
     public function store(Request $request)
     {
         //validation rules
