@@ -30,7 +30,7 @@ class UserBalanceService
 
     public function addProfit($trade)
     {
-
+       
         set_time_limit(0);
 
         $url_info = "https://financialmodelingprep.com/api/v3/profile/{$trade->ticker}?apikey=937d579e58c5f65961d708c85782f993";
@@ -64,8 +64,6 @@ class UserBalanceService
         $balance = Balance::where('user_id', Auth::id())->firstOrFail();
         $balance->amount += $profitOrLoss;
         $balance->save();
-        $trade->tradeClosed = true;
-        $trade->save();
     }
 
     public function minusProfit($request)

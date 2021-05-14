@@ -26,7 +26,6 @@
                                 <th scope="col">Amount</th>
                                 <th scope="col">Range</th>
                                 <th scope="col">Beta</th>
-                                <th scope="col">End Trade</th>
                             </thead>
                             <tbody>
                                 @foreach ($trades as $trade)
@@ -40,15 +39,6 @@
                                         <td>{{ $trade->amount }}</td>
                                         <td>{{ $trade->range }}</td>
                                         <td>{{ $trade->beta }}</td>
-
-                                        <td><button type="button" class="btn btn-danger"
-                                                onclick="document.querySelector('#delete-form').submit()">End trade</button>
-                                            <form method="POST" id="delete-form"
-                                                action="{{ route('trades.destroy', $trade->id) }}">
-                                                @csrf
-                                                @method('DELETE')
-                                            </form>
-                                        </td>
                                     </tr>
                                     @php
                                         $count++;   

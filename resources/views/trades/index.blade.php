@@ -42,14 +42,23 @@
                                         <td>{{ $trade->range }}</td>
                                         <td>{{ $trade->beta }}</td>
 
-                                        <td><button type="button" class="btn btn-danger"
+                                        <td>
+                                            {{-- <button type="submit" class="btn btn-danger"
                                                 onclick="document.querySelector('#delete-form').submit()">End trade</button>
                                             <form method="POST" id="delete-form"
                                                 action="{{ route('trades.destroy', $trade->id) }}">
                                                 @csrf
                                                 @method('DELETE')
+                                            </form> --}}
+                                            <form method="POST" action="{{ route( 'trades.destroy', $trade->id) }}">
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <input type="hidden" name="_token" value=" {{ csrf_token() }} ">                                        
+                                                <button type="submit" class="table-delete" title="End trade">
+                                                    <i class="fas fa-trash" style="font-size: 24px"></i>
+                                                </button>
                                             </form>
                                         </td>
+                                        
                                     </tr>
                                     @php
                                         $count++;   

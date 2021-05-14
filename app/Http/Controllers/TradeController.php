@@ -218,8 +218,9 @@ class TradeController extends Controller
      */
     public function destroy($id)
     {
-        // dd($id);
         $trades = Trade::findOrFail($id);
+        $trades->tradeClosed = true;
+        $trades->save();
         (new UserBalanceService())->addProfit($trades);
         // $trades->delete();
         //Redirect to a specified route with flash message.
